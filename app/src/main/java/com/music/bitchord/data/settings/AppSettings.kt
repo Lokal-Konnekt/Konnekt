@@ -202,7 +202,7 @@ object AppSettings {
     val wifiOnlyDownloads = MutableStateFlow(true)
 
     /**
-     * Keep ordinary downloads in Music/BitChord where other music apps can see
+     * Keep ordinary downloads in Music/Konnekt where other music apps can see
      * them. Off (the default) keeps downloads in this app's private storage.
      * HLS downloads always stay private because they are a playlist package,
      * not one portable audio file.
@@ -257,7 +257,7 @@ object AppSettings {
      * normalizes by default for the same reason.
      *
      * The case against it is that a constant gain is still a multiplication,
-     * so this is the first thing in BitChord that is *on* out of the box and
+     * so this is the first thing in Konnekt that is *on* out of the box and
      * alters samples. Rather than hide that, the Audio Pipeline readout names
      * it: its Bit-exact row reports the first stage in the chain that is
      * altering samples, and switching this off is the first thing a listener
@@ -748,7 +748,7 @@ object AppSettings {
      * one here was a measurable slice of cold start.
      */
     fun init(context: Context, authStore: AuthStore) {
-        prefs = context.getSharedPreferences("bitchord_settings", Context.MODE_PRIVATE)
+        prefs = context.getSharedPreferences("Konnekt_settings", Context.MODE_PRIVATE)
         this.authStore = authStore
         com.music.bitchord.data.spotify.LocalPlaylistStore.init(context)
         readAll()
@@ -2029,6 +2029,3 @@ object AppSettings {
     private const val KEY_DISCORD_INFO_DISMISSED = "discord_info_dismissed"
     private const val KEY_LAST_VERSION_CODE = "last_version_code"
 }
-
-
-

@@ -14,7 +14,7 @@ class DesktopSmallSettingsTest {
 
     // ── Filter non-music audio ────────────────────────────────────────────
 
-    private val scratch = Files.createTempDirectory("bitchord-filter")
+    private val scratch = Files.createTempDirectory("Konnekt-filter")
 
     @AfterTest
     fun cleanUp() {

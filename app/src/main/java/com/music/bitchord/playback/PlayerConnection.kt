@@ -431,23 +431,23 @@ val MediaItem.queueEntryId: String?
     get() = mediaMetadata.extras?.getString(EXTRA_QUEUE_ENTRY_ID)
 
 /** Public metadata keys for queue categorization and immutable queue entry identity. */
-const val EXTRA_QUEUE_TIER = "bitchord.queueTier"
-const val EXTRA_QUEUE_ENTRY_ID = "bitchord.queueEntryId"
+const val EXTRA_QUEUE_TIER = "Konnekt.queueTier"
+const val EXTRA_QUEUE_ENTRY_ID = "Konnekt.queueEntryId"
 
 /**
  * Marks a queue entry as AutoPlay's rather than the user's. Carried on the
  * MediaItem so it survives the trip through the session — the queue belongs to
  * the player, and the UI only ever sees it back through a MediaController.
  */
-private const val EXTRA_FROM_AUTOPLAY = "bitchord.fromAutoplay"
+private const val EXTRA_FROM_AUTOPLAY = "Konnekt.fromAutoplay"
 
 /** @see Song.radioName */
-private const val EXTRA_RADIO_NAME = "bitchord.radioName"
+private const val EXTRA_RADIO_NAME = "Konnekt.radioName"
 
 /** @see Song.playbackSource */
-private const val EXTRA_PLAYBACK_SOURCE = "bitchord.playbackSource"
-private const val EXTRA_PLAYBACK_SOURCE_TYPE = "bitchord.playbackSourceType"
-private const val EXTRA_PLAYBACK_SOURCE_ID = "bitchord.playbackSourceId"
+private const val EXTRA_PLAYBACK_SOURCE = "Konnekt.playbackSource"
+private const val EXTRA_PLAYBACK_SOURCE_TYPE = "Konnekt.playbackSourceType"
+private const val EXTRA_PLAYBACK_SOURCE_ID = "Konnekt.playbackSourceId"
 
 /**
  * The artist and album pages this track hangs under, when they are known.
@@ -457,17 +457,17 @@ private const val EXTRA_PLAYBACK_SOURCE_ID = "bitchord.playbackSourceId"
  * `links`), but a queue restored after a restart, or a track read back by the
  * service, has only what the item carries.
  */
-private const val EXTRA_ARTIST_ID = "bitchord.artistId"
-private const val EXTRA_ALBUM_ID = "bitchord.albumId"
+private const val EXTRA_ARTIST_ID = "Konnekt.artistId"
+private const val EXTRA_ALBUM_ID = "Konnekt.albumId"
 
 /** @see Song.setVideoId */
-private const val EXTRA_SET_VIDEO_ID = "bitchord.setVideoId"
+private const val EXTRA_SET_VIDEO_ID = "Konnekt.setVideoId"
 
 /** @see Song.localUri */
-internal const val EXTRA_LOCAL_URI = "bitchord.localUri"
+internal const val EXTRA_LOCAL_URI = "Konnekt.localUri"
 
 /** @see Song.localPath */
-internal const val EXTRA_LOCAL_PATH = "bitchord.localPath"
+internal const val EXTRA_LOCAL_PATH = "Konnekt.localPath"
 
 /**
  * How long the track runs, as the row that queued it said.
@@ -479,13 +479,13 @@ internal const val EXTRA_LOCAL_PATH = "bitchord.localPath"
  * with the other loses information. Carried so that [toSong] can give it back
  * to the live queue and matching code.
  */
-private const val EXTRA_DURATION = "bitchord.durationText"
-private const val EXTRA_EXPLICIT = "bitchord.explicit"
-private const val EXTRA_IS_VIDEO = "bitchord.isVideo"
-private const val EXTRA_VIDEO_ORIGIN = "bitchord.isVideoOrigin"
+private const val EXTRA_DURATION = "Konnekt.durationText"
+private const val EXTRA_EXPLICIT = "Konnekt.explicit"
+private const val EXTRA_IS_VIDEO = "Konnekt.isVideo"
+private const val EXTRA_VIDEO_ORIGIN = "Konnekt.isVideoOrigin"
 
 /** Set only on the replacement item produced by [QualityUpgrade]. */
-const val EXTRA_QUALITY_UPGRADED = "bitchord.qualityUpgraded"
+const val EXTRA_QUALITY_UPGRADED = "Konnekt.qualityUpgraded"
 
 /** Whether this item was selected from a music-video row, even after conversion. */
 val MediaItem.isVideoOrigin: Boolean
@@ -598,7 +598,7 @@ fun Song.toMediaItem(): MediaItem {
         // resolves it — see [SourceResolver.substituteForYouTube] — and that
         // match is made on them, which the loader thread has no other way to
         // reach.
-        else -> "bitchord://watch?v=$videoId${matchQuery()}"
+        else -> "Konnekt://watch?v=$videoId${matchQuery()}"
     }
     return MediaItem.Builder()
         .setMediaId(videoId)
@@ -688,7 +688,7 @@ fun Song.toDirectYouTubeMediaItem(): MediaItem =
         .build()
 
 private fun Song.directYouTubeUri(): String =
-    "bitchord://watch?v=$videoId${matchQuery()}&$DIRECT_YOUTUBE_PARAMETER=1&q=original"
+    "Konnekt://watch?v=$videoId${matchQuery()}&$DIRECT_YOUTUBE_PARAMETER=1&q=original"
 
 /**
  * Whether there is a YouTube upload behind this song to go back *to* — the

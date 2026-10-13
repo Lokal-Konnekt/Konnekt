@@ -86,7 +86,7 @@ data class SourceConfig(
  */
 object SourceRegistry {
 
-    private const val TAG = "BitChord"
+    private const val TAG = "Konnekt"
 
     private lateinit var prefs: SharedPreferences
 
@@ -106,7 +106,7 @@ object SourceRegistry {
 
     fun init(context: Context) {
         // Same repair and degradation as AuthStore; see EncryptedPrefs.
-        prefs = EncryptedPrefs.open(context, "bitchord_sources", "bitchord_sources_plain")
+        prefs = EncryptedPrefs.open(context, "Konnekt_sources", "Konnekt_sources_plain")
 
         val stored = prefs.getString(KEY_SOURCES, null)?.let(::decodeStored) ?: emptyList()
         val jioOptInMigrationDone = prefs.getBoolean(KEY_JIOSAAVN_OPT_IN_V1, false)
@@ -494,7 +494,7 @@ object SourceRegistry {
     /** The playback URI for a source-backed track; [PlaybackService] resolves it at open time. */
     fun trackUri(configId: String, trackId: String): String =
         Uri.Builder()
-            .scheme("bitchord")
+            .scheme("Konnekt")
             .authority("source")
             .appendQueryParameter("s", configId)
             .appendQueryParameter("t", trackId)

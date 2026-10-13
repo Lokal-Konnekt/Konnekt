@@ -92,5 +92,5 @@ internal object DesktopWindowsAudio {
     @JvmStatic private external fun nativeDeviceName(): String
     @JvmStatic private external fun nativeLastError(): String
 
-    private const val LIBRARY = "bitchord_window"
+    private const val LIBRARY = "Konnekt_window"
 }

@@ -13,7 +13,7 @@ import java.nio.file.Path
 import java.nio.file.StandardCopyOption
 import java.nio.file.StandardOpenOption
 
-/** Downloads resolved audio into the user's own BitChord folder. */
+/** Downloads resolved audio into the user's own Konnekt folder. */
 object DesktopDownloadManager {
     private val activeJobs = ConcurrentHashMap<String, Job>()
 
@@ -28,7 +28,7 @@ object DesktopDownloadManager {
         return try {
             require(song.localPath == null) { "This track is already local" }
             val stream = DesktopMusicSources.resolve(song, quality, forDownload = true).getOrThrow()
-            val directory = Path.of(System.getProperty("user.home"), "Music", "BitChord")
+            val directory = Path.of(System.getProperty("user.home"), "Music", "Konnekt")
             Files.createDirectories(directory)
             val safeName = buildString {
                 append(song.artist)

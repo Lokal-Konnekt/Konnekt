@@ -16,7 +16,7 @@ import kotlin.test.assertNull
  */
 class DesktopEmbeddedLyricsTest {
 
-    private val scratch = Files.createTempDirectory("bitchord-embedded")
+    private val scratch = Files.createTempDirectory("Konnekt-embedded")
 
     @AfterTest
     fun cleanUp() {

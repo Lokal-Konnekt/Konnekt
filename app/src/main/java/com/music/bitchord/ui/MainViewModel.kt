@@ -1668,8 +1668,6 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private fun publishHomeShelves(shelves: List<HomeShelf>, prepend: Boolean = false) {
         val existing = (_home.value as? UiState.Success)?.data.orEmpty()
         if (prepend) {
-            // YouTube's core home can also contain a stale "Recently played"
-            // shelf. The dedicated history endpoint wins and replaces it.
             val replacing = shelves.map { it.title.lowercase(Locale.ROOT) }.toSet()
             homeSeenTitles.addAll(replacing)
             _home.value = UiState.Success(shelves + existing.filterNot {
@@ -1677,9 +1675,27 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             })
             return
         }
-        val added = shelves.withoutRepeatsOf(existing)
+        // Shuffle at process start so recommendations change on every launch.
+        val seed = ProcessStartSeed.value
+        val shuffled = if (seed != 0L) {
+            val rnd = kotlin.random.Random(seed + shelves.hashCode() + existing.size)
+            shelves.shuffled(rnd).map { s -> s.copy(items = s.items.shuffled(rnd)) }
+        } else shelves
+        val added = shuffled.withoutRepeatsOf(existing)
             .filter { homeSeenTitles.add(it.title.lowercase(Locale.ROOT)) }
-        if (added.isNotEmpty()) _home.value = UiState.Success(existing + added)
+        if (added.isEmpty()) return
+        // Interleave shuffled order across the whole feed: re-shuffle existing+added once
+        // so launch-to-launch variety propagates beyond incremental addition.
+        val combined = (existing + added)
+        val finalList = if (seed != 0L && existing.isNotEmpty()) {
+            val rnd2 = kotlin.random.Random(seed + combined.hashCode())
+            // Keep prepended Recents at index 0 if present
+            val isRecentsTitle = { t: String -> t.lowercase(Locale.ROOT).contains("recent") }
+            val recents = combined.filter { isRecentsTitle(it.title) }
+            val rest = (combined - recents.toSet()).shuffled(rnd2)
+            recents + rest
+        } else combined
+        _home.value = UiState.Success(finalList)
     }
 
     /** Refreshes the core feed without blanking the current Play page first. */

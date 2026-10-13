@@ -19,7 +19,7 @@ import kotlin.test.assertTrue
  */
 class DesktopDownloadRecordTest {
 
-    private val scratch = Files.createTempDirectory("bitchord-downloads")
+    private val scratch = Files.createTempDirectory("Konnekt-downloads")
 
     @AfterTest
     fun cleanUp() {

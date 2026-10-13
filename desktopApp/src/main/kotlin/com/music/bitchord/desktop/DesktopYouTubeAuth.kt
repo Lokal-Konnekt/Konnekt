@@ -33,7 +33,7 @@ internal object DesktopYouTubeAuth {
 
     /** The cookie a headless run can be given without an accounts screen. */
     fun environmentCookie(): String? =
-        System.getenv("BITCHORD_YTMUSIC_COOKIE")?.trim()?.takeIf { it.isNotBlank() }
+        System.getenv("Konnekt_YTMUSIC_COOKIE")?.trim()?.takeIf { it.isNotBlank() }
 
     fun adopt(value: Session?) {
         if (session == value) return

@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean
  *
  * The Windows counterpart of [DesktopMprisController], and the same contract:
  * the player hands it state, it hands back button presses. What it talks to is
- * WinRT, which the JVM cannot reach, so the work happens in `bitchord_smtc.dll`
+ * WinRT, which the JVM cannot reach, so the work happens in `Konnekt_smtc.dll`
  * beside the analyser.
  *
  * Absent, everything here is a no-op. The library is only built by MSVC, so a
@@ -54,7 +54,7 @@ internal object DesktopWindowsMedia {
         // library's pump thread was then still running when the DLL unloaded, and destroying a
         // joinable std::thread aborts the process — every quit ended in a native crash.
         if (shutdownHookAdded.compareAndSet(false, true)) {
-            Runtime.getRuntime().addShutdownHook(Thread(::stop, "bitchord-smtc-stop"))
+            Runtime.getRuntime().addShutdownHook(Thread(::stop, "Konnekt-smtc-stop"))
         }
     }
 
@@ -106,7 +106,7 @@ internal object DesktopWindowsMedia {
         durationMs: Long,
     )
 
-    private const val LIBRARY = "bitchord_smtc"
+    private const val LIBRARY = "Konnekt_smtc"
 
     private const val BUTTON_PLAY = 0
     private const val BUTTON_PAUSE = 1

@@ -63,13 +63,13 @@ import kotlin.coroutines.coroutineContext
  * expire within hours, and differ between resolves of the same track, so
  * keying on them would cache every track afresh on every play. Because
  * [CacheDataSource] sits *outside* the resolving data source it sees the
- * original `bitchord://watch?v=<id>` request, and a cache hit never resolves a
+ * original `Konnekt://watch?v=<id>` request, and a cache hit never resolves a
  * URL at all.
  */
 @UnstableApi
 object AudioCache {
 
-    private const val TAG = "BitChord"
+    private const val TAG = "Konnekt"
 
     /**
      * The disk budget, straight from [AppSettings] — 512MB by default, roughly
@@ -536,7 +536,7 @@ object AudioCache {
         if (playedIds.size > MAX_NOTED_SONGS) playedIds.clear()
         playedIds += song.videoId
         noteSongs(listOf(song))
-        if (!::cache.isInitialized || uri?.scheme != "bitchord") return
+        if (!::cache.isInitialized || uri?.scheme != "Konnekt") return
         scope.launch {
             val key = keyFactory.buildCacheKey(DataSpec(uri))
             runCatching {
@@ -555,7 +555,7 @@ object AudioCache {
      * Tags the cache entry [spec] is filling with who is serving it.
      *
      * Called from the player's resolving data source, the one place where the
-     * `bitchord://` request and the real stream URL it resolved to are both in
+     * `Konnekt://` request and the real stream URL it resolved to are both in
      * hand — see PlaybackService. [CacheDataSource] has already put the cache
      * key it is writing under into [DataSpec.key], so the tag lands on exactly
      * the entry being filled, whichever rendition that is.
@@ -566,7 +566,7 @@ object AudioCache {
      */
     fun recordServed(spec: DataSpec, servedUrl: String) {
         if (!::cache.isInitialized) return
-        if (spec.uri.scheme != "bitchord") return
+        if (spec.uri.scheme != "Konnekt") return
         val mediaId = mediaIdIn(spec.uri) ?: return
         val key = spec.key ?: keyFactory.buildCacheKey(spec)
         val origin = originOf(spec.uri, mediaId, servedUrl)
@@ -992,7 +992,7 @@ object AudioCache {
      * [target] is what a cross-source match is made on, and read-ahead cannot
      * reach it any other way: it runs for tracks that are not the current item,
      * so the session's metadata is the wrong track's, and the plain
-     * `bitchord://watch?v=…` URI it builds for itself carries an id and nothing
+     * `Konnekt://watch?v=…` URI it builds for itself carries an id and nothing
      * else. It rides along from the queue instead — see
      * [PlaybackService.prefetchAround][com.music.bitchord.playback.PlaybackService].
      */
@@ -1292,7 +1292,7 @@ object AudioCache {
      * "openable with exactly these bytes".
      */
     private fun alignmentPrefixBytes(videoId: String): Long {
-        val watch = Uri.parse("bitchord://watch?v=$videoId")
+        val watch = Uri.parse("Konnekt://watch?v=$videoId")
         val opus = Uri.parse(AutomixAnalysisSource.opusUri(videoId))
         val renditions = renditionsOf(watch)
         val sameSource = renditions
@@ -1369,7 +1369,7 @@ object AudioCache {
                     // regardless.
                     pull(
                         videoId,
-                        Uri.parse("bitchord://watch?v=$videoId"),
+                        Uri.parse("Konnekt://watch?v=$videoId"),
                         0,
                         want,
                         /* pinKey = */ false,
@@ -1769,7 +1769,7 @@ object AudioCache {
      * from a track played earlier, or skipped back to — costs only the rest.
      */
     private suspend fun fetch(videoId: String, position: Long, length: Long) =
-        fetch(videoId, Uri.parse("bitchord://watch?v=$videoId"), position, length)
+        fetch(videoId, Uri.parse("Konnekt://watch?v=$videoId"), position, length)
 
     /**
      * [pinKey] forces the write to land under [cacheKey] instead of wherever

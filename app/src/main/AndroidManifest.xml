@@ -204,7 +204,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:scheme="https"
-                    android:host="bitchord.kushagrasingh.in"
+                    android:host="Konnekt.kushagrasingh.in"
                     android:pathPattern="/invite/......" />
             </intent-filter>
 
@@ -214,12 +214,12 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
-                    android:scheme="bitchord"
+                    android:scheme="Konnekt"
                     android:host="party" />
             </intent-filter>
 
             <!--
-              Share → BitChord, from YT Music's own share sheet or from
+              Share → Konnekt, from YT Music's own share sheet or from
               anywhere a link can be sent. The text is whatever the sending app
               wrote around the URL, so the URL is picked out of it rather than
               parsed whole.

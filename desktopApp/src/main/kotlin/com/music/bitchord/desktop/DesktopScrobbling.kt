@@ -66,18 +66,18 @@ object DesktopScrobbling {
         get() = listenBrainzToken() != null && DesktopScrobbleSettings.listenBrainzEnabled.value
 
     private val apiKey: String?
-        get() = property("bitchord.lastfm.key") ?: env("BITCHORD_LASTFM_API_KEY")
+        get() = property("Konnekt.lastfm.key") ?: env("Konnekt_LASTFM_API_KEY")
 
     private val apiSecret: String?
-        get() = property("bitchord.lastfm.secret") ?: env("BITCHORD_LASTFM_API_SECRET")
+        get() = property("Konnekt.lastfm.secret") ?: env("Konnekt_LASTFM_API_SECRET")
 
     private fun sessionKey(): String? =
         DesktopScrobbleSettings.lastfmSessionKey.value.takeIf(String::isNotBlank)
-            ?: env("BITCHORD_LASTFM_SESSION_KEY")
+            ?: env("Konnekt_LASTFM_SESSION_KEY")
 
     private fun listenBrainzToken(): String? =
         DesktopScrobbleSettings.listenBrainzToken.value.takeIf(String::isNotBlank)
-            ?: env("BITCHORD_LISTENBRAINZ_TOKEN")
+            ?: env("Konnekt_LISTENBRAINZ_TOKEN")
 
     /**
      * Signs in with a username and password, the way Android's login alert
@@ -266,7 +266,7 @@ object DesktopScrobbling {
                                     put("track_name", song.title)
                                     song.albumName?.let { put("release_name", it) }
                                     putJsonObject("additional_info") {
-                                        put("submission_client", "BitChord")
+                                        put("submission_client", "Konnekt")
                                         if (isPlayingNow) {
                                             put("position_ms", 0L)
                                             if (durationMs > 0) put("duration_ms", durationMs)

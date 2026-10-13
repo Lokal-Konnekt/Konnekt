@@ -31,7 +31,7 @@ sealed interface LinkRequest {
 }
 
 /**
- * Links and voice requests handed to BitChord from elsewhere on the device.
+ * Links and voice requests handed to Konnekt from elsewhere on the device.
  *
  * The same relay [PlayerDeepLink] is, and for the same reason: what has to
  * happen — start a queue, push a page, run a search — is all inside
@@ -54,7 +54,7 @@ object MusicLink {
      * returning the link that launched it. Without this, rotating the phone an
      * hour later would replay the shared song over whatever is playing.
      */
-    private const val EXTRA_CONSUMED = "bitchord.linkConsumed"
+    private const val EXTRA_CONSUMED = "Konnekt.linkConsumed"
 
     private val _pending = MutableStateFlow<LinkRequest?>(null)
 

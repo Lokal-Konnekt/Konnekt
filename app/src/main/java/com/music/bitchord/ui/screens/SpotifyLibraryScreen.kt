@@ -66,7 +66,7 @@ private const val LOGIN_USER_AGENT =
 
 private const val LOGIN_LAYOUT_FIX = """
     (function () {
-      var id = 'bitchord-login-layout-fix';
+      var id = 'Konnekt-login-layout-fix';
       if (document.getElementById(id)) return;
       var st = document.createElement('style');
       st.id = id;

@@ -304,12 +304,12 @@ internal object DesktopAccounts {
     // ---- Where the credential itself lives ---------------------------------
 
     private fun attributesFor(accountId: String) =
-        mapOf("application" to "bitchord", "account" to accountId)
+        mapOf("application" to "Konnekt", "account" to accountId)
 
     /** The keyring first, and a preference only when there is no keyring. */
     private fun writeCookie(accountId: String, cookie: String) {
         val stored = DesktopSecretStore.store(
-            label = DesktopStrings["d_bitchord_youtube_music_session", "BitChord — YouTube Music session"],
+            label = DesktopStrings["d_Konnekt_youtube_music_session", "Konnekt — YouTube Music session"],
             attributes = attributesFor(accountId),
             secret = cookie.toByteArray(Charsets.UTF_8),
         )

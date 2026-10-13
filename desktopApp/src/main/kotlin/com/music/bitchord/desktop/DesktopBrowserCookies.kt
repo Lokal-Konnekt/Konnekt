@@ -98,7 +98,7 @@ internal object DesktopBrowserCookies {
     fun read(profile: Profile): Result {
         if (!Files.isReadable(profile.database)) return Result.Unavailable("its cookie store cannot be read")
         val copy = runCatching {
-            Files.createTempFile("bitchord-cookies", ".sqlite").also {
+            Files.createTempFile("Konnekt-cookies", ".sqlite").also {
                 Files.copy(profile.database, it, StandardCopyOption.REPLACE_EXISTING)
             }
         }.getOrElse { return Result.Unavailable("its cookie store could not be copied: ${it.message}") }

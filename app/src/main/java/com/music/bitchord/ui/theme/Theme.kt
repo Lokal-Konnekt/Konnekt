@@ -60,7 +60,7 @@ val SFProDisplay = FontFamily(
 )
 
 // Heavy, tight typography — the backbone of the Apple Music look.
-private val BitChordTypography = Typography(
+private val KonnektTypography = Typography(
     displayLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 34.sp, letterSpacing = (-0.8).sp),
     headlineLarge = TextStyle(fontWeight = FontWeight.W800, fontSize = 30.sp, letterSpacing = (-0.7).sp),
     headlineMedium = TextStyle(fontWeight = FontWeight.W700, fontSize = 22.sp, letterSpacing = (-0.4).sp),
@@ -92,13 +92,13 @@ private fun Typography.withFamily(family: FontFamily) = Typography(
 )
 
 @Composable
-fun BitChordTheme(
+fun KonnektTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
         colorScheme = if (darkTheme) DarkColors else LightColors,
-        typography = BitChordTypography,
+        typography = KonnektTypography,
         content = content,
     )
 }
@@ -125,4 +125,3 @@ fun SystemBarIcons(dark: Boolean) {
         }
     }
 }
-

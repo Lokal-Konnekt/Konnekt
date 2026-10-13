@@ -63,7 +63,7 @@ class DesktopPreferenceChunksTest {
 
     @Test
     fun `characters xml cannot carry never reach the store`() {
-        val node = Preferences.userRoot().node("bitchord-test-${System.nanoTime()}")
+        val node = Preferences.userRoot().node("Konnekt-test-${System.nanoTime()}")
         try {
             // 0x1f is the one that was actually observed.
             DesktopPreferenceChunks.write(node, "k", "before\u001Fafter\u0000end")

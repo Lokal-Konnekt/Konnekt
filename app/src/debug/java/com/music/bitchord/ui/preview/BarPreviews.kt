@@ -179,20 +179,20 @@ private fun ChromeStack(scrolled: Boolean, withMiniPlayer: Boolean) {
 @Preview(name = "Chrome · dark", device = "id:pixel_8", showBackground = true)
 @Composable
 private fun ChromeDarkPreview() {
-    BitChordTheme(darkTheme = true) { ChromeStack(scrolled = true, withMiniPlayer = false) }
+    KonnektTheme(darkTheme = true) { ChromeStack(scrolled = true, withMiniPlayer = false) }
 }
 
 @Preview(name = "Chrome · light", device = "id:pixel_8", showBackground = true)
 @Composable
 private fun ChromeLightPreview() {
-    BitChordTheme(darkTheme = false) { ChromeStack(scrolled = true, withMiniPlayer = false) }
+    KonnektTheme(darkTheme = false) { ChromeStack(scrolled = true, withMiniPlayer = false) }
 }
 
 /** The taller scrim, which the mini player's arrival grows it into. */
 @Preview(name = "Chrome · mini player", device = "id:pixel_8", showBackground = true)
 @Composable
 private fun ChromeMiniPlayerPreview() {
-    BitChordTheme(darkTheme = true) { ChromeStack(scrolled = true, withMiniPlayer = true) }
+    KonnektTheme(darkTheme = true) { ChromeStack(scrolled = true, withMiniPlayer = true) }
 }
 
 /**
@@ -213,7 +213,7 @@ private fun ChromeMiniPlayerPreview() {
 )
 @Composable
 private fun MiniPlayerPreview() {
-    BitChordTheme {
+    KonnektTheme {
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -265,7 +265,7 @@ private fun MiniPlayerPreview() {
 )
 @Composable
 private fun ScrimRampPreview() {
-    BitChordTheme {
+    KonnektTheme {
         Box(Modifier.fillMaxSize()) {
             // A mid grey under it: the ramp reads as a ramp against this,
             // whereas over the theme's own background it is invisible by
@@ -290,7 +290,7 @@ private fun ScrimRampPreview() {
 @Preview(name = "Top bar · backdrops", device = "id:pixel_8", showBackground = true)
 @Composable
 private fun TopBarBackdropPreview() {
-    BitChordTheme(darkTheme = true) {
+    KonnektTheme(darkTheme = true) {
         Column(
             Modifier
                 .fillMaxSize()

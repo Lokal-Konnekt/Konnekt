@@ -87,7 +87,7 @@ internal object DesktopAppUiHost : AppUiHost {
         _librarySort.value = value
     }
 
-    /** Kept current by the app, which owns the download list — see `BitChordDesktopApp`. */
+    /** Kept current by the app, which owns the download list — see `KonnektDesktopApp`. */
     val downloaded = MutableStateFlow<Set<String>>(emptySet())
 
     @Composable

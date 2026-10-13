@@ -73,7 +73,7 @@ private fun desktopMain() = application {
     Window(
         onCloseRequest = { if (DesktopWindowVisibility.onCloseRequest()) exitApplication() },
         visible = visible,
-        title = "BitChord",
+        title = "Konnekt",
         icon = painterResource(Res.drawable.logo),
         state = state,
         // No system title bar on Windows, where the application draws its own instead — see
@@ -112,7 +112,7 @@ private fun desktopMain() = application {
                 (openingSize.width.value * transform.scaleX).roundToInt(),
                 (openingSize.height.value * transform.scaleY).roundToInt(),
             )
-            if (DesktopPlatform.isWindows && DesktopWindowsFrame.install("BitChord")) {
+            if (DesktopPlatform.isWindows && DesktopWindowsFrame.install("Konnekt")) {
                 DesktopWindowBackdrop.apply()
             }
         }
@@ -150,7 +150,7 @@ private fun desktopMain() = application {
             LocalDesktopWindowActions provides actions,
             LocalDesktopWindowScope provides this,
         ) {
-            BitChordDesktopApp()
+            KonnektDesktopApp()
         }
     }
 }

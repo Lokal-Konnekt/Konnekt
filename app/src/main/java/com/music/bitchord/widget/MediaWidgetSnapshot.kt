@@ -89,7 +89,7 @@ internal data class MediaWidgetSnapshot(
         }
 
         private fun prefs(context: Context) =
-            context.getSharedPreferences("bitchord_widget", Context.MODE_PRIVATE)
+            context.getSharedPreferences("Konnekt_widget", Context.MODE_PRIVATE)
 
         private const val KEY_MEDIA_ID = "media_id"
         private const val KEY_TITLE = "title"
