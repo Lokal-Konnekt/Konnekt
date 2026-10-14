@@ -23,14 +23,6 @@ Konnekt brings together music search and playback through YouTube Music, local a
 
 Some features require an account, a configured music source, or an external service.
 
-## Project
-
-The codebase includes the Android application, a desktop application, and the Listen Together server. The Android application uses the package name `com.music.konnekt`. Some desktop project components still retain technical references to BitChord.
-
-Konnekt is based on the open-source project [BitChord](https://github.com/kushagrasinghx/BitChord). Original contributions and licenses are preserved in the source code and in [LICENSE](LICENSE).
-
-For more information, see [CONTRIBUTING.md](CONTRIBUTING.md), [DESKTOP.md](DESKTOP.md), and [backend/README.md](backend/README.md).
-
 ## Disclaimer
 
 Konnekt is an independent third-party client. It is not affiliated with, endorsed by, or officially associated with YouTube, Google, Spotify, or Discord.
