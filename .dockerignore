@@ -1,0 +1,16 @@
+.git
+.gradle
+.kotlin
+build
+*/build
+*/bin
+local.properties
+keystore.properties
+*.jks
+*.keystore
+*.apk
+*.idsig
+.tmp_verify
+.shots
+.env
+output

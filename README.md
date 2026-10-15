@@ -29,7 +29,7 @@ The repository includes the Android app, shared Kotlin modules, a Windows/Linux 
 | **Listen** | Background and lock-screen playback, queue management, shuffle, repeat, sleep timer, gapless playback, crossfade and Automix. |
 | **Follow the lyrics** | Syllable, word and line sync, multiple providers, source selection, timing adjustment, translation, romanization and lyric sharing. |
 | **Go offline** | Download music, browse local audio and keep downloads across compatible app updates. |
-| **Make it yours** | Light/dark appearance, Midnight and Ember themes, artwork colors, Canvas artwork and reduced animation/blur options. |
+| **Make it yours** | Light/dark appearance, Midnight and Ember themes, artwork colors, Canvas artwork, reduced animation/blur options and an opt-in New Design with liquid-glass motion. |
 | **Explore Replay** | Listening time, favorite tracks and artists, Replay stories and shareable summaries. |
 | **Connect** | Google/YouTube Music accounts, Spotify playlists, Discord Rich Presence, Last.fm, ListenBrainz and Listen Together. |
 | **Keep your setup** | A username/password Konnekt account and encrypted cloud backup of playlists, settings and connected account sessions. Audio files stay on the device. |
@@ -121,10 +121,25 @@ go run .
 
 ## 🧪 Checks & releases
 
+The Gradle wrapper is pinned in `gradle/wrapper/gradle-wrapper.properties`. Android uses JDK 17; the desktop toolchain is pinned to Java 21 in `desktopApp/build.gradle.kts`. No global package installation is required.
+
 ```bash
+# The single local test entry point
+make test
+
+# Equivalent explicit Gradle checks
 ./gradlew :shared:jvmTest :sharedUi:jvmTest :app:testProdDebugUnitTest
 ./gradlew :desktopApp:test
 ```
+
+For a clean Linux desktop build with the required system libraries:
+
+```bash
+docker build -t konnekt-dev .
+docker run --rm -it konnekt-dev
+```
+
+The container runs the desktop client. Android builds still need the Android SDK, NDK and CMake versions listed above. Copy `.env.example` to a private environment or use `local.properties` for optional service values; never commit credentials.
 
 Verify APK package, version, signature and alignment with [verify-release.ps1](tools/verify-release.ps1). Follow the [update publishing guide](docs/IN_APP_UPDATES.md).
 
