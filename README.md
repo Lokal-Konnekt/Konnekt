@@ -5,7 +5,6 @@
 
 **A music player for Android, featuring a polished interface and flexible music sources.**
 
-<img src="release-banner-1.1.0.png" alt="Bannière Konnekt 1.1.0" width="100%" />
 
 </div>
 
