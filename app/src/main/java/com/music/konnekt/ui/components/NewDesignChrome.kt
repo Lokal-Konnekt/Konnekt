@@ -50,16 +50,20 @@ fun NewDesignBackdrop(
         return
     }
 
-    val transition = rememberInfiniteTransition(label = "newDesignAmbient")
-    val phase by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 18_000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart,
-        ),
-        label = "newDesignAmbientPhase",
-    )
+    val phase = if (reduceAnimation) {
+        0f
+    } else {
+        val transition = rememberInfiniteTransition(label = "newDesignAmbient")
+        transition.animateFloat(
+            initialValue = 0f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 18_000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart,
+            ),
+            label = "newDesignAmbientPhase",
+        ).value
+    }
     val motionAlpha by animateFloatAsState(
         targetValue = if (reduceAnimation) 0.55f else 1f,
         animationSpec = tween(480),
