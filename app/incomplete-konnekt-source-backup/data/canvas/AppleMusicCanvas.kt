@@ -1,7 +1,7 @@
-package com.music.bitchord.data.canvas
+package com.music.konnekt.data.canvas
 
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.Http
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.Http
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.contentOrNull

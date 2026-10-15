@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.components
+package com.music.konnekt.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -37,10 +37,10 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.R
-import com.music.bitchord.playback.cast.CastController
-import com.music.bitchord.ui.haptics.Haptic
-import com.music.bitchord.ui.haptics.rememberHaptics
+import com.music.konnekt.R
+import com.music.konnekt.playback.cast.CastController
+import com.music.konnekt.ui.haptics.Haptic
+import com.music.konnekt.ui.haptics.rememberHaptics
 import dev.chrisbanes.haze.HazeState
 
 /**

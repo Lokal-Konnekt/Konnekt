@@ -1,8 +1,8 @@
-package com.music.bitchord.data.spotify
+package com.music.konnekt.data.spotify
 
-import com.music.bitchord.data.Http
-import com.music.bitchord.data.canvas.CANVAS_UA
-import com.music.bitchord.data.canvas.SpotifyToken
+import com.music.konnekt.data.Http
+import com.music.konnekt.data.canvas.CANVAS_UA
+import com.music.konnekt.data.canvas.SpotifyToken
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json

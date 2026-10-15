@@ -11,6 +11,8 @@
 <full-backup-content>
     <exclude domain="sharedpref" path="Konnekt_auth.xml" />
     <exclude domain="sharedpref" path="Konnekt_auth_plain.xml" />
+    <exclude domain="sharedpref" path="Konnekt_cloud_auth.xml" />
+    <exclude domain="sharedpref" path="Konnekt_cloud_auth_plain.xml" />
     <exclude domain="sharedpref" path="Konnekt_sources.xml" />
     <exclude domain="sharedpref" path="Konnekt_sources_plain.xml" />
 </full-backup-content>

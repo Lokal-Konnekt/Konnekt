@@ -144,7 +144,7 @@
     <string name="widget_previous">Önceki</string>
     <string name="widget_artwork">Albüm kapağı</string>
     <string name="widget_nothing_played">Henüz bir şey çalınmadı</string>
-    <string name="widget_open_bitchord">Konnekt\'u Aç</string>
+    <string name="widget_open_konnekt">Konnekt\'u Aç</string>
     <string name="widget_preview_title">Şarkı adı</string>
     <string name="widget_preview_artist">Sanatçı</string>
     <string name="widget_pill_label">Şu an çalıyor 4×1</string>
@@ -349,7 +349,7 @@
     <string name="starting">Başlatılıyor</string>
     <string name="start_radio">Radyoyu başlat</string>
     <string name="radio_started">%1$s radyosu başlatıldı</string>
-    <string name="saved_to_bitchord_folder">Müzik/Konnekt klasörüne kaydedildi</string>
+    <string name="saved_to_konnekt_folder">Müzik/Konnekt klasörüne kaydedildi</string>
     <string name="nothing_downloading">İndirilen bir şey yok</string>
     <string name="nothing_to_explore">Şu anda keşfedilecek bir şey yok</string>
     <string name="no_youtube_music_results">YouTube Music\'ten sonuç yok</string>
@@ -685,7 +685,7 @@
     </plurals>
     <string name="no_local_albums">Burada henüz bir albüme veya çalma listesine ait bir şey yok. Tam bir albüm veya çalma listesi indir, burada görünecek.</string>
     <string name="play_your_replay">Replay\'ini çal</string>
-    <string name="counted_on_device_with_bitchord">Bu cihazda Konnekt ile sayıldı</string>
+    <string name="counted_on_device_with_konnekt">Bu cihazda Konnekt ile sayıldı</string>
     <string name="this_month">Bu ay</string>
     <string name="this_year">Bu yıl</string>
     <string name="all_time">Tüm zamanlar</string>
@@ -1245,4 +1245,35 @@
     <string name="spotify_library_subtitle">Spotify çalma listeleriniz</string>
     <string name="spotify_sign_in">Spotify ile oturum aç</string>
     <string name="spotify_track_unavailable">O şarkı YouTube Music’de bulunamadı</string>
+
+    <string name="home_for_you">Senin için</string>
+    <string name="home_for_you_subtitle">Dinlediklerinden ilham alan yeni keşifler</string>
+    <string name="update_verifying_body">Konnekt %1$s indirmesi kontrol ediliyor…</string>
+    <string name="update_verifying">İndirme kontrol ediliyor…</string>
+    <string name="update_retry_hint">Bağlantınızı kontrol edip tekrar indirmeyi deneyin.</string>
+    <string name="update_invalid_apk">Bu güncelleme doğrulanamadı. Yüklemeden önce tekrar indirin.</string>
+    <string name="update_install_permission">Android, Konnekt güncellemelerine izin vermenizi isteyecek. Geri döndüğünüzde yükleme devam edecek.</string>
+
+    <string name="cloud_account_title">Konnekt hesabı</string>
+    <string name="cloud_account_intro">Çalma listelerini, ayarları ve bağlı hesapları gizli şekilde eşitleyin.</string>
+    <string name="cloud_username">Kullanıcı adı</string>
+    <string name="cloud_password">Parola</string>
+    <string name="cloud_create">Hesap oluştur</string>
+    <string name="cloud_sign_in">Giriş yap</string>
+    <string name="cloud_new_account">Yeni hesap</string>
+    <string name="cloud_have_account">Hesabım var</string>
+    <string name="cloud_password_warning">E-posta gerekmez. Parolanızı saklayın: kurtarılamaz ve şifreli yedeğinizi korur.</string>
+    <string name="cloud_connected_as">%1$s olarak giriş yapıldı</string>
+    <string name="cloud_scope">Listeler, ayarlar ve oturumlar yüklenmeden önce şifrelenir. Ses dosyaları cihazda kalır.</string>
+    <string name="cloud_save">Buluta kaydet</string>
+    <string name="cloud_restore">Geri yükle</string>
+    <string name="cloud_restore_warning">Bu cihazın listeleri, ayarları ve oturumları bulut kopyasıyla değiştirilsin mi? İndirilen sesler korunur. Sonrasında uygulamayı yeniden başlatın.</string>
+    <string name="cloud_restore_confirm">Şimdi geri yükle</string>
+    <string name="cloud_sign_out">Konnekt hesabından çık</string>
+    <string name="cloud_saved">Şifreli yedek kaydedildi.</string>
+    <string name="cloud_restored">Geri yüklendi. Bağlı hizmetleri yenilemek için uygulamayı yeniden başlatın.</string>
+    <string name="cloud_signed_in">Konnekt hesabı bağlandı.</string>
+    <string name="theme_midnight">Gece yarısı</string>
+    <string name="theme_ember">Kor</string>
+    <string name="replay_load_error">Dinleme geçmişi yüklenemedi. Tekrar deneyin.</string>
 </resources>

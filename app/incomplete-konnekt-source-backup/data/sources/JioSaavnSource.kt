@@ -1,11 +1,11 @@
-package com.music.bitchord.data.sources
+package com.music.konnekt.data.sources
 
-import com.music.bitchord.data.TrackLog
-import com.music.bitchord.data.jiosaavn.JioSaavnService
-import com.music.bitchord.data.jiosaavn.prioritizeExplicit
-import com.music.bitchord.data.model.Song
+import com.music.konnekt.data.TrackLog
+import com.music.konnekt.data.jiosaavn.JioSaavnService
+import com.music.konnekt.data.jiosaavn.prioritizeExplicit
+import com.music.konnekt.data.model.Song
 
-private const val TAG = "BitChord"
+private const val TAG = "Konnekt"
 
 class JioSaavnSource(
     override val config: SourceConfig,
@@ -35,7 +35,7 @@ class JioSaavnSource(
         return results.take(limit).map { raw ->
             val primaryArtists = raw.moreInfo.artistMap.primaryArtists.joinToString(", ") { it.name }
             val artistName = primaryArtists.ifBlank { "Unknown Artist" }
-            
+
             // Generate higher quality thumbnail link (e.g. 500x500)
             val thumbnail = raw.image
                 .replace(Regex("150x150|50x50"), "500x500")
@@ -52,8 +52,8 @@ class JioSaavnSource(
                 albumName = raw.moreInfo.album.ifBlank { null },
                 thumbnailUrl = thumbnail,
                 // JioSaavn provides duration in seconds, but Song expects durationText ("M:SS")
-                // Alternatively, Song.durationMillis() will parse durationText. Let's just 
-                // format it since BitChord uses string duration.
+                // Alternatively, Song.durationMillis() will parse durationText. Let's just
+                // format it since Konnekt uses string duration.
                 durationText = raw.moreInfo.duration.toIntOrNull()?.let { seconds ->
                     val m = seconds / 60
                     val s = seconds % 60

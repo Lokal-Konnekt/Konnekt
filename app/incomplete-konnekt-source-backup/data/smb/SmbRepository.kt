@@ -1,8 +1,8 @@
-package com.music.bitchord.data.smb
+package com.music.konnekt.data.smb
 
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.remote.RemoteArtwork
-import com.music.bitchord.data.settings.AppSettings
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.remote.RemoteArtwork
+import com.music.konnekt.data.settings.AppSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

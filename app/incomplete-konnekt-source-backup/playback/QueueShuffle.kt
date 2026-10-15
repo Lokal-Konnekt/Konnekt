@@ -1,4 +1,4 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.os.Bundle
 import androidx.core.os.bundleOf
@@ -6,9 +6,9 @@ import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionCommand
-import com.music.bitchord.data.model.QueueTier
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.settings.AppSettings
+import com.music.konnekt.data.model.QueueTier
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.settings.AppSettings
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

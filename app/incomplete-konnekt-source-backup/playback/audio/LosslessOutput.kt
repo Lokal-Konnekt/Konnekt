@@ -1,4 +1,4 @@
-package com.music.bitchord.playback.audio
+package com.music.konnekt.playback.audio
 
 import android.content.Context
 import android.media.AudioDeviceCallback
@@ -6,8 +6,8 @@ import android.media.AudioDeviceInfo
 import android.media.AudioManager
 import android.os.Handler
 import android.os.Looper
-import com.music.bitchord.data.TrackLog
-import com.music.bitchord.playback.audio.bluetooth.BluetoothAudioTracker
+import com.music.konnekt.data.TrackLog
+import com.music.konnekt.playback.audio.bluetooth.BluetoothAudioTracker
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -158,5 +158,5 @@ object LosslessOutput {
         31, // TYPE_DOCK_ANALOG, API 34
     )
 
-    private const val TAG = "BitChord"
+    private const val TAG = "Konnekt"
 }

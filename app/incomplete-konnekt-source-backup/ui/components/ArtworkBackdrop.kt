@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.components
+package com.music.konnekt.ui.components
 
 import android.os.Build
 import androidx.compose.foundation.background
@@ -17,10 +17,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.music.bitchord.data.model.CARD_ART_PX
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.ui.theme.ArtworkPalette
+import com.music.konnekt.data.model.CARD_ART_PX
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.ui.theme.ArtworkPalette
 
 /**
  * The colour a surface takes from the artwork it is about: a flat tint

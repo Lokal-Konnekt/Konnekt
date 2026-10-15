@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import android.annotation.SuppressLint
 import android.net.Uri
@@ -28,8 +28,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import org.jetbrains.compose.resources.painterResource
-import com.music.bitchord.sharedui.resources.spotify_logo
-import com.music.bitchord.sharedui.resources.Res
+import com.music.konnekt.sharedui.resources.spotify_logo
+import com.music.konnekt.sharedui.resources.Res
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Icon
 import androidx.compose.material3.CircularProgressIndicator
@@ -52,11 +52,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
-import com.music.bitchord.R
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.spotify.SpotifyLibrary
-import com.music.bitchord.data.spotify.SpotifyPlaylist
-import com.music.bitchord.data.spotify.SpotifyTrack
+import com.music.konnekt.R
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.spotify.SpotifyLibrary
+import com.music.konnekt.data.spotify.SpotifyPlaylist
+import com.music.konnekt.data.spotify.SpotifyTrack
 
 private const val LOGIN_URL =
     "https://accounts.spotify.com/login?continue=https%3A%2F%2Fopen.spotify.com%2F"
@@ -66,7 +66,7 @@ private const val LOGIN_USER_AGENT =
 
 private const val LOGIN_LAYOUT_FIX = """
     (function () {
-      var id = 'bitchord-login-layout-fix';
+      var id = 'konnekt-login-layout-fix';
       if (document.getElementById(id)) return;
       var st = document.createElement('style');
       st.id = id;

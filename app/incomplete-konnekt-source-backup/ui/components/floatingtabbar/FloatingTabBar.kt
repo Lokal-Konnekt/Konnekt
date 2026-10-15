@@ -20,8 +20,8 @@
  *   animation morphs around the center instead of the start edge.
  *
  * Taken from EchoMusicApp/Echo-Music, which carries the three modifications
- * listed above; BitChord's own use of it is in
- * [com.music.bitchord.ui.components.GlassNavBar]. One further change here:
+ * listed above; Konnekt's own use of it is in
+ * [com.music.konnekt.ui.components.GlassNavBar]. One further change here:
  *
  * - `tabBarContentModifier` is a `@Composable () -> Modifier` factory rather
  *   than a single Modifier value. It is applied to three surfaces of three
@@ -37,7 +37,7 @@
  *   resist at the ends, tick across tab boundaries, and settle on release.
  */
 
-package com.music.bitchord.ui.components.floatingtabbar
+package com.music.konnekt.ui.components.floatingtabbar
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibilityScope
@@ -112,14 +112,14 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.ui.components.GlassSpring
-import com.music.bitchord.ui.components.LocalGlassExport
-import com.music.bitchord.ui.components.backdrop.backdrops.layerBackdrop
-import com.music.bitchord.ui.components.backdrop.backdrops.rememberLayerBackdrop
-import com.music.bitchord.ui.components.isGlassSupported
-import com.music.bitchord.ui.haptics.Haptic
-import com.music.bitchord.ui.haptics.rememberHaptics
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.ui.components.GlassSpring
+import com.music.konnekt.ui.components.LocalGlassExport
+import com.music.konnekt.ui.components.backdrop.backdrops.layerBackdrop
+import com.music.konnekt.ui.components.backdrop.backdrops.rememberLayerBackdrop
+import com.music.konnekt.ui.components.isGlassSupported
+import com.music.konnekt.ui.haptics.Haptic
+import com.music.konnekt.ui.haptics.rememberHaptics
 import kotlin.math.roundToInt
 
 /** Hoisted so the default is one stable lambda rather than a new one per call. */
@@ -1179,7 +1179,7 @@ private class FloatingTabBarScopeImpl : FloatingTabBarScope {
             )
         )
     }
-    
+
     override fun standaloneTab(
         key: Any,
         icon: @Composable () -> Unit,

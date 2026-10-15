@@ -1,4 +1,4 @@
-package com.music.bitchord.data.listentogether
+package com.music.konnekt.data.listentogether
 
 import android.content.Context
 import android.os.SystemClock
@@ -6,10 +6,10 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
-import com.music.bitchord.BitChordApplication
-import com.music.bitchord.BuildConfig
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.settings.AppSettings
+import com.music.konnekt.KonnektApplication
+import com.music.konnekt.BuildConfig
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.settings.AppSettings
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.engine.okhttp.OkHttp
@@ -116,7 +116,7 @@ val ServerConnectionState.health: ListenTogether.Health
  * the clock, and the controls any member may send. It does **not** touch the
  * player. What it publishes instead is [partyPositionMs]: where this device
  * ought to be, right now, on its own clock.
- * [PartySync][com.music.bitchord.playback.PartySync] is what binds that to
+ * [PartySync][com.music.konnekt.playback.PartySync] is what binds that to
  * Media3, and it lives in the playback service rather than here, because
  * everything above that line is testable and everything below it is not.
  *
@@ -1401,7 +1401,7 @@ object ListenTogether {
     /**
      * Who this device is jamming as, or null if it cannot.
      *
-     * [AuthStore.isSignedIn][com.music.bitchord.auth.AuthStore.isSignedIn]
+     * [AuthStore.isSignedIn][com.music.konnekt.auth.AuthStore.isSignedIn]
      * rather than "is there a cookie": a jar with no signable secret in it is a
      * session the app is already treating as signed out everywhere else, and a
      * party is not the place to start disagreeing with that.
@@ -1412,7 +1412,7 @@ object ListenTogether {
      * real account identifiers would be holding something it has no use for.
      */
     private fun identity(nickname: String = nickname()): Identity? {
-        val store = BitChordApplication.authStore
+        val store = KonnektApplication.authStore
         if (!store.isSignedIn) return null
         val account = store.activeSession ?: return null
         val profile = account.profiles.firstOrNull { it.profileId == account.activeProfileId }
@@ -1639,7 +1639,7 @@ object ListenTogether {
     const val CODE_LENGTH = 6
 
     private const val TAG = "ListenTogether"
-    private const val PREFS = "bitchord_listen_together"
+    private const val PREFS = "konnekt_listen_together"
     private const val KEY_SERVER = "server_url"
 
     /** What a redacted address reads as. Not a hostname, so it cannot be resolved back. */

@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.replay
+package com.music.konnekt.ui.replay
 
 import android.content.Context
 import androidx.compose.runtime.Composable
@@ -8,11 +8,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.music.bitchord.data.stats.ArtistFacts
-import com.music.bitchord.data.stats.ListeningStats
-import com.music.bitchord.data.stats.ReplayPeriod
-import com.music.bitchord.data.stats.ReplaySummary
-import com.music.bitchord.R
+import com.music.konnekt.data.stats.ArtistFacts
+import com.music.konnekt.data.stats.ListeningStats
+import com.music.konnekt.data.stats.ReplayPeriod
+import com.music.konnekt.data.stats.ReplaySummary
+import com.music.konnekt.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
@@ -26,7 +26,7 @@ import java.util.Locale
  * The Replay's state: which stretch of listening is being shown, and the
  * numbers for it.
  *
- * Held here rather than in [com.music.bitchord.ui.MainViewModel] because it is
+ * Held here rather than in [com.music.konnekt.ui.MainViewModel] because it is
  * only alive while the page is: the summary is a merge of a few files and is
  * cheap to make, and keeping a copy of every chart in a view model that outlives
  * the screen would hold artwork URLs and a few hundred rows for the rest of the
@@ -361,7 +361,7 @@ fun ReplaySummary.albumRows(limit: Int): List<ReplayRow> =
  *
  * The cover of whichever artist happened to lead the genre is not a picture of
  * the genre, and putting it there makes a row of five look like five artists
- * mislabelled. [com.music.bitchord.ui.replay.InitialTile] stands in instead.
+ * mislabelled. [com.music.konnekt.ui.replay.InitialTile] stands in instead.
  */
 fun ReplaySummary.genreRows(limit: Int): List<ReplayRow> =
     genres.take(limit).mapIndexed { index, entry ->

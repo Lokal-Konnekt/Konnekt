@@ -1,4 +1,4 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.os.SystemClock
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.components
+package com.music.konnekt.ui.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn

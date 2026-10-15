@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.components
+package com.music.konnekt.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -56,14 +56,14 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.music.bitchord.R
-import com.music.bitchord.data.model.PlaylistPrivacy
-import com.music.bitchord.data.model.ROW_ART_PX
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.model.UserPlaylist
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.ui.components.thumbnailBorder
-import com.music.bitchord.ui.icons.BitChordIcons
+import com.music.konnekt.R
+import com.music.konnekt.data.model.PlaylistPrivacy
+import com.music.konnekt.data.model.ROW_ART_PX
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.model.UserPlaylist
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.ui.components.thumbnailBorder
+import com.music.konnekt.ui.icons.KonnektIcons
 import java.util.Locale
 
 /**
@@ -120,7 +120,7 @@ fun PlaylistPickerSheet(
         )
 
         ActionRow(
-            icon = BitChordIcons.Plus,
+            icon = KonnektIcons.Plus,
             label = stringResource(R.string.new_playlist),
             onClick = { creating = true },
         )

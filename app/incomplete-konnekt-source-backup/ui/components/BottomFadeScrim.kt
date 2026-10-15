@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.components
+package com.music.konnekt.ui.components
 
 import androidx.compose.animation.core.EaseInCubic
 import androidx.compose.animation.core.animateDpAsState

@@ -136,7 +136,7 @@
     <string name="widget_previous">Anterior</string>
     <string name="widget_artwork">Portada del álbum</string>
     <string name="widget_nothing_played">Aún no se ha reproducido nada</string>
-    <string name="widget_open_bitchord">Abrir Konnekt</string>
+    <string name="widget_open_konnekt">Abrir Konnekt</string>
     <string name="widget_preview_title">Título de la canción</string>
     <string name="widget_preview_artist">Artista</string>
     <string name="widget_pill_label">Reproduciendo 4×1</string>
@@ -335,7 +335,7 @@
     <string name="downloads_finished">Descargas · finalizadas</string>
     <string name="downloading_progress">Descargando · %1$d%%</string>
     <string name="starting">Iniciando</string>
-    <string name="saved_to_bitchord_folder">Guardada en Music/Konnekt</string>
+    <string name="saved_to_konnekt_folder">Guardada en Music/Konnekt</string>
     <string name="nothing_downloading">No hay descargas activas</string>
     <string name="nothing_to_explore">No hay nada para explorar ahora</string>
     <string name="no_youtube_music_results">No hay resultados de YouTube Music</string>
@@ -668,7 +668,7 @@
     </plurals>
     <string name="no_local_albums">Todavía no hay archivos asociados a un álbum o playlist. Descarga un álbum o una playlist completa para que aparezca aquí.</string>
     <string name="play_your_replay">Reproducir tu Replay</string>
-    <string name="counted_on_device_with_bitchord">Calculado en este dispositivo con Konnekt</string>
+    <string name="counted_on_device_with_konnekt">Calculado en este dispositivo con Konnekt</string>
     <string name="this_month">Este mes</string>
     <string name="this_year">Este año</string>
     <string name="all_time">Todo el tiempo</string>
@@ -1260,4 +1260,35 @@
     <string name="spotify_library_subtitle">Tus playlists de Spotify</string>
     <string name="spotify_sign_in">Iniciar sesión con Spotify</string>
     <string name="spotify_track_unavailable">No se encontró esa canción en YouTube Music</string>
+
+    <string name="home_for_you">Para ti</string>
+    <string name="home_for_you_subtitle">Nuevos descubrimientos inspirados en lo que escuchas</string>
+    <string name="update_verifying_body">Verificando la descarga de Konnekt %1$s…</string>
+    <string name="update_verifying">Verificando la descarga…</string>
+    <string name="update_retry_hint">Comprueba tu conexión e intenta descargar de nuevo.</string>
+    <string name="update_invalid_apk">No se pudo verificar esta actualización. Descárgala de nuevo antes de instalarla.</string>
+    <string name="update_install_permission">Android te pedirá que permitas actualizaciones desde Konnekt. La instalación continuará cuando vuelvas.</string>
+
+    <string name="cloud_account_title">Cuenta Konnekt</string>
+    <string name="cloud_account_intro">Sincroniza tus listas, ajustes y cuentas conectadas de forma privada.</string>
+    <string name="cloud_username">Nombre de usuario</string>
+    <string name="cloud_password">Contraseña</string>
+    <string name="cloud_create">Crear cuenta</string>
+    <string name="cloud_sign_in">Iniciar sesión</string>
+    <string name="cloud_new_account">Nueva cuenta</string>
+    <string name="cloud_have_account">Ya tengo una cuenta</string>
+    <string name="cloud_password_warning">No necesitas correo. Guarda tu contraseña: no se puede recuperar y protege tu copia cifrada.</string>
+    <string name="cloud_connected_as">Sesión iniciada como %1$s</string>
+    <string name="cloud_scope">Las listas, los ajustes y las sesiones se cifran antes de subirlos. El audio permanece en este dispositivo.</string>
+    <string name="cloud_save">Guardar en la nube</string>
+    <string name="cloud_restore">Restaurar</string>
+    <string name="cloud_restore_warning">¿Reemplazar las listas, ajustes y sesiones de este dispositivo con la copia en la nube? El audio descargado se conserva. Reinicia la app después.</string>
+    <string name="cloud_restore_confirm">Restaurar ahora</string>
+    <string name="cloud_sign_out">Cerrar sesión de Konnekt</string>
+    <string name="cloud_saved">Copia cifrada guardada.</string>
+    <string name="cloud_restored">Restaurado. Reinicia la app para actualizar los servicios conectados.</string>
+    <string name="cloud_signed_in">Cuenta Konnekt conectada.</string>
+    <string name="theme_midnight">Medianoche</string>
+    <string name="theme_ember">Brasa</string>
+    <string name="replay_load_error">No se pudo cargar tu historial de escucha. Inténtalo de nuevo.</string>
 </resources>

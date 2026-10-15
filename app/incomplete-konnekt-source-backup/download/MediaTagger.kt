@@ -1,13 +1,13 @@
-package com.music.bitchord.download
+package com.music.konnekt.download
 
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.Http
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.model.artworkAt
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.Http
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.model.artworkAt
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import java.io.ByteArrayOutputStream
@@ -37,7 +37,7 @@ import kotlin.math.max
  */
 object MediaTagger {
 
-    private const val TAG = "BitChord"
+    private const val TAG = "Konnekt"
 
     /** Long side of the embedded cover — plenty for a lock screen or a car head unit, without ballooning the file. */
     private const val COVER_MAX_SIDE = 1000

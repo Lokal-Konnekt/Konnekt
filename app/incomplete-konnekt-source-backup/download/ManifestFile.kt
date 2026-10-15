@@ -1,10 +1,10 @@
-package com.music.bitchord.download
+package com.music.konnekt.download
 
-import com.music.bitchord.data.Http
-import com.music.bitchord.download.Mp4Boxes.boxes
-import com.music.bitchord.download.Mp4Boxes.child
-import com.music.bitchord.download.Mp4Boxes.find
-import com.music.bitchord.download.Mp4Boxes.readU32
+import com.music.konnekt.data.Http
+import com.music.konnekt.download.Mp4Boxes.boxes
+import com.music.konnekt.download.Mp4Boxes.child
+import com.music.konnekt.download.Mp4Boxes.find
+import com.music.konnekt.download.Mp4Boxes.readU32
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ensureActive
 import kotlinx.coroutines.withContext
@@ -17,7 +17,7 @@ import java.io.OutputStream
  * A manifest's segments joined back into one ordinary file, so a lossless
  * download is a `.flac` whether it stays in the app or is exported.
  *
- * [OfflineHls] and [OfflineDash] keep a manifest as a package only BitChord can
+ * [OfflineHls] and [OfflineDash] keep a manifest as a package only Konnekt can
  * play, which is why [Downloads.routeFor][Downloads] used to decline a manifest
  * outright whenever "export downloads" was on — and declining sent the track to
  * YouTube. With Tidal answering every lossless request with a manifest, that

@@ -1,12 +1,12 @@
-package com.music.bitchord.data.spotify
+package com.music.konnekt.data.spotify
 
 import android.net.Uri
-import com.music.bitchord.data.Http
-import com.music.bitchord.data.YtMusicRepository
-import com.music.bitchord.data.model.SearchFilter
-import com.music.bitchord.data.model.SearchResult
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.sources.TrackMatcher
+import com.music.konnekt.data.Http
+import com.music.konnekt.data.YtMusicRepository
+import com.music.konnekt.data.model.SearchFilter
+import com.music.konnekt.data.model.SearchResult
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.sources.TrackMatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll

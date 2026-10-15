@@ -138,7 +138,7 @@
     <string name="widget_previous">Poprzedni</string>
     <string name="widget_artwork">Okładka albumu</string>
     <string name="widget_nothing_played">Nic nie zostało odtworzone</string>
-    <string name="widget_open_bitchord">Open Konnekt</string>
+    <string name="widget_open_konnekt">Open Konnekt</string>
     <string name="widget_preview_title">Tytuł utworu</string>
     <string name="widget_preview_artist">Artysta</string>
     <string name="widget_pill_label">Now playing 4×1</string>
@@ -320,7 +320,7 @@
     <string name="downloads_finished">Pobieranie · zakończone</string>
     <string name="downloading_progress">Pobieranie · %1$d%%</string>
     <string name="starting">Rozpoczynanie</string>
-    <string name="saved_to_bitchord_folder">Zapisano w Music/Konnekt</string>
+    <string name="saved_to_konnekt_folder">Zapisano w Music/Konnekt</string>
     <string name="nothing_downloading">Nic się nie pobiera</string>
     <string name="nothing_to_explore">Nie ma teraz nic do odkrycia</string>
     <string name="no_youtube_music_results">Brak wyników z YouTube Music</string>
@@ -602,7 +602,7 @@
     <string name="no_listening_history">brak historii odtwarzania</string>
     <string name="no_local_albums">Nic stąd jeszcze nie należy do albumu ani playlisty. Pobierz cały album lub playlistę, a pojawi się tutaj.</string>
     <string name="play_your_replay">Odtwórz swój Replay</string>
-    <string name="counted_on_device_with_bitchord">Obliczono na tym urządzeniu z Konnekt</string>
+    <string name="counted_on_device_with_konnekt">Obliczono na tym urządzeniu z Konnekt</string>
     <string name="this_month">Ten miesiąc</string>
     <string name="this_year">Ten rok</string>
     <string name="all_time">Cały czas</string>
@@ -1328,4 +1328,35 @@
     <string name="spotify_library_subtitle">Twoje playlisty Spotify</string>
     <string name="spotify_sign_in">Zaloguj się przez Spotify</string>
     <string name="spotify_track_unavailable">Nie znaleziono tego utworu w YouTube Music</string>
+
+    <string name="home_for_you">Dla Ciebie</string>
+    <string name="home_for_you_subtitle">Nowe odkrycia inspirowane Twoją muzyką</string>
+    <string name="update_verifying_body">Sprawdzanie pobranego Konnekt %1$s…</string>
+    <string name="update_verifying">Sprawdzanie pliku…</string>
+    <string name="update_retry_hint">Sprawdź połączenie i spróbuj pobrać ponownie.</string>
+    <string name="update_invalid_apk">Nie udało się zweryfikować aktualizacji. Pobierz ją ponownie przed instalacją.</string>
+    <string name="update_install_permission">Android poprosi o zezwolenie na aktualizacje z Konnekt. Instalacja będzie kontynuowana po powrocie.</string>
+
+    <string name="cloud_account_title">Konto Konnekt</string>
+    <string name="cloud_account_intro">Prywatnie synchronizuj playlisty, ustawienia i połączone konta.</string>
+    <string name="cloud_username">Nazwa użytkownika</string>
+    <string name="cloud_password">Hasło</string>
+    <string name="cloud_create">Utwórz konto</string>
+    <string name="cloud_sign_in">Zaloguj się</string>
+    <string name="cloud_new_account">Nowe konto</string>
+    <string name="cloud_have_account">Mam już konto</string>
+    <string name="cloud_password_warning">E-mail nie jest wymagany. Zachowaj hasło: nie można go odzyskać i chroni zaszyfrowaną kopię.</string>
+    <string name="cloud_connected_as">Zalogowano jako %1$s</string>
+    <string name="cloud_scope">Playlisty, ustawienia i sesje są szyfrowane przed wysłaniem. Pliki audio pozostają na urządzeniu.</string>
+    <string name="cloud_save">Zapisz w chmurze</string>
+    <string name="cloud_restore">Przywróć</string>
+    <string name="cloud_restore_warning">Zastąpić playlisty, ustawienia i sesje tego urządzenia kopią z chmury? Pobrana muzyka pozostanie. Następnie uruchom aplikację ponownie.</string>
+    <string name="cloud_restore_confirm">Przywróć teraz</string>
+    <string name="cloud_sign_out">Wyloguj z Konnekt</string>
+    <string name="cloud_saved">Zapisano zaszyfrowaną kopię.</string>
+    <string name="cloud_restored">Przywrócono. Uruchom aplikację ponownie, aby odświeżyć połączone usługi.</string>
+    <string name="cloud_signed_in">Połączono konto Konnekt.</string>
+    <string name="theme_midnight">Północ</string>
+    <string name="theme_ember">Żar</string>
+    <string name="replay_load_error">Nie udało się wczytać historii słuchania. Spróbuj ponownie.</string>
 </resources>

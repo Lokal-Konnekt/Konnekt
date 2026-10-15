@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -30,8 +30,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.R
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -84,7 +84,7 @@ fun SpotifyCanvasAuthScreen(
                 checked = prioritizeSpotify,
                 onCheckedChange = AppSettings::setPrioritizeSpotifyCanvas,
             )
-            
+
             Text(
                 text = stringResource(R.string.spotify_canvas_setup_steps),
                 style = MaterialTheme.typography.bodyMedium,
@@ -100,7 +100,7 @@ fun SpotifyCanvasAuthScreen(
             )
 
             Button(
-                onClick = { 
+                onClick = {
                     AppSettings.setSpotifySpdcToken(tokenInput.trim())
                     onNavigateUp()
                 },

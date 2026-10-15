@@ -1,4 +1,4 @@
-package com.music.bitchord.widget
+package com.music.konnekt.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -10,9 +10,9 @@ import android.content.res.Configuration
 import android.os.Bundle
 import android.graphics.Bitmap
 import android.widget.RemoteViews
-import com.music.bitchord.MainActivity
-import com.music.bitchord.R
-import com.music.bitchord.playback.PlayerDeepLink
+import com.music.konnekt.MainActivity
+import com.music.konnekt.R
+import com.music.konnekt.playback.PlayerDeepLink
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

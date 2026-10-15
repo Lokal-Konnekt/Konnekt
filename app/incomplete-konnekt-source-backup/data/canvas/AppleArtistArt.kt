@@ -1,9 +1,9 @@
-package com.music.bitchord.data.canvas
+package com.music.konnekt.data.canvas
 
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.Http
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.Http
 import androidx.compose.ui.graphics.Color
-import com.music.bitchord.ui.theme.ArtworkKeyColors
+import com.music.konnekt.ui.theme.ArtworkKeyColors
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

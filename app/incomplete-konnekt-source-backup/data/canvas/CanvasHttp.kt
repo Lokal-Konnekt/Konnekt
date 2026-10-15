@@ -1,6 +1,6 @@
-package com.music.bitchord.data.canvas
+package com.music.konnekt.data.canvas
 
-import com.music.bitchord.data.Http
+import com.music.konnekt.data.Http
 import okhttp3.Request
 
 /**

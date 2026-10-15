@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -15,18 +15,18 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.R
-import com.music.bitchord.sharedui.resources.Res
-import com.music.bitchord.sharedui.resources.spotify_logo
-import com.music.bitchord.data.model.ShelfItem
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.download.Downloads
-import com.music.bitchord.download.SavedCollection
-import com.music.bitchord.ui.components.PAGE_GUTTER
-import com.music.bitchord.ui.components.ReplayCardRowSkeleton
-import com.music.bitchord.ui.replay.ReplayCardRow
-import com.music.bitchord.ui.replay.ReplayHeroCard
-import com.music.bitchord.ui.replay.ReplayStoryPage
+import com.music.konnekt.R
+import com.music.konnekt.sharedui.resources.Res
+import com.music.konnekt.sharedui.resources.spotify_logo
+import com.music.konnekt.data.model.ShelfItem
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.download.Downloads
+import com.music.konnekt.download.SavedCollection
+import com.music.konnekt.ui.components.PAGE_GUTTER
+import com.music.konnekt.ui.components.ReplayCardRowSkeleton
+import com.music.konnekt.ui.replay.ReplayCardRow
+import com.music.konnekt.ui.replay.ReplayHeroCard
+import com.music.konnekt.ui.replay.ReplayStoryPage
 
 // The phone's halves of the shared Library page: its list of folders, what
 // sits on its "On device" shelf, and the way in to Replay at its head.
@@ -67,7 +67,7 @@ fun libraryLinks(): List<LibraryLink> {
             "local:all",
         ),
         // Opt-in from Settings → Storage: what the song cache is holding from
-        // YouTube and JioSaavn. See [com.music.bitchord.playback.AudioCache.cachedSongs].
+        // YouTube and JioSaavn. See [com.music.konnekt.playback.AudioCache.cachedSongs].
         link(
             Icons.Rounded.Storage,
             stringResource(R.string.cached_songs),
@@ -79,13 +79,13 @@ fun libraryLinks(): List<LibraryLink> {
             Icons.Rounded.Cloud,
             stringResource(R.string.webdav),
             stringResource(R.string.webdav_subtitle),
-            com.music.bitchord.data.webdav.WebDavConfig.BROWSE_ID,
+            com.music.konnekt.data.webdav.WebDavConfig.BROWSE_ID,
         ).takeIf { webdavConfigured.isNotBlank() },
         link(
             Icons.Rounded.Lan,
             stringResource(R.string.smb),
             stringResource(R.string.smb_subtitle),
-            com.music.bitchord.data.smb.SmbConfig.BROWSE_ID,
+            com.music.konnekt.data.smb.SmbConfig.BROWSE_ID,
         ).takeIf { smbHost.isNotBlank() && smbShare.isNotBlank() },
         // Only while signed in to Spotify in Settings → Accounts; it opens that
         // account's playlists rather than a browse page.

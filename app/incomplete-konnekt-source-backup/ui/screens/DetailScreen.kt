@@ -1,7 +1,7 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import android.os.Build
-import com.music.bitchord.R
+import com.music.konnekt.R
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateContentSize
@@ -12,7 +12,7 @@ import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import com.music.bitchord.ui.components.longPressMenuClickable
+import com.music.konnekt.ui.components.longPressMenuClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -49,7 +49,7 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.ui.graphics.luminance
-import com.music.bitchord.data.model.LibraryState
+import com.music.konnekt.data.model.LibraryState
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.GraphicEq
 import androidx.compose.material.icons.rounded.MoreHoriz
@@ -110,51 +110,51 @@ import androidx.compose.runtime.mutableIntStateOf
 import kotlinx.coroutines.delay
 import androidx.compose.ui.layout.layout
 import androidx.compose.ui.unit.Constraints
-import com.music.bitchord.data.canvas.AppleArtistArt
-import com.music.bitchord.data.canvas.AppleArtistArtRepository
-import com.music.bitchord.data.canvas.keyColors
+import com.music.konnekt.data.canvas.AppleArtistArt
+import com.music.konnekt.data.canvas.AppleArtistArtRepository
+import com.music.konnekt.data.canvas.keyColors
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
-import com.music.bitchord.data.canvas.CanvasArtwork
-import com.music.bitchord.data.canvas.CanvasRepository
-import com.music.bitchord.data.model.BrowseType
-import com.music.bitchord.data.model.DetailPage
-import com.music.bitchord.data.model.CARD_ART_PX
-import com.music.bitchord.data.model.HEADER_ART_PX
-import com.music.bitchord.data.model.ROW_ART_PX
-import com.music.bitchord.data.model.HomeShelf
-import com.music.bitchord.data.model.ShelfItem
-import com.music.bitchord.data.settings.SongSort
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.model.SubscriptionState
-import com.music.bitchord.data.model.UiState
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.data.model.durationMillis
-import com.music.bitchord.data.model.isSameTrackAs
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.ui.components.DownloadedBadge
-import com.music.bitchord.ui.components.ExplicitSongTitle
-import com.music.bitchord.ui.components.LIBRARY_GRID_SPACING
-import com.music.bitchord.ui.components.MessageState
-import com.music.bitchord.ui.components.PAGE_GUTTER
-import com.music.bitchord.ui.components.NUMBERED_ROW_DIVIDER_INSET
-import com.music.bitchord.ui.components.RowMoreButton
-import com.music.bitchord.ui.components.ROW_DIVIDER_INSET
-import com.music.bitchord.ui.components.SHELF_CARD_WIDTH
-import com.music.bitchord.ui.components.SongRow
-import com.music.bitchord.ui.components.SearchPlayingBars
-import com.music.bitchord.ui.components.libraryGrid
-import com.music.bitchord.ui.components.lightweightLiquidGlass
-import com.music.bitchord.ui.components.thumbnailBorder
-import com.music.bitchord.ui.components.detailSkeleton
-import com.music.bitchord.ui.components.topBarContentPadding
-import com.music.bitchord.ui.components.trackColumnWidth
-import com.music.bitchord.ui.haptics.Haptic
-import com.music.bitchord.ui.haptics.rememberHaptics
-import com.music.bitchord.ui.icons.BitChordIcons
-import com.music.bitchord.ui.player.CanvasArtworkPlayer
-import com.music.bitchord.ui.theme.ArtworkPalette
-import com.music.bitchord.ui.theme.rememberArtworkPalette
+import com.music.konnekt.data.canvas.CanvasArtwork
+import com.music.konnekt.data.canvas.CanvasRepository
+import com.music.konnekt.data.model.BrowseType
+import com.music.konnekt.data.model.DetailPage
+import com.music.konnekt.data.model.CARD_ART_PX
+import com.music.konnekt.data.model.HEADER_ART_PX
+import com.music.konnekt.data.model.ROW_ART_PX
+import com.music.konnekt.data.model.HomeShelf
+import com.music.konnekt.data.model.ShelfItem
+import com.music.konnekt.data.settings.SongSort
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.model.SubscriptionState
+import com.music.konnekt.data.model.UiState
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.data.model.durationMillis
+import com.music.konnekt.data.model.isSameTrackAs
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.ui.components.DownloadedBadge
+import com.music.konnekt.ui.components.ExplicitSongTitle
+import com.music.konnekt.ui.components.LIBRARY_GRID_SPACING
+import com.music.konnekt.ui.components.MessageState
+import com.music.konnekt.ui.components.PAGE_GUTTER
+import com.music.konnekt.ui.components.NUMBERED_ROW_DIVIDER_INSET
+import com.music.konnekt.ui.components.RowMoreButton
+import com.music.konnekt.ui.components.ROW_DIVIDER_INSET
+import com.music.konnekt.ui.components.SHELF_CARD_WIDTH
+import com.music.konnekt.ui.components.SongRow
+import com.music.konnekt.ui.components.SearchPlayingBars
+import com.music.konnekt.ui.components.libraryGrid
+import com.music.konnekt.ui.components.lightweightLiquidGlass
+import com.music.konnekt.ui.components.thumbnailBorder
+import com.music.konnekt.ui.components.detailSkeleton
+import com.music.konnekt.ui.components.topBarContentPadding
+import com.music.konnekt.ui.components.trackColumnWidth
+import com.music.konnekt.ui.haptics.Haptic
+import com.music.konnekt.ui.haptics.rememberHaptics
+import com.music.konnekt.ui.icons.KonnektIcons
+import com.music.konnekt.ui.player.CanvasArtworkPlayer
+import com.music.konnekt.ui.theme.ArtworkPalette
+import com.music.konnekt.ui.theme.rememberArtworkPalette
 import kotlin.math.roundToInt
 import java.util.Locale
 
@@ -262,7 +262,7 @@ fun DetailScreen(
     /**
      * The header's overflow: everything this page can do to its whole track
      * list that isn't already one of the buttons beside it — downloading it
-     * among them, see [com.music.bitchord.ui.components.BrowseActionsSheet].
+     * among them, see [com.music.konnekt.ui.components.BrowseActionsSheet].
      * Null on the pages with no list to act on.
      */
     onMore: ((List<Song>) -> Unit)? = null,
@@ -839,7 +839,7 @@ private fun ReleaseHeader(
                         CircleIconButton(
                             // A tick, not a filled-in plus: the pair reads as
                             // "not yet / done", which is what the state is.
-                            icon = if (library.saved) BitChordIcons.Check else BitChordIcons.Plus,
+                            icon = if (library.saved) KonnektIcons.Check else KonnektIcons.Plus,
                             contentDescription = if (library.saved) {
                                 stringResource(R.string.remove_from_library)
                             } else {
@@ -852,7 +852,7 @@ private fun ReleaseHeader(
                         )
                     }
                     CircleIconButton(
-                        icon = BitChordIcons.Shuffle,
+                        icon = KonnektIcons.Shuffle,
                         contentDescription = stringResource(R.string.shuffle),
                         palette = palette,
                         onClick = onShuffle,
@@ -870,7 +870,7 @@ private fun ReleaseHeader(
                     // reading the page, so it is the one that earns a button and
                     // the download moved to the overflow beside it.
                     CircleIconButton(
-                        icon = if (searching) Icons.Rounded.Close else BitChordIcons.Search,
+                        icon = if (searching) Icons.Rounded.Close else KonnektIcons.Search,
                         contentDescription = stringResource(
                             if (searching) R.string.close_search else R.string.search_this_list,
                         ),
@@ -938,7 +938,7 @@ private fun DetailSearchField(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
-            imageVector = BitChordIcons.Search,
+            imageVector = KonnektIcons.Search,
             contentDescription = null,
             tint = palette.onBackgroundVariant,
             modifier = Modifier.size(18.dp),
@@ -1269,7 +1269,7 @@ private fun ActionRow(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         CircleIconButton(
-            icon = BitChordIcons.Shuffle,
+            icon = KonnektIcons.Shuffle,
             contentDescription = stringResource(R.string.shuffle),
             palette = palette,
             onClick = onShuffle,
@@ -1383,7 +1383,7 @@ private fun PlayPill(
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Icon(
-            imageVector = BitChordIcons.Play,
+            imageVector = KonnektIcons.Play,
             contentDescription = if (iconOnly) stringResource(R.string.play) else null,
             tint = contentColor,
             modifier = Modifier.size(if (iconOnly) size * iconScale else 18.dp),

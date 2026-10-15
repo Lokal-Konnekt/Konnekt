@@ -1,13 +1,13 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.util.Log
 import androidx.media3.common.C
 import androidx.media3.common.audio.AudioProcessor
 import androidx.media3.common.audio.BaseAudioProcessor
 import androidx.media3.common.util.UnstableApi
-import com.music.bitchord.playback.audio.AudioBlock
-import com.music.bitchord.playback.audio.FloatAudioProcessor
-import com.music.bitchord.playback.audio.PcmBoundary
+import com.music.konnekt.playback.audio.AudioBlock
+import com.music.konnekt.playback.audio.FloatAudioProcessor
+import com.music.konnekt.playback.audio.PcmBoundary
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import kotlin.math.abs
@@ -369,7 +369,7 @@ class EqualizerProcessor : BaseAudioProcessor() {
     }
 
     companion object {
-        private const val TAG = "BitChordEqualizer"
+        private const val TAG = "KonnektEqualizer"
 
         private const val BYTES_PER_SAMPLE = 2
 

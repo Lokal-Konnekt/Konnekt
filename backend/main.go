@@ -18,13 +18,13 @@ import (
 
 	"github.com/gorilla/websocket"
 
-	"github.com/KabirSinghBhatia/BitChord/backend/clock"
-	"github.com/KabirSinghBhatia/BitChord/backend/codes"
-	"github.com/KabirSinghBhatia/BitChord/backend/config"
-	"github.com/KabirSinghBhatia/BitChord/backend/hub"
-	"github.com/KabirSinghBhatia/BitChord/backend/party"
-	"github.com/KabirSinghBhatia/BitChord/backend/presence"
-	"github.com/KabirSinghBhatia/BitChord/backend/protocol"
+	"github.com/Lokal-Konnekt/Konnekt/backend/clock"
+	"github.com/Lokal-Konnekt/Konnekt/backend/codes"
+	"github.com/Lokal-Konnekt/Konnekt/backend/config"
+	"github.com/Lokal-Konnekt/Konnekt/backend/hub"
+	"github.com/Lokal-Konnekt/Konnekt/backend/party"
+	"github.com/Lokal-Konnekt/Konnekt/backend/presence"
+	"github.com/Lokal-Konnekt/Konnekt/backend/protocol"
 )
 
 var (
@@ -73,7 +73,7 @@ func main() {
 	handler := corsMiddleware(mux)
 
 	addr := fmt.Sprintf("0.0.0.0:%d", config.Port)
-	log.Printf("BitChord Listen Together (Go) starting on %s...", addr)
+	log.Printf("Konnekt Listen Together (Go) starting on %s...", addr)
 	server := &http.Server{
 		Addr:              addr,
 		Handler:           handler,
@@ -222,7 +222,7 @@ func handleRoot(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	jsonResponse(w, http.StatusOK, map[string]interface{}{
-		"service":    "bitchord-listen-together",
+		"service":    "konnekt-listen-together",
 		"members":    store.MemberCount(),
 		"parties":    store.Len(),
 		"serverMs":   clock.NowMs(),
@@ -555,7 +555,7 @@ var inviteTemplate = template.Must(template.New("invite").Parse(`<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BitChord Listen Together - Party {{.Code}}</title>
+    <title>Konnekt Listen Together - Party {{.Code}}</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
@@ -690,7 +690,7 @@ var inviteTemplate = template.Must(template.New("invite").Parse(`<!DOCTYPE html>
                 <span>Listen Together • {{.MemberCount}} in party</span>
             </div>
             <h1>Join the Music Party</h1>
-            <p class="subtitle">Opening BitChord to sync playback in real time.</p>
+            <p class="subtitle">Opening Konnekt to sync playback in real time.</p>
             <div class="code-box">
                 <div class="code-label">Party Code</div>
                 <div class="code-val">{{.Code}}</div>
@@ -698,10 +698,10 @@ var inviteTemplate = template.Must(template.New("invite").Parse(`<!DOCTYPE html>
                     <div class="now-playing">🎵 {{.CurrentSongTitle}} - {{.CurrentSongArtist}}</div>
                 {{end}}
             </div>
-            <a id="joinBtn" href="{{.IntentURI}}" class="btn">Join Party in BitChord</a>
+            <a id="joinBtn" href="{{.IntentURI}}" class="btn">Join Party in Konnekt</a>
             <p class="footer-note">
                 Didn’t open automatically? Tap the button above.<br>
-                Don't have BitChord yet? <a href="https://github.com/kushagrasinghx/BitChord/releases" target="_blank" rel="noopener">Download it here</a>.
+                Don't have Konnekt yet? <a href="https://github.com/Lokal-Konnekt/Konnekt/releases" target="_blank" rel="noopener">Download it here</a>.
             </p>
             <script>
                 var intentUri = {{.IntentURI}};
@@ -778,8 +778,8 @@ func handleInviteLanding(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	deepLink := fmt.Sprintf("bitchord://party/%s?server=%s", url.PathEscape(code), url.QueryEscape(origin))
-	intentURI := fmt.Sprintf("intent://party/%s?server=%s#Intent;scheme=bitchord;end", url.PathEscape(code), url.QueryEscape(origin))
+	deepLink := fmt.Sprintf("konnekt://party/%s?server=%s", url.PathEscape(code), url.QueryEscape(origin))
+	intentURI := fmt.Sprintf("intent://party/%s?server=%s#Intent;scheme=konnekt;end", url.PathEscape(code), url.QueryEscape(origin))
 
 	currentSongTitle := ""
 	currentSongArtist := ""

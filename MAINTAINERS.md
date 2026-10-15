@@ -1,18 +1,19 @@
 # Maintainers
 
-This document lists the maintainers responsible for BitChord.
+Project contacts for Konnekt.
 
 | Maintainer | GitHub | Responsibilities |
 |---|---|---|
-| Kushagra Singh | [@kushagrasinghx](https://github.com/kushagrasinghx) | Project creator, core architecture, release management, and PR reviews |
+| Lokal Konnekt | [@Lokal-Konnekt](https://github.com/Lokal-Konnekt) | Project repository and releases |
+| Tysnnn23 | [@Tysnnn23](https://github.com/Tysnnn23) | Project contact |
 
 ## Responsibilities
 
 Maintainers oversee project direction, repository maintenance, review and merging of contributions, and release management.
 
-## Contributors
+## Acknowledgements
 
-This list is automatically generated from GitHub repository contributor data.
+Thanks to Kushagra Singh and the contributors below for their work on the shared codebase. Original author and third-party copyright notices remain in the source files. This historical list does not assign current release or review responsibilities.
 
 <!-- BEGIN CONTRIBUTORS -->
 - [@kushagrasinghx](https://github.com/kushagrasinghx)

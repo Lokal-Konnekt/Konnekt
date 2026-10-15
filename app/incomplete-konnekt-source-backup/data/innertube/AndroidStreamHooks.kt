@@ -1,17 +1,17 @@
-package com.music.bitchord.data.innertube
+package com.music.konnekt.data.innertube
 
 import android.content.Context
 import android.os.Build
 import android.os.SystemClock
 import android.util.Log
-import com.music.bitchord.BuildConfig
-import com.music.bitchord.data.MonotonicClock
-import com.music.bitchord.data.TrackLog
+import com.music.konnekt.BuildConfig
+import com.music.konnekt.data.MonotonicClock
+import com.music.konnekt.data.TrackLog
 import android.webkit.CookieManager
-import com.music.bitchord.data.innertube.potoken.PoTokenGenerator
-import com.music.bitchord.data.innertube.potoken.PoTokenWebView
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.sources.SourceResolver
+import com.music.konnekt.data.innertube.potoken.PoTokenGenerator
+import com.music.konnekt.data.innertube.potoken.PoTokenWebView
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.sources.SourceResolver
 
 /**
  * The phone's answers to what the shared stream resolution asks of its

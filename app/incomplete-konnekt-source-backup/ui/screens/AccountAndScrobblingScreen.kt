@@ -1,9 +1,9 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.HorizontalDivider
-import com.music.bitchord.sharedui.resources.Res
-import com.music.bitchord.sharedui.resources.spotify_logo
+import com.music.konnekt.sharedui.resources.Res
+import com.music.konnekt.sharedui.resources.spotify_logo
 import org.jetbrains.compose.resources.painterResource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
@@ -31,9 +31,9 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.R
-import com.music.bitchord.data.model.Account
-import com.music.bitchord.data.settings.AppSettings
+import com.music.konnekt.R
+import com.music.konnekt.data.model.Account
+import com.music.konnekt.data.settings.AppSettings
 import kotlin.math.roundToInt
 
 @Composable

@@ -1,14 +1,14 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
-import com.music.bitchord.data.YtMusicRepository
-import com.music.bitchord.data.listentogether.ListenTogether
-import com.music.bitchord.data.model.SearchFilter
-import com.music.bitchord.data.model.SearchResult
-import com.music.bitchord.data.model.QueueTier
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.sources.SourceRegistry
-import com.music.bitchord.data.sources.TrackMatcher
-import com.music.bitchord.playback.QueueCoordinator.asQueueEntry
+import com.music.konnekt.data.YtMusicRepository
+import com.music.konnekt.data.listentogether.ListenTogether
+import com.music.konnekt.data.model.SearchFilter
+import com.music.konnekt.data.model.SearchResult
+import com.music.konnekt.data.model.QueueTier
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.sources.SourceRegistry
+import com.music.konnekt.data.sources.TrackMatcher
+import com.music.konnekt.playback.QueueCoordinator.asQueueEntry
 import kotlinx.coroutines.CancellationException
 
 /** Most AutoPlay-suggested tracks kept queued ahead of the current one at once. */

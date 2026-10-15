@@ -1,4 +1,4 @@
-package com.music.bitchord.data.innertube.potoken
+package com.music.konnekt.data.innertube.potoken
 
 import android.content.Context
 import android.os.Handler
@@ -11,8 +11,8 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.annotation.MainThread
 import androidx.collection.ArrayMap
-import com.music.bitchord.data.Http
-import com.music.bitchord.BuildConfig
+import com.music.konnekt.data.Http
+import com.music.konnekt.BuildConfig
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.Dispatchers
@@ -27,7 +27,7 @@ import kotlinx.coroutines.withTimeout
 import okhttp3.Headers.Companion.toHeaders
 import okhttp3.OkHttpClient
 import okhttp3.RequestBody.Companion.toRequestBody
-import com.music.bitchord.data.TrackLog
+import com.music.konnekt.data.TrackLog
 import java.time.Instant
 import java.time.temporal.ChronoUnit
 import java.util.Collections

@@ -130,7 +130,7 @@
     <string name="widget_previous">前へ</string>
     <string name="widget_artwork">アルバムアート</string>
     <string name="widget_nothing_played">まだ何も再生されていません</string>
-    <string name="widget_open_bitchord">Konnektを開く</string>
+    <string name="widget_open_konnekt">Konnektを開く</string>
     <string name="widget_preview_title">曲名</string>
     <string name="widget_preview_artist">アーティスト</string>
     <string name="widget_pill_label">再生中 4×1</string>
@@ -317,7 +317,7 @@
     <string name="downloads_finished">ダウンロード · 完了</string>
     <string name="downloading_progress">ダウンロード中 · %1$d%%</string>
     <string name="starting">開始しています</string>
-    <string name="saved_to_bitchord_folder">Music/Konnektに保存済み</string>
+    <string name="saved_to_konnekt_folder">Music/Konnektに保存済み</string>
     <string name="nothing_downloading">ダウンロード中の項目はありません</string>
     <string name="nothing_to_explore">現在探索できるものはありません</string>
     <string name="no_youtube_music_results">YouTube Musicからの結果はありません</string>
@@ -635,7 +635,7 @@
     </plurals>
     <string name="no_local_albums">ここにはまだアルバムやプレイリストに属するものがありません。完全なアルバムやプレイリストをダウンロードするとここに表示されます。</string>
     <string name="play_your_replay">あなたのReplayを再生</string>
-    <string name="counted_on_device_with_bitchord">Konnektでこのデバイス内で集計</string>
+    <string name="counted_on_device_with_konnekt">Konnektでこのデバイス内で集計</string>
     <string name="this_month">今月</string>
     <string name="this_year">今年</string>
     <string name="all_time">すべての期間</string>
@@ -1266,4 +1266,35 @@
     <string name="spotify_library_subtitle">あなたの Spotify プレイリスト</string>
     <string name="spotify_sign_in">Spotify でサインイン</string>
     <string name="spotify_track_unavailable">その曲は YouTube Music で見つかりません</string>
+
+    <string name="home_for_you">あなたへのおすすめ</string>
+    <string name="home_for_you_subtitle">あなたの音楽の好みに合った新しい発見</string>
+    <string name="update_verifying_body">Konnekt %1$s のダウンロードを確認中…</string>
+    <string name="update_verifying">ダウンロードを確認中…</string>
+    <string name="update_retry_hint">接続を確認して、もう一度ダウンロードしてください。</string>
+    <string name="update_invalid_apk">このアップデートを検証できませんでした。インストールする前に再ダウンロードしてください。</string>
+    <string name="update_install_permission">Android で Konnekt からのアップデートを許可してください。アプリに戻るとインストールが続行されます。</string>
+
+    <string name="cloud_account_title">Konnekt アカウント</string>
+    <string name="cloud_account_intro">プレイリスト、設定、接続済みアカウントを非公開で同期します。</string>
+    <string name="cloud_username">ユーザー名</string>
+    <string name="cloud_password">パスワード</string>
+    <string name="cloud_create">アカウントを作成</string>
+    <string name="cloud_sign_in">ログイン</string>
+    <string name="cloud_new_account">新しいアカウント</string>
+    <string name="cloud_have_account">アカウントをお持ちの方</string>
+    <string name="cloud_password_warning">メールアドレスは不要です。パスワードは復元できず、暗号化バックアップの保護にも使うため、大切に保管してください。</string>
+    <string name="cloud_connected_as">%1$s としてログイン中</string>
+    <string name="cloud_scope">プレイリスト、設定、セッションはアップロード前に暗号化されます。音声ファイルはこの端末に残ります。</string>
+    <string name="cloud_save">クラウドに保存</string>
+    <string name="cloud_restore">復元</string>
+    <string name="cloud_restore_warning">この端末のプレイリスト、設定、セッションをクラウドのコピーで置き換えますか？ダウンロード済みの音声は保持されます。復元後にアプリを再起動してください。</string>
+    <string name="cloud_restore_confirm">今すぐ復元</string>
+    <string name="cloud_sign_out">Konnekt からログアウト</string>
+    <string name="cloud_saved">暗号化バックアップを保存しました。</string>
+    <string name="cloud_restored">復元しました。接続済みサービスを更新するにはアプリを再起動してください。</string>
+    <string name="cloud_signed_in">Konnekt アカウントを接続しました。</string>
+    <string name="theme_midnight">真夜中</string>
+    <string name="theme_ember">残り火</string>
+    <string name="replay_load_error">再生履歴を読み込めませんでした。もう一度お試しください。</string>
 </resources>

@@ -1,7 +1,7 @@
-package com.music.bitchord.data.remote
+package com.music.konnekt.data.remote
 
-import com.music.bitchord.data.model.PlaybackSourceType
-import com.music.bitchord.data.model.Song
+import com.music.konnekt.data.model.PlaybackSourceType
+import com.music.konnekt.data.model.Song
 
 /**
  * What every remote file library names a track: `Artist - Title`, or just

@@ -1,4 +1,4 @@
-package com.music.bitchord.data.settings
+package com.music.konnekt.data.settings
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.serialization.builtins.ListSerializer
 import kotlinx.serialization.json.Json
-import com.music.bitchord.data.model.SearchHistoryEntity
+import com.music.konnekt.data.model.SearchHistoryEntity
 
 /**
  * What's been searched for lately, kept on this device only.
@@ -35,7 +35,7 @@ object SearchHistory {
     val recent: StateFlow<List<SearchHistoryEntity>> = _recent.asStateFlow()
 
     fun init(context: Context) {
-        prefs = context.getSharedPreferences("bitchord_settings", Context.MODE_PRIVATE)
+        prefs = context.getSharedPreferences("konnekt_settings", Context.MODE_PRIVATE)
         reload()
     }
 

@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import android.content.Context
 import android.content.Intent
@@ -75,7 +75,7 @@ import androidx.compose.material.icons.rounded.Wifi
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatDelegate
-import com.music.bitchord.data.lyrics.translationLanguageName
+import com.music.konnekt.data.lyrics.translationLanguageName
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
@@ -124,31 +124,31 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.SingletonImageLoader
 import coil3.compose.AsyncImage
-import com.music.bitchord.ui.components.isGlassSupported
-import com.music.bitchord.ui.components.languageDisplayNameRes
-import com.music.bitchord.ui.components.MessageState
-import com.music.bitchord.ui.components.SearchField
-import com.music.bitchord.ui.components.thumbnailBorder
-import com.music.bitchord.ui.icons.BitChordIcons
-import com.music.bitchord.ui.performance.resolvePerformanceRefreshRate
-import com.music.bitchord.ui.performance.supportedPerformanceRefreshRates
-import com.music.bitchord.data.model.Account
-import com.music.bitchord.data.LocalMediaRepository
-import com.music.bitchord.data.NerdStats
-import com.music.bitchord.data.scrobbling.LastFM
-import com.music.bitchord.data.listentogether.ListenTogether
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.settings.OutputPcmMode
-import com.music.bitchord.playback.AudioOutputStatus
-import com.music.bitchord.data.settings.AutomixPerformanceMode
-import com.music.bitchord.R
-import com.music.bitchord.data.sources.DeviceCodecs
-import com.music.bitchord.data.settings.AudioQuality
-import com.music.bitchord.data.settings.DownloadQuality
-import com.music.bitchord.data.settings.ThemeMode
-import com.music.bitchord.data.stats.Backup
-import com.music.bitchord.playback.AudioCache
-import com.music.bitchord.ui.player.fullBleedArtworkAvailable
+import com.music.konnekt.ui.components.isGlassSupported
+import com.music.konnekt.ui.components.languageDisplayNameRes
+import com.music.konnekt.ui.components.MessageState
+import com.music.konnekt.ui.components.SearchField
+import com.music.konnekt.ui.components.thumbnailBorder
+import com.music.konnekt.ui.icons.KonnektIcons
+import com.music.konnekt.ui.performance.resolvePerformanceRefreshRate
+import com.music.konnekt.ui.performance.supportedPerformanceRefreshRates
+import com.music.konnekt.data.model.Account
+import com.music.konnekt.data.LocalMediaRepository
+import com.music.konnekt.data.NerdStats
+import com.music.konnekt.data.scrobbling.LastFM
+import com.music.konnekt.data.listentogether.ListenTogether
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.settings.OutputPcmMode
+import com.music.konnekt.playback.AudioOutputStatus
+import com.music.konnekt.data.settings.AutomixPerformanceMode
+import com.music.konnekt.R
+import com.music.konnekt.data.sources.DeviceCodecs
+import com.music.konnekt.data.settings.AudioQuality
+import com.music.konnekt.data.settings.DownloadQuality
+import com.music.konnekt.data.settings.ThemeMode
+import com.music.konnekt.data.stats.Backup
+import com.music.konnekt.playback.AudioCache
+import com.music.konnekt.ui.player.fullBleedArtworkAvailable
 import kotlinx.coroutines.launch
 import kotlin.math.roundToInt
 import java.util.Locale
@@ -425,7 +425,7 @@ fun SettingsScreen(
         // it switched the *module source* on and off, not lossless. Sources
         // above lists that as the module's own row now. Lossless itself is no
         // longer a setting at all — see
-        // [SourceResolver.requestForNow][com.music.bitchord.data.sources.SourceResolver.requestForNow].
+        // [SourceResolver.requestForNow][com.music.konnekt.data.sources.SourceResolver.requestForNow].
         SearchableSettingsGroup(search, header = stringResource(R.string.audio_quality)) {
             val sourceTitle = stringResource(R.string.source)
             val sourceSubtitle = stringResource(R.string.sources_subtitle)
@@ -463,7 +463,7 @@ fun SettingsScreen(
             //
             // Greyed rather than hidden where the device can't decode E-AC-3.
             // A missing row reads as a feature the app doesn't have; a disabled
-            // one with a reason under it is the difference between "BitChord
+            // one with a reason under it is the difference between "Konnekt
             // has no Atmos" and "this phone has no Dolby decoder", and only the
             // second is true. The stored preference is left untouched either
             // way — see [AppSettings.dolbyAtmos].
@@ -530,7 +530,7 @@ fun SettingsScreen(
                     title = exportDownloadsTitle,
                     checked = exportDownloads,
                     onCheckedChange = AppSettings::setExportDownloads,
-                    subtitle = "Music/BitChord".takeIf { exportDownloads },
+                    subtitle = "Music/Konnekt".takeIf { exportDownloads },
                 )
             }
         }
@@ -726,7 +726,7 @@ fun SettingsScreen(
                 )
             }
             // The system panel is not listed here as well. A device with a
-            // Dolby or Dirac panel has something BitChord cannot reproduce and
+            // Dolby or Dirac panel has something Konnekt cannot reproduce and
             // keeps its row — but one level in, at the foot of the equaliser
             // screen, rather than as a second equaliser entry alongside ours.
             val equalizerTitle = stringResource(R.string.equalizer)
@@ -998,7 +998,7 @@ fun SettingsScreen(
             val highPerformanceModeTitle = stringResource(R.string.high_performance_mode)
             row(highPerformanceModeTitle, "frame rate", "refresh rate", "hz", "battery", "smooth") {
                 SettingsRow(
-                    icon = BitChordIcons.Performance,
+                    icon = KonnektIcons.Performance,
                     title = highPerformanceModeTitle,
                     subtitle = if (highPerformanceMode) {
                         stringResource(R.string.high_performance_active, selectedPerformanceRefreshRate)
@@ -1034,7 +1034,7 @@ fun SettingsScreen(
                 val refreshRateTitle = stringResource(R.string.refresh_rate)
                 row(refreshRateTitle, "hz", "frame rate") {
                     SettingsRow(
-                        icon = BitChordIcons.FrameRate,
+                        icon = KonnektIcons.FrameRate,
                         title = refreshRateTitle,
                     )
                     SegmentedControl(
@@ -1391,14 +1391,14 @@ fun SettingsScreen(
         if (searchQuery.isBlank()) {
         Text(
             text = buildAnnotatedString {
-                append("bitchord $version  ")
+                append("konnekt $version  ")
                 val linkStyles = TextLinkStyles(
                     style = SpanStyle(
                         color = MaterialTheme.colorScheme.primary,
                         textDecoration = TextDecoration.Underline,
                     ),
                 )
-                withLink(LinkAnnotation.Url("https://github.com/kushagrasinghx/BitChord", linkStyles)) {
+                withLink(LinkAnnotation.Url("https://github.com/Lokal-Konnekt/Konnekt", linkStyles)) {
                     append("GitHub")
                 }
                 append("  ")
@@ -1410,7 +1410,7 @@ fun SettingsScreen(
                     append("Discord")
                 }
                 append("  ")
-                withLink(LinkAnnotation.Url("https://bitchord.kushagrasingh.in/", linkStyles)) {
+                withLink(LinkAnnotation.Url("https://konnekt.kushagrasingh.in/", linkStyles)) {
                     append("Website")
                 }
                 append("\n~YouTube Music & Listen Together Backend")

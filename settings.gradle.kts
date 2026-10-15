@@ -15,7 +15,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "BitChord"
+rootProject.name = "Konnekt"
 include(":shared")
 include(":sharedUi")
 include(":desktopApp")

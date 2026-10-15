@@ -1,4 +1,4 @@
-package com.music.bitchord.data.remote
+package com.music.konnekt.data.remote
 
 /**
  * Cover pictures embedded in audio files, read through bounded ranged

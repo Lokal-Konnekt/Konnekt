@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 BitChord Project
+ * Copyright (C) 2026 Konnekt Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,19 +8,19 @@
  *      http://www.apache.org/licenses/LICENSE-2.0
  */
 
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.media.AudioDeviceInfo
 import android.media.AudioFormat
 import android.media.AudioManager
-import com.music.bitchord.data.settings.OutputPcmMode
-import com.music.bitchord.playback.audio.DirectAudioProbe
-import com.music.bitchord.playback.audio.FallbackReason
-import com.music.bitchord.playback.audio.OutputNegotiationResult
-import com.music.bitchord.playback.audio.PcmEncoding
-import com.music.bitchord.playback.audio.TransportType
-import com.music.bitchord.playback.audio.bluetooth.BluetoothTelemetry
-import com.music.bitchord.playback.audio.usb.DirectUsbProbeResult
+import com.music.konnekt.data.settings.OutputPcmMode
+import com.music.konnekt.playback.audio.DirectAudioProbe
+import com.music.konnekt.playback.audio.FallbackReason
+import com.music.konnekt.playback.audio.OutputNegotiationResult
+import com.music.konnekt.playback.audio.PcmEncoding
+import com.music.konnekt.playback.audio.TransportType
+import com.music.konnekt.playback.audio.bluetooth.BluetoothTelemetry
+import com.music.konnekt.playback.audio.usb.DirectUsbProbeResult
 import kotlinx.coroutines.flow.MutableStateFlow
 
 /**
@@ -140,7 +140,7 @@ object AudioOutputStatus {
                 decoderName == other.decoderName &&
                 bufferSize == other.bufferSize &&
                 decoderOutputEncoding == other.decoderOutputEncoding &&
-                dspFormat == other.dspFormat &&
+                dspFormat == other.dspFormat &&
                 dspAvailable == other.dspAvailable &&
                 directUsbProbe == other.directUsbProbe &&
                 directSupport == other.directSupport &&
@@ -181,7 +181,7 @@ object AudioOutputStatus {
             result = 31 * result + (decoderName?.hashCode() ?: 0)
             result = 31 * result + (bufferSize ?: 0)
             result = 31 * result + (decoderOutputEncoding?.hashCode() ?: 0)
-            result = 31 * result + dspFormat.hashCode()
+            result = 31 * result + dspFormat.hashCode()
             result = 31 * result + dspAvailable.hashCode()
             result = 31 * result + (directUsbProbe?.hashCode() ?: 0)
             result = 31 * result + (directSupport?.hashCode() ?: 0)

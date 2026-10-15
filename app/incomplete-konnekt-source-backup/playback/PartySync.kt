@@ -1,14 +1,14 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.os.SystemClock
 import androidx.media3.common.Player
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.listentogether.ListenTogether
-import com.music.bitchord.data.listentogether.PartyTrack
-import com.music.bitchord.data.listentogether.partyQueueIndexOf
-import com.music.bitchord.data.model.QueueTier
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.sources.TrackMatcher
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.listentogether.ListenTogether
+import com.music.konnekt.data.listentogether.PartyTrack
+import com.music.konnekt.data.listentogether.partyQueueIndexOf
+import com.music.konnekt.data.model.QueueTier
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.sources.TrackMatcher
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -677,7 +677,7 @@ class PartySync(
             val queue = if (index >= 0) partyQueue else listOf(track)
             val startIndex = if (index >= 0) index else 0
             // Off the main thread: building an item resolves artwork sizes and
-            // asks [com.music.bitchord.download.Downloads] whether each track is
+            // asks [com.music.konnekt.download.Downloads] whether each track is
             // already on disk, which is a stat per downloaded song. See
             // [MediaController.playSongs], which moves it for the same reason.
             val items = withContext(Dispatchers.Default) { queue.map { it.toSong().toMediaItem() } }

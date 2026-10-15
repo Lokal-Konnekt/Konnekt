@@ -23,7 +23,7 @@
    limitations under the License.
  */
 
-package com.music.bitchord.ui.components.backdrop.internal
+package com.music.konnekt.ui.components.backdrop.internal
 
 import org.intellij.lang.annotations.Language
 
@@ -77,17 +77,17 @@ half4 main(float2 coord) {
     float2 halfSize = size * 0.5;
     float2 centeredCoord = (coord + offset) - halfSize;
     float radius = radiusAt(coord, cornerRadii);
-    
+
     float sd = sdRoundedRect(centeredCoord, halfSize, radius);
     if (-sd >= refractionHeight) {
         return content.eval(coord);
     }
     sd = min(sd, 0.0);
-    
+
     float d = circleMap(1.0 - -sd / refractionHeight) * refractionAmount;
     float gradRadius = min(radius * 1.5, min(halfSize.x, halfSize.y));
     float2 grad = normalize(gradSdRoundedRect(centeredCoord, halfSize, gradRadius) + depthEffect * normalize(centeredCoord));
-    
+
     float2 refractedCoord = coord + d * grad;
     return content.eval(refractedCoord);
 }"""
@@ -114,55 +114,55 @@ half4 main(float2 coord) {
     float2 halfSize = size * 0.5;
     float2 centeredCoord = (coord + offset) - halfSize;
     float radius = radiusAt(coord, cornerRadii);
-    
+
     float sd = sdRoundedRect(centeredCoord, halfSize, radius);
     if (-sd >= refractionHeight) {
         return content.eval(coord);
     }
     sd = min(sd, 0.0);
-    
+
     float d = circleMap(1.0 - -sd / refractionHeight) * refractionAmount;
     float gradRadius = min(radius * 1.5, min(halfSize.x, halfSize.y));
     float2 grad = normalize(gradSdRoundedRect(centeredCoord, halfSize, gradRadius) + depthEffect * normalize(centeredCoord));
-    
+
     float2 refractedCoord = coord + d * grad;
     float dispersionIntensity = chromaticAberration * ((centeredCoord.x * centeredCoord.y) / (halfSize.x * halfSize.y));
     float2 dispersedCoord = d * grad * dispersionIntensity;
-    
+
     half4 color = half4(0.0);
-    
+
     half4 red = content.eval(refractedCoord + dispersedCoord);
     color.r += red.r / 3.5;
     color.a += red.a / 7.0;
-    
+
     half4 orange = content.eval(refractedCoord + dispersedCoord * (2.0 / 3.0));
     color.r += orange.r / 3.5;
     color.g += orange.g / 7.0;
     color.a += orange.a / 7.0;
-    
+
     half4 yellow = content.eval(refractedCoord + dispersedCoord * (1.0 / 3.0));
     color.r += yellow.r / 3.5;
     color.g += yellow.g / 3.5;
     color.a += yellow.a / 7.0;
-    
+
     half4 green = content.eval(refractedCoord);
     color.g += green.g / 3.5;
     color.a += green.a / 7.0;
-    
+
     half4 cyan = content.eval(refractedCoord - dispersedCoord * (1.0 / 3.0));
     color.g += cyan.g / 3.5;
     color.b += cyan.b / 3.0;
     color.a += cyan.a / 7.0;
-    
+
     half4 blue = content.eval(refractedCoord - dispersedCoord * (2.0 / 3.0));
     color.b += blue.b / 3.0;
     color.a += blue.a / 7.0;
-    
+
     half4 purple = content.eval(refractedCoord - dispersedCoord);
     color.r += purple.r / 7.0;
     color.b += purple.b / 3.0;
     color.a += purple.a / 7.0;
-    
+
     return color;
 }"""
 
@@ -180,7 +180,7 @@ half4 main(float2 coord) {
     float2 halfSize = size * 0.5;
     float2 centeredCoord = coord - halfSize;
     float radius = radiusAt(coord, cornerRadii);
-    
+
     float gradRadius = min(radius * 1.5, min(halfSize.x, halfSize.y));
     float2 grad = gradSdRoundedRect(centeredCoord, halfSize, gradRadius);
     float2 normal = float2(cos(angle), sin(angle));
@@ -202,7 +202,7 @@ half4 main(float2 coord) {
     float2 halfSize = size * 0.5;
     float2 centeredCoord = coord - halfSize;
     float radius = radiusAt(coord, cornerRadii);
-    
+
     float gradRadius = min(radius * 1.5, min(halfSize.x, halfSize.y));
     float2 grad = gradSdRoundedRect(centeredCoord, halfSize, gradRadius);
     float2 normal = float2(cos(angle), sin(angle));

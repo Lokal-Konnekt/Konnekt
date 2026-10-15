@@ -1,4 +1,4 @@
-module github.com/KabirSinghBhatia/BitChord/backend
+module github.com/Lokal-Konnekt/Konnekt/backend
 
 go 1.27.0
 

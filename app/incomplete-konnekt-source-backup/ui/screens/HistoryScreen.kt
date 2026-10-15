@@ -1,6 +1,6 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
-import com.music.bitchord.R
+import com.music.konnekt.R
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,14 +13,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.model.UiState
-import com.music.bitchord.data.model.isSameTrackAs
-import com.music.bitchord.ui.components.MessageState
-import com.music.bitchord.ui.components.PlayingAccent
-import com.music.bitchord.ui.components.ROW_DIVIDER_INSET
-import com.music.bitchord.ui.components.SongRow
-import com.music.bitchord.ui.components.songListSkeleton
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.model.UiState
+import com.music.konnekt.data.model.isSameTrackAs
+import com.music.konnekt.ui.components.MessageState
+import com.music.konnekt.ui.components.PlayingAccent
+import com.music.konnekt.ui.components.ROW_DIVIDER_INSET
+import com.music.konnekt.ui.components.SongRow
+import com.music.konnekt.ui.components.songListSkeleton
 
 /**
  * What the account has been listening to, most recent first.

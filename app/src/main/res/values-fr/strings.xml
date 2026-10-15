@@ -1,4 +1,25 @@
 <resources>
+    <string name="cloud_account_title">Compte Konnekt</string>
+    <string name="cloud_account_intro">Synchronise tes playlists, réglages et comptes connectés de façon privée.</string>
+    <string name="cloud_username">Identifiant</string>
+    <string name="cloud_password">Mot de passe</string>
+    <string name="cloud_create">Créer le compte</string>
+    <string name="cloud_sign_in">Se connecter</string>
+    <string name="cloud_new_account">Nouveau compte</string>
+    <string name="cloud_have_account">J’ai un compte</string>
+    <string name="cloud_password_warning">Aucun e-mail requis. Garde ton mot de passe : il ne peut pas être récupéré et protège ta sauvegarde chiffrée.</string>
+    <string name="cloud_connected_as">Connecté : %1$s</string>
+    <string name="cloud_scope">Playlists, réglages et sessions sont chiffrés avant l’envoi. Les fichiers audio restent sur cet appareil.</string>
+    <string name="cloud_save">Sauver dans le cloud</string>
+    <string name="cloud_restore">Restaurer</string>
+    <string name="cloud_restore_warning">Remplacer les playlists, réglages et sessions de cet appareil par la copie cloud ? Les fichiers audio téléchargés restent ici. Redémarre l’app après la restauration.</string>
+    <string name="cloud_restore_confirm">Restaurer</string>
+    <string name="cloud_sign_out">Déconnecter Konnekt</string>
+    <string name="cloud_saved">Sauvegarde chiffrée enregistrée.</string>
+    <string name="cloud_restored">Restauré. Redémarre l’app pour actualiser les services connectés.</string>
+    <string name="cloud_signed_in">Compte Konnekt connecté.</string>
+    <string name="theme_midnight">Minuit</string>
+    <string name="theme_ember">Braise</string>
     <string name="app_name">Konnekt</string>
     <string name="playback_channel_name">Lecture en cours</string>
     <string name="download_channel_name">Téléchargements</string>
@@ -136,7 +157,7 @@
     <string name="widget_previous">Précédent</string>
     <string name="widget_artwork">Pochette d\'album</string>
     <string name="widget_nothing_played">Rien n\'a encore été joué</string>
-    <string name="widget_open_bitchord">Ouvrir Konnekt</string>
+    <string name="widget_open_konnekt">Ouvrir Konnekt</string>
     <string name="widget_preview_title">Titre de la chanson</string>
     <string name="widget_preview_artist">Artiste</string>
     <string name="widget_pill_label">Lecture en cours 4×1</string>
@@ -323,7 +344,7 @@
     <string name="downloads_finished">Téléchargements · terminés</string>
     <string name="downloading_progress">Téléchargement · %1$d%%</string>
     <string name="starting">Démarrage</string>
-    <string name="saved_to_bitchord_folder">Enregistrée dans Musique/Konnekt</string>
+    <string name="saved_to_konnekt_folder">Enregistrée dans Musique/Konnekt</string>
     <string name="nothing_downloading">Aucun téléchargement en cours</string>
     <string name="nothing_to_explore">Rien à explorer pour le moment</string>
     <string name="no_youtube_music_results">Aucun résultat de YouTube Music</string>
@@ -516,6 +537,7 @@
     <string name="minutes_listened">Minutes écoutées</string>
     <string name="minutes_short">%1$d min</string>
     <string name="not_enough_listening">Pas encore assez d\'écoute</string>
+    <string name="replay_load_error">Impossible de charger votre historique d\'écoute. Réessayez.</string>
     <string name="not_enough_this_month">Écoutez encore quelques chansons ce mois-ci pour débloquer votre Replay.</string>
     <string name="pinned">Épinglé</string>
     <string name="replay_across"> sur </string>
@@ -656,7 +678,7 @@
     </plurals>
     <string name="no_local_albums">Rien ici n\'appartient encore à un album ou à une playlist. Téléchargez un album complet ou une playlist et il apparaîtra ici.</string>
     <string name="play_your_replay">Lire votre Replay</string>
-    <string name="counted_on_device_with_bitchord">Calculé sur cet appareil avec Konnekt</string>
+    <string name="counted_on_device_with_konnekt">Calculé sur cet appareil avec Konnekt</string>
     <string name="this_month">Ce mois-ci</string>
     <string name="this_year">Cette année</string>
     <string name="all_time">Depuis toujours</string>
@@ -1289,4 +1311,12 @@
     <string name="spotify_library_subtitle">Vos playlists Spotify</string>
     <string name="spotify_sign_in">Se connecter avec Spotify</string>
     <string name="spotify_track_unavailable">Impossible de trouver ce titre sur YouTube Music</string>
+
+    <string name="home_for_you">Pour vous</string>
+    <string name="home_for_you_subtitle">De nouvelles découvertes inspirées de vos écoutes</string>
+    <string name="update_verifying_body">Vérification du téléchargement de Konnekt %1$s…</string>
+    <string name="update_verifying">Vérification du téléchargement…</string>
+    <string name="update_retry_hint">Vérifiez votre connexion et réessayez le téléchargement.</string>
+    <string name="update_invalid_apk">Cette mise à jour n’a pas pu être vérifiée. Téléchargez-la à nouveau avant de l’installer.</string>
+    <string name="update_install_permission">Android vous demandera d’autoriser les mises à jour depuis Konnekt. L’installation reprendra à votre retour.</string>
 </resources>

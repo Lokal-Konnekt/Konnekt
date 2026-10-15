@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2026 BitChord Project
+ * Copyright (C) 2026 Konnekt Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -8,14 +8,14 @@
  *      http://www.apache.org/licenses/LICENSE-2.0
  */
 
-package com.music.bitchord.playback.audio
+package com.music.konnekt.playback.audio
 
 import android.media.AudioFormat
-import com.music.bitchord.data.settings.OutputPcmMode
-import com.music.bitchord.playback.AudioOutputPolicy
-import com.music.bitchord.playback.AudioRouting
-import com.music.bitchord.playback.audio.bluetooth.BluetoothTelemetry
-import com.music.bitchord.playback.audio.usb.DirectUsbProbeResult
+import com.music.konnekt.data.settings.OutputPcmMode
+import com.music.konnekt.playback.AudioOutputPolicy
+import com.music.konnekt.playback.AudioRouting
+import com.music.konnekt.playback.audio.bluetooth.BluetoothTelemetry
+import com.music.konnekt.playback.audio.usb.DirectUsbProbeResult
 
 /**
  * Output transport mechanism selected by the universal best-path engine.

@@ -33,6 +33,17 @@ val lastfmSecret: String = (
         ?: System.getenv("LASTFM_SECRET")
         ?: ""
     ).trim()
+// Publishable keys are designed to ship in clients; RLS protects each user's
+// encrypted row. Local/environment overrides support project rotation.
+val supabaseUrl: String = (
+    localProps.getProperty("SUPABASE_URL") ?: System.getenv("SUPABASE_URL")
+        ?: "https://bzxekuihaiylgyedgeap.supabase.co"
+    ).trim().trimEnd('/')
+val supabasePublishableKey: String = (
+    localProps.getProperty("SUPABASE_PUBLISHABLE_KEY")
+        ?: System.getenv("SUPABASE_PUBLISHABLE_KEY")
+        ?: "sb_publishable_uD14pNg2lLMdZK9JUU7e3A_SEhToQN5"
+    ).trim()
 
 /*
  * Where Listen Together's party server lives. Not a credential — it is a public
@@ -70,7 +81,7 @@ val listenTogetherServer: String = (
 val betaSuffix = ""
 
 android {
-    namespace = "com.music.bitchord"
+    namespace = "com.music.konnekt"
     // InnerTubeX requires compiling against API 37; targetSdk (runtime behaviour) stays 36.
     compileSdk = 37
     ndkVersion = "26.3.11579264"
@@ -81,14 +92,16 @@ android {
         // Haze falls back to a translucent scrim below that.
         minSdk = 26
         targetSdk = 36
-        versionCode = 12000
-        versionName = "1.2.0"
+        versionCode = 13006
+        versionName = "1.3.4"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         // Last.fm credentials are supplied locally and never committed.
         buildConfigField("String", "LASTFM_API_KEY", "\"${lastfmApiKey.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
         buildConfigField("String", "LASTFM_SECRET", "\"${lastfmSecret.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
+        buildConfigField("String", "SUPABASE_URL", "\"${supabaseUrl.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
+        buildConfigField("String", "SUPABASE_PUBLISHABLE_KEY", "\"${supabasePublishableKey.replace("\\", "\\\\").replace("\"", "\\\"")}\"")
         buildConfigField(
             "String",
             "LISTEN_TOGETHER_SERVER",

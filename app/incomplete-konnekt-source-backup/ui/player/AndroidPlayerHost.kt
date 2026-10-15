@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.player
+package com.music.konnekt.ui.player
 
 import android.content.Context
 import android.database.ContentObserver
@@ -12,17 +12,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.music.bitchord.data.canvas.CanvasArtwork
-import com.music.bitchord.data.canvas.CanvasRepository
-import com.music.bitchord.data.listentogether.ListenTogether
-import com.music.bitchord.data.lyrics.LyricLine
-import com.music.bitchord.data.lyrics.LyricsTranslation
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.settings.LastPlayerScreen
-import com.music.bitchord.playback.AudioOutputStatus
-import com.music.bitchord.playback.AudioRouting
-import com.music.bitchord.playback.cast.CastController
+import com.music.konnekt.data.canvas.CanvasArtwork
+import com.music.konnekt.data.canvas.CanvasRepository
+import com.music.konnekt.data.listentogether.ListenTogether
+import com.music.konnekt.data.lyrics.LyricLine
+import com.music.konnekt.data.lyrics.LyricsTranslation
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.settings.LastPlayerScreen
+import com.music.konnekt.playback.AudioOutputStatus
+import com.music.konnekt.playback.AudioRouting
+import com.music.konnekt.playback.cast.CastController
 import dev.chrisbanes.haze.HazeState
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -90,7 +90,7 @@ class AndroidPlayerHost(context: Context) : PlayerHost {
 
     @Composable
     override fun rememberRemoteArtworkUrl(song: Song?): String? =
-        com.music.bitchord.ui.components.rememberRemoteArtworkUrl(song)
+        com.music.konnekt.ui.components.rememberRemoteArtworkUrl(song)
 
     // Lazy, all three: the player is not the first thing the process does, and
     // none of these objects should be woken for a launch that never opens it.
@@ -162,11 +162,11 @@ class AndroidPlayerHost(context: Context) : PlayerHost {
 
     @Composable
     override fun CastDialog(hazeState: HazeState, onDismiss: () -> Unit) =
-        com.music.bitchord.ui.components.CastDialog(hazeState = hazeState, onDismiss = onDismiss)
+        com.music.konnekt.ui.components.CastDialog(hazeState = hazeState, onDismiss = onDismiss)
 
     @Composable
     override fun AudioPipelineDialog(hazeState: HazeState, isPlaying: Boolean, onDismiss: () -> Unit) =
-        com.music.bitchord.ui.components.AudioPipelineDialog(
+        com.music.konnekt.ui.components.AudioPipelineDialog(
             hazeState = hazeState,
             onDismiss = onDismiss,
             isPlaying = isPlaying,

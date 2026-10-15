@@ -1,4 +1,4 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.content.ComponentName
 import android.net.Uri
@@ -23,16 +23,16 @@ import androidx.media3.common.Timeline
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionCommand
 import androidx.media3.session.SessionToken
-import com.music.bitchord.data.model.ArtistRef
-import com.music.bitchord.data.model.NOTIFICATION_ART_PX
-import com.music.bitchord.data.model.PlaybackSourceType
-import com.music.bitchord.data.model.QueueTier
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.data.sources.SourceRegistry
-import com.music.bitchord.data.sources.TrackMatcher
-import com.music.bitchord.download.Downloads
-import com.music.bitchord.ui.rememberIsForeground
+import com.music.konnekt.data.model.ArtistRef
+import com.music.konnekt.data.model.NOTIFICATION_ART_PX
+import com.music.konnekt.data.model.PlaybackSourceType
+import com.music.konnekt.data.model.QueueTier
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.data.sources.SourceRegistry
+import com.music.konnekt.data.sources.TrackMatcher
+import com.music.konnekt.download.Downloads
+import com.music.konnekt.ui.rememberIsForeground
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.guava.await
@@ -230,7 +230,7 @@ fun songFromBundle(b: Bundle): Song = Song(
     localPath = b.getString("localPath"),
     sourceQuality = b.getString("sourceQuality"),
     playbackSource = b.getString("playbackSource"),
-    playbackSourceType = b.getString("playbackSourceType")?.let { runCatching { com.music.bitchord.data.model.PlaybackSourceType.valueOf(it) }.getOrNull() },
+    playbackSourceType = b.getString("playbackSourceType")?.let { runCatching { com.music.konnekt.data.model.PlaybackSourceType.valueOf(it) }.getOrNull() },
     playbackSourceId = b.getString("playbackSourceId"),
     isExplicit = if (b.containsKey("isExplicit")) b.getBoolean("isExplicit") else null,
 )
@@ -431,23 +431,23 @@ val MediaItem.queueEntryId: String?
     get() = mediaMetadata.extras?.getString(EXTRA_QUEUE_ENTRY_ID)
 
 /** Public metadata keys for queue categorization and immutable queue entry identity. */
-const val EXTRA_QUEUE_TIER = "bitchord.queueTier"
-const val EXTRA_QUEUE_ENTRY_ID = "bitchord.queueEntryId"
+const val EXTRA_QUEUE_TIER = "konnekt.queueTier"
+const val EXTRA_QUEUE_ENTRY_ID = "konnekt.queueEntryId"
 
 /**
  * Marks a queue entry as AutoPlay's rather than the user's. Carried on the
  * MediaItem so it survives the trip through the session — the queue belongs to
  * the player, and the UI only ever sees it back through a MediaController.
  */
-private const val EXTRA_FROM_AUTOPLAY = "bitchord.fromAutoplay"
+private const val EXTRA_FROM_AUTOPLAY = "konnekt.fromAutoplay"
 
 /** @see Song.radioName */
-private const val EXTRA_RADIO_NAME = "bitchord.radioName"
+private const val EXTRA_RADIO_NAME = "konnekt.radioName"
 
 /** @see Song.playbackSource */
-private const val EXTRA_PLAYBACK_SOURCE = "bitchord.playbackSource"
-private const val EXTRA_PLAYBACK_SOURCE_TYPE = "bitchord.playbackSourceType"
-private const val EXTRA_PLAYBACK_SOURCE_ID = "bitchord.playbackSourceId"
+private const val EXTRA_PLAYBACK_SOURCE = "konnekt.playbackSource"
+private const val EXTRA_PLAYBACK_SOURCE_TYPE = "konnekt.playbackSourceType"
+private const val EXTRA_PLAYBACK_SOURCE_ID = "konnekt.playbackSourceId"
 
 /**
  * The artist and album pages this track hangs under, when they are known.
@@ -457,17 +457,17 @@ private const val EXTRA_PLAYBACK_SOURCE_ID = "bitchord.playbackSourceId"
  * `links`), but a queue restored after a restart, or a track read back by the
  * service, has only what the item carries.
  */
-private const val EXTRA_ARTIST_ID = "bitchord.artistId"
-private const val EXTRA_ALBUM_ID = "bitchord.albumId"
+private const val EXTRA_ARTIST_ID = "konnekt.artistId"
+private const val EXTRA_ALBUM_ID = "konnekt.albumId"
 
 /** @see Song.setVideoId */
-private const val EXTRA_SET_VIDEO_ID = "bitchord.setVideoId"
+private const val EXTRA_SET_VIDEO_ID = "konnekt.setVideoId"
 
 /** @see Song.localUri */
-internal const val EXTRA_LOCAL_URI = "bitchord.localUri"
+internal const val EXTRA_LOCAL_URI = "konnekt.localUri"
 
 /** @see Song.localPath */
-internal const val EXTRA_LOCAL_PATH = "bitchord.localPath"
+internal const val EXTRA_LOCAL_PATH = "konnekt.localPath"
 
 /**
  * How long the track runs, as the row that queued it said.
@@ -479,13 +479,13 @@ internal const val EXTRA_LOCAL_PATH = "bitchord.localPath"
  * with the other loses information. Carried so that [toSong] can give it back
  * to the live queue and matching code.
  */
-private const val EXTRA_DURATION = "bitchord.durationText"
-private const val EXTRA_EXPLICIT = "bitchord.explicit"
-private const val EXTRA_IS_VIDEO = "bitchord.isVideo"
-private const val EXTRA_VIDEO_ORIGIN = "bitchord.isVideoOrigin"
+private const val EXTRA_DURATION = "konnekt.durationText"
+private const val EXTRA_EXPLICIT = "konnekt.explicit"
+private const val EXTRA_IS_VIDEO = "konnekt.isVideo"
+private const val EXTRA_VIDEO_ORIGIN = "konnekt.isVideoOrigin"
 
 /** Set only on the replacement item produced by [QualityUpgrade]. */
-const val EXTRA_QUALITY_UPGRADED = "bitchord.qualityUpgraded"
+const val EXTRA_QUALITY_UPGRADED = "konnekt.qualityUpgraded"
 
 /** Whether this item was selected from a music-video row, even after conversion. */
 val MediaItem.isVideoOrigin: Boolean
@@ -529,7 +529,7 @@ private fun resolvePlaybackUri(uriString: String, localPath: String?): String {
 
 /**
  * The `&n=&a=&d=` tail every playback URI carries: what this track is, in the
- * terms [com.music.bitchord.data.sources.TrackMatcher] compares recordings on.
+ * terms [com.music.konnekt.data.sources.TrackMatcher] compares recordings on.
  *
  * The runtime is the one of the three that can rule a candidate *out* on its
  * own, and it is only ever a hint here — a row that never carried a duration
@@ -598,7 +598,7 @@ fun Song.toMediaItem(): MediaItem {
         // resolves it — see [SourceResolver.substituteForYouTube] — and that
         // match is made on them, which the loader thread has no other way to
         // reach.
-        else -> "bitchord://watch?v=$videoId${matchQuery()}"
+        else -> "konnekt://watch?v=$videoId${matchQuery()}"
     }
     return MediaItem.Builder()
         .setMediaId(videoId)
@@ -688,7 +688,7 @@ fun Song.toDirectYouTubeMediaItem(): MediaItem =
         .build()
 
 private fun Song.directYouTubeUri(): String =
-    "bitchord://watch?v=$videoId${matchQuery()}&$DIRECT_YOUTUBE_PARAMETER=1&q=original"
+    "konnekt://watch?v=$videoId${matchQuery()}&$DIRECT_YOUTUBE_PARAMETER=1&q=original"
 
 /**
  * Whether there is a YouTube upload behind this song to go back *to* — the
@@ -735,7 +735,7 @@ const val DIRECT_YOUTUBE_PARAMETER = "direct_youtube"
  * has only the URI: the resolver runs on ExoPlayer's loader thread with a
  * DataSpec in hand, and read-ahead means the track being fetched is usually not
  * the one playing. That is what makes it the answer to "whose log line is this"
- * — see [com.music.bitchord.data.TrackLog.about].
+ * — see [com.music.konnekt.data.TrackLog.about].
  *
  * Deliberately not the cache key, which looks similar and is not the same
  * thing: that one splits a track's renditions apart on purpose and spells a

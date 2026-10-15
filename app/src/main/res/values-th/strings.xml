@@ -138,7 +138,7 @@
     <string name="widget_previous">ก่อนหน้า</string>
     <string name="widget_artwork">ปกอัลบั้ม</string>
     <string name="widget_nothing_played">ยังไม่มีการเล่นเพลง</string>
-    <string name="widget_open_bitchord">เปิด Konnekt</string>
+    <string name="widget_open_konnekt">เปิด Konnekt</string>
     <string name="widget_preview_title">ชื่อเพลง</string>
     <string name="widget_preview_artist">ศิลปิน</string>
     <string name="widget_pill_label">กำลังเล่น 4×1</string>
@@ -343,7 +343,7 @@
     <string name="starting">กำลังเริ่ม</string>
     <string name="start_radio">เริ่มวิทยุ</string>
     <string name="radio_started">เริ่มวิทยุ %1$s แล้ว</string>
-    <string name="saved_to_bitchord_folder">บันทึกลง Music/Konnekt แล้ว</string>
+    <string name="saved_to_konnekt_folder">บันทึกลง Music/Konnekt แล้ว</string>
     <string name="nothing_downloading">ไม่มีการดาวน์โหลด</string>
     <string name="nothing_to_explore">ยังไม่มีอะไรให้สำรวจตอนนี้</string>
     <string name="no_youtube_music_results">ไม่มีผลลัพธ์จาก YouTube Music</string>
@@ -664,7 +664,7 @@
     </plurals>
     <string name="no_local_albums">ยังไม่มีอะไรที่นี่เป็นของอัลบั้มหรือเพลย์ลิสต์ ดาวน์โหลดอัลบั้มหรือเพลย์ลิสต์ทั้งชุดแล้วจะปรากฏที่นี่</string>
     <string name="play_your_replay">เล่น Replay ของคุณ</string>
-    <string name="counted_on_device_with_bitchord">นับบนอุปกรณ์นี้ด้วย Konnekt</string>
+    <string name="counted_on_device_with_konnekt">นับบนอุปกรณ์นี้ด้วย Konnekt</string>
     <string name="this_month">เดือนนี้</string>
     <string name="this_year">ปีนี้</string>
     <string name="all_time">ตลอดเวลา</string>
@@ -1271,4 +1271,35 @@
     <string name="spotify_library_subtitle">เพลย์ลิสต์ Spotify ของคุณ</string>
     <string name="spotify_sign_in">ลงชื่อเข้าใช้ด้วย Spotify</string>
     <string name="spotify_track_unavailable">หาเพลงนั้นบน YouTube Music ไม่พบ</string>
+
+    <string name="home_for_you">สำหรับคุณ</string>
+    <string name="home_for_you_subtitle">ค้นพบเพลงใหม่จากแนวเพลงที่คุณฟัง</string>
+    <string name="update_verifying_body">กำลังตรวจสอบไฟล์ Konnekt %1$s…</string>
+    <string name="update_verifying">กำลังตรวจสอบไฟล์…</string>
+    <string name="update_retry_hint">ตรวจสอบการเชื่อมต่อแล้วลองดาวน์โหลดอีกครั้ง</string>
+    <string name="update_invalid_apk">ไม่สามารถยืนยันการอัปเดตนี้ได้ โปรดดาวน์โหลดอีกครั้งก่อนติดตั้ง</string>
+    <string name="update_install_permission">Android จะขอให้อนุญาตการอัปเดตจาก Konnekt การติดตั้งจะดำเนินต่อเมื่อคุณกลับมา</string>
+
+    <string name="cloud_account_title">บัญชี Konnekt</string>
+    <string name="cloud_account_intro">ซิงค์เพลย์ลิสต์ การตั้งค่า และบัญชีที่เชื่อมต่ออย่างเป็นส่วนตัว</string>
+    <string name="cloud_username">ชื่อผู้ใช้</string>
+    <string name="cloud_password">รหัสผ่าน</string>
+    <string name="cloud_create">สร้างบัญชี</string>
+    <string name="cloud_sign_in">เข้าสู่ระบบ</string>
+    <string name="cloud_new_account">บัญชีใหม่</string>
+    <string name="cloud_have_account">ฉันมีบัญชีแล้ว</string>
+    <string name="cloud_password_warning">ไม่ต้องใช้อีเมล โปรดเก็บรหัสผ่านให้ปลอดภัย เพราะกู้คืนไม่ได้และใช้ป้องกันข้อมูลสำรองที่เข้ารหัส</string>
+    <string name="cloud_connected_as">เข้าสู่ระบบเป็น %1$s</string>
+    <string name="cloud_scope">เพลย์ลิสต์ การตั้งค่า และเซสชันจะเข้ารหัสก่อนอัปโหลด ไฟล์เสียงจะอยู่ในอุปกรณ์นี้</string>
+    <string name="cloud_save">บันทึกไปยังคลาวด์</string>
+    <string name="cloud_restore">กู้คืน</string>
+    <string name="cloud_restore_warning">แทนที่เพลย์ลิสต์ การตั้งค่า และเซสชันในอุปกรณ์ด้วยสำเนาบนคลาวด์หรือไม่? ไฟล์เสียงที่ดาวน์โหลดจะยังอยู่ โปรดเริ่มแอปใหม่หลังจากกู้คืน</string>
+    <string name="cloud_restore_confirm">กู้คืนตอนนี้</string>
+    <string name="cloud_sign_out">ออกจากบัญชี Konnekt</string>
+    <string name="cloud_saved">บันทึกข้อมูลสำรองที่เข้ารหัสแล้ว</string>
+    <string name="cloud_restored">กู้คืนแล้ว โปรดเริ่มแอปใหม่เพื่อรีเฟรชบริการที่เชื่อมต่อ</string>
+    <string name="cloud_signed_in">เชื่อมต่อบัญชี Konnekt แล้ว</string>
+    <string name="theme_midnight">เที่ยงคืน</string>
+    <string name="theme_ember">ถ่านคุ</string>
+    <string name="replay_load_error">โหลดประวัติการฟังไม่ได้ โปรดลองอีกครั้ง</string>
 </resources>

@@ -1,6 +1,6 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
-import com.music.bitchord.data.settings.OutputPcmMode
+import com.music.konnekt.data.settings.OutputPcmMode
 
 /**
  * Decides whether Media3 may open a PCM-float AudioTrack.

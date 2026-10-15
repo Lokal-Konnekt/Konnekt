@@ -137,7 +137,7 @@
     <string name="widget_previous">הקודם</string>
     <string name="widget_artwork">עטיפת אלבום</string>
     <string name="widget_nothing_played">עדיין לא הושמע דבר</string>
-    <string name="widget_open_bitchord">פתיחת Konnekt</string>
+    <string name="widget_open_konnekt">פתיחת Konnekt</string>
     <string name="widget_preview_title">שם השיר</string>
     <string name="widget_preview_artist">אמן</string>
     <string name="widget_pill_label">מתנגן כעת 4×1</string>
@@ -323,7 +323,7 @@
     <string name="downloads_finished">הורדות · הסתיימו</string>
     <string name="downloading_progress">מוריד · %1$d%%</string>
     <string name="starting">מתחיל</string>
-    <string name="saved_to_bitchord_folder">נשמר ב-Music/Konnekt</string>
+    <string name="saved_to_konnekt_folder">נשמר ב-Music/Konnekt</string>
     <string name="nothing_downloading">שום דבר לא יורד</string>
     <string name="nothing_to_explore">אין מה לחקור כרגע</string>
     <string name="no_youtube_music_results">אין תוצאות מ-YouTube Music</string>
@@ -603,7 +603,7 @@
     <string name="no_listening_history">אין היסטוריית האזנה</string>
     <string name="no_local_albums">שום דבר כאן לא שייך עדיין לאלבום או רשימת השמעה. הורד אלבום מלא או רשימת השמעה והם יופיעו כאן.</string>
     <string name="play_your_replay">הפעל את ה-Replay שלך</string>
-    <string name="counted_on_device_with_bitchord">נספר במכשיר זה עם Konnekt</string>
+    <string name="counted_on_device_with_konnekt">נספר במכשיר זה עם Konnekt</string>
     <string name="this_month">החודש</string>
     <string name="this_year">השנה</string>
     <string name="all_time">כל הזמן</string>
@@ -1293,4 +1293,35 @@
     <string name="spotify_library_subtitle">הפלייליסטים שלכם ב-Spotify</string>
     <string name="spotify_sign_in">התחברות עם Spotify</string>
     <string name="spotify_track_unavailable">לא נמצא שיר כזה ב-YouTube Music</string>
+
+    <string name="home_for_you">בשבילך</string>
+    <string name="home_for_you_subtitle">תגליות חדשות בהשראת המוזיקה שלך</string>
+    <string name="update_verifying_body">ההורדה של Konnekt %1$s נבדקת…</string>
+    <string name="update_verifying">ההורדה נבדקת…</string>
+    <string name="update_retry_hint">יש לבדוק את החיבור ולנסות להוריד שוב.</string>
+    <string name="update_invalid_apk">לא ניתן היה לאמת את העדכון. יש להוריד אותו שוב לפני ההתקנה.</string>
+    <string name="update_install_permission">Android יבקש לאפשר עדכונים מ־Konnekt. ההתקנה תימשך עם החזרה לאפליקציה.</string>
+
+    <string name="cloud_account_title">חשבון Konnekt</string>
+    <string name="cloud_account_intro">סנכרון פרטי של רשימות השמעה, הגדרות וחשבונות מחוברים.</string>
+    <string name="cloud_username">שם משתמש</string>
+    <string name="cloud_password">סיסמה</string>
+    <string name="cloud_create">יצירת חשבון</string>
+    <string name="cloud_sign_in">כניסה</string>
+    <string name="cloud_new_account">חשבון חדש</string>
+    <string name="cloud_have_account">כבר יש לי חשבון</string>
+    <string name="cloud_password_warning">אין צורך בדוא״ל. יש לשמור את הסיסמה: לא ניתן לשחזר אותה והיא מגינה על הגיבוי המוצפן.</string>
+    <string name="cloud_connected_as">מחובר בתור %1$s</string>
+    <string name="cloud_scope">רשימות השמעה, הגדרות והפעלות מוצפנות לפני ההעלאה. קובצי השמע נשארים במכשיר.</string>
+    <string name="cloud_save">שמירה בענן</string>
+    <string name="cloud_restore">שחזור</string>
+    <string name="cloud_restore_warning">להחליף את רשימות ההשמעה, ההגדרות וההפעלות במכשיר בעותק מהענן? השמע שהורד יישמר. יש להפעיל מחדש את האפליקציה לאחר השחזור.</string>
+    <string name="cloud_restore_confirm">שחזור עכשיו</string>
+    <string name="cloud_sign_out">יציאה מ־Konnekt</string>
+    <string name="cloud_saved">הגיבוי המוצפן נשמר.</string>
+    <string name="cloud_restored">השחזור הושלם. יש להפעיל מחדש את האפליקציה כדי לרענן שירותים מחוברים.</string>
+    <string name="cloud_signed_in">חשבון Konnekt חובר.</string>
+    <string name="theme_midnight">חצות</string>
+    <string name="theme_ember">גחלת</string>
+    <string name="replay_load_error">לא ניתן לטעון את היסטוריית ההאזנה. יש לנסות שוב.</string>
 </resources>

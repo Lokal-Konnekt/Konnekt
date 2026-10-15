@@ -1,0 +1,86 @@
+{
+  "runtimeStory": "Konnekt n'héberge aucun catalogue : chaque recherche est une requête Innertube signée (WEB_REMIX) qui rend des étagères identiques au client web YouTube Music, chaque lecture résout paresseusement une URL de stream via une course priorisée entre sources (addon → module JS → JioSaavn → YouTube), et la synchronisation Listen Together repose sur une autorité Go éphémère qui fait avancer le playhead par AnchorMs+elapsed plutôt que par ticks de position. Le pipeline audio (ExoPlayer double ou FFmpeg desktop) applique crossfade beat-aware, spatialisation, égalisation et loudness avant la sortie, tandis que 15 fournisseurs de paroles concourent en parallèle pour afficher des paroles synchronisées.",
+  "flow": [
+    ["Recherche → Innertube", "L'utilisateur tape dans SearchScreen (sharedUi, debounce 220/400ms) → shared/YtMusicRepository.search() → Innertube POST youtubei/v1/search (SAPISIDHASH, visitorData) → InnertubeParser → SearchResult en étagères"],
+    ["Construction de file d'attente", "QueueTimeline/QueueBuilder (shared) compose Song{videoId, SourceTrackKeys} + QueueSource ; SourceRegistry trie les sources par rang et qualité autorisée"],
+    ["Résolution de stream", "ResolvingDataSource (Android) / DesktopPlaybackEngine (desktop) résout Konnekt:// → StreamResolver parcourt PlayerClient (WEB/Android/iOS) + InnerTubeX cipher + NewPipe n-deobfuscation → URL HTTPS expirable, fallback OkHttp + AudioCache"],
+    ["Pipeline audio + analyse", "Double ExoPlayer / FFmpeg → TransitionFilter + Spatial + Equalizer + Loudness → sortie ; TrackAnalyzer délègue à native/analyzer (C++) pour mix_in/out, beats, energy_curve → CrossfadeController/TransitionRide"],
+    ["Paroles synchronisées", "LyricsRepository lance 15 sources en parallèle (BiniLyrics-ISRC 2.5s → LrcRed/PaxSenix/LyricsPlus…) avec priorité syllabe>ligne → LyricClock → NowPlayingScreen"],
+    ["Listen Together", "POST /api/parties (backend Go, code 6 chars) → WebSocket /ws/parties/{code} + FrameWelcome → FrameControl (play/pause/seek/setTrack/queueAdd…) → hub.Broadcast(state+queue) → clients PositionAt(serverMs) via ServerClock, HostOnlyControl enforced côté serveur"]
+  ],
+  "testSegments": ["androidTest", "jvmTest", "commonTest"],
+  "modules": {
+    "app": {
+      "purpose": "Application Android principale : cycle de vie, service de lecture Media3, liaisons plateforme (Auto, Cast, widgets) et fonctionnalités appareil (téléchargements offline, WebDAV, scrobbling).",
+      "keyAreas": [
+        "playback/PlaybackService.kt — MediaLibraryService + double ExoPlayer, ResolvingDataSource lazy, CrossfadeController, PartySync hôte",
+        "playback/*Processor.kt — TransitionFilter, SpatialAudio, Equalizer, Loudness (effets audio DSP)",
+        "data/sources/SourceRegistry.kt — Registre addon/module/JioSaavn/YouTube trié par rang + qualité audio",
+        "data/lyrics + data/presence + data/stats — Paroles embarquées, compteur d'app ouverte, ListeningStats/Replay",
+        "download/ — DownloadsService, OfflineDash/HLS, Flac/Mp4/Webm taggers",
+        "ui/screens + ui/player + widget/ — Compose screens, MiniPlayer/MainViewModel, MediaWidget"
+      ],
+      "runtime": "Android 26–36 · Kotlin/JVM 17 · Compose Material3 · Media3 1.11 · Coil3 · Ktor 3.5.2 · InnerTubeX/NewPipe/Rhino · QuickJS · ONNX 1.28"
+    },
+    "shared": {
+      "purpose": "Domaine agnostique plateforme : client YouTube Music, parsers, maths de file d'attente et orchestration des paroles. Consommé par app et desktopApp.",
+      "keyAreas": [
+        "data/innertube/Innertube.kt — Client WEB_REMIX youtubei/v1 : SAPISIDHASH, visitorData, SessionScope",
+        "data/innertube/InnertubeParser.kt + StreamResolver.kt — Parsers d'étagères + résolution de flux multi-client (WEB/Android/iOS + NewPipe fallback)",
+        "data/lyrics/LyricsRepository.kt — Course parallèle de 15 sources, priorité syllabe > ligne, timeout 2.5s ISRC",
+        "data/model/Models.kt — Song, ShelfItem, HomeFeed, SearchResult, états like/abonnement",
+        "playback/smart/TransitionPlanner.kt + data/listentogether/PartyModels.kt — Planification Automix, modèles de party et ServerClock",
+        "data/YtMusicRepository.kt + data/sources/TrackMatcher.kt — Repo haut niveau et matching de pistes"
+      ],
+      "runtime": "Kotlin Multiplatform · androidTarget + jvm · jvmSharedMain · Ktor-OkHttp/WebSockets/Serialization · compileOnly ONNX & NewPipeExtractor"
+    },
+    "sharedUi": {
+      "purpose": "UI Compose unique pour téléphone et desktop : player Now Playing, étagères, recherche, fonds mesh/backdrop et panneaux paroles/file d'attente.",
+      "keyAreas": [
+        "ui/player/NowPlayingScreen.kt — Player style Apple Music : shrinkage artwork, scrub, queue slide 420ms, Haze blur",
+        "ui/player/PlayerLyrics.kt + LyricClock.kt — Affichage paroles synchronisées, focus et offset",
+        "ui/player/PlayerControls.kt + PlayerQueue.kt — Contrôles transport, drag & drop file d'attente",
+        "ui/screens/HomeScreen.kt + SearchScreen.kt — Étagères d'accueil, SearchField avec typeahead",
+        "ui/components/ShelfRow.kt + ui/graphics/ArtworkPixels.kt — Chrome des rangées, skeletons, palette artwork",
+        "ui/AppUi.kt + ui/theme/ArtworkPalette.kt — Hôte UI cross-platform, couleurs mesh extraites de l'artwork"
+      ],
+      "runtime": "Compose Multiplatform 1.10.3 · Haze 1.3.1 · Coil3 · Material3 · lifecycle-runtime-compose"
+    },
+    "desktopApp": {
+      "purpose": "Port Windows/Linux miroir des fonctionnalités Android : mêmes files/paroles/party avec stack audio desktop, chrome fenêtre et import cookies navigateur.",
+      "keyAreas": [
+        "desktop/DesktopApp.kt — Composable racine : destinations (listen-now/explore/library/search), état liveQueue/history/liked",
+        "desktop/DesktopPlayback.kt + DesktopAudioEngine.kt — Moteur FFmpeg/javacpp, DesktopAudioDecoder/RateConverter, MPRIS/SMTC",
+        "desktop/DesktopListenTogether.kt + DesktopPartySync.kt — Client party Ktor-CIO WebSocket, miroir Android PartySync",
+        "desktop/DesktopSourceRegistry.kt + DesktopBrowserCookies.kt — Registry GraalVM JS + import cookies SQLite/JNA DPAPI",
+        "desktop/DesktopDownloadManager.kt + DesktopArtwork.kt — Gestion téléchargements et cache artwork desktop",
+        "native/window/window_jni.cpp — Pont JNI DWM frame bridge (Windows)"
+      ],
+      "runtime": "JVM 21 · Compose Desktop 1.10.3 · JavaFX WebKit 21 · FFmpeg 7.1.1/javacpp 1.5.12 · ONNX 1.29 · Ktor CIO 3.0.3"
+    },
+    "backend": {
+      "purpose": "Autorité Listen Together éphémère en mémoire : CRUD party REST, sync WebSocket, heartbeats presence et rate-limit. Sans base de données.",
+      "keyAreas": [
+        "main.go — Mux net/http : /api/parties, /ws/parties/{code}, /invite/{code}, /api/presence, CORS + ipRateLimiter",
+        "party/party.go — Party{Members, Playback*PlaybackState, MaxMembers, HostOnlyControl} + PlaybackState{Track, Queue, Seq} + PositionAt(serverMs)",
+        "hub/hub.go — SafeConn Attach/Broadcast/Detach par code party",
+        "protocol/protocol.go — Types Frame (welcome/state/queue/members/control/activity…) et ControlActions",
+        "presence/presence.go — Tracker 10k installs, GET /api/stats/live",
+        "codes/codes.go + config/config.go — Codes party 6 chars, limites PlayLeadMs/heartbeat/intervalles"
+      ],
+      "runtime": "Go 1.27 · gorilla/websocket 1.5.3 · binaire unique ListenAndServe 0.0.0.0:PORT · store map in-proc"
+    },
+    "native": {
+      "purpose": "DSP offline sur piste entière (portage Orchard AGPLv3) pour Automix : enveloppe, tempo/beat grid, tonalité/chroma, loudness et heuristique vocale.",
+      "keyAreas": [
+        "analyzer/audio_analysis.cpp — Pipeline AnalyzeAudio : AnalyzeEnvelope (RMS 250ms), FindMixOutTime, AnalyzeKeyAndTimbre (FFT 4096 Hann, chroma), BuildStructure (phrases 32 beats)",
+        "analyzer/tempo_analysis.cpp — Enveloppe onset 180s + PLL beat tracker (beats/downbeats, beat_interval/bpm)",
+        "analyzer/mel_spectrogram.cpp + vocal_spectrogram.cpp — Spectrogrammes Mel/Vocal à 11.025 kHz",
+        "analyzer/audio_analysis.h — AnalysisResult (duration/bpm/beats/key/chroma/mix_in/out, energy_curve, vocal_activity_mask, loudness_lufs)",
+        "ffmpeg/ffmpeg_jni.cc — Chemin décodage FFmpeg JNI fournissant PCM Float32 mono à l'analyseur",
+        "ffmpeg/build.sh — Build libffmpegJNI.so depuis librempeg (seul FFmpeg avec décodeur AC-4)"
+      ],
+      "runtime": "C++17 CMake → konnekt_analysis.so/.dll via JNI · thread worker uniquement · réentrant O(n)"
+    }
+  }
+}

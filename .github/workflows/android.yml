@@ -23,9 +23,9 @@ jobs:
         echo "LASTFM_API_KEY=${{ secrets.LASTFM_API_KEY }}" > local.properties
         echo "LASTFM_SECRET=${{ secrets.LASTFM_SECRET }}" >> local.properties
 
-        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > bitchord-release.jks
+        echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > konnekt-release.jks
         {
-          echo "storeFile=bitchord-release.jks"
+          echo "storeFile=konnekt-release.jks"
           echo "storePassword=${{ secrets.KEYSTORE_PASSWORD }}"
           echo "keyAlias=${{ secrets.KEY_ALIAS }}"
           echo "keyPassword=${{ secrets.KEY_PASSWORD }}"
@@ -37,8 +37,28 @@ jobs:
     - name: Build Signed Prod Release APK
       run: ./gradlew assembleProdRelease
 
+    - name: Verify package, signature and alignment
+      shell: bash
+      run: |
+        set -euo pipefail
+        tools_dir="$(find "$ANDROID_HOME/build-tools" -mindepth 1 -maxdepth 1 -type d | sort -V | tail -1)"
+        expected_code="$(sed -n 's/^[[:space:]]*versionCode = \([0-9]*\).*/\1/p' app/build.gradle.kts | head -1)"
+        expected_name="$(sed -n 's/^[[:space:]]*versionName = "\([^"]*\)".*/\1/p' app/build.gradle.kts | head -1)"
+        shopt -s nullglob
+        apks=(app/build/outputs/apk/prod/release/*.apk)
+        test "${#apks[@]}" -gt 0
+        for apk in "${apks[@]}"; do
+          package_line="$("$tools_dir/aapt" dump badging "$apk" | sed -n '1p')"
+          [[ "$package_line" == *"name='com.music.konnekt'"* ]]
+          [[ "$package_line" == *"versionCode='$expected_code'"* ]]
+          [[ "$package_line" == *"versionName='$expected_name'"* ]]
+          "$tools_dir/zipalign" -c -P 16 -v 4 "$apk" >/dev/null
+          signer="$("$tools_dir/apksigner" verify --print-certs "$apk" | sed -n 's/^Signer #1 certificate SHA-256 digest: //p')"
+          [[ "$signer" == "54d56c9b9eef84ea188efc5853bf9306d0c2ea2a8765a0dcacaf559476c8eccf" ]]
+        done
+
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: bitchord-prod-release-signed
+        name: konnekt-prod-release-signed
         path: app/build/outputs/apk/prod/release/*.apk

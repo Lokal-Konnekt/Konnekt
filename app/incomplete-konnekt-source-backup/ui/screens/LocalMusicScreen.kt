@@ -1,4 +1,4 @@
-package com.music.bitchord.ui.screens
+package com.music.konnekt.ui.screens
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContent
@@ -11,7 +11,7 @@ import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
-import com.music.bitchord.ui.components.longPressMenuClickable
+import com.music.konnekt.ui.components.longPressMenuClickable
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -90,32 +90,32 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
-import com.music.bitchord.data.model.CARD_ART_PX
-import com.music.bitchord.data.model.ROW_ART_PX
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.R
-import com.music.bitchord.ui.components.ExplicitSongTitle
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.data.model.isSameTrackAs
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.settings.LibraryViewType
-import com.music.bitchord.data.settings.LocalMusicSort
-import com.music.bitchord.download.DownloadedCollection
-import com.music.bitchord.ui.components.MessageState
-import com.music.bitchord.ui.components.PlayingAccent
-import com.music.bitchord.ui.components.PAGE_GUTTER
-import com.music.bitchord.ui.components.hangIntoGutter
-import com.music.bitchord.ui.components.NUMBERED_ROW_DIVIDER_INSET
-import com.music.bitchord.ui.components.ROW_DIVIDER_INSET
-import com.music.bitchord.ui.components.SongRow
-import com.music.bitchord.ui.components.SearchPlayingBars
-import com.music.bitchord.ui.components.rememberRemoteArtworkUrl
-import com.music.bitchord.ui.components.thumbnailBorder
-import com.music.bitchord.ui.components.TopBarContentGap
-import com.music.bitchord.ui.components.topBarHeight
-import com.music.bitchord.ui.haptics.Haptic
-import com.music.bitchord.ui.haptics.rememberHaptics
-import com.music.bitchord.ui.icons.BitChordIcons
+import com.music.konnekt.data.model.CARD_ART_PX
+import com.music.konnekt.data.model.ROW_ART_PX
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.R
+import com.music.konnekt.ui.components.ExplicitSongTitle
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.data.model.isSameTrackAs
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.settings.LibraryViewType
+import com.music.konnekt.data.settings.LocalMusicSort
+import com.music.konnekt.download.DownloadedCollection
+import com.music.konnekt.ui.components.MessageState
+import com.music.konnekt.ui.components.PlayingAccent
+import com.music.konnekt.ui.components.PAGE_GUTTER
+import com.music.konnekt.ui.components.hangIntoGutter
+import com.music.konnekt.ui.components.NUMBERED_ROW_DIVIDER_INSET
+import com.music.konnekt.ui.components.ROW_DIVIDER_INSET
+import com.music.konnekt.ui.components.SongRow
+import com.music.konnekt.ui.components.SearchPlayingBars
+import com.music.konnekt.ui.components.rememberRemoteArtworkUrl
+import com.music.konnekt.ui.components.thumbnailBorder
+import com.music.konnekt.ui.components.TopBarContentGap
+import com.music.konnekt.ui.components.topBarHeight
+import com.music.konnekt.ui.haptics.Haptic
+import com.music.konnekt.ui.haptics.rememberHaptics
+import com.music.konnekt.ui.icons.KonnektIcons
 import java.util.Locale
 
 private const val LOCAL_TAB_SONGS = 0
@@ -1316,7 +1316,7 @@ private fun DrillDownActionRow(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                BitChordIcons.Shuffle,
+                KonnektIcons.Shuffle,
                 contentDescription = stringResource(R.string.shuffle),
                 tint = if (isSystemInDarkTheme()) Color.White else Color.Black,
                 modifier = Modifier.size(18.dp),
@@ -1334,7 +1334,7 @@ private fun DrillDownActionRow(
             horizontalArrangement = Arrangement.Center,
         ) {
             Icon(
-                BitChordIcons.Play,
+                KonnektIcons.Play,
                 contentDescription = null,
                 tint = MaterialTheme.colorScheme.onSurface,
                 modifier = Modifier.size(18.dp),
@@ -1569,7 +1569,7 @@ private fun LocalSearchField(
             contentAlignment = Alignment.Center,
         ) {
             Icon(
-                imageVector = if (viewType == LibraryViewType.GRID) BitChordIcons.ListView else BitChordIcons.GridView,
+                imageVector = if (viewType == LibraryViewType.GRID) KonnektIcons.ListView else KonnektIcons.GridView,
                 contentDescription = stringResource(
                     if (viewType == LibraryViewType.GRID) R.string.switch_to_list_view else R.string.switch_to_grid_view,
                 ),

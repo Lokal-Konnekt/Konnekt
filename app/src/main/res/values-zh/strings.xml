@@ -130,7 +130,7 @@
     <string name="widget_previous">上一首</string>
     <string name="widget_artwork">专辑封面</string>
     <string name="widget_nothing_played">尚未播放任何内容</string>
-    <string name="widget_open_bitchord">打开 Konnekt</string>
+    <string name="widget_open_konnekt">打开 Konnekt</string>
     <string name="widget_preview_title">歌曲标题</string>
     <string name="widget_preview_artist">艺人</string>
     <string name="widget_pill_label">正在播放 4×1</string>
@@ -317,7 +317,7 @@
     <string name="downloads_finished">下载 · 已完成</string>
     <string name="downloading_progress">正在下载 · %1$d%%</string>
     <string name="starting">正在开始</string>
-    <string name="saved_to_bitchord_folder">已保存到 Music/Konnekt</string>
+    <string name="saved_to_konnekt_folder">已保存到 Music/Konnekt</string>
     <string name="nothing_downloading">当前没有下载任务</string>
     <string name="nothing_to_explore">目前没有可探索的内容</string>
     <string name="no_youtube_music_results">YouTube Music 没有搜索结果</string>
@@ -635,7 +635,7 @@
     </plurals>
     <string name="no_local_albums">这里还没有任何属于专辑或播放列表的内容。下载完整的专辑或播放列表后，它们会显示在这里。</string>
     <string name="play_your_replay">播放你的 Replay</string>
-    <string name="counted_on_device_with_bitchord">由 Konnekt 在此设备上统计</string>
+    <string name="counted_on_device_with_konnekt">由 Konnekt 在此设备上统计</string>
     <string name="this_month">本月</string>
     <string name="this_year">今年</string>
     <string name="all_time">全部时间</string>
@@ -1265,4 +1265,35 @@
     <string name="spotify_library_subtitle">你的 Spotify 播放列表</string>
     <string name="spotify_sign_in">使用 Spotify 登录</string>
     <string name="spotify_track_unavailable">在 YouTube Music 上找不到该歌曲</string>
+
+    <string name="home_for_you">为你推荐</string>
+    <string name="home_for_you_subtitle">根据你的聆听喜好发现新音乐</string>
+    <string name="update_verifying_body">正在验证 Konnekt %1$s 下载…</string>
+    <string name="update_verifying">正在验证下载…</string>
+    <string name="update_retry_hint">请检查网络连接，然后重新下载。</string>
+    <string name="update_invalid_apk">无法验证此更新。请重新下载后再安装。</string>
+    <string name="update_install_permission">Android 将请求允许 Konnekt 安装更新。返回应用后将继续安装。</string>
+
+    <string name="cloud_account_title">Konnekt 账户</string>
+    <string name="cloud_account_intro">私密同步播放列表、设置和已连接账户。</string>
+    <string name="cloud_username">用户名</string>
+    <string name="cloud_password">密码</string>
+    <string name="cloud_create">创建账户</string>
+    <string name="cloud_sign_in">登录</string>
+    <string name="cloud_new_account">新账户</string>
+    <string name="cloud_have_account">我已有账户</string>
+    <string name="cloud_password_warning">无需电子邮箱。请妥善保存密码：密码无法找回，并用于保护你的加密备份。</string>
+    <string name="cloud_connected_as">已登录为 %1$s</string>
+    <string name="cloud_scope">播放列表、设置和账户会话在上传前加密。音频文件保留在此设备上。</string>
+    <string name="cloud_save">保存到云端</string>
+    <string name="cloud_restore">恢复</string>
+    <string name="cloud_restore_warning">用云端副本替换此设备上的播放列表、设置和账户会话？已下载的音频会保留。恢复后请重启应用。</string>
+    <string name="cloud_restore_confirm">立即恢复</string>
+    <string name="cloud_sign_out">退出 Konnekt</string>
+    <string name="cloud_saved">加密备份已保存。</string>
+    <string name="cloud_restored">已恢复。请重启应用以刷新已连接服务。</string>
+    <string name="cloud_signed_in">Konnekt 账户已连接。</string>
+    <string name="theme_midnight">午夜</string>
+    <string name="theme_ember">余烬</string>
+    <string name="replay_load_error">无法加载你的聆听记录。请重试。</string>
 </resources>

@@ -204,7 +204,7 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data
                     android:scheme="https"
-                    android:host="Konnekt.kushagrasingh.in"
+                    android:host="konnekt-listen-together.onrender.com"
                     android:pathPattern="/invite/......" />
             </intent-filter>
 
@@ -339,7 +339,7 @@
         <!-- Where the Cast framework asks how this app wants to cast. -->
         <meta-data
             android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME"
-            android:value="com.music.bitchord.playback.cast.CastOptionsProvider" />
+            android:value="com.music.konnekt.playback.cast.CastOptionsProvider" />
     </application>
 
 </manifest>

@@ -144,7 +144,7 @@
     <string name="widget_previous">Trước</string>
     <string name="widget_artwork">Ảnh bìa album</string>
     <string name="widget_nothing_played">Chưa phát bài nào</string>
-    <string name="widget_open_bitchord">Mở Konnekt</string>
+    <string name="widget_open_konnekt">Mở Konnekt</string>
     <string name="widget_preview_title">Tên bài hát</string>
     <string name="widget_preview_artist">Nghệ sĩ</string>
     <string name="widget_pill_label">Đang phát 4×1</string>
@@ -358,7 +358,7 @@
     <string name="starting">Đang bắt đầu</string>
     <string name="start_radio">Phát radio</string>
     <string name="radio_started">Đã bắt đầu radio %1$s</string>
-    <string name="saved_to_bitchord_folder">Đã lưu vào Music/Konnekt</string>
+    <string name="saved_to_konnekt_folder">Đã lưu vào Music/Konnekt</string>
     <string name="nothing_downloading">Không có nội dung đang tải</string>
     <string name="nothing_to_explore">Hiện không có gì để khám phá</string>
     <string name="no_youtube_music_results">Không có kết quả nào từ YouTube Music</string>
@@ -678,7 +678,7 @@
     </plurals>
     <string name="no_local_albums">Chưa có mục nào ở đây thuộc về một album hoặc danh sách phát. Tải xuống toàn bộ album hoặc danh sách phát và nội dung sẽ xuất hiện ở đây.</string>
     <string name="play_your_replay">Phát Replay của bạn</string>
-    <string name="counted_on_device_with_bitchord">Được thống kê trên thiết bị này bằng Konnekt</string>
+    <string name="counted_on_device_with_konnekt">Được thống kê trên thiết bị này bằng Konnekt</string>
     <string name="this_month">Tháng này</string>
     <string name="this_year">Năm nay</string>
     <string name="all_time">Tất cả thời gian</string>
@@ -1205,4 +1205,35 @@
     <string name="spotify_library_subtitle">Danh sách phát Spotify của bạn</string>
     <string name="spotify_sign_in">Đăng nhập bằng Spotify</string>
     <string name="spotify_track_unavailable">Không tìm thấy bài hát đó trên YouTube Music</string>
+
+    <string name="home_for_you">Dành cho bạn</string>
+    <string name="home_for_you_subtitle">Khám phá mới dựa trên nhạc bạn thường nghe</string>
+    <string name="update_verifying_body">Đang kiểm tra bản tải Konnekt %1$s…</string>
+    <string name="update_verifying">Đang kiểm tra bản tải…</string>
+    <string name="update_retry_hint">Kiểm tra kết nối và thử tải xuống lại.</string>
+    <string name="update_invalid_apk">Không thể xác minh bản cập nhật này. Hãy tải lại trước khi cài đặt.</string>
+    <string name="update_install_permission">Android sẽ yêu cầu cho phép cập nhật từ Konnekt. Quá trình cài đặt sẽ tiếp tục khi bạn quay lại.</string>
+
+    <string name="cloud_account_title">Tài khoản Konnekt</string>
+    <string name="cloud_account_intro">Đồng bộ riêng tư danh sách phát, cài đặt và tài khoản đã kết nối.</string>
+    <string name="cloud_username">Tên người dùng</string>
+    <string name="cloud_password">Mật khẩu</string>
+    <string name="cloud_create">Tạo tài khoản</string>
+    <string name="cloud_sign_in">Đăng nhập</string>
+    <string name="cloud_new_account">Tài khoản mới</string>
+    <string name="cloud_have_account">Tôi đã có tài khoản</string>
+    <string name="cloud_password_warning">Không cần email. Hãy giữ mật khẩu an toàn: không thể khôi phục mật khẩu và nó bảo vệ bản sao lưu mã hóa.</string>
+    <string name="cloud_connected_as">Đã đăng nhập bằng %1$s</string>
+    <string name="cloud_scope">Danh sách phát, cài đặt và phiên được mã hóa trước khi tải lên. Tệp âm thanh vẫn ở thiết bị này.</string>
+    <string name="cloud_save">Lưu lên đám mây</string>
+    <string name="cloud_restore">Khôi phục</string>
+    <string name="cloud_restore_warning">Thay danh sách phát, cài đặt và phiên trên thiết bị này bằng bản trên đám mây? Âm thanh đã tải vẫn được giữ. Hãy khởi động lại ứng dụng sau đó.</string>
+    <string name="cloud_restore_confirm">Khôi phục ngay</string>
+    <string name="cloud_sign_out">Đăng xuất Konnekt</string>
+    <string name="cloud_saved">Đã lưu bản sao lưu mã hóa.</string>
+    <string name="cloud_restored">Đã khôi phục. Khởi động lại ứng dụng để làm mới các dịch vụ đã kết nối.</string>
+    <string name="cloud_signed_in">Đã kết nối tài khoản Konnekt.</string>
+    <string name="theme_midnight">Nửa đêm</string>
+    <string name="theme_ember">Than hồng</string>
+    <string name="replay_load_error">Không thể tải lịch sử nghe. Vui lòng thử lại.</string>
 </resources>

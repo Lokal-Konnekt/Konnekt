@@ -45,4 +45,6 @@ keystore.properties
 
 # AI agent configuration
 AGENTS.md
+.agents/
+/skills-lock.json
 /output/

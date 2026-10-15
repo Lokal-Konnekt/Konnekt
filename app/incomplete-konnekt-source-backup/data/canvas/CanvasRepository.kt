@@ -1,8 +1,8 @@
-package com.music.bitchord.data.canvas
+package com.music.konnekt.data.canvas
 
-import com.music.bitchord.data.DebugLog as Log
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.settings.AppSettings
+import com.music.konnekt.data.DebugLog as Log
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.settings.AppSettings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock

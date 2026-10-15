@@ -1,4 +1,4 @@
-package com.music.bitchord.data.remote
+package com.music.konnekt.data.remote
 
 import java.net.URLDecoder
 import java.util.Locale

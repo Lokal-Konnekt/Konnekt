@@ -1,6 +1,6 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
-import com.music.bitchord.playback.audio.AudioBlock
+import com.music.konnekt.playback.audio.AudioBlock
 import kotlin.math.abs
 import kotlin.math.exp
 

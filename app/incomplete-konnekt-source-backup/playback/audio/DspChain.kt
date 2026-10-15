@@ -1,14 +1,14 @@
-package com.music.bitchord.playback.audio
+package com.music.konnekt.playback.audio
 
 import android.util.Log
-import com.music.bitchord.BuildConfig
-import com.music.bitchord.playback.EqualizerProcessor
-import com.music.bitchord.playback.LoudnessProcessor
-import com.music.bitchord.playback.SpatialAudioProcessor
-import com.music.bitchord.playback.TransitionFilterProcessor
+import com.music.konnekt.BuildConfig
+import com.music.konnekt.playback.EqualizerProcessor
+import com.music.konnekt.playback.LoudnessProcessor
+import com.music.konnekt.playback.SpatialAudioProcessor
+import com.music.konnekt.playback.TransitionFilterProcessor
 
 /**
- * Composite DSP chain executing BitChord's custom audio processors in their canonical sequence:
+ * Composite DSP chain executing Konnekt's custom audio processors in their canonical sequence:
  *
  * AudioBlock(Float32) -> SpatialAudioProcessor -> EqualizerProcessor
  *   -> TransitionFilterProcessor -> LoudnessProcessor -> AudioBlock(Float32)

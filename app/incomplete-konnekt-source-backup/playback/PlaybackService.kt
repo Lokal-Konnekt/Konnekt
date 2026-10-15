@@ -1,4 +1,4 @@
-package com.music.bitchord.playback
+package com.music.konnekt.playback
 
 import android.app.PendingIntent
 import android.content.Context
@@ -14,11 +14,11 @@ import android.widget.Toast
 import android.os.Bundle
 import android.os.Handler
 import android.os.SystemClock
-import com.music.bitchord.data.TelemetryProvenance
+import com.music.konnekt.data.TelemetryProvenance
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import com.music.bitchord.playback.audio.usb.UsbDirectManager
-import com.music.bitchord.playback.audio.usb.DirectUsbProbeResult
+import com.music.konnekt.playback.audio.usb.UsbDirectManager
+import com.music.konnekt.playback.audio.usb.DirectUsbProbeResult
 import android.util.Log
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
@@ -75,68 +75,68 @@ import com.google.common.collect.ImmutableList
 import com.google.common.util.concurrent.Futures
 import com.google.common.util.concurrent.ListenableFuture
 import kotlinx.coroutines.guava.future
-import com.music.bitchord.playback.audio.DspChain
-import com.music.bitchord.playback.cast.CastController
-import com.music.bitchord.playback.cast.CastPlayback
-import com.music.bitchord.playback.cast.CastSink
-import com.music.bitchord.playback.cast.CastStream
-import com.music.bitchord.playback.audio.PrecisionAudioSink
-import com.music.bitchord.playback.dsd.DsdExtractorsFactory
-import com.music.bitchord.playback.audio.DirectAudioProbe
-import com.music.bitchord.playback.audio.OutputNegotiator
-import com.music.bitchord.playback.audio.PcmEncoding
-import com.music.bitchord.playback.audio.SourceDescriptor
-import com.music.bitchord.playback.audio.bluetooth.BluetoothAudioTracker
-import com.music.bitchord.playback.audio.bluetooth.BluetoothTelemetry
-import com.music.bitchord.MainActivity
-import com.music.bitchord.data.listentogether.ListenTogether
-import com.music.bitchord.data.listentogether.partyQueueIndexOf
-import com.music.bitchord.data.listentogether.partyUpcomingAfter
-import com.music.bitchord.R
-import com.music.bitchord.data.LocalMediaRepository
-import com.music.bitchord.data.innertube.InnertubeParser
-import com.music.bitchord.data.YtMusicRepository
-import com.music.bitchord.data.lyrics.EmbeddedLyrics
-import com.music.bitchord.data.lyrics.LyricLine
-import com.music.bitchord.data.lyrics.LyricsRepository
-import com.music.bitchord.data.model.NOTIFICATION_ART_PX
-import com.music.bitchord.data.model.SearchFilter
-import com.music.bitchord.data.model.SearchResult
-import com.music.bitchord.data.model.BrowseItem
-import com.music.bitchord.data.model.ShelfItem
-import com.music.bitchord.data.model.artworkAt
-import com.music.bitchord.data.model.QueueTier
-import com.music.bitchord.data.sources.SourceRegistry
-import com.music.bitchord.download.Downloads
+import com.music.konnekt.playback.audio.DspChain
+import com.music.konnekt.playback.cast.CastController
+import com.music.konnekt.playback.cast.CastPlayback
+import com.music.konnekt.playback.cast.CastSink
+import com.music.konnekt.playback.cast.CastStream
+import com.music.konnekt.playback.audio.PrecisionAudioSink
+import com.music.konnekt.playback.dsd.DsdExtractorsFactory
+import com.music.konnekt.playback.audio.DirectAudioProbe
+import com.music.konnekt.playback.audio.OutputNegotiator
+import com.music.konnekt.playback.audio.PcmEncoding
+import com.music.konnekt.playback.audio.SourceDescriptor
+import com.music.konnekt.playback.audio.bluetooth.BluetoothAudioTracker
+import com.music.konnekt.playback.audio.bluetooth.BluetoothTelemetry
+import com.music.konnekt.MainActivity
+import com.music.konnekt.data.listentogether.ListenTogether
+import com.music.konnekt.data.listentogether.partyQueueIndexOf
+import com.music.konnekt.data.listentogether.partyUpcomingAfter
+import com.music.konnekt.R
+import com.music.konnekt.data.LocalMediaRepository
+import com.music.konnekt.data.innertube.InnertubeParser
+import com.music.konnekt.data.YtMusicRepository
+import com.music.konnekt.data.lyrics.EmbeddedLyrics
+import com.music.konnekt.data.lyrics.LyricLine
+import com.music.konnekt.data.lyrics.LyricsRepository
+import com.music.konnekt.data.model.NOTIFICATION_ART_PX
+import com.music.konnekt.data.model.SearchFilter
+import com.music.konnekt.data.model.SearchResult
+import com.music.konnekt.data.model.BrowseItem
+import com.music.konnekt.data.model.ShelfItem
+import com.music.konnekt.data.model.artworkAt
+import com.music.konnekt.data.model.QueueTier
+import com.music.konnekt.data.sources.SourceRegistry
+import com.music.konnekt.download.Downloads
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.CopyOnWriteArraySet
 import java.util.concurrent.atomic.AtomicLong
-import com.music.bitchord.data.Http
-import com.music.bitchord.data.LikeState
-import com.music.bitchord.data.NerdStats
-import com.music.bitchord.data.TrackLog
-import com.music.bitchord.data.discord.DiscordRPC
-import com.music.bitchord.data.discord.discordAudioQualityLine
-import com.music.bitchord.data.innertube.PlaybackTracker
-import com.music.bitchord.data.stats.ListeningRecorder
-import com.music.bitchord.data.innertube.PlayerClient
-import com.music.bitchord.data.innertube.StreamResolver
-import com.music.bitchord.data.model.LikeStatus
-import com.music.bitchord.data.model.Song
-import com.music.bitchord.data.scrobbling.LastFM
-import com.music.bitchord.data.scrobbling.ListenBrainzManager
-import com.music.bitchord.data.scrobbling.ScrobbleManager
-import com.music.bitchord.data.settings.AppSettings
-import com.music.bitchord.data.settings.EqualizerMode
-import com.music.bitchord.data.settings.OutputPcmMode
-import com.music.bitchord.data.sources.SourceResolver
-import com.music.bitchord.data.sources.SourceStream
-import com.music.bitchord.data.sources.StreamFormat
-import com.music.bitchord.data.sources.TrackMatcher
-import com.music.bitchord.playback.smart.AutomixAnalysisSource
-import com.music.bitchord.playback.smart.VersionAudioAligner
-import com.music.bitchord.widget.MediaWidget
-import com.music.bitchord.widget.MediaWidgetSnapshot
+import com.music.konnekt.data.Http
+import com.music.konnekt.data.LikeState
+import com.music.konnekt.data.NerdStats
+import com.music.konnekt.data.TrackLog
+import com.music.konnekt.data.discord.DiscordRPC
+import com.music.konnekt.data.discord.discordAudioQualityLine
+import com.music.konnekt.data.innertube.PlaybackTracker
+import com.music.konnekt.data.stats.ListeningRecorder
+import com.music.konnekt.data.innertube.PlayerClient
+import com.music.konnekt.data.innertube.StreamResolver
+import com.music.konnekt.data.model.LikeStatus
+import com.music.konnekt.data.model.Song
+import com.music.konnekt.data.scrobbling.LastFM
+import com.music.konnekt.data.scrobbling.ListenBrainzManager
+import com.music.konnekt.data.scrobbling.ScrobbleManager
+import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.settings.EqualizerMode
+import com.music.konnekt.data.settings.OutputPcmMode
+import com.music.konnekt.data.sources.SourceResolver
+import com.music.konnekt.data.sources.SourceStream
+import com.music.konnekt.data.sources.StreamFormat
+import com.music.konnekt.data.sources.TrackMatcher
+import com.music.konnekt.playback.smart.AutomixAnalysisSource
+import com.music.konnekt.playback.smart.VersionAudioAligner
+import com.music.konnekt.widget.MediaWidget
+import com.music.konnekt.widget.MediaWidgetSnapshot
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
@@ -173,29 +173,29 @@ import java.util.Locale
 
 
 /** Session command used by both the player UI and the media notification. */
-const val ACTION_TOGGLE_AUTOPLAY = "com.music.bitchord.action.TOGGLE_AUTOPLAY"
+const val ACTION_TOGGLE_AUTOPLAY = "com.music.konnekt.action.TOGGLE_AUTOPLAY"
 
 /** Session command used to smoothly swap the current track's version (film vs release). */
-const val ACTION_SWAP_VERSION = "com.music.bitchord.action.SWAP_VERSION"
-const val EXTRA_SWAP_MEDIA_ITEM = "bitchord.swap.media_item"
+const val ACTION_SWAP_VERSION = "com.music.konnekt.action.SWAP_VERSION"
+const val EXTRA_SWAP_MEDIA_ITEM = "konnekt.swap.media_item"
 
 /** Session command used by the media notification's and the 4×1 widget's Favorite button. */
-const val ACTION_TOGGLE_FAVORITE = "com.music.bitchord.action.TOGGLE_FAVORITE"
+const val ACTION_TOGGLE_FAVORITE = "com.music.konnekt.action.TOGGLE_FAVORITE"
 
 /** Session command used by the media notification's and the 4×1 widget's Shuffle button. */
-const val ACTION_TOGGLE_SHUFFLE = "com.music.bitchord.action.TOGGLE_SHUFFLE"
+const val ACTION_TOGGLE_SHUFFLE = "com.music.konnekt.action.TOGGLE_SHUFFLE"
 
 /** Session actions exposed to Android Auto for the track that is playing. */
-const val ACTION_START_STATION = "com.music.bitchord.action.START_STATION"
-const val ACTION_REVERT_TO_ORIGINAL = "com.music.bitchord.action.REVERT_TO_ORIGINAL"
-const val ACTION_SWAP_TO_VERSION = "com.music.bitchord.action.SWAP_TO_VERSION"
+const val ACTION_START_STATION = "com.music.konnekt.action.START_STATION"
+const val ACTION_REVERT_TO_ORIGINAL = "com.music.konnekt.action.REVERT_TO_ORIGINAL"
+const val ACTION_SWAP_TO_VERSION = "com.music.konnekt.action.SWAP_TO_VERSION"
 
 /** Session commands bracketing an explicit radio queue replacement. */
-const val ACTION_BEGIN_RADIO_QUEUE = "com.music.bitchord.action.BEGIN_RADIO_QUEUE"
-const val ACTION_COMMIT_RADIO_QUEUE = "com.music.bitchord.action.COMMIT_RADIO_QUEUE"
+const val ACTION_BEGIN_RADIO_QUEUE = "com.music.konnekt.action.BEGIN_RADIO_QUEUE"
+const val ACTION_COMMIT_RADIO_QUEUE = "com.music.konnekt.action.COMMIT_RADIO_QUEUE"
 
 /** Session command behind the player menu's "Upgrade quality". */
-const val ACTION_UPGRADE_QUALITY = "com.music.bitchord.action.UPGRADE_QUALITY"
+const val ACTION_UPGRADE_QUALITY = "com.music.konnekt.action.UPGRADE_QUALITY"
 
 /**
  * App-side gate for explicit quality retries.
@@ -227,11 +227,11 @@ internal class ManualUpgradeThrottle(private val cooldownMs: Long) {
  * can see have had their playback URIs stripped on the way out to it. The
  * permutation travels instead, and the session applies it to the items it holds.
  */
-const val ACTION_REORDER_QUEUE = "com.music.bitchord.action.REORDER_QUEUE"
+const val ACTION_REORDER_QUEUE = "com.music.konnekt.action.REORDER_QUEUE"
 
 /** Where the rearrangement starts, and where each slot's new occupant stands now. */
-const val EXTRA_REORDER_FROM = "bitchord.reorder.from"
-const val EXTRA_REORDER_ORDER = "bitchord.reorder.order"
+const val EXTRA_REORDER_FROM = "konnekt.reorder.from"
+const val EXTRA_REORDER_ORDER = "konnekt.reorder.order"
 
 /**
  * Session command marking the span of a queue drag in the UI — see
@@ -240,15 +240,15 @@ const val EXTRA_REORDER_ORDER = "bitchord.reorder.order"
  * party publish those moves would otherwise trigger one at a time, so a jam
  * hears about the reorder once, when the row is dropped, not mid-drag.
  */
-const val ACTION_QUEUE_DRAG = "com.music.bitchord.action.QUEUE_DRAG"
-const val EXTRA_QUEUE_DRAG_ACTIVE = "bitchord.queueDrag.active"
+const val ACTION_QUEUE_DRAG = "com.music.konnekt.action.QUEUE_DRAG"
+const val EXTRA_QUEUE_DRAG_ACTIVE = "konnekt.queueDrag.active"
 
 /** A full first page for an explicitly requested station. */
 private const val INITIAL_STATION_TRACKS = 24
 
 /**
  * How long a version switch will sit on a not-yet-downloaded opening before
- * it gives up on the head — [com.music.bitchord.playback.AudioCache.awaitAnalysisHead]
+ * it gives up on the head — [com.music.konnekt.playback.AudioCache.awaitAnalysisHead]
  * both starts the fetch and waits on it, so this is the wait a listener sees
  * with the bar running. Shared by the two heads, which are fetched in
  * parallel, so it bounds the pair rather than being paid twice.
@@ -279,7 +279,7 @@ private fun Song.canStartStation(): Boolean =
  * notification, lockscreen/Bluetooth controls, and Android Auto surface for
  * free; UI processes attach with a MediaController.
  *
- * Queue items carry a `bitchord://watch?v=<videoId>` URI. The actual stream
+ * Queue items carry a `konnekt://watch?v=<videoId>` URI. The actual stream
  * URL is resolved lazily by [ResolvingDataSource] the moment ExoPlayer opens
  * the item — stream URLs expire after a few hours, so resolving at play time
  * (on Media3's loader thread, hence runBlocking is safe) keeps queues valid.
@@ -367,7 +367,7 @@ class PlaybackService : MediaLibraryService() {
     private val LIKED_CACHE_TTL_MS = 60_000L
 
     private suspend fun cachedLikedSongs(): List<Song> = likedMutex.withLock {
-        val cookie = com.music.bitchord.data.innertube.Innertube.cookie
+        val cookie = com.music.konnekt.data.innertube.Innertube.cookie
         if (cookie == null) {
             cachedLiked = null
             cachedLikedCookie = null
@@ -407,12 +407,12 @@ class PlaybackService : MediaLibraryService() {
         songs
     }
 
-    private var cachedHome: Pair<Long, com.music.bitchord.data.model.HomeFeed>? = null
+    private var cachedHome: Pair<Long, com.music.konnekt.data.model.HomeFeed>? = null
     private val homeMutex = Mutex()
     private val HOME_CACHE_TTL_MS = 60_000L
     private val HOME_NETWORK_TIMEOUT_MS = 2_500L
 
-    private suspend fun cachedHomeFeed(): com.music.bitchord.data.model.HomeFeed? = homeMutex.withLock {
+    private suspend fun cachedHomeFeed(): com.music.konnekt.data.model.HomeFeed? = homeMutex.withLock {
         cachedHome?.let { (at, feed) ->
             if (SystemClock.elapsedRealtime() - at < HOME_CACHE_TTL_MS) return feed
         }
@@ -450,7 +450,7 @@ class PlaybackService : MediaLibraryService() {
     }
 
     private suspend fun cachedPlaylistCards(): List<ShelfItem> = playlistsMutex.withLock {
-        val cookie = com.music.bitchord.data.innertube.Innertube.cookie
+        val cookie = com.music.konnekt.data.innertube.Innertube.cookie
         if (cookie == null) {
             cachedPlaylistCards = null
             cachedPlaylistCookie = null
@@ -473,14 +473,14 @@ class PlaybackService : MediaLibraryService() {
     private fun snapshotRecents(): List<Song> = cachedRecents?.second.orEmpty()
     private fun snapshotQuickPicks(): List<Song> = cachedQuickPicks?.second.orEmpty()
     private fun snapshotLiked(): List<Song> {
-        val cookie = com.music.bitchord.data.innertube.Innertube.cookie
+        val cookie = com.music.konnekt.data.innertube.Innertube.cookie
         return if (cookie != null && cookie == cachedLikedCookie) cachedLiked?.second.orEmpty() else emptyList()
     }
     private fun snapshotPlaylistCards(): List<ShelfItem> {
-        val cookie = com.music.bitchord.data.innertube.Innertube.cookie
+        val cookie = com.music.konnekt.data.innertube.Innertube.cookie
         return if (cookie != null && cookie == cachedPlaylistCookie) cachedPlaylistCards?.second.orEmpty() else emptyList()
     }
-    private fun snapshotHome(): com.music.bitchord.data.model.HomeFeed? = cachedHome?.second
+    private fun snapshotHome(): com.music.konnekt.data.model.HomeFeed? = cachedHome?.second
 
     private fun isFresh(at: Long, ttlMs: Long): Boolean =
         SystemClock.elapsedRealtime() - at < ttlMs
@@ -617,8 +617,8 @@ class PlaybackService : MediaLibraryService() {
     private fun spareLoudness(): LoudnessProcessor =
         if (activeFilter === transitionFilterA) loudnessB else loudnessA
 
-    /** Automix's DSP analyzer — see [com.music.bitchord.playback.smart.TrackAnalyzer]. */
-    private val trackAnalyzer = com.music.bitchord.playback.smart.TrackAnalyzer(this, AudioCache)
+    /** Automix's DSP analyzer — see [com.music.konnekt.playback.smart.TrackAnalyzer]. */
+    private val trackAnalyzer = com.music.konnekt.playback.smart.TrackAnalyzer(this, AudioCache)
 
     /** Shared with the crossfade's tail player, so both read the same disk cache. */
     private var mediaSourceFactory: DefaultMediaSourceFactory? = null
@@ -755,7 +755,7 @@ class PlaybackService : MediaLibraryService() {
      * replacement mix afterwards is the obvious thing to do and the wrong one:
      * the track that was queued next has usually been analysed for the
      * transition into it by then (see
-     * [com.music.bitchord.playback.smart.TrackAnalyzer]), and a different track
+     * [com.music.konnekt.playback.smart.TrackAnalyzer]), and a different track
      * in its place means that several-second decode is spent again, on a song
      * that is now much closer than it was. Turning repeat on and back off
      * should leave the queue where it found it.
@@ -817,7 +817,7 @@ class PlaybackService : MediaLibraryService() {
             if (isPlaying) {
                 trackSelectedAt?.let {
                     TrackLog.d(
-                        "BitChord",
+                        "Konnekt",
                         "TIMING first audio: ${SystemClock.elapsedRealtime() - it}ms since track selected",
                         about = exoPlayer.currentMediaItem?.mediaId,
                     )
@@ -1131,7 +1131,7 @@ class PlaybackService : MediaLibraryService() {
             val cutAt = swapCutAt ?: return
             swapCutAt = null
             TrackLog.d(
-                "BitChord",
+                "Konnekt",
                 "swap seam: ${SystemClock.elapsedRealtime() - cutAt}ms of silence",
                 about = eventTime.mediaId(),
             )
@@ -1147,7 +1147,7 @@ class PlaybackService : MediaLibraryService() {
             val cutAt = swapCutAt ?: return
             if (state == Player.STATE_READY) {
                 TrackLog.d(
-                    "BitChord",
+                    "Konnekt",
                     "swap leg: ready ${SystemClock.elapsedRealtime() - cutAt}ms after the cut",
                     about = eventTime.mediaId(),
                 )
@@ -1168,7 +1168,7 @@ class PlaybackService : MediaLibraryService() {
             )
             val cutAt = swapCutAt ?: return
             TrackLog.d(
-                "BitChord",
+                "Konnekt",
                 "swap leg: $decoderName stood up in ${initializationDurationMs}ms, " +
                     "${SystemClock.elapsedRealtime() - cutAt}ms after the cut",
                 about = eventTime.mediaId(),
@@ -1210,8 +1210,8 @@ class PlaybackService : MediaLibraryService() {
     override fun onCreate() {
         super.onCreate()
 
-        if (com.music.bitchord.data.innertube.Innertube.cookie == null) {
-            com.music.bitchord.data.innertube.Innertube.cookie = com.music.bitchord.auth.AuthStore(this).cookie
+        if (com.music.konnekt.data.innertube.Innertube.cookie == null) {
+            com.music.konnekt.data.innertube.Innertube.cookie = com.music.konnekt.auth.AuthStore(this).cookie
         }
 
         // First, because everything below assumes it is standing up fresh and
@@ -1341,7 +1341,7 @@ class PlaybackService : MediaLibraryService() {
                     throw java.io.IOException("Direct YouTube resolution timed out for $videoId", e)
                 }
                 val headers = StreamResolver.mediaHeadersFor(streamUrl)
-                TrackLog.d("BitChord", "serving original YouTube version for $videoId", about = videoId)
+                TrackLog.d("Konnekt", "serving original YouTube version for $videoId", about = videoId)
                 return@Resolver dataSpec.buildUpon()
                     .setUri(Uri.parse(streamUrl))
                     .setHttpRequestHeaders(headers)
@@ -1391,7 +1391,7 @@ class PlaybackService : MediaLibraryService() {
                 // one that reached it and got nothing back, and the two have
                 // opposite fixes.
                 TrackLog.d(
-                    "BitChord",
+                    "Konnekt",
                     "${if (proving) "auditioning" else "serving"} upgraded $videoId " +
                         "from ${Uri.parse(upgraded.url).host} " +
                         "at ${dataSpec.position} (${upgraded.format.summary})",
@@ -1553,7 +1553,7 @@ class PlaybackService : MediaLibraryService() {
             // is made in one place for every branch of it, and made from what
             // the resolver *returned* rather than from what each branch meant
             // to return. Nothing above this line knows what is really on the
-            // end of a `bitchord://` URI and nothing below it knows which
+            // end of a `konnekt://` URI and nothing below it knows which
             // track's bytes it is fetching; this is the seam where both are in
             // hand. See [StreamContainer].
             streamResolver.resolveDataSpec(dataSpec).also { resolved ->
@@ -1863,7 +1863,7 @@ class PlaybackService : MediaLibraryService() {
                 limit = INITIAL_STATION_TRACKS,
             ).getOrElse {
                 TrackLog.w(
-                    "BitChord",
+                    "Konnekt",
                     "Android Auto station failed: ${it.message}",
                     about = seed.videoId,
                 )
@@ -1916,7 +1916,7 @@ class PlaybackService : MediaLibraryService() {
         // the same reason. The toggle is hidden client-side for this, but the
         // command can still arrive from a controller that predates the hide.
         if (ListenTogether.state.value.inParty) {
-            TrackLog.d("BitChord", "version swap ignored: in a Listen Together party", about = currentItem.mediaId)
+            TrackLog.d("Konnekt", "version swap ignored: in a Listen Together party", about = currentItem.mediaId)
             return
         }
         // Never while Automix is mid-blend: both fades share the same
@@ -1925,7 +1925,7 @@ class PlaybackService : MediaLibraryService() {
         // reverse — Automix arming while a version swap is running — is
         // guarded symmetrically in [createCrossfadeController].
         if (crossfade?.isTransitioning() == true) {
-            TrackLog.d("BitChord", "version swap deferred: Automix is mid-transition", about = currentItem.mediaId)
+            TrackLog.d("Konnekt", "version swap deferred: Automix is mid-transition", about = currentItem.mediaId)
             return
         }
 
@@ -2025,7 +2025,7 @@ class PlaybackService : MediaLibraryService() {
             }
 
             if (!isReady) {
-                TrackLog.w("BitChord", "version swap standby player failed to prepare, applying directly", about = mediaId)
+                TrackLog.w("Konnekt", "version swap standby player failed to prepare, applying directly", about = mediaId)
                 standbyPlayer.stop()
                 standbyPlayer.clearMediaItems()
                 standbyPlayer.volume = 1f
@@ -2201,7 +2201,7 @@ class PlaybackService : MediaLibraryService() {
                         // whatever opening is largest on disk, and a short one
                         // still correlates better than not trying at all.
                         TrackLog.w(
-                            "BitChord",
+                            "Konnekt",
                             "version alignment head short on disk (source=$sourceReady, " +
                                 "target=$targetReady) for '${sourceSong.title}'",
                             sourceId,
@@ -2253,7 +2253,7 @@ class PlaybackService : MediaLibraryService() {
             val measured = deferred.await()
             if (measured == null) {
                 TrackLog.w(
-                    "BitChord",
+                    "Konnekt",
                     "version alignment found nothing to measure for '${sourceSong.title}'; switching with no shift",
                     sourceId,
                 )
@@ -2452,7 +2452,7 @@ class PlaybackService : MediaLibraryService() {
                 val result = loadAutoplayTracks(existing, current, remaining)
                 val resolved = result.getOrElse {
                     TrackLog.w(
-                        "BitChord",
+                        "Konnekt",
                         "notification autoplay failed: ${it.message}",
                         about = current.videoId,
                     )
@@ -2476,7 +2476,7 @@ class PlaybackService : MediaLibraryService() {
                         val landed = topUpPartyAutoplay(current.videoId, resolved)
                         if (!landed) {
                             TrackLog.w(
-                                "BitChord",
+                                "Konnekt",
                                 "party did not take AutoPlay's tracks; releasing the seed to retry",
                                 about = current.videoId,
                             )
@@ -2658,7 +2658,7 @@ class PlaybackService : MediaLibraryService() {
                 .onFailure {
                     LikeState.set(videoId, previous)
                     refreshCustomLayouts()
-                    TrackLog.w("BitChord", "notification favorite failed: ${it.message}", about = videoId)
+                    TrackLog.w("Konnekt", "notification favorite failed: ${it.message}", about = videoId)
                 }
         }
     }
@@ -2928,7 +2928,7 @@ class PlaybackService : MediaLibraryService() {
         trackSelectedAt = if (alreadyAudible) null else SystemClock.elapsedRealtime()
         if (alreadyAudible) {
             TrackLog.d(
-                "BitChord",
+                "Konnekt",
                 "TIMING first audio: 0ms, the crossfade covered it",
                 about = mediaItem?.mediaId,
             )
@@ -2953,7 +2953,7 @@ class PlaybackService : MediaLibraryService() {
             )
         }
         TrackLog.d(
-            "BitChord",
+            "Konnekt",
             "TIMING track selected: ${mediaItem?.mediaId} (reason=$reason)",
             about = mediaItem?.mediaId,
         )
@@ -3176,7 +3176,7 @@ class PlaybackService : MediaLibraryService() {
         val attempts = recoveries.getOrDefault(mediaId, 0) + 1
         recoveries[mediaId] = attempts
         TrackLog.w(
-            "BitChord",
+            "Konnekt",
             "playback failed for $mediaId at ${position}ms (${error.errorCodeName}), attempt $attempts",
             error,
             about = mediaId,
@@ -3253,9 +3253,9 @@ class PlaybackService : MediaLibraryService() {
         // player on in between.
         val neverStarted = audibleMediaId != mediaId
         if (verdict != null) {
-            TrackLog.w("BitChord", "$mediaId cannot be played: $verdict", about = mediaId)
+            TrackLog.w("Konnekt", "$mediaId cannot be played: $verdict", about = mediaId)
         } else if (givingUp) {
-            TrackLog.w("BitChord", "$mediaId has failed $attempts times; leaving it alone", about = mediaId)
+            TrackLog.w("Konnekt", "$mediaId has failed $attempts times; leaving it alone", about = mediaId)
         }
         // The upgraded rendition goes with the cache entry it lived in, so the
         // marker on the URI would otherwise point at nothing.
@@ -3305,7 +3305,7 @@ class PlaybackService : MediaLibraryService() {
             ?.let { videoId ->
                 StreamChoice.refuseSubstitutes(videoId)
                 TrackLog.w(
-                    "BitChord",
+                    "Konnekt",
                     "$videoId broke on a substituted stream; YouTube serves it for now",
                     about = mediaId,
                 )
@@ -3342,7 +3342,7 @@ class PlaybackService : MediaLibraryService() {
             withContext(Dispatchers.Main) {
                 val player = this@PlaybackService.player ?: return@withContext
                 if (player.currentMediaItem?.mediaId != mediaId) return@withContext
-                TrackLog.d("BitChord", "retrying $mediaId from ${position}ms")
+                TrackLog.d("Konnekt", "retrying $mediaId from ${position}ms")
                 // Claimed before the seek, so the transition it may fire is
                 // recognised as this retry rather than read as a fresh start and
                 // handed a fresh attempt budget.
@@ -3378,7 +3378,7 @@ class PlaybackService : MediaLibraryService() {
         NerdStats.clearDeclared(mediaId)
         recoveries.remove(mediaId)
         TrackLog.w(
-            "BitChord",
+            "Konnekt",
             "$mediaId failed on a higher-quality source; falling back to YouTube audio",
             about = mediaId,
         )
@@ -3436,7 +3436,7 @@ class PlaybackService : MediaLibraryService() {
         val restreamed = item.toSong().copy(localUri = null, localPath = null).toMediaItem()
         if (restreamed.localConfiguration?.uri == uri) {
             TrackLog.w(
-                "BitChord",
+                "Konnekt",
                 "$mediaId is a local file that is gone and has no stream behind it",
                 about = mediaId,
             )
@@ -3444,7 +3444,7 @@ class PlaybackService : MediaLibraryService() {
         }
 
         TrackLog.w(
-            "BitChord",
+            "Konnekt",
             "$mediaId was downloaded but $uri is gone; streaming it instead",
             about = mediaId,
         )
@@ -3468,8 +3468,8 @@ class PlaybackService : MediaLibraryService() {
      * manifest through a progressive source — [StreamContainer] has the full
      * account of why one cannot be played that way and how it happens anyway.
      * The live path now declines to substitute one at all, but that is only the
-     * `bitchord://watch?v=…` half: a track queued from a module's own search
-     * results plays through `bitchord://source?…`, is resolved by that module
+     * `konnekt://watch?v=…` half: a track queued from a module's own search
+     * results plays through `konnekt://source?…`, is resolved by that module
      * and by nothing else, and has no YouTube copy to start on. For those there
      * is no choice to make in advance, and this is the only place that can see
      * what actually came back.
@@ -3513,7 +3513,7 @@ class PlaybackService : MediaLibraryService() {
         if (reopenedUri == playbackUri.toString()) return false
 
         TrackLog.w(
-            "BitChord",
+            "Konnekt",
             "$mediaId was served a manifest through a progressive source; reopening it as $mime",
             about = mediaId,
         )
@@ -3588,7 +3588,7 @@ class PlaybackService : MediaLibraryService() {
         if (!neverStarted) return null
         if (consecutiveErrorSkips >= MAX_CONSECUTIVE_SKIPS) {
             TrackLog.w(
-                "BitChord",
+                "Konnekt",
                 "$MAX_CONSECUTIVE_SKIPS tracks in a row failed to start; " +
                     "this is the queue or the connection, not the track — stopping here",
             )
@@ -3615,16 +3615,16 @@ class PlaybackService : MediaLibraryService() {
      * correct end state rather than a failure to recover: the error stays on the
      * player, which is what puts a message in front of the listener — see
      * `rememberPlayerState` in
-     * [PlayerConnection][com.music.bitchord.playback.PlayerConnection].
+     * [PlayerConnection][com.music.konnekt.playback.PlayerConnection].
      */
     private fun skipPastUnplayable(mediaId: String, reason: String) {
         val exoPlayer = player ?: return
         if (exoPlayer.currentMediaItem?.mediaId != mediaId) return
         if (!exoPlayer.hasNextMediaItem()) {
-            TrackLog.w("BitChord", "$reason — and nothing after it in the queue", about = mediaId)
+            TrackLog.w("Konnekt", "$reason — and nothing after it in the queue", about = mediaId)
             return
         }
-        TrackLog.w("BitChord", "$reason — skipping to the next track", about = mediaId)
+        TrackLog.w("Konnekt", "$reason — skipping to the next track", about = mediaId)
         exoPlayer.seekToNextMediaItem()
         // No play() here: an error does not clear playWhenReady, so prepare()
         // resumes exactly as far as the listener had asked for. Calling play()
@@ -3728,7 +3728,7 @@ class PlaybackService : MediaLibraryService() {
         }
         upgradeFor = mediaId
         if (alreadyPending) {
-            TrackLog.d("BitChord", "looking again for a better copy of $mediaId", about = mediaId)
+            TrackLog.d("Konnekt", "looking again for a better copy of $mediaId", about = mediaId)
         }
         upgradeJob = scope.launch(TrackLog.about(mediaId)) {
             // A previous visit to this track already did all the expensive
@@ -3737,7 +3737,7 @@ class PlaybackService : MediaLibraryService() {
             // on disk — so this goes straight to the swap and skips the ten
             // seconds of catalogue searching it would otherwise repeat.
             if (shelved != null) {
-                TrackLog.d("BitChord", "re-offering the upgrade already proved for $mediaId")
+                TrackLog.d("Konnekt", "re-offering the upgrade already proved for $mediaId")
                 NerdStats.onLosslessRaceStart(mediaId)
                 try {
                     swapIn(mediaId, shelved)
@@ -3834,13 +3834,13 @@ class PlaybackService : MediaLibraryService() {
         if (mediaId in NerdStats.racingLossless.value ||
             (upgradeJob?.isActive == true && upgradeFor == mediaId)
         ) {
-            TrackLog.d("BitChord", "manual upgrade ignored for $mediaId: upgrade already running", about = mediaId)
+            TrackLog.d("Konnekt", "manual upgrade ignored for $mediaId: upgrade already running", about = mediaId)
             return
         }
         val remaining = manualUpgradeThrottle.tryAcquire(SystemClock.elapsedRealtime())
         if (remaining > 0) {
             TrackLog.d(
-                "BitChord",
+                "Konnekt",
                 "manual upgrade ignored for $mediaId: ${remaining}ms cooldown remaining",
                 about = mediaId,
             )
@@ -3854,7 +3854,7 @@ class PlaybackService : MediaLibraryService() {
         // answers are discarded. The manifest is intentionally unaffected.
         SourceRegistry.clearCompletedAddonTrackCalls()
         QualityUpgrade.askByHand(mediaId)
-        TrackLog.d("BitChord", "upgrade asked for by hand for $mediaId", about = mediaId)
+        TrackLog.d("Konnekt", "upgrade asked for by hand for $mediaId", about = mediaId)
         lookForBetterCopy(player)
     }
 
@@ -3892,13 +3892,13 @@ class PlaybackService : MediaLibraryService() {
         } ?: return false
         val mime = format.sampleMimeType ?: return false
         val videoId = uri.getQueryParameter("v") ?: return false
-        val downloaded = com.music.bitchord.download.Downloads.savedUri(this, videoId) != null
+        val downloaded = com.music.konnekt.download.Downloads.savedUri(this, videoId) != null
         if (downloaded) return false
         val target = SourceResolver.targetIn(uri)
         val expectedSec = target.durationSec
         if (TrackMatcher.isSevereMismatch(expectedSec, durationSec)) {
             TrackLog.w(
-                "BitChord",
+                "Konnekt",
                 "cached rendition duration mismatch: playing ${durationSec}s vs catalogue ${expectedSec}s for $videoId; discarding cache rendition",
                 about = mediaId,
             )
@@ -3920,7 +3920,7 @@ class PlaybackService : MediaLibraryService() {
      * Two measurements, in order of directness:
      *
      *  - **What the decoder says.** `Format.bitrate` is populated for the
-     *    containers that carry the field, which for what BitChord plays means
+     *    containers that carry the field, which for what Konnekt plays means
      *    MP4/AAC — the 320kbps copy a module served last session reports itself
      *    exactly.
      *  - **What the cache entry weighs.** Opus in WebM, which is what YouTube
@@ -3982,7 +3982,7 @@ class PlaybackService : MediaLibraryService() {
     private suspend fun swapIn(mediaId: String, stream: SourceStream) {
         val at = withContext(Dispatchers.Main) { swapPointFor(mediaId) } ?: return
         if (at.duration > 0 && at.duration - at.position < UPGRADE_MIN_REMAINING_MS) {
-            TrackLog.d("BitChord", "upgrade abandoned: only ${at.duration - at.position}ms of the track left")
+            TrackLog.d("Konnekt", "upgrade abandoned: only ${at.duration - at.position}ms of the track left")
             return
         }
 
@@ -4073,7 +4073,7 @@ class PlaybackService : MediaLibraryService() {
         withContext(Dispatchers.Main) { crossfade?.msSinceTransition() }?.let { since ->
             if (since < UPGRADE_AFTER_CROSSFADE_MS) {
                 val settle = UPGRADE_AFTER_CROSSFADE_MS - since
-                TrackLog.d("BitChord", "upgrade for $mediaId holding ${settle}ms; a transition just ended")
+                TrackLog.d("Konnekt", "upgrade for $mediaId holding ${settle}ms; a transition just ended")
                 delay(settle)
             }
         }
@@ -4086,7 +4086,7 @@ class PlaybackService : MediaLibraryService() {
                 // for next time rather than throwing away, exactly like the
                 // "queue moved on" case just below.
                 QualityUpgrade.shelve(mediaId, stream)
-                TrackLog.d("BitChord", "upgrade for $mediaId shelved: a crossfade was still running")
+                TrackLog.d("Konnekt", "upgrade for $mediaId shelved: a crossfade was still running")
                 return@withContext
             }
             if (now == null) {
@@ -4098,12 +4098,12 @@ class PlaybackService : MediaLibraryService() {
                 // and from the logs "found a FLAC, cached it, swapped nothing"
                 // was indistinguishable from never having looked.
                 QualityUpgrade.shelve(mediaId, stream)
-                TrackLog.d("BitChord", "upgrade for $mediaId proved but the queue moved on; shelved")
+                TrackLog.d("Konnekt", "upgrade for $mediaId proved but the queue moved on; shelved")
                 return@withContext
             }
             val player = player ?: return@withContext
             if (now.duration > 0 && now.duration - now.position < UPGRADE_MIN_REMAINING_MS) {
-                TrackLog.d("BitChord", "upgrade abandoned: only ${now.duration - now.position}ms of the track left")
+                TrackLog.d("Konnekt", "upgrade abandoned: only ${now.duration - now.position}ms of the track left")
                 QualityUpgrade.forget(mediaId)
                 return@withContext
             }
@@ -4115,7 +4115,7 @@ class PlaybackService : MediaLibraryService() {
             // into the rendition entry the audition just filled — two files,
             // one key, which is the corruption the audition exists to avoid.
             if (QualityUpgrade.forcedStream(Uri.parse(upgradedUri)) == null) {
-                TrackLog.d("BitChord", "upgrade abandoned: its stream was dropped while it was being proved")
+                TrackLog.d("Konnekt", "upgrade abandoned: its stream was dropped while it was being proved")
                 return@withContext
             }
             // Not fatal, just slower than intended, and worth being able to see
@@ -4123,7 +4123,7 @@ class PlaybackService : MediaLibraryService() {
             // only lose that race on a connection that is barely keeping up.
             if (now.position > warmedThrough) {
                 TrackLog.d(
-                    "BitChord",
+                    "Konnekt",
                     "upgrade landing at ${now.position}ms, past the ${warmedThrough}ms warmed for it",
                 )
             }
@@ -4154,7 +4154,7 @@ class PlaybackService : MediaLibraryService() {
             player.seekTo(player.currentMediaItemIndex, now.position)
             player.prepare()
             QualityUpgrade.unshelve(mediaId)
-            TrackLog.d("BitChord", "upgraded to ${stream.format.summary} at ${now.position}ms ($upgradedSourceName)")
+            TrackLog.d("Konnekt", "upgraded to ${stream.format.summary} at ${now.position}ms ($upgradedSourceName)")
             watchUpgrade(mediaId, now.uri, now.position, now.duration, previousFormat)
             if (QualityUpgrade.continueAfterLossySwap(mediaId)) {
                 // The immediate JioSaavn improvement stays audible while a
@@ -4187,7 +4187,7 @@ class PlaybackService : MediaLibraryService() {
             // Which in a party it cannot be: the transition there is the plain
             // one everybody moves through together, and nothing is analysed for
             // it — see [CrossfadeController] and
-            // [com.music.bitchord.playback.smart.TrackAnalyzer]. This is the one
+            // [com.music.konnekt.playback.smart.TrackAnalyzer]. This is the one
             // fetch Automix makes that neither of those two gates, and a
             // megabyte pulled for an analysis that will not run is a megabyte
             // taken off the connection the party is syncing over.
@@ -4221,7 +4221,7 @@ class PlaybackService : MediaLibraryService() {
         // unpins the track, and swapping against that item is the whole point.
         // See [OriginalVersion] and [QualityUpgrade.askByHand].
         if (OriginalVersion.isPinned(mediaId)) {
-            TrackLog.d("BitChord", "no swap for $mediaId: it is held on the original", about = mediaId)
+            TrackLog.d("Konnekt", "no swap for $mediaId: it is held on the original", about = mediaId)
             return null
         }
         return SwapPoint(item, uri, player.currentPosition, player.duration)
@@ -4328,7 +4328,7 @@ class PlaybackService : MediaLibraryService() {
                     when (verdict) {
                         is Audition.Ready -> return@withTimeoutOrNull verdict.bufferedTo
                         is Audition.Rejected -> {
-                            TrackLog.w("BitChord", "upgrade dropped before it was heard: ${verdict.why}")
+                            TrackLog.w("Konnekt", "upgrade dropped before it was heard: ${verdict.why}")
                             return@withTimeoutOrNull null
                         }
                         Audition.Waiting -> delay(UPGRADE_PROVE_STEP_MS)
@@ -4345,11 +4345,11 @@ class PlaybackService : MediaLibraryService() {
         }
         val took = SystemClock.elapsedRealtime() - startedAt
         if (warmedThrough == null) {
-            TrackLog.d("BitChord", "upgrade for $mediaId never proved itself in ${took}ms")
+            TrackLog.d("Konnekt", "upgrade for $mediaId never proved itself in ${took}ms")
             return null
         }
         TrackLog.d(
-            "BitChord",
+            "Konnekt",
             "upgrade to ${stream.format.summary} proved in ${took}ms, buffered through ${warmedThrough}ms",
         )
         // Media3 locks a cache entry to one writer, and the audition lets go of
@@ -4359,13 +4359,13 @@ class PlaybackService : MediaLibraryService() {
         // the stall [AudioCache]'s key factory documents. Free to wait for: the
         // old stream is still playing.
         delay(AUDITION_RELEASE_MS)
-        TrackLog.d("BitChord", AudioCache.cachedSummary(Uri.parse(upgradedUri)))
+        TrackLog.d("Konnekt", AudioCache.cachedSummary(Uri.parse(upgradedUri)))
         return warmedThrough
     }
 
     /**
      * Tells Media3 the type of a stream found behind one of our virtual
-     * `bitchord://` playback URIs.
+     * `konnekt://` playback URIs.
      *
      * The resolver replaces that URI with the real URL only after
      * [DefaultMediaSourceFactory] has selected a source implementation. A
@@ -4547,7 +4547,7 @@ class PlaybackService : MediaLibraryService() {
             // to one that never loaded at all, and only the second is a fault
             // in the stream rather than a wrong match.
             TrackLog.w(
-                "BitChord",
+                "Konnekt",
                 "upgrade reverted: replacement reports ${player.duration}ms against " +
                     "${previousDuration}ms (state=${player.playbackState}, " +
                     "buffered=${player.bufferedPosition}ms)",
@@ -4694,7 +4694,7 @@ class PlaybackService : MediaLibraryService() {
         // A manifest cannot be substituted here, however good it is. This
         // function runs on the loader thread, *inside* the open of a media
         // source that was built minutes ago from an extensionless
-        // `bitchord://` URI — so the source is already progressive and cannot
+        // `konnekt://` URI — so the source is already progressive and cannot
         // be told otherwise, and handing it a manifest is a track that fails
         // at 0ms rather than a track that plays lossless. See [StreamContainer]
         // for the log of exactly that.
@@ -4709,7 +4709,7 @@ class PlaybackService : MediaLibraryService() {
             val url = runCatching { fallback.await().getOrThrow() }.getOrNull()
             if (url != null) {
                 TrackLog.d(
-                    "BitChord",
+                    "Konnekt",
                     "'${target.title}' was offered ${quick.format.summary} as a manifest; " +
                         "starting on YouTube and swapping to it under the music",
                     about = videoId,
@@ -4729,7 +4729,7 @@ class PlaybackService : MediaLibraryService() {
             // with the type declared and prepares it again. A cut before the
             // first note beats a track that does not play at all.
             TrackLog.w(
-                "BitChord",
+                "Konnekt",
                 "'${target.title}' has only a manifest and YouTube cannot serve it; " +
                     "letting it fail once to declare its type",
                 about = videoId,
@@ -4980,7 +4980,7 @@ class PlaybackService : MediaLibraryService() {
             if (!name.isNullOrBlank()) return name
         }
 
-        // 5. Virtual bitchord://source?s=... playback URI
+        // 5. Virtual konnekt://source?s=... playback URI
         if (uri?.authority == "source") {
             val configId = uri.getQueryParameter("s")
             val name = configId?.let { SourceRegistry.config(it)?.displayName }
@@ -5340,7 +5340,7 @@ class PlaybackService : MediaLibraryService() {
             val preferred = runCatching { YtMusicRepository.resolveAudio(next) }
                 .onFailure {
                     TrackLog.d(
-                        "BitChord",
+                        "Konnekt",
                         "music-only queue warm-up fell back to video: ${it.message}",
                         about = next.videoId,
                     )
@@ -6073,7 +6073,7 @@ class PlaybackService : MediaLibraryService() {
     /**
      * The linear gain [LoudnessProcessor] applies to [mediaId]: YouTube's own
      * normalization figure — see
-     * [com.music.bitchord.data.innertube.StreamResolver.loudnessDbFor] —
+     * [com.music.konnekt.data.innertube.StreamResolver.loudnessDbFor] —
      * bounded the way the platform effect this replaced was, or exactly 1 when
      * nothing is known yet or the setting is off.
      *
@@ -6418,7 +6418,7 @@ class PlaybackService : MediaLibraryService() {
                 activityName = AppSettings.discordActivityName.value,
                 audioQuality = audioQuality,
             ).onFailure {
-                TrackLog.d("BitChord", "Discord presence failed: ${it.message}", about = song.videoId)
+                TrackLog.d("Konnekt", "Discord presence failed: ${it.message}", about = song.videoId)
             }
         }
     }
@@ -7374,7 +7374,7 @@ class PlaybackService : MediaLibraryService() {
                     )
                 }
                 MEDIA_LIKED_ID -> {
-                    if (com.music.bitchord.data.innertube.Innertube.cookie == null) {
+                    if (com.music.konnekt.data.innertube.Innertube.cookie == null) {
                         listOf(createLoginPromptItem())
                     } else {
                         val snapshot = snapshotLiked()
@@ -7414,7 +7414,7 @@ class PlaybackService : MediaLibraryService() {
                     )
                 }
                 MEDIA_PLAYLISTS_ID -> {
-                    if (com.music.bitchord.data.innertube.Innertube.cookie == null) {
+                    if (com.music.konnekt.data.innertube.Innertube.cookie == null) {
                         listOf(createLoginPromptItem())
                     } else {
                         val snapshot = snapshotPlaylistCards()
@@ -8065,8 +8065,8 @@ class PlaybackService : MediaLibraryService() {
         /** Length of a FLAC STREAMINFO block, which the format fixes at 34 bytes. */
         const val STREAM_INFO_BYTES = 34
 
-        const val CHANNEL_ID = "bitchord_playback"
-        const val SESSION_ID = "BitChordPlayback"
+        const val CHANNEL_ID = "konnekt_playback"
+        const val SESSION_ID = "KonnektPlayback"
 
         /** How often played-seconds are sampled off the player. */
         const val PROGRESS_SAMPLE_MS = 5_000L

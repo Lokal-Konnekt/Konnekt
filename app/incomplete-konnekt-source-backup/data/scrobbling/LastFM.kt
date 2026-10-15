@@ -1,4 +1,4 @@
-package com.music.bitchord.data.scrobbling
+package com.music.konnekt.data.scrobbling
 
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.okhttp.OkHttp
@@ -86,7 +86,7 @@ object LastFM {
         extra: Map<String, String> = emptyMap(),
         format: String = "json",
     ) {
-        headers.append(HttpHeaders.UserAgent, "BitChord (https://github.com/kushagrasinghx/BitChord)")
+        headers.append(HttpHeaders.UserAgent, "Konnekt (https://github.com/Lokal-Konnekt/Konnekt)")
         val paramsForSig =
             mutableMapOf(
                 "method" to method,

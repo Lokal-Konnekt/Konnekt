@@ -1,0 +1,27 @@
+{
+  "repo": ".",
+  "title": "Konnekt / Konnekt",
+  "subtitle": "KONNEKT · LECTEUR MUSICAL · MONOREPO ATLAS",
+  "out": "konnekt-map.html",
+  "branch": "main",
+  "topKinds": ["app"],
+  "stripKinds": ["tooling"],
+  "excludeRel": [
+    "build/",
+    "\\.gradle/",
+    "\\.cxx/",
+    "\\.kotlin/",
+    "\\.tmp_verify/",
+    "incomplete-konnekt-source-backup",
+    "migrations/meta$",
+    "drizzle/meta$"
+  ],
+  "modules": [
+    { "id": "app", "path": "app", "kind": "app", "deps": ["shared", "sharedUi"] },
+    { "id": "shared", "path": "shared", "kind": "library", "deps": [] },
+    { "id": "sharedUi", "path": "sharedUi", "kind": "library", "deps": ["shared"] },
+    { "id": "desktopApp", "path": "desktopApp", "kind": "app", "deps": ["shared", "sharedUi"] },
+    { "id": "backend", "path": "backend", "kind": "service", "deps": [] },
+    { "id": "native", "path": "native", "kind": "native", "deps": [] }
+  ]
+}
