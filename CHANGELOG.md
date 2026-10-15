@@ -1,5 +1,15 @@
 # 🎵 Konnekt Changelog
 
+## 1.4.1 — Android version update
+
+- The `v1.4.0` tag points to the same source commit as the previous `main` branch. This release contains no new application features or fixes beyond its version update.
+- Set the Android version to `1.4.1` and increase its version code to `14001` for an in-place update when the APK is signed with the existing release key.
+- The playback, lyrics, discovery, account, download and update behavior described in 1.3.4 remains the functional baseline. Desktop and backend code is unchanged in this release.
+
+**Android version:** `1.4.1` · **versionCode:** `14001` · **Package:** `com.music.konnekt`
+
+---
+
 ## 1.3.4 — Smoother lyrics, better discovery & updates in Konnekt
 
 ### 🎤 Lyrics that arrive sooner
