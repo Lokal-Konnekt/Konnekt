@@ -1,7 +1,5 @@
+<img width="1254" height="1254" alt="logo" src="https://github.com/user-attachments/assets/27c15cbe-0a0c-4904-b683-85a326e5b355" />
 
-<div align="center">
-
-<img src="Logo.png" alt="Icône de Konnekt" width="180" />
 
 # Konnekt
 
