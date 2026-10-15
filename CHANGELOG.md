@@ -6,7 +6,7 @@
 
 - Add Discovery, Energy and Chill filters to the Home shelves, with a two-track limit per artist in each filtered shelf.
 - Add a saved lyrics text-size control from 85% to 125% and a button to return to the current line after scrolling through synchronized lyrics.
-- Translate the new Home and lyrics controls across the app's 16 Android languages.
+- Translate the new lyrics size setting across the app's 16 Android languages.
 
 ### 🔄 Updates and Automix
 
