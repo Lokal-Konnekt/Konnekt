@@ -19,6 +19,7 @@ import com.music.konnekt.playback.smart.CrossfadeMode
 import com.music.konnekt.playback.smart.FILTER_ECHO_AT
 import com.music.konnekt.playback.smart.FilterTransitionVariant
 import com.music.konnekt.playback.smart.TrackAnalysis
+import com.music.konnekt.playback.smart.TransitionPlan
 import com.music.konnekt.playback.smart.TransitionStyle
 import com.music.konnekt.playback.smart.TransitionTrackInfo
 import com.music.konnekt.playback.smart.echoTailSeconds
@@ -480,6 +481,16 @@ class CrossfadeController(
     /** Dedupes the per-tick plan log down to one line per distinct verdict. */
     private var lastPlanVerdict = ""
 
+    /** Pair for which an AutoMix answer has been committed close to its arm window. */
+    private var committedSmartPlanPair: String? = null
+
+    /**
+     * Once this exists, late whole-track analysis cannot move the transition
+     * underneath the playhead. The selected answer is still recalculated freely
+     * earlier in the song, while there is time to choose a better musical exit.
+     */
+    private var committedSmartPlan: TransitionPlan? = null
+
     // ---- Phase lock (Advanced Automix) --------------------------------------
 
     /** When the speed nudge in flight ends, from [SystemClock.elapsedRealtime]; 0 when none is. */
@@ -782,6 +793,8 @@ class CrossfadeController(
             // otherwise sit on screen for as long as the party lasts.
             AppSettings.smartTransitionWindow.value = null
             AppSettings.smartMixInProgress.value = false
+            committedSmartPlanPair = null
+            committedSmartPlan = null
             return
         }
         // Nothing to transition *into*, so any analysis state left over from the
@@ -789,6 +802,8 @@ class CrossfadeController(
         // claiming both songs are measured.
         if (!player.hasNextMediaItem()) {
             AppSettings.smartTransitionWindow.value = null
+            committedSmartPlanPair = null
+            committedSmartPlan = null
             return
         }
 
@@ -815,6 +830,7 @@ class CrossfadeController(
             // planned for this pair before the loop went on, at a point the
             // playhead now runs past on every lap without anything happening.
             AppSettings.smartTransitionWindow.value = null
+            committedSmartPlan = null
             return
         }
 
@@ -826,6 +842,12 @@ class CrossfadeController(
             considerSmartTransition(duration)
             return
         }
+
+        // A manual fade is a new policy. Do not let a plan committed for the
+        // previous AutoMix session leak into it when the switch is toggled near
+        // the end of a track.
+        committedSmartPlanPair = null
+        committedSmartPlan = null
 
         if (configuredFadeMs() <= 0L) return
         val fade = fadeFor(duration)
@@ -872,38 +894,50 @@ class CrossfadeController(
         val nextIndex = player.nextMediaItemIndex
         if (nextIndex == C.INDEX_UNSET) return
         val nextItem = player.getMediaItemAt(nextIndex)
+        val pairKey = "${player.currentMediaItemIndex}:${currentItem.mediaId}\u0000$nextIndex:${nextItem.mediaId}"
+        if (committedSmartPlanPair != pairKey) {
+            committedSmartPlanPair = pairKey
+            committedSmartPlan = null
+        }
         // Even a manual catalogue match is still video-origin. AutoMix's
         // analysis and cueing are deliberately never applied to either side
         // of a transition involving a video row.
         if (currentItem.isVideoOrigin || nextItem.isVideoOrigin) {
             AppSettings.smartTransitionWindow.value = null
             AppSettings.smartMixInProgress.value = false
+            committedSmartPlan = null
             return
         }
         val nextDuration = nextItemDurationMs(nextIndex, nextItem)
 
         requestAnalysisAround(player, duration)
 
-        // Only used before analysis lands, or when the evidence is too weak
-        // for more than a plain fade (see [TransitionTier.PLAIN_CROSSFADE]):
-        // once real analysis is available, [planTransition] sizes the overlap
-        // itself from tempo and structure and ignores this entirely. Honours
-        // the manual slider if the listener also set one, so the two settings
-        // don't fight; falls back to a fixed length when it's at "Off".
-        val fallbackSeconds = configuredFadeMs().takeIf { it > 0L }
-            ?.div(1000.0)
-            ?: DEFAULT_SMART_FALLBACK_SECONDS
+        // AutoMix owns its fallback. Reusing the hidden manual slider made a
+        // previously selected 12-second crossfade suddenly control Automix's
+        // first transition, even though the slider disappeared when Automix
+        // was enabled. A dedicated six-second fallback is predictable while
+        // analysis is pending and leaves the two settings independent.
+        val fallbackSeconds = DEFAULT_SMART_FALLBACK_SECONDS
 
         // Resolved once and reused: [analysisFor] was being called five separate
         // times per tick below, and the answer cannot change mid-tick.
         val currentAnalysis = analysisFor(currentItem)
         val nextAnalysis = analysisFor(nextItem)
         val analysisState = AppSettings.smartAnalysis.value
+        // A head pass is good enough to enter the incoming track, but it has no
+        // trustworthy outro/content-end information. Feeding it to the
+        // outgoing side let a late refinement move the mix-out anchor under the
+        // playhead. Until the current track is fully analysed, ask the planner
+        // for the stable plain fallback while still passing the incoming head
+        // result for any future cue calculation.
+        val planningCurrentAnalysis = currentAnalysis.takeIf {
+            analysisState.current == TrackAnalysisState.ANALYSED
+        } ?: TrackAnalysis()
         // The DJ planner is Automix now; there is no separate mode switch.
         val advanced = true
 
-        val plan = planTransition(
-            analysis = currentAnalysis,
+        val candidatePlan = planTransition(
+            analysis = planningCurrentAnalysis,
             nextAnalysis = nextAnalysis,
             currentTrack = currentItem.toTransitionInfo(duration),
             nextTrack = nextItem.toTransitionInfo(nextDuration),
@@ -913,6 +947,18 @@ class CrossfadeController(
             mode = CrossfadeMode.SMART,
             advanced = advanced,
         )
+        // Freeze the answer shortly before its arm window. Analysis can still
+        // refine freely earlier in the song, but once the standby decoder needs
+        // to open there is no time for a new cue/end point to be applied without
+        // starting late. A cached fallback is preferable to a dramatic jump.
+        val candidateLockAt = (candidatePlan.transitionStart * 1000.0).roundToLong() -
+            SMART_PLAN_LOCK_LEAD_MS
+        if (committedSmartPlan == null && !candidatePlan.blocked &&
+            (player.currentPosition >= candidateLockAt || candidatePlan.shouldStart)
+        ) {
+            committedSmartPlan = candidatePlan
+        }
+        val plan = committedSmartPlan ?: candidatePlan
         // One line per distinct verdict rather than one per 250ms tick, so the
         // log says what the planner decided for this pair without burying it.
         val verdict = "${plan.reason}|${plan.transitionStyle}|fade=${plan.fadeMs}" +
@@ -2605,8 +2651,15 @@ class CrossfadeController(
          * too weak for more than a plain fade — see [considerSmartTransition].
          * Once real analysis lands, the overlap is sized from tempo and
          * structure instead and this is never read.
-         */
+        */
         const val DEFAULT_SMART_FALLBACK_SECONDS = 6.0
+
+        /**
+         * How early the selected AutoMix answer becomes immutable. This covers
+         * the standby's read-ahead and one late planning tick without making a
+         * good, already-known musical exit wait longer than necessary.
+         */
+        const val SMART_PLAN_LOCK_LEAD_MS = 8_000L
 
         /** Ramp used when a fade is interrupted. */
         const val BAIL_MS = 120L

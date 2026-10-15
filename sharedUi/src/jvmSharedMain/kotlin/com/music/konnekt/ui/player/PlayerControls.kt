@@ -31,6 +31,7 @@ import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
@@ -205,6 +206,7 @@ internal fun PlayerScrubber(
     // canvas needs.
     val mixBlend = PlayerSettings.smartMixBlend.collectAsStateWithLifecycle()
     val reduceAnimation by PlayerSettings.reduceAnimation.collectAsStateWithLifecycle()
+    val newDesignEnabled by PlayerSettings.newDesignEnabled.collectAsStateWithLifecycle()
     // One clock for the bar and the "Mixing" label, so they breathe on the same beat.
     val mixPulse = rememberMixPulse({ mixBlend.value }, enabled = !reduceAnimation)
     Column(Modifier.fillMaxWidth()) {
@@ -252,7 +254,11 @@ internal fun PlayerScrubber(
             }
             val mixingShown by remember { derivedStateOf { mixPulse.cover > 0f } }
             if (mixingShown) {
-                MixingLabel(mixPulse, Modifier.align(Alignment.Center))
+                MixingLabel(
+                    pulse = mixPulse,
+                    newDesignEnabled = newDesignEnabled,
+                    modifier = Modifier.align(Alignment.Center),
+                )
             }
         }
     }
@@ -265,17 +271,73 @@ internal fun PlayerScrubber(
  * no glow: over artwork, a white haze reads as grey fog rather than light.
  */
 @Composable
-private fun MixingLabel(pulse: MixPulse, modifier: Modifier = Modifier) {
-    Text(
-        text = stringResource(Res.string.mixing),
-        modifier = modifier.graphicsLayer { alpha = pulse.cover * pulse.alpha(1f, restShare = MIXING_LABEL_REST) },
-        style = MaterialTheme.typography.labelMedium.copy(
-            fontWeight = FontWeight.SemiBold,
-            fontSize = (MaterialTheme.typography.labelMedium.fontSize.value + 1).sp,
-        ),
-        color = Color.White.copy(alpha = 0.85f),
-        maxLines = 1,
-    )
+private fun MixingLabel(
+    pulse: MixPulse,
+    newDesignEnabled: Boolean,
+    modifier: Modifier = Modifier,
+) {
+    val rotation = if (newDesignEnabled) {
+        val transition = rememberInfiniteTransition(label = "automixBadge")
+        transition.animateFloat(
+            initialValue = 0f,
+            targetValue = 360f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(1_800, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart,
+            ),
+            label = "automixBadgeRotation",
+        ).value
+    } else {
+        0f
+    }
+    val badgePrimary = MaterialTheme.colorScheme.primary
+    val badgeSecondary = MaterialTheme.colorScheme.secondary
+    val badgeTertiary = MaterialTheme.colorScheme.tertiary
+    Row(
+        modifier = modifier.graphicsLayer {
+            alpha = pulse.cover * pulse.alpha(1f, restShare = MIXING_LABEL_REST)
+        },
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        if (newDesignEnabled) {
+            Canvas(
+                modifier = Modifier
+                    .size(18.dp)
+                    .graphicsLayer { rotationZ = rotation },
+            ) {
+                val center = Offset(size.width / 2f, size.height / 2f)
+                drawCircle(
+                    color = badgePrimary.copy(alpha = 0.18f),
+                    radius = size.minDimension / 2f,
+                    center = center,
+                )
+                drawCircle(
+                    color = badgeSecondary,
+                    radius = size.minDimension * 0.16f,
+                    center = Offset(size.width * 0.76f, size.height * 0.28f),
+                )
+                drawCircle(
+                    color = badgeTertiary,
+                    radius = size.minDimension * 0.12f,
+                    center = Offset(size.width * 0.24f, size.height * 0.72f),
+                )
+            }
+            Spacer(Modifier.width(6.dp))
+        }
+        Text(
+            text = stringResource(Res.string.mixing),
+            style = MaterialTheme.typography.labelMedium.copy(
+                fontWeight = FontWeight.SemiBold,
+                fontSize = (MaterialTheme.typography.labelMedium.fontSize.value + 1).sp,
+            ),
+            color = if (newDesignEnabled) {
+                MaterialTheme.colorScheme.primary.copy(alpha = 0.95f)
+            } else {
+                Color.White.copy(alpha = 0.85f)
+            },
+            maxLines = 1,
+        )
+    }
 }
 
 /** The label dips only to half between beats: text fading further stops reading as a word. */

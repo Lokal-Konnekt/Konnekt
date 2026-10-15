@@ -9,6 +9,7 @@ import com.music.konnekt.data.settings.TransitionWindow
 import com.music.konnekt.playback.EqCurve
 import com.music.konnekt.playback.TransitionFilter
 import com.music.konnekt.playback.smart.CrossfadeMode
+import com.music.konnekt.playback.smart.TrackAnalysis
 import com.music.konnekt.playback.smart.TransitionPlan
 import com.music.konnekt.playback.smart.TransitionStyle
 import com.music.konnekt.playback.smart.TransitionTrackInfo
@@ -634,6 +635,8 @@ class DesktopPlaybackEngine(
         nextSong = null
         nextLocalStream = null
         awaitingArm.set(null)
+        committedSmartPlanPair = null
+        committedSmartPlan = null
         commands += Command.ClearUpcoming
     }
 
@@ -712,6 +715,10 @@ class DesktopPlaybackEngine(
 
     /** The plan the running fade was started from, for the filter ride. */
     private var activePlan: TransitionPlan? = null
+
+    /** Pair for which the pre-arm AutoMix answer has been frozen. */
+    private var committedSmartPlanPair: String? = null
+    private var committedSmartPlan: TransitionPlan? = null
 
     private fun pump() {
         while (running.get()) {
@@ -1015,6 +1022,8 @@ class DesktopPlaybackEngine(
         val incoming = upcoming ?: return
         val plan = activePlan
         activePlan = null
+        committedSmartPlanPair = null
+        committedSmartPlan = null
         transitionEcho = null
         outgoingFilter.open()
         incomingFilter.open()
@@ -1179,6 +1188,8 @@ class DesktopPlaybackEngine(
                 Command.ClearUpcoming -> {
                     upcoming?.decoder?.close()
                     upcoming = null
+                    committedSmartPlanPair = null
+                    committedSmartPlan = null
                     val wasBlending = fadeRemaining > 0
                     fadeRemaining = 0
                     if (wasBlending) endBlend()
@@ -1188,6 +1199,8 @@ class DesktopPlaybackEngine(
                     current = null
                     upcoming?.decoder?.close()
                     upcoming = null
+                    committedSmartPlanPair = null
+                    committedSmartPlan = null
                     fadeRemaining = 0
                     sink.flush()
                     framesWritten = sink.framesPlayed()
@@ -1225,6 +1238,8 @@ class DesktopPlaybackEngine(
         // decoder it is about to read from.
         if (current !== track) current?.decoder?.close()
         current = track
+        committedSmartPlanPair = null
+        committedSmartPlan = null
         fadeRemaining = 0
 
         val decoded = track.decoder.outputFormat
@@ -1566,10 +1581,32 @@ class DesktopPlaybackEngine(
     ): TransitionPlan {
         val manualSeconds = crossfadeSeconds
         val smart = automixEnabled
-        if (!smart && manualSeconds <= 0) return TransitionPlan()
-        return planTransition(
-            analysis = analyzer.analysisFor(track.song.videoId),
-            nextAnalysis = analyzer.analysisFor(next.videoId),
+        if (!smart && manualSeconds <= 0) {
+            committedSmartPlanPair = null
+            committedSmartPlan = null
+            return TransitionPlan()
+        }
+        val pairKey = "${track.song.videoId}\u0000${next.videoId}"
+        if (committedSmartPlanPair != pairKey) {
+            committedSmartPlanPair = pairKey
+            committedSmartPlan = null
+        }
+        val currentAnalysis = analyzer.analysisFor(track.song.videoId)
+        val nextAnalysis = analyzer.analysisFor(next.videoId)
+        // The head pass can cue the incoming deck, but cannot place the
+        // outgoing exit. Until the current track is fully analysed, keep the
+        // outgoing side on the fixed fallback so the transition cannot jump
+        // when a late refinement arrives.
+        val planningCurrentAnalysis = if (
+            smart && analyzer.stateFor(track.song.videoId) != TrackAnalysisState.ANALYSED
+        ) {
+            TrackAnalysis()
+        } else {
+            currentAnalysis
+        }
+        val candidatePlan = planTransition(
+            analysis = planningCurrentAnalysis,
+            nextAnalysis = nextAnalysis,
             currentTrack = track.song.transitionInfo(durationMs),
             nextTrack = next.transitionInfo(nextDurationMs),
             currentTime = positionMs / 1_000.0,
@@ -1578,6 +1615,13 @@ class DesktopPlaybackEngine(
             mode = if (smart) CrossfadeMode.SMART else CrossfadeMode.STANDARD,
             advanced = smart,
         )
+        if (smart && committedSmartPlan == null && !candidatePlan.blocked &&
+            (positionMs >= candidatePlan.transitionStart * 1_000.0 - SMART_PLAN_LOCK_LEAD_MS ||
+                candidatePlan.shouldStart)
+        ) {
+            committedSmartPlan = candidatePlan
+        }
+        return if (smart) committedSmartPlan ?: candidatePlan else candidatePlan
     }
 
     private fun closeEverything() {
@@ -1699,6 +1743,9 @@ class DesktopPlaybackEngine(
          * stream to open, and an incoming track that is not ready by the transition misses it.
          */
         private const val ADDON_ARM_LEAD_MS = 15_000L
+
+        /** Keeps a late analysis result from moving an already imminent mix. */
+        private const val SMART_PLAN_LOCK_LEAD_MS = 8_000L
 
         /** How long a better copy waits for the blend into its track to finish: up to a minute. */
         private const val BLEND_WAIT_POLLS = 300
