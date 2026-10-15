@@ -871,6 +871,10 @@
 
     <string name="legacy_mesh_gradient_subtitle">Restaure les formes colorées animées de la v1.5</string>
 
+    <string name="new_design">Nouveau design</string>
+    <string name="new_design_subtitle">Essayez l’interface Liquid Glass avec plus de mouvement et un système visuel inédit</string>
+    <string name="new_design_enabled_subtitle">Nouveau design activé · verre animé, transitions fluides et lecteur amélioré</string>
+
     <string name="liquid_glass">Verre liquide</string>
 
     <string name="liquid_glass_subtitle">Effet de verre réfracté sur la barre flottante. Android 12+ uniquement.</string>

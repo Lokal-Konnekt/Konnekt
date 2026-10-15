@@ -201,6 +201,7 @@ fun SettingsScreen(
     val reduceAnimation by AppSettings.reduceAnimation.collectAsStateWithLifecycle()
     val reduceDynamicBlur by AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
     val liquidGlass by AppSettings.liquidGlass.collectAsStateWithLifecycle()
+    val newDesignEnabled by AppSettings.newDesignEnabled.collectAsStateWithLifecycle()
     val liquidGlassSupported = isGlassSupported()
     val lyricsBlur by AppSettings.lyricsBlur.collectAsStateWithLifecycle()
     val animatedCanvas by AppSettings.animatedCanvas.collectAsStateWithLifecycle()
@@ -752,6 +753,32 @@ fun SettingsScreen(
                     selectedIndex = ThemeMode.entries.indexOf(theme),
                     onSelect = { AppSettings.setThemeMode(ThemeMode.entries[it]) },
                     modifier = Modifier.padding(start = ROW_INSET, end = ROW_INSET, bottom = 14.dp),
+                )
+            }
+            val newDesignTitle = stringResource(R.string.new_design)
+            row(newDesignTitle, "liquid glass", "aesthetic", "redesign", "motion") {
+                SettingsRow(
+                    icon = Icons.Rounded.AutoAwesome,
+                    title = newDesignTitle,
+                    subtitle = stringResource(
+                        if (newDesignEnabled) {
+                            R.string.new_design_enabled_subtitle
+                        } else {
+                            R.string.new_design_subtitle
+                        },
+                    ),
+                    badge = "NEW",
+                    trailing = {
+                        Switch(
+                            checked = newDesignEnabled,
+                            onCheckedChange = AppSettings::setNewDesignEnabled,
+                            colors = SwitchDefaults.colors(
+                                checkedTrackColor = MaterialTheme.colorScheme.primary,
+                                checkedBorderColor = MaterialTheme.colorScheme.primary,
+                            ),
+                        )
+                    },
+                    onClick = { AppSettings.setNewDesignEnabled(!newDesignEnabled) },
                 )
             }
             val reduceAnimationTitle = stringResource(R.string.reduce_animation)

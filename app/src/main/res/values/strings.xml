@@ -332,6 +332,9 @@
     <string name="show_nerd_stats">Show stats for nerds</string>
     <string name="show_nerd_stats_subtitle">Codec, bitrate and sample rate on the player</string>
     <string name="theme">Theme</string>
+    <string name="new_design">New design</string>
+    <string name="new_design_subtitle">Try the new liquid-glass interface with richer motion and a fresh visual system</string>
+    <string name="new_design_enabled_subtitle">New design is active · animated glass, fluid transitions and an upgraded player</string>
     <string name="reduce_animation">Reduce animation</string>
     <string name="reduce_animation_subtitle">Freezes the main player\'s gradient instead of drifting</string>
     <string name="reduce_dynamic_blur">Reduce dynamic blur</string>

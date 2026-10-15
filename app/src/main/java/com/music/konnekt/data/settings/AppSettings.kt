@@ -394,6 +394,18 @@ object AppSettings {
     /** Real backdrop-sampled glass (blur, lens refraction) on the floating nav bar, Android 12+ only. */
     val liquidGlass = MutableStateFlow(false)
 
+    /**
+     * Opt-in visual refresh for the whole Android surface.
+     *
+     * This is deliberately separate from [liquidGlass]. Liquid Glass remains a
+     * focused material switch, while this flag enables the new colour system,
+     * ambient motion and player chrome together. Keeping it independent means
+     * the existing design stays byte-for-byte the same for everyone who leaves
+     * the new design off, and the user's individual appearance choices remain
+     * intact when they try it.
+     */
+    val newDesignEnabled = MutableStateFlow(false)
+
     /** Blurs unfocused lyric lines, keeping the active line sharp. */
     val lyricsBlur = MutableStateFlow(true)
 
@@ -825,6 +837,7 @@ object AppSettings {
         smartVersionAlignment.value = prefs.getBoolean(KEY_SMART_VERSION_ALIGNMENT, true)
         reduceDynamicBlur.value = prefs.getBoolean(KEY_REDUCE_BLUR, false)
         liquidGlass.value = prefs.getBoolean(KEY_LIQUID_GLASS, false)
+        newDesignEnabled.value = prefs.getBoolean(KEY_NEW_DESIGN_ENABLED, false)
         lyricsBlur.value = prefs.getBoolean(KEY_LYRICS_BLUR, true)
         lyricsOffsetMs.value = prefs.getInt(KEY_LYRICS_OFFSET_MS, 0)
             .coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
@@ -1222,6 +1235,11 @@ object AppSettings {
     fun setLiquidGlass(value: Boolean) {
         liquidGlass.value = value
         prefs.edit().putBoolean(KEY_LIQUID_GLASS, value).apply()
+    }
+
+    fun setNewDesignEnabled(value: Boolean) {
+        newDesignEnabled.value = value
+        prefs.edit().putBoolean(KEY_NEW_DESIGN_ENABLED, value).apply()
     }
 
     fun setHighPerformanceMode(value: Boolean) {
@@ -1951,6 +1969,7 @@ object AppSettings {
     private const val KEY_SMART_VERSION_ALIGNMENT = "smart_version_alignment"
     private const val KEY_REDUCE_BLUR = "reduce_dynamic_blur"
     private const val KEY_LIQUID_GLASS = "liquid_glass"
+    private const val KEY_NEW_DESIGN_ENABLED = "new_design_enabled"
     private const val KEY_LYRICS_BLUR = "lyrics_blur"
     private const val KEY_LYRICS_OFFSET_MS = "lyrics_offset_ms"
     private const val KEY_TRANSLATION_LANGUAGE = "translation_language"

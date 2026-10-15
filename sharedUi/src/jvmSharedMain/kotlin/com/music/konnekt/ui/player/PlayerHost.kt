@@ -145,6 +145,8 @@ interface PlayerSettingsSource {
     val hideVolumeBar: StateFlow<Boolean>
     val lastPlayerScreen: StateFlow<LastPlayerScreen>
     val legacyMeshGradient: StateFlow<Boolean>
+    /** Android's opt-in visual refresh; desktop keeps the legacy surface for now. */
+    val newDesignEnabled: StateFlow<Boolean>
     val lyricsBlur: StateFlow<Boolean>
     val lyricsOffsetMs: StateFlow<Int>
     val lyricsSourceOrder: StateFlow<List<LyricsSource>>
