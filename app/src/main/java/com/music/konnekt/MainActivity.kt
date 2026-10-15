@@ -725,7 +725,7 @@ private fun KonnektApp(
      */
     val updateNotice = updateAvailable
 
-    LaunchedEffect(updateNotice) {
+    LaunchedEffect(updateNotice?.version) {
         if (updateNotice != null && updateDialogVersion != updateNotice.version) {
             updateDialogVersion = updateNotice.version
             showUpdateDialog = true

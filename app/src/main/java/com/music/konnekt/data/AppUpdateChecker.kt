@@ -21,10 +21,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
-import kotlinx.serialization.json.contentOrNull
-import kotlinx.serialization.json.jsonArray
-import kotlinx.serialization.json.jsonPrimitive
-import kotlinx.serialization.json.longOrNull
 import okhttp3.Call
 import okhttp3.Request
 import java.io.File
@@ -89,8 +85,7 @@ object AppUpdateChecker {
 
     suspend fun check(context: Context) = withContext(Dispatchers.IO) { checkMutex.withLock {
         val now = SystemClock.elapsedRealtime()
-        if (lastCheckAt != 0L && now - lastCheckAt < 60_000L) return@withLock
-        lastCheckAt = now
+        if (!UpdateReleasePolicy.isCheckDue(now, lastCheckAt)) return@withLock
         runCatching {
             val request = Request.Builder().url(LATEST_RELEASE_URL)
                 .header("Accept", "application/vnd.github+json")
@@ -99,20 +94,25 @@ object AppUpdateChecker {
                 if (!response.isSuccessful) null else response.body?.string()
             } ?: return@runCatching
             val release = json.parseToJsonElement(body) as? JsonObject ?: return@runCatching
-            if (release["draft"]?.jsonPrimitive?.content == "true" ||
-                release["prerelease"]?.jsonPrimitive?.content == "true") return@runCatching
-            val tag = release["tag_name"]?.jsonPrimitive?.contentOrNull ?: return@runCatching
-            val url = release["html_url"]?.jsonPrimitive?.contentOrNull ?: return@runCatching
-            val apk = apkAsset(release) ?: return@runCatching
-            val notes = release["body"]?.jsonPrimitive?.contentOrNull
-            val latest = tag.removePrefix("v").removePrefix("V")
-            if (UpdateReleasePolicy.isNewer(latest, BuildConfig.VERSION_NAME)) {
-                if (downloadMutex.isLocked && _available.value?.version != latest) return@runCatching
-                val info = UpdateInfo(latest, url, apk.url, notes, apk.size, apk.sha256)
-                if (_available.value?.version != latest && !downloadMutex.isLocked) _download.value = DownloadState.Idle
+            val parsed = UpdateReleasePolicy.parseRelease(release, Build.SUPPORTED_ABIS.toList())
+                ?: return@runCatching
+            lastCheckAt = now
+            if (UpdateReleasePolicy.isNewer(parsed.version, BuildConfig.VERSION_NAME)) {
+                if (downloadMutex.isLocked && _available.value?.version != parsed.version) return@runCatching
+                val info = UpdateInfo(
+                    version = parsed.version,
+                    releaseUrl = parsed.releaseUrl,
+                    apkUrl = parsed.apk?.url,
+                    notes = parsed.notes,
+                    size = parsed.apk?.size ?: 0,
+                    sha256 = parsed.apk?.sha256,
+                )
+                if (_available.value?.version != parsed.version && !downloadMutex.isLocked) _download.value = DownloadState.Idle
                 _available.value = info
-                val target = File(File(context.cacheDir, CACHE_SUBDIR), "Konnekt-$latest.apk")
-                if (target.exists() && downloadMutex.tryLock()) {
+                val target = parsed.apk?.let {
+                    File(File(context.cacheDir, CACHE_SUBDIR), "Konnekt-${parsed.version}.apk")
+                }
+                if (target != null && target.exists() && downloadMutex.tryLock()) {
                     try {
                         _download.value = DownloadState.Verifying
                         runCatching { validateDownloadedApk(context, target, info) }
@@ -125,24 +125,6 @@ object AppUpdateChecker {
             }
         }.onFailure { if (it is CancellationException) throw it }
     } }
-
-    /** Prefer the APK for this device's CPU; the universal asset is a fallback. */
-    private fun apkAsset(release: JsonObject): UpdateReleasePolicy.Apk? = runCatching {
-        val assets = release["assets"]?.jsonArray
-            ?.mapNotNull { it as? JsonObject }
-            ?.filter { asset ->
-                asset["name"]?.jsonPrimitive?.contentOrNull?.endsWith(".apk", ignoreCase = true) == true &&
-                    asset["state"]?.jsonPrimitive?.contentOrNull == "uploaded"
-            }
-            ?.mapNotNull { asset ->
-                val name = asset["name"]?.jsonPrimitive?.contentOrNull ?: return@mapNotNull null
-                val url = asset["browser_download_url"]?.jsonPrimitive?.contentOrNull ?: return@mapNotNull null
-                UpdateReleasePolicy.Apk(name, url, asset["size"]?.jsonPrimitive?.longOrNull ?: 0,
-                    asset["digest"]?.jsonPrimitive?.contentOrNull?.removePrefix("sha256:"))
-            }
-            .orEmpty()
-        UpdateReleasePolicy.selectApk(assets, Build.SUPPORTED_ABIS.toList())
-    }.getOrNull()
 
     fun startDownload(context: Context) {
         scope.launch { downloadApk(context.applicationContext) }
