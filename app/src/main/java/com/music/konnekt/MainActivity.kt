@@ -234,6 +234,8 @@ import com.music.konnekt.ui.components.FrostedTopBar
 import com.music.konnekt.ui.components.LastfmLoginAlert
 import com.music.konnekt.ui.components.LocalAppBackdrop
 import com.music.konnekt.ui.components.LocalLiquidGlassEnabled
+import com.music.konnekt.ui.components.LocalNewDesignEnabled
+import com.music.konnekt.ui.components.NewDesignBackdrop
 import com.music.konnekt.ui.components.backdrop.backdrops.LayerBackdrop
 import com.music.konnekt.ui.components.backdrop.backdrops.layerBackdrop
 import com.music.konnekt.ui.components.backdrop.backdrops.rememberLayerBackdrop
@@ -357,6 +359,8 @@ class MainActivity : AppCompatActivity() {
             val theme by AppSettings.themeMode.collectAsStateWithLifecycle()
             val highPerformance by AppSettings.highPerformanceMode.collectAsStateWithLifecycle()
             val liquidGlassEnabled by AppSettings.liquidGlass.collectAsStateWithLifecycle()
+            val newDesignEnabled by AppSettings.newDesignEnabled.collectAsStateWithLifecycle()
+            val reduceAnimation by AppSettings.reduceAnimation.collectAsStateWithLifecycle()
             val iosOverscrollFactory = rememberIosOverscrollFactory()
             val performanceRefreshRate by AppSettings.performanceRefreshRate.collectAsStateWithLifecycle()
             val composeView = LocalView.current
@@ -369,7 +373,11 @@ class MainActivity : AppCompatActivity() {
                 ThemeMode.DARK -> true
                 ThemeMode.MIDNIGHT, ThemeMode.EMBER -> true
             }
-            KonnektTheme(darkTheme = darkTheme, themeMode = theme) {
+            KonnektTheme(
+                darkTheme = darkTheme,
+                themeMode = theme,
+                newDesignEnabled = newDesignEnabled,
+            ) {
                 // The glass surfaces sample this layer, and a layer records only
                 // what is drawn into it — which, for Konnekt, is a page that
                 // paints no background of its own. Everywhere a page is not
@@ -387,30 +395,36 @@ class MainActivity : AppCompatActivity() {
                     }
                 }
                 val appBackdrop = rememberLayerBackdrop(onDraw = paintBackdrop)
-                CompositionLocalProvider(
-                    LocalOverscrollFactory provides iosOverscrollFactory,
-                    LocalLiquidGlassEnabled provides liquidGlassEnabled,
-                    LocalAppBackdrop provides appBackdrop,
+                NewDesignBackdrop(
+                    enabled = newDesignEnabled,
+                    reduceAnimation = reduceAnimation,
                 ) {
-                // The window's width, measured rather than asked for.
-                //
-                // `Configuration.screenWidthDp` is the wrong question here: in a
-                // freeform or desktop window it can report the display rather
-                // than the window it is actually in, and it lands a beat late
-                // when that window is dragged. The layout downstream splits in
-                // two on the strength of this number and sizes both halves from
-                // it, so a stale one is a player pane sized for a window that no
-                // longer exists and a page squeezed to a sliver to pay for it.
-                // A measured constraint cannot be stale — it is the very width
-                // the split is about to be laid out in.
-                BoxWithConstraints(Modifier.fillMaxSize()) {
-                    KonnektApp(
-                        darkTheme = darkTheme,
-                        windowWidth = maxWidth,
-                        windowHeight = maxHeight,
-                        appBackdrop = appBackdrop,
-                    )
-                }
+                    CompositionLocalProvider(
+                        LocalOverscrollFactory provides iosOverscrollFactory,
+                        LocalLiquidGlassEnabled provides (liquidGlassEnabled || newDesignEnabled),
+                        LocalNewDesignEnabled provides newDesignEnabled,
+                        LocalAppBackdrop provides appBackdrop,
+                    ) {
+                        // The window's width, measured rather than asked for.
+                        //
+                        // `Configuration.screenWidthDp` is the wrong question here: in a
+                        // freeform or desktop window it can report the display rather
+                        // than the window it is actually in, and it lands a beat late
+                        // when that window is dragged. The layout downstream splits in
+                        // two on the strength of this number and sizes both halves from
+                        // it, so a stale one is a player pane sized for a window that no
+                        // longer exists and a page squeezed to a sliver to pay for it.
+                        // A measured constraint cannot be stale — it is the very width
+                        // the split is about to be laid out in.
+                        BoxWithConstraints(Modifier.fillMaxSize()) {
+                            KonnektApp(
+                                darkTheme = darkTheme,
+                                windowWidth = maxWidth,
+                                windowHeight = maxHeight,
+                                appBackdrop = appBackdrop,
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -471,6 +485,7 @@ private fun KonnektApp(
     viewModel: MainViewModel = viewModel(),
 ) {
     val context = LocalContext.current
+    val newDesignEnabled = LocalNewDesignEnabled.current
     val clipboard = LocalClipboardManager.current
     val hazeState = remember { HazeState() }
     // Recording the backdrop layer costs a draw pass, so it only runs when a
@@ -2442,7 +2457,13 @@ private fun KonnektApp(
     Box(
         Modifier
             .fillMaxSize()
-            .background(MaterialTheme.colorScheme.background),
+            .background(
+                if (LocalNewDesignEnabled.current) {
+                    Color.Transparent
+                } else {
+                    MaterialTheme.colorScheme.background
+                },
+            ),
     ) {
         // A pushed album/artist/playlist page replaces the tab content but
         // leaves the tab bar and mini player in place.
@@ -2567,7 +2588,10 @@ private fun KonnektApp(
                         val libraryTabKey = "$TAB_KEY$TAB_LIBRARY"
                         val libraryShowAllSwap = (initialState == "library_show_all" && targetState == libraryTabKey) ||
                             (targetState == "library_show_all" && initialState == libraryTabKey)
-                        if (tabSwap || libraryShowAllSwap) {
+                        if (newDesignEnabled && !reducePlayerMotion) {
+                            (fadeIn(tween(280)) + slideInHorizontally(tween(280)) { it / 18 }) togetherWith
+                                fadeOut(tween(190))
+                        } else if (tabSwap || libraryShowAllSwap) {
                             if (reducePlayerMotion) {
                                 EnterTransition.None togetherWith ExitTransition.None
                             } else {

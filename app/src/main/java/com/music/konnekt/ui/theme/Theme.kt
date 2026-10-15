@@ -3,9 +3,11 @@ package com.music.konnekt.ui.theme
 import android.app.Activity
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.Typography
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
@@ -16,6 +18,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.unit.dp
 import com.music.konnekt.R
 import com.music.konnekt.data.settings.ThemeMode
 
@@ -69,6 +72,50 @@ private val EmberColors = DarkColors.copy(
 )
 
 /**
+ * The opt-in redesign palette: a deep ink canvas with cyan, lilac and rose
+ * accents that stay legible through translucent surfaces. It is kept separate
+ * from the established palettes so disabling the setting returns to the exact
+ * existing colour path.
+ */
+private val NewDarkColors = darkColorScheme(
+    primary = Color(0xFFB8F5FF),
+    onPrimary = Color(0xFF002027),
+    secondary = Color(0xFFFFA9E5),
+    onSecondary = Color(0xFF2C0B25),
+    tertiary = Color(0xFFBEBBFF),
+    onTertiary = Color(0xFF17143C),
+    background = Color(0xFF070914),
+    onBackground = Color(0xFFF3F4FF),
+    surface = Color(0xFF101529),
+    onSurface = Color(0xFFF3F4FF),
+    surfaceVariant = Color(0xFF1A2140),
+    onSurfaceVariant = Color(0xFFB5BCD9),
+    outline = Color(0xFF46517B),
+)
+
+private val NewLightColors = lightColorScheme(
+    primary = Color(0xFF006B7A),
+    onPrimary = Color.White,
+    secondary = Color(0xFF9B2C7A),
+    onSecondary = Color.White,
+    tertiary = Color(0xFF514CA2),
+    onTertiary = Color.White,
+    background = Color(0xFFF8F8FF),
+    onBackground = Color(0xFF151521),
+    surface = Color(0xFFFDFBFF),
+    onSurface = Color(0xFF151521),
+    surfaceVariant = Color(0xFFEDEEFF),
+    onSurfaceVariant = Color(0xFF5E6174),
+    outline = Color(0xFFB5B7CB),
+)
+
+private val NewDesignShapes = Shapes(
+    small = RoundedCornerShape(14.dp),
+    medium = RoundedCornerShape(22.dp),
+    large = RoundedCornerShape(30.dp),
+)
+
+/**
  * SF Pro Display, the face Apple Music itself is set in. Only the weights the
  * type scale actually asks for are bundled; Compose synthesises nothing, so a
  * missing weight would silently fall back to the nearest one shipped.
@@ -117,14 +164,20 @@ private fun Typography.withFamily(family: FontFamily) = Typography(
 fun KonnektTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     themeMode: ThemeMode = ThemeMode.SYSTEM,
+    newDesignEnabled: Boolean = false,
     content: @Composable () -> Unit,
 ) {
     MaterialTheme(
-        colorScheme = when (themeMode) {
-            ThemeMode.MIDNIGHT -> MidnightColors
-            ThemeMode.EMBER -> EmberColors
-            else -> if (darkTheme) DarkColors else LightColors
+        colorScheme = if (newDesignEnabled) {
+            if (darkTheme) NewDarkColors else NewLightColors
+        } else {
+            when (themeMode) {
+                ThemeMode.MIDNIGHT -> MidnightColors
+                ThemeMode.EMBER -> EmberColors
+                else -> if (darkTheme) DarkColors else LightColors
+            }
         },
+        shapes = if (newDesignEnabled) NewDesignShapes else Shapes(),
         typography = KonnektTypography,
         content = content,
     )
