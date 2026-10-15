@@ -102,8 +102,8 @@ The production Android build and all Kotlin test suites passed: 983 Android,
 46 shared, 35 shared UI and 337 desktop tests. Backend `go vet ./...` and
 `go test ./...` also passed.
 
-The arm64 and universal APKs report `com.music.konnekt`, version `1.3.4`
-(`13006`). Their signatures match the previous release, their version code
+The arm64 and universal APKs report `com.music.konnekt`, version `1.4.0`
+(`14000`). Their signatures match the previous release, their version code
 increases, and both pass the 16 KB ZIP alignment check. No Android device was
 connected for installation or runtime validation. Desktop native packaging was
 not validated.

@@ -8,8 +8,8 @@ For every release:
 1. Increase `versionCode` in `app/build.gradle.kts`, and set the new `versionName`.
 2. Build `:app:assembleProdRelease` with the existing release keystore.
 3. Run `tools/verify-release.ps1` against the previous release to verify package, signature, version code and ZIP alignment.
-4. Publish a stable GitHub release with a tag matching `versionName`, for example `v1.3.4`.
-5. Attach the signed APK files as release assets, for example `Konnekt-1.3.4-arm64.apk` and `Konnekt-1.3.4.apk` (universal). Source archives and ZIP artifacts are not APK assets.
+4. Publish a stable GitHub release with a tag matching `versionName`, for example `v1.4.1`.
+5. Attach the signed APK files as release assets, for example `Konnekt-1.4.1-arm64.apk` and `Konnekt-1.4.1.apk` (universal). Source archives and ZIP artifacts are not APK assets.
 6. Add the release notes to the GitHub release body. The dialog displays these notes as written; interface labels are localized independently.
 
 Drafts, prereleases and releases with no compatible uploaded APK are not offered.

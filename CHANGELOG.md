@@ -1,28 +1,46 @@
 # 🎵 Konnekt Changelog
 
-## Unreleased — New Design & smarter Automix
+## 1.4.1 — More personal listening and reliable updates
 
-### ✨ An entirely new look, when you choose it
+### 🎧 Home and lyrics
 
-- Added **Settings → Appearance → New design**, disabled by default so the existing interface remains unchanged unless you opt in.
-- Introduced a new ink, cyan, lilac and rose visual system with larger rounded surfaces and an ambient liquid background.
-- Enabled the existing Liquid Glass chrome automatically while New design is active, without changing the saved Liquid Glass preference.
-- Added smoother page transitions, a more expressive player backdrop and a special animated Automix indicator for the new interface.
-- Kept **Reduce animation** effective: the ambient motion and Automix ornament settle when reduced motion is enabled.
-- Added English and French labels for the new setting and kept the preference in the normal settings backup flow.
+- Add Discovery, Energy and Chill filters to the Home shelves, with a two-track limit per artist in each filtered shelf.
+- Add a saved lyrics text-size control from 85% to 125% and a button to return to the current line after scrolling through synchronized lyrics.
+- Translate the new Home and lyrics controls across the app's 16 Android languages.
 
-### 🎚️ Automix timing and feedback
+### 🔄 Updates and Automix
 
-- Use a dedicated six-second Automix fallback instead of inheriting a hidden manual crossfade value.
-- Ignore provisional outgoing-track analysis when choosing the exit point; head analysis may still help prepare the incoming track.
-- Freeze the selected transition shortly before arming so late analysis cannot move the mix under the playhead.
-- Applied the same stability rules to the desktop playback engine.
-- Kept the beat-linked progress animation while adding a clearer visual cue during a real blend.
+- Show an update notice for a newer stable GitHub release even when it has no compatible APK; the release page remains available in that case.
+- Keep update checks eligible after an invalid response, and reopen the notice only when its version changes.
+- Shorten advanced Automix handoffs when both tracks have strong vocals and timing masks are unavailable, while leaving classic Automix behavior intact.
 
-### 🧰 Reproducible development
+**Android version:** `1.4.1` · **versionCode:** `14001` · **Package:** `com.music.konnekt`
 
-- Added `Makefile`, `Dockerfile`, `.dockerignore` and `.env.example` for repeatable desktop checks and clean Linux setup.
+---
+
+## 1.4.0 — A new look and steadier Automix
+
+### ✨ A fresh design, on your terms
+
+- Turn on **Settings → Appearance → New design** to try Konnekt's new visual style. It starts off, so you can switch when you're ready.
+- Explore ink-dark surfaces with cyan, lilac and rose accents, softer shapes and an ambient liquid backdrop. The player and page transitions have matching motion.
+- The new style brings Liquid Glass controls with it while preserving your separately saved Liquid Glass preference.
+- An animated Automix indicator makes an active blend easier to spot. **Reduce animation** still calms the backdrop and indicator.
+- The choice is saved with your settings and included in settings backup. Its labels are available in all 16 app languages.
+
+### 🎚️ Mixes that stay on cue
+
+- Automix now has its own **six-second fallback** when a timed transition is unavailable; changing manual crossfade no longer silently changes that fallback.
+- Preliminary analysis of the outgoing song no longer shifts its exit point. Analysis of the next song can still help find a suitable entrance.
+- The chosen transition is locked shortly before it starts, preventing late analysis from moving the blend past the playhead.
+- Android and desktop use the same stability rules. The progress bar keeps its beat-linked pulse, with a clearer cue while songs are actually blending.
+
+### 🧰 Easier to build and check
+
+- Added a `Makefile`, `Dockerfile`, `.dockerignore` and `.env.example` for repeatable desktop checks and a clean Linux development environment.
 - Documented the pinned Gradle wrapper, Java toolchains, test command and Docker workflow in the README.
+
+**Android version:** `1.4.0` · **versionCode:** `14000` · **Package:** `com.music.konnekt`
 
 ---
 
