@@ -1,5 +1,6 @@
 package com.music.konnekt.playback.smart
 
+import kotlin.math.abs
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotEquals
@@ -190,5 +191,52 @@ class AdvancedAutomixPlannerTest {
         val bars = plan.fadeSeconds / (4 * plan.beatSeconds)
         assertEquals(bars.toInt().toDouble(), bars, 1e-6, "overlap of $bars bars")
         assertTrue(!plan.phaseLock, "phase correction must not pulse AudioTrack speed while audible")
+    }
+
+    @Test
+    fun aMatchedPairWithTwoLeadVocalsUsesOneBarAndKeepsItsMarker() {
+        val current = track("vocal-out", 120.0, "C major", vocal = 0.9)
+        val next = track("vocal-in", 120.0, "C major", vocal = 0.9)
+        val plan = plan(current, next, advanced = true)
+
+        assertEquals(TransitionStyle.DJ_BLEND, plan.transitionStyle)
+        assertEquals(4, plan.transitionBeats, "two lead vocals should not ride for a full phrase")
+        assertEquals(2.0, plan.fadeSeconds, 1e-6, "the vocal-safe overlap should be one bar")
+        assertTrue(plan.vocalOverlap >= 0.5, "missing masks must still expose conservative vocal risk")
+        assertTrue(plan.markerVisible, "the next-track transition should remain publishable")
+        assertTrue(!plan.shouldStart, "the marker must remain a future state before its start")
+
+        val started = plan(current, next, advanced = true).let {
+            planTransition(
+                analysis = current,
+                nextAnalysis = next,
+                currentTrack = TransitionTrackInfo(current.trackId, 200_000),
+                nextTrack = TransitionTrackInfo(next.trackId, 200_000),
+                currentTime = it.transitionStart + 0.1,
+                duration = current.duration,
+                mode = CrossfadeMode.SMART,
+                advanced = true,
+            )
+        }
+        assertTrue(started.shouldStart, "the transition state should become active at its rhythm-aligned start")
+    }
+
+    @Test
+    fun advancedFilterTransitionsAlignBothEdgesToTheOutgoingGrid() {
+        val current = track("out", 120.0, "C major", vocal = 0.1)
+            .copy(contentEndTime = 193.4)
+        val next = track("in", 97.0, "F♯ major", vocal = 0.1)
+        val plan = plan(current, next, advanced = true)
+
+        assertEquals(TransitionStyle.DJ_FILTER, plan.transitionStyle)
+        assertTrue(
+            current.downbeats.any { abs(it - plan.transitionStart) < 1e-6 },
+            "start ${plan.transitionStart} was not on an outgoing downbeat",
+        )
+        assertTrue(
+            current.downbeats.any { abs(it - plan.transitionEnd) < 1e-6 },
+            "end ${plan.transitionEnd} was not on an outgoing downbeat",
+        )
+        assertTrue(plan.transitionEnd <= current.contentEndTime)
     }
 }

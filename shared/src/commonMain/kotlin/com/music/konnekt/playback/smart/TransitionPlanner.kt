@@ -612,6 +612,42 @@ private fun plannedVocalOverlap(
     ) ?: 0.0
 }
 
+/**
+ * Vocal overlap for an advanced plan, including the conservative whole-track
+ * fallback used while a timed mask is unavailable. The fallback is deliberately
+ * advanced-only: classic Automix must retain its previous answer until it has
+ * timing evidence.
+ */
+private fun vocalOverlapForPlan(
+    analysis: TrackAnalysis,
+    nextAnalysis: TrackAnalysis,
+    transitionStart: Double,
+    transitionEnd: Double,
+    incomingCueTime: Double,
+    incomingPlaybackRate: Double,
+    advanced: Boolean,
+): Double {
+    val measured = plannedVocalOverlap(
+        analysis = analysis,
+        nextAnalysis = nextAnalysis,
+        transitionStart = transitionStart,
+        transitionEnd = transitionEnd,
+        incomingCueTime = incomingCueTime,
+        incomingPlaybackRate = incomingPlaybackRate,
+    )
+    val conservative = if (
+        advanced &&
+        analysis.vocalProbability >= VOCAL_CONFLICT_PROBABILITY &&
+        nextAnalysis.vocalProbability >= VOCAL_CONFLICT_PROBABILITY &&
+        (analysis.vocalActivityMask.isEmpty() || nextAnalysis.vocalActivityMask.isEmpty())
+    ) {
+        VOCAL_MASK_MISSING_PROTECTION
+    } else {
+        0.0
+    }
+    return max(measured, conservative)
+}
+
 private fun nearestAtOrBefore(values: List<Double>, target: Double): Double? =
     values.filter { it.isFinite() && it >= 0 && it <= target }.maxOrNull()
 
@@ -692,6 +728,9 @@ fun planWsolaTransition(
 
     val incomingBeatSeconds = 60 / incomingBpm
     val outgoingBeatSeconds = 60 / outgoingBpm
+    val vocalConflict = advanced &&
+        analysis.vocalProbability >= VOCAL_CONFLICT_PROBABILITY &&
+        nextAnalysis.vocalProbability >= VOCAL_CONFLICT_PROBABILITY
 
     val incomingDropTime = incomingMixInPoint(nextAnalysis, latestIncomingCue(incomingLength))
     if (incomingDropTime == null || !incomingDropTime.isFinite() || incomingDropTime < 0) {
@@ -725,6 +764,15 @@ fun planWsolaTransition(
         val inStart = max(audibleStart, incomingDropTime - beats * incomingBeatSeconds)
         val outVocal = vocalActivityBetween(analysis, outStart, overlapEndTarget)
         val inVocal = vocalActivityBetween(nextAnalysis, inStart, incomingDropTime)
+
+        // A head analysis often knows both tracks are sung before the timed
+        // mask is available. Keep that pair to a compact one-bar minimum
+        // rather than allowing the phrase-switch path to bypass the same
+        // vocal protection used by the adaptive fallback.
+        if (vocalConflict && (
+                analysis.vocalActivityMask.isEmpty() ||
+                    nextAnalysis.vocalActivityMask.isEmpty()
+            )) return true
 
         // Instant-by-instant first, because it is the question actually being
         // asked. The mean-based test below only fires when *both* windows average
@@ -877,13 +925,14 @@ private fun phraseSwitch(
         // pulls them apart — they sit in the same bar, in the same range, for the
         // whole blend. The renderer uses this to deepen the entry high-pass and
         // the exit low-pass without turning the blend into a filter ride.
-        vocalOverlap = plannedVocalOverlap(
+        vocalOverlap = vocalOverlapForPlan(
             analysis = analysis,
             nextAnalysis = nextAnalysis,
             transitionStart = planned.transitionStart,
             transitionEnd = planned.transitionEnd,
             incomingCueTime = planned.incomingCueTime,
             incomingPlaybackRate = renderedIncomingRate,
+            advanced = advanced,
         ),
         outgoingBpm = planned.outgoingBpm,
         incomingBpm = planned.incomingBpm,
@@ -1428,8 +1477,16 @@ private fun mixPlan(
 
     if (sameBeatBlend && beatSeconds > 0) {
         val introDropTime = incomingHandoffTime / max(0.8, incomingPlaybackRate)
-        val clamped = clamp(introDropTime, min(12.0, maximumOverlap), maximumOverlap)
-        val totalOverlap = if (traits != null) wholeBars(clamped, beatSeconds, maximumOverlap) else clamped
+        // Two strong lead vocals need a short handoff even when the grids are
+        // perfectly aligned. Keep the overlap musical (one whole bar) and
+        // leave unmatched fallback lengths untouched for compatibility.
+        val vocalSafeMaximum = if (traits?.vocalConflict == true) {
+            min(maximumOverlap, 4 * beatSeconds)
+        } else {
+            maximumOverlap
+        }
+        val clamped = clamp(introDropTime, min(12.0, vocalSafeMaximum), vocalSafeMaximum)
+        val totalOverlap = if (traits != null) wholeBars(clamped, beatSeconds, vocalSafeMaximum) else clamped
         val targetStart = max(0.0, mixEnd - totalOverlap)
         val earliestTransitionStart = max(0.0, mixEnd - maximumOverlap)
         transitionStart = alignedTransitionStart(
@@ -1463,23 +1520,14 @@ private fun mixPlan(
 
     val alignedOverlap = mixEnd - transitionStart
     val hasBassContent = analysis.lowEnergyCurve.isNotEmpty() || nextAnalysis.lowEnergyCurve.isNotEmpty()
-    val measuredVocalOverlap = plannedVocalOverlap(
+    val vocalOverlap = vocalOverlapForPlan(
         analysis = analysis,
         nextAnalysis = nextAnalysis,
         transitionStart = transitionStart,
         transitionEnd = mixEnd,
         incomingCueTime = finalIncomingCueTime,
         incomingPlaybackRate = incomingPlaybackRate,
-    )
-    // A missing time mask must not mean "instrumental". Whole-track vocal
-    // likelihood is less precise, but it is a safe fallback when either side
-    // has not produced its mask yet.
-    val vocalOverlap = max(
-        measuredVocalOverlap,
-        if (
-            traits?.vocalConflict == true &&
-            (analysis.vocalActivityMask.isEmpty() || nextAnalysis.vocalActivityMask.isEmpty())
-        ) VOCAL_MASK_MISSING_PROTECTION else 0.0,
+        advanced = traits != null,
     )
     val vocalSafeFallback = !sameBeatBlend && vocalOverlap >= VOCAL_SAFE_FALLBACK_THRESHOLD
     // One stable fallback personality trails the outgoing track on a beat.
