@@ -1324,4 +1324,7 @@
     <string name="theme_midnight">Meia-noite</string>
     <string name="theme_ember">Brasa</string>
     <string name="replay_load_error">Não foi possível carregar seu histórico de músicas. Tente novamente.</string>
+    <string name="new_design">Novo visual</string>
+    <string name="new_design_subtitle">Experimente a nova interface Liquid Glass com mais movimento e um visual renovado</string>
+    <string name="new_design_enabled_subtitle">Novo visual ativado · vidro animado, transições suaves e reprodutor melhorado</string>
 </resources>

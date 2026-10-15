@@ -1236,4 +1236,7 @@
     <string name="theme_midnight">Nửa đêm</string>
     <string name="theme_ember">Than hồng</string>
     <string name="replay_load_error">Không thể tải lịch sử nghe. Vui lòng thử lại.</string>
+    <string name="new_design">Thiết kế mới</string>
+    <string name="new_design_subtitle">Thử giao diện Liquid Glass mới với chuyển động sinh động và diện mạo mới</string>
+    <string name="new_design_enabled_subtitle">Đã bật thiết kế mới · kính động, chuyển cảnh mượt mà và trình phát cải tiến</string>
 </resources>

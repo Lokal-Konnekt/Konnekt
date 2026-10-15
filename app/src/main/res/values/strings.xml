@@ -348,6 +348,9 @@
     <string name="animated_cover_art">Animated cover art</string>
     <string name="synced_lyrics">Synced lyrics</string>
     <string name="synced_lyrics_subtitle">Lights up the words on the player as they’re sung</string>
+    <string name="lyrics_text_size">Lyrics text size</string>
+    <string name="lyrics_text_size_subtitle">Adjust the reading size in the full lyrics view</string>
+    <string name="return_to_current_lyrics">Return to current lyrics</string>
     <string name="lyrics_sources">Lyrics sources</string>
     <string name="song_cache_limit">Song cache limit</string>
     <string name="clear_song_cache">Clear song cache</string>

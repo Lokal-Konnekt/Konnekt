@@ -1296,4 +1296,7 @@
     <string name="theme_midnight">Tengah malam</string>
     <string name="theme_ember">Bara</string>
     <string name="replay_load_error">Riwayat mendengarkan tidak dapat dimuat. Coba lagi.</string>
+    <string name="new_design">Desain baru</string>
+    <string name="new_design_subtitle">Coba antarmuka Liquid Glass baru dengan gerakan yang lebih kaya dan tampilan segar</string>
+    <string name="new_design_enabled_subtitle">Desain baru aktif · kaca animasi, transisi mulus, dan pemutar yang ditingkatkan</string>
 </resources>

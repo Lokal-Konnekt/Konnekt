@@ -1296,4 +1296,7 @@
     <string name="theme_midnight">午夜</string>
     <string name="theme_ember">余烬</string>
     <string name="replay_load_error">无法加载你的聆听记录。请重试。</string>
+    <string name="new_design">全新设计</string>
+    <string name="new_design_subtitle">试试焕然一新的 Liquid Glass 界面和更丰富的动态效果</string>
+    <string name="new_design_enabled_subtitle">已启用全新设计 · 动态玻璃、流畅转场和升级的播放器</string>
 </resources>

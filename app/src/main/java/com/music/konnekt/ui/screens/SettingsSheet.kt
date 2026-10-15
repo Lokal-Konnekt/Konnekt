@@ -47,6 +47,7 @@ import androidx.compose.material.icons.rounded.Download
 import androidx.compose.material.icons.rounded.FileDownload
 import androidx.compose.material.icons.rounded.FileUpload
 import androidx.compose.material.icons.rounded.FilterAlt
+import androidx.compose.material.icons.rounded.FormatSize
 import androidx.compose.material.icons.rounded.Folder
 import androidx.compose.material.icons.rounded.Fullscreen
 import androidx.compose.material.icons.rounded.Gradient
@@ -204,6 +205,7 @@ fun SettingsScreen(
     val newDesignEnabled by AppSettings.newDesignEnabled.collectAsStateWithLifecycle()
     val liquidGlassSupported = isGlassSupported()
     val lyricsBlur by AppSettings.lyricsBlur.collectAsStateWithLifecycle()
+    val lyricsTextScale by AppSettings.lyricsTextScale.collectAsStateWithLifecycle()
     val animatedCanvas by AppSettings.animatedCanvas.collectAsStateWithLifecycle()
     val canvasOverCellular by AppSettings.canvasOverCellular.collectAsStateWithLifecycle()
     val fullBleedArtwork by AppSettings.fullBleedArtwork.collectAsStateWithLifecycle()
@@ -972,6 +974,19 @@ fun SettingsScreen(
             // sources are third-party services being reached on the user's
             // connection — which is the part worth being able to narrow.
             if (syncedLyrics) {
+                val lyricsTextSizeTitle = stringResource(R.string.lyrics_text_size)
+                row(lyricsTextSizeTitle, "lyrics", "text", "size", "accessibility") {
+                    SliderRow(
+                        icon = Icons.Rounded.FormatSize,
+                        title = lyricsTextSizeTitle,
+                        subtitle = stringResource(R.string.lyrics_text_size_subtitle),
+                        value = "${(lyricsTextScale * 100).roundToInt()}%",
+                        sliderValue = lyricsTextScale,
+                        onSliderValue = AppSettings::setLyricsTextScale,
+                        valueRange = AppSettings.MIN_LYRICS_TEXT_SCALE..AppSettings.MAX_LYRICS_TEXT_SCALE,
+                        steps = 7,
+                    )
+                }
                 val lyricsBlurTitle = stringResource(R.string.blur_unfocused_lyrics)
                 row(lyricsBlurTitle, "lyrics", "blur") {
                     SettingsRow(

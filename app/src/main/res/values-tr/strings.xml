@@ -1276,4 +1276,7 @@
     <string name="theme_midnight">Gece yarısı</string>
     <string name="theme_ember">Kor</string>
     <string name="replay_load_error">Dinleme geçmişi yüklenemedi. Tekrar deneyin.</string>
+    <string name="new_design">Yeni tasarım</string>
+    <string name="new_design_subtitle">Daha canlı hareketlere ve yenilenmiş görünüme sahip Liquid Glass arayüzünü dene</string>
+    <string name="new_design_enabled_subtitle">Yeni tasarım açık · hareketli cam, akıcı geçişler ve geliştirilmiş oynatıcı</string>
 </resources>

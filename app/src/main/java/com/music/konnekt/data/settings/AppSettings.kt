@@ -409,6 +409,9 @@ object AppSettings {
     /** Blurs unfocused lyric lines, keeping the active line sharp. */
     val lyricsBlur = MutableStateFlow(true)
 
+    /** Reader scale for the full lyrics panel, from compact to accessibility size. */
+    val lyricsTextScale = MutableStateFlow(1.0f)
+
     /** Positive values delay synced lyrics; negative values bring them forward. */
     val lyricsOffsetMs = MutableStateFlow(0)
 
@@ -839,6 +842,8 @@ object AppSettings {
         liquidGlass.value = prefs.getBoolean(KEY_LIQUID_GLASS, false)
         newDesignEnabled.value = prefs.getBoolean(KEY_NEW_DESIGN_ENABLED, false)
         lyricsBlur.value = prefs.getBoolean(KEY_LYRICS_BLUR, true)
+        lyricsTextScale.value = prefs.getFloat(KEY_LYRICS_TEXT_SCALE, 1.0f)
+            .coerceIn(MIN_LYRICS_TEXT_SCALE, MAX_LYRICS_TEXT_SCALE)
         lyricsOffsetMs.value = prefs.getInt(KEY_LYRICS_OFFSET_MS, 0)
             .coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
         translationLanguage.value = prefs.getString(KEY_TRANSLATION_LANGUAGE, "").orEmpty()
@@ -1265,6 +1270,12 @@ object AppSettings {
     fun setLyricsBlur(value: Boolean) {
         lyricsBlur.value = value
         prefs.edit().putBoolean(KEY_LYRICS_BLUR, value).apply()
+    }
+
+    fun setLyricsTextScale(value: Float) {
+        val normalized = value.coerceIn(MIN_LYRICS_TEXT_SCALE, MAX_LYRICS_TEXT_SCALE)
+        lyricsTextScale.value = normalized
+        prefs.edit().putFloat(KEY_LYRICS_TEXT_SCALE, normalized).apply()
     }
 
     fun setLyricsOffsetMs(value: Int) {
@@ -1971,6 +1982,7 @@ object AppSettings {
     private const val KEY_LIQUID_GLASS = "liquid_glass"
     private const val KEY_NEW_DESIGN_ENABLED = "new_design_enabled"
     private const val KEY_LYRICS_BLUR = "lyrics_blur"
+    private const val KEY_LYRICS_TEXT_SCALE = "lyrics_text_scale"
     private const val KEY_LYRICS_OFFSET_MS = "lyrics_offset_ms"
     private const val KEY_TRANSLATION_LANGUAGE = "translation_language"
     private const val KEY_ANIMATED_CANVAS = "animated_canvas"
@@ -2038,4 +2050,7 @@ object AppSettings {
     private const val KEY_DISCORD_BUTTON_2_VISIBLE = "discord_button_2_visible"
     private const val KEY_DISCORD_INFO_DISMISSED = "discord_info_dismissed"
     private const val KEY_LAST_VERSION_CODE = "last_version_code"
+
+    const val MIN_LYRICS_TEXT_SCALE = 0.85f
+    const val MAX_LYRICS_TEXT_SCALE = 1.25f
 }

@@ -1319,4 +1319,7 @@
     <string name="theme_midnight">आधी रात</string>
     <string name="theme_ember">अंगारा</string>
     <string name="replay_load_error">सुनने का इतिहास लोड नहीं हो सका। फिर से कोशिश करें।</string>
+    <string name="new_design">नया डिज़ाइन</string>
+    <string name="new_design_subtitle">ज़्यादा गतिशीलता और नए रूप वाला Liquid Glass इंटरफ़ेस आज़माएँ</string>
+    <string name="new_design_enabled_subtitle">नया डिज़ाइन चालू है · गतिशील ग्लास, सहज बदलाव और बेहतर प्लेयर</string>
 </resources>

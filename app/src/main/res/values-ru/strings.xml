@@ -1351,4 +1351,7 @@
     <string name="theme_midnight">Полночь</string>
     <string name="theme_ember">Угли</string>
     <string name="replay_load_error">Не удалось загрузить историю прослушиваний. Попробуйте ещё раз.</string>
+    <string name="new_design">Новый дизайн</string>
+    <string name="new_design_subtitle">Попробуйте новый интерфейс Liquid Glass с более выразительной анимацией и свежим оформлением</string>
+    <string name="new_design_enabled_subtitle">Новый дизайн включён · анимированное стекло, плавные переходы и улучшенный плеер</string>
 </resources>

@@ -1359,4 +1359,7 @@
     <string name="theme_midnight">Północ</string>
     <string name="theme_ember">Żar</string>
     <string name="replay_load_error">Nie udało się wczytać historii słuchania. Spróbuj ponownie.</string>
+    <string name="new_design">Nowy wygląd</string>
+    <string name="new_design_subtitle">Wypróbuj nowy interfejs Liquid Glass z bogatszym ruchem i świeżą stylistyką</string>
+    <string name="new_design_enabled_subtitle">Nowy wygląd włączony · animowane szkło, płynne przejścia i ulepszony odtwarzacz</string>
 </resources>

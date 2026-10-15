@@ -37,11 +37,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.FilterChipDefaults
 import androidx.compose.material3.pulltorefresh.PullToRefreshState
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.snapshotFlow
@@ -97,6 +101,35 @@ private val HOME_TITLE_LIFT = 28.dp
 private const val RECENTS_TITLE = "Recents"
 private const val RECENT_TRACKS_PER_COLUMN = 4
 
+private enum class HomeMood { DISCOVERY, ENERGY, CHILL }
+
+private fun HomeShelf.filteredFor(mood: HomeMood): HomeShelf {
+    val keywords = when (mood) {
+        HomeMood.DISCOVERY -> listOf("discover", "recommended", "new", "for you", "mix")
+        HomeMood.ENERGY -> listOf("dance", "pop", "rock", "workout", "party", "energy", "hits")
+        HomeMood.CHILL -> listOf("chill", "acoustic", "lofi", "relax", "ambient", "sleep", "calm")
+    }
+    val shelfMatches = title.lowercase().let { titleText -> keywords.any(titleText::contains) }
+    val ranked = if (mood == HomeMood.DISCOVERY || shelfMatches) {
+        items
+    } else {
+        items.sortedByDescending { item ->
+            val text = "${item.title} ${item.subtitle}".lowercase()
+            keywords.count(text::contains)
+        }
+    }
+    val artistCounts = mutableMapOf<String, Int>()
+    val balanced = ranked.filter { item ->
+        val artist = item.subtitle.trim().ifBlank { item.title }
+        val count = artistCounts[artist] ?: 0
+        if (count >= 2) false else {
+            artistCounts[artist] = count + 1
+            true
+        }
+    }
+    return copy(items = balanced)
+}
+
 private fun ShelfItem.matchesCurrentlyPlaying(song: Song?): Boolean {
     song ?: return false
     if (videoId == null) return false
@@ -141,6 +174,7 @@ fun HomeScreen(
     isPlaying: Boolean = false,
 ) {
     val recentsViewType by AppUi.host.homeRecentsViewType.collectAsStateWithLifecycle()
+    var homeMood by remember { mutableStateOf<HomeMood?>(null) }
 
     PullToRefresh(
         refreshing = refreshing,
@@ -165,6 +199,36 @@ fun HomeScreen(
             if (title != null) {
                 item { HomeTitle(title) }
             }
+            item {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = PAGE_GUTTER, vertical = 6.dp),
+                    horizontalArrangement = Arrangement.spacedBy(8.dp),
+                ) {
+                    HomeMood.entries.forEach { mood ->
+                        val selected = homeMood == mood
+                        FilterChip(
+                            selected = selected,
+                            onClick = { homeMood = if (selected) null else mood },
+                            label = {
+                                Text(
+                                    stringResource(
+                                        when (mood) {
+                                            HomeMood.DISCOVERY -> Res.string.home_filter_discovery
+                                            HomeMood.ENERGY -> Res.string.home_filter_energy
+                                            HomeMood.CHILL -> Res.string.home_filter_chill
+                                        },
+                                    ),
+                                )
+                            },
+                            colors = FilterChipDefaults.filterChipColors(
+                                selectedContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.18f),
+                            ),
+                        )
+                    }
+                }
+            }
             if (!signedIn && onSignIn != null) {
                 item {
                     SignInBanner(onSignIn = onSignIn, modifier = Modifier.padding(bottom = 8.dp))
@@ -185,15 +249,15 @@ fun HomeScreen(
                 is UiState.Error -> item {
                     MessageState(state.message, actionLabel = stringResource(Res.string.retry), onAction = onRetry)
                 }
-                is UiState.Success -> {
+                    is UiState.Success -> {
                     if (recentlyPlayedLoading) {
                         recentlyPlayedSkeleton(listLayout = recentsViewType == LibraryViewType.LIST)
                     }
                     // The loading skeleton already owns the hero slot. Until
                     // Recently Played lands, every real shelf must retain its
                     // compact-card layout instead of briefly becoming a hero.
-                    itemsIndexedShelves(
-                        shelves = state.data,
+                        itemsIndexedShelves(
+                        shelves = state.data.map { shelf -> homeMood?.let(shelf::filteredFor) ?: shelf },
                         onItemClick = onItemClick,
                         onItemLongPress = onItemLongPress,
                         currentSong = currentSong,

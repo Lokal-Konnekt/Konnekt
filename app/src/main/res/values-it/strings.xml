@@ -1258,4 +1258,7 @@
     <string name="theme_midnight">Mezzanotte</string>
     <string name="theme_ember">Brace</string>
     <string name="replay_load_error">Impossibile caricare la cronologia di ascolto. Riprova.</string>
+    <string name="new_design">Nuovo design</string>
+    <string name="new_design_subtitle">Prova la nuova interfaccia Liquid Glass con più movimento e uno stile rinnovato</string>
+    <string name="new_design_enabled_subtitle">Nuovo design attivo · vetro animato, transizioni fluide e lettore migliorato</string>
 </resources>

@@ -1291,4 +1291,7 @@
     <string name="theme_midnight">Medianoche</string>
     <string name="theme_ember">Brasa</string>
     <string name="replay_load_error">No se pudo cargar tu historial de escucha. Inténtalo de nuevo.</string>
+    <string name="new_design">Nuevo diseño</string>
+    <string name="new_design_subtitle">Prueba la nueva interfaz Liquid Glass con más movimiento y un estilo renovado</string>
+    <string name="new_design_enabled_subtitle">Nuevo diseño activo · cristal animado, transiciones fluidas y reproductor mejorado</string>
 </resources>

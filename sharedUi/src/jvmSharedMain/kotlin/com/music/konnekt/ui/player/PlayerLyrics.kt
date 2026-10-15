@@ -49,6 +49,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Language
 import androidx.compose.material.icons.rounded.Translate
+import androidx.compose.material.icons.rounded.Replay
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -1615,6 +1616,7 @@ internal fun LyricsPanel(
     // the blur and the movement are one gesture.
     val focusLine = if (leadLine >= 0) leadLine else scrollLine
     val listState = rememberLazyListState()
+    val lyricsScope = rememberCoroutineScope()
     LaunchedEffect(listState) {
         snapshotFlow { listState.isScrollInProgress }.collect(onScrollingChange)
     }
@@ -1640,6 +1642,7 @@ internal fun LyricsPanel(
     val reduceDynamicBlur by PlayerSettings.reduceDynamicBlur.collectAsStateWithLifecycle()
     val lyricsBlur by PlayerSettings.lyricsBlur.collectAsStateWithLifecycle()
     val reduceAnimation by PlayerSettings.reduceAnimation.collectAsStateWithLifecycle()
+    val lyricsTextScale by PlayerSettings.lyricsTextScale.collectAsStateWithLifecycle()
 
     val glowing = !reduceAnimation && !reduceDynamicBlur && lyricsBlur &&
         renderEffectBlurSupported
@@ -1781,9 +1784,10 @@ internal fun LyricsPanel(
         return
     }
 
+    Box(modifier = modifier) {
     LazyColumn(
         state = listState,
-        modifier = modifier
+        modifier = Modifier
             .bleedHorizontally(PLAYER_GUTTER)
             .nestedScroll(controlsOnScroll)
             .nestedScroll(keepScroll)
@@ -1960,15 +1964,15 @@ internal fun LyricsPanel(
                 val alignEnd = duet && line.alignment == LyricAlignment.End
                 val style = if (isSynced) {
                     MaterialTheme.typography.headlineLarge.copy(
-                        fontSize = 34.sp,
-                        lineHeight = 41.sp,
+                        fontSize = 34.sp * lyricsTextScale,
+                        lineHeight = 41.sp * lyricsTextScale,
                         fontWeight = FontWeight.ExtraBold,
                         textAlign = if (alignEnd) TextAlign.End else TextAlign.Start,
                     )
                 } else {
                     MaterialTheme.typography.headlineMedium.copy(
-                        fontSize = 30.sp,
-                        lineHeight = 38.sp,
+                        fontSize = 30.sp * lyricsTextScale,
+                        lineHeight = 38.sp * lyricsTextScale,
                         fontWeight = FontWeight.ExtraBold,
                         textAlign = if (alignEnd) TextAlign.End else TextAlign.Start,
                     )
@@ -2263,6 +2267,32 @@ internal fun LyricsPanel(
                 }
             }
         }
+    }
+    if (browsingByDrag && !picking) {
+        Row(
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .padding(bottom = 28.dp)
+                .clip(RoundedCornerShape(50))
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.86f))
+                .clickable {
+                    browsingByDrag = false
+                    if (focusLine >= 0) {
+                        lyricsScope.launch { listState.animateScrollToItem(focusLine, scrollOffset = 0) }
+                    }
+                }
+                .padding(horizontal = 16.dp, vertical = 10.dp),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(8.dp),
+        ) {
+            Icon(Icons.Rounded.Replay, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
+            Text(
+                text = stringResource(Res.string.return_to_current_lyrics),
+                color = MaterialTheme.colorScheme.onSurface,
+                style = MaterialTheme.typography.labelLarge,
+            )
+        }
+    }
     }
 }
 

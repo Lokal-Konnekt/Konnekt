@@ -883,6 +883,10 @@
 
     <string name="listen_as">Écouter en tant que</string>
 
+    <string name="lyrics_text_size">Taille du texte des paroles</string>
+    <string name="lyrics_text_size_subtitle">Ajuste la taille de lecture dans la vue complète des paroles</string>
+    <string name="return_to_current_lyrics">Revenir aux paroles actuelles</string>
+
     <string name="lyrics_debug_logs">Journaux de débogage des paroles</string>
 
     <string name="lyrics_debug_logs_subtitle">Affiche les requêtes API en direct dans le panneau des paroles</string>

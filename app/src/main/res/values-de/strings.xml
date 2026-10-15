@@ -1319,4 +1319,7 @@
     <string name="theme_midnight">Mitternacht</string>
     <string name="theme_ember">Glut</string>
     <string name="replay_load_error">Dein Hörverlauf konnte nicht geladen werden. Bitte versuche es erneut.</string>
+    <string name="new_design">Neues Design</string>
+    <string name="new_design_subtitle">Probiere die neue Liquid-Glass-Oberfläche mit mehr Bewegung und frischem Design aus</string>
+    <string name="new_design_enabled_subtitle">Neues Design aktiv · animiertes Glas, flüssige Übergänge und verbesserter Player</string>
 </resources>

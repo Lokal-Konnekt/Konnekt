@@ -1324,4 +1324,7 @@
     <string name="theme_midnight">חצות</string>
     <string name="theme_ember">גחלת</string>
     <string name="replay_load_error">לא ניתן לטעון את היסטוריית ההאזנה. יש לנסות שוב.</string>
+    <string name="new_design">עיצוב חדש</string>
+    <string name="new_design_subtitle">אפשר לנסות ממשק Liquid Glass חדש עם יותר תנועה ומראה רענן</string>
+    <string name="new_design_enabled_subtitle">העיצוב החדש פעיל · זכוכית מונפשת, מעברים חלקים ונגן משופר</string>
 </resources>

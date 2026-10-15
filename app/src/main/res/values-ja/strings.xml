@@ -1297,4 +1297,7 @@
     <string name="theme_midnight">真夜中</string>
     <string name="theme_ember">残り火</string>
     <string name="replay_load_error">再生履歴を読み込めませんでした。もう一度お試しください。</string>
+    <string name="new_design">新しいデザイン</string>
+    <string name="new_design_subtitle">動きが豊かで新鮮な Liquid Glass インターフェースを試す</string>
+    <string name="new_design_enabled_subtitle">新しいデザインが有効 · 動くガラス、滑らかな画面切り替え、進化したプレーヤー</string>
 </resources>
