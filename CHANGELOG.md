@@ -1,5 +1,31 @@
 # 🎵 Konnekt Changelog
 
+## Unreleased — New Design & smarter Automix
+
+### ✨ An entirely new look, when you choose it
+
+- Added **Settings → Appearance → New design**, disabled by default so the existing interface remains unchanged unless you opt in.
+- Introduced a new ink, cyan, lilac and rose visual system with larger rounded surfaces and an ambient liquid background.
+- Enabled the existing Liquid Glass chrome automatically while New design is active, without changing the saved Liquid Glass preference.
+- Added smoother page transitions, a more expressive player backdrop and a special animated Automix indicator for the new interface.
+- Kept **Reduce animation** effective: the ambient motion and Automix ornament settle when reduced motion is enabled.
+- Added English and French labels for the new setting and kept the preference in the normal settings backup flow.
+
+### 🎚️ Automix timing and feedback
+
+- Use a dedicated six-second Automix fallback instead of inheriting a hidden manual crossfade value.
+- Ignore provisional outgoing-track analysis when choosing the exit point; head analysis may still help prepare the incoming track.
+- Freeze the selected transition shortly before arming so late analysis cannot move the mix under the playhead.
+- Applied the same stability rules to the desktop playback engine.
+- Kept the beat-linked progress animation while adding a clearer visual cue during a real blend.
+
+### 🧰 Reproducible development
+
+- Added `Makefile`, `Dockerfile`, `.dockerignore` and `.env.example` for repeatable desktop checks and clean Linux setup.
+- Documented the pinned Gradle wrapper, Java toolchains, test command and Docker workflow in the README.
+
+---
+
 ## 1.3.4 — Smoother lyrics, better discovery & updates in Konnekt
 
 ### 🎤 Lyrics that arrive sooner
