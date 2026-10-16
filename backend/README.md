@@ -271,9 +271,16 @@ Check it with `curl https://<domain>/healthz`. Logs are in
 
 ## Deploying to Render
 
-The blueprint is `render.yaml`, but Render reads blueprints from the repository
-root and this one lives in `backend/`. Either copy it up a level, or create the
-service by hand — which is one screen:
+The Blueprint is [`../render.yaml`](../render.yaml), at the repository root.
+For the simplest setup, open the deployment link and review the single Free
+service before creating it:
+
+[Deploy Konnekt Listen Together to Render](https://render.com/deploy?repo=https://github.com/Lokal-Konnekt/Konnekt)
+
+The Blueprint selects Frankfurt, one instance and a health check at `/healthz`.
+It turns automatic deploys off, so upstream pushes do not restart your parties.
+Use **Manual Deploy → Deploy latest commit** in Render when you want a newer
+server version. You can also create the service by hand:
 
 - **New → Web Service**, connect this repo
 - **Root Directory** `backend`

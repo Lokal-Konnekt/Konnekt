@@ -6,6 +6,7 @@
 - Added visible waiting, empty, updating, queued, ready and error states for smart offline downloads, with a manual refresh action.
 - Saved lyrics timing offsets per song on Android and desktop. Existing global offsets remain the starting value for songs without a saved correction.
 - Updated the Listen Together hosting guide with the current Render Free behavior and the status of the old default server URL.
+- Moved the Render Blueprint to the repository root and added a direct deployment link for a single Frankfurt Free instance.
 
 ---
 

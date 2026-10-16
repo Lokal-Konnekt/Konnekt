@@ -71,6 +71,10 @@ The Android interface supports **16 languages**: English, French, German, Spanis
 
 See the [folder-by-folder guide](docs/PROJECT_STRUCTURE.md).
 
+To host Listen Together, use the [Render Free deployment guide](backend/README.md#deploying-to-render)
+and the root [`render.yaml`](render.yaml) Blueprint. The service keeps parties in
+memory, so a restart or idle spin-down ends active rooms.
+
 ## 🛠️ Build Android
 
 Use **JDK 17**, Android **SDK platform 37**, **NDK 26.3.11579264**, **CMake 3.22.1** and the included Gradle wrapper. The app targets API 36.
