@@ -14,6 +14,7 @@ offline listening and a customizable player.
 </div>
 
 ---
+<img width="1122" height="1402" alt="adsscreen" src="https://github.com/user-attachments/assets/edd1811b-ae9e-4323-a079-b75d2c04c2a3" />
 
 ## 🎧 Your music, in one place
 
