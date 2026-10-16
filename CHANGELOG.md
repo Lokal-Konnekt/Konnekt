@@ -1,6 +1,6 @@
 # 🎵 Konnekt Changelog
 
-## Unreleased — Addon search and a more expressive player
+## 1.4.2 — Addon search and a more expressive player
 
 ### 🔎 Search where the best copy lives
 
@@ -12,6 +12,8 @@
 
 - Added a persisted **Album artwork size** setting with Small, Medium and Large grid cards across local music, downloads and library pages.
 - During an active Automix handoff, the player briefly names the incoming track so the transition is easier to follow.
+
+**Android version:** `1.4.2` · **versionCode:** `14002` · **Package:** `com.music.konnekt`
 
 ---
 
