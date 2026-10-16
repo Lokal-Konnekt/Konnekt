@@ -1,10 +1,12 @@
 # 🎵 Konnekt Changelog
 
-## Unreleased — Discord and update polish
+## 1.4.3 — Discord and update polish
 
 - Fixed Rich Presence button routing: the first button now opens the Konnekt Discord invite instead of YouTube Music.
 - Migrated the Discord gateway/API paths to v10 and only mark a presence as live after Discord accepts the activity push.
 - Reworked the Android GitHub update prompt into a frosted Konnekt sheet with clearer installed/new version context, release-page fallback, readable release notes, and state-specific actions.
+
+**Android version:** `1.4.3` · **versionCode:** `14003` · **Package:** `com.music.konnekt`
 
 ---
 
