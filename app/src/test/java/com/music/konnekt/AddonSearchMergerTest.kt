@@ -34,15 +34,29 @@ class AddonSearchMergerTest {
         assertEquals(listOf("first"), result.map(Song::videoId))
     }
 
+    @Test
+    fun keepsNonLatinRecordingsDistinct() {
+        val result = mergeAddonSearchResults(
+            listOf(
+                AddonSearchCandidate(song("one", "夜に駆ける", "YOASOBI"), 0),
+                AddonSearchCandidate(song("two", "群青", "YOASOBI"), 0),
+            ),
+        )
+
+        assertEquals(listOf("one", "two"), result.map(Song::videoId))
+    }
+
     private fun candidate(id: String, quality: String, rank: Int) = AddonSearchCandidate(
-        song = Song(
-            videoId = id,
-            title = "Song (Remastered)",
-            artist = "Artist feat. Guest",
-            thumbnailUrl = null,
-            fromAutoplay = false,
-            sourceQuality = quality,
-        ),
+        song = song(id, "Song (Remastered)", "Artist feat. Guest", quality),
         sourceRank = rank,
+    )
+
+    private fun song(id: String, title: String, artist: String, quality: String? = null) = Song(
+        videoId = id,
+        title = title,
+        artist = artist,
+        thumbnailUrl = null,
+        fromAutoplay = false,
+        sourceQuality = quality,
     )
 }

@@ -53,6 +53,8 @@ private fun recordingKey(song: Song): String {
 private fun normalize(value: String): String = Normalizer.normalize(value, Normalizer.Form.NFKD)
     .replace("\\p{M}".toRegex(), "")
     .lowercase(Locale.ROOT)
-    .replace("[^a-z0-9]+".toRegex(), " ")
+    // Keep every Unicode letter/number: Japanese, Cyrillic and Arabic addon
+    // catalogues must not all collapse into the same empty search key.
+    .replace("[^\\p{L}\\p{N}]+".toRegex(), " ")
     .trim()
     .replace("\\s+".toRegex(), " ")
