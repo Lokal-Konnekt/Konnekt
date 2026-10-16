@@ -1,5 +1,20 @@
 # 🎵 Konnekt Changelog
 
+## Unreleased — Addon search and a more expressive player
+
+### 🔎 Search where the best copy lives
+
+- Added a **YouTube Music / Addons / Library** selector directly below the search field.
+- Addons search all eligible configured addon sources concurrently, merges duplicate recordings, and keeps the highest advertised quality instead of showing one row per server.
+- Preserved non-Latin titles when comparing addon results, so Japanese, Cyrillic and Arabic catalogues do not collapse into one result.
+
+### 🖼️ Artwork and Automix polish
+
+- Added a persisted **Album artwork size** setting with Small, Medium and Large grid cards across local music, downloads and library pages.
+- During an active Automix handoff, the player briefly names the incoming track so the transition is easier to follow.
+
+---
+
 ## 1.4.1 — More personal listening and reliable updates
 
 ### 🎧 Home and lyrics
