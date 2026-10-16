@@ -1335,4 +1335,19 @@
     <string name="saved_queue_playlist_name">कतार — %1$s</string>
     <string name="saved_queue_playlist_success">कतार स्थानीय प्लेलिस्ट में सहेजी गई।</string>
     <string name="shared_queue_title">Konnekt कतार</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">ऐडऑन</string>
+    <string name="no_addons_configured">कोई ऐडऑन कॉन्फ़िगर नहीं है। सेटिंग → स्रोत में एक जोड़ें।</string>
+    <string name="album_artwork_size">एल्बम कवर का आकार</string>
+    <string name="album_artwork_size_subtitle">ग्रिड दृश्य में एल्बम कवर का आकार चुनें</string>
+    <string name="album_artwork_size_small">छोटा</string>
+    <string name="album_artwork_size_medium">मध्यम</string>
+    <string name="album_artwork_size_large">बड़ा</string>
+    <string name="update_release_page_body">Konnekt %1$s उपलब्ध है। नोट्स पढ़ने और सही बिल्ड डाउनलोड करने के लिए GitHub रिलीज़ पेज खोलें।</string>
+    <string name="update_new_version">संस्करण %1$s</string>
+    <string name="update_current_version">इंस्टॉल किया गया संस्करण: %1$s</string>
+    <string name="lyrics_text_size">गीत के बोल का टेक्स्ट आकार</string>
+    <string name="lyrics_text_size_subtitle">बोलों के पूरे दृश्य में टेक्स्ट का आकार बदलें</string>
+    <string name="return_to_current_lyrics">मौजूदा बोलों पर लौटें</string>
+    <string name="pipeline_pcm_data_rate">PCM डेटा दर</string>
 </resources>

@@ -1367,4 +1367,19 @@
     <string name="saved_queue_playlist_name">Очередь — %1$s</string>
     <string name="saved_queue_playlist_success">Очередь сохранена в локальных плейлистах.</string>
     <string name="shared_queue_title">Очередь Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Дополнения</string>
+    <string name="no_addons_configured">Дополнения не настроены. Добавьте их в разделе «Настройки → Источники».</string>
+    <string name="album_artwork_size">Размер обложек альбомов</string>
+    <string name="album_artwork_size_subtitle">Выберите размер обложек в режиме сетки</string>
+    <string name="album_artwork_size_small">Маленький</string>
+    <string name="album_artwork_size_medium">Средний</string>
+    <string name="album_artwork_size_large">Большой</string>
+    <string name="update_release_page_body">Доступен Konnekt %1$s. Откройте страницу выпуска на GitHub, чтобы прочитать примечания и скачать подходящую сборку.</string>
+    <string name="update_new_version">Версия %1$s</string>
+    <string name="update_current_version">Установленная версия: %1$s</string>
+    <string name="lyrics_text_size">Размер текста песен</string>
+    <string name="lyrics_text_size_subtitle">Настройте размер текста в полном режиме просмотра</string>
+    <string name="return_to_current_lyrics">Вернуться к текущей строке</string>
+    <string name="pipeline_pcm_data_rate">Скорость данных PCM</string>
 </resources>

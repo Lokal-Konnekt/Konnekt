@@ -202,4 +202,9 @@
     <string name="search_library_no_results">אין דבר במוזיקה המקומית שתואם ל-„%1$s”.</string>
     <string name="save_queue_as_playlist">שמירת התור כפלייליסט</string>
     <string name="share_queue">שיתוף התור</string>
+    <string name="automix_next_track">הבא בתור</string>
+    <string name="return_to_current_lyrics">חזרה למילים הנוכחיות</string>
+    <string name="home_filter_discovery">גילוי</string>
+    <string name="home_filter_energy">אנרגיה</string>
+    <string name="home_filter_chill">רוגע</string>
 </resources>

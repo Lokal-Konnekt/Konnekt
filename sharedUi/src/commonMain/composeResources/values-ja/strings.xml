@@ -202,4 +202,9 @@
     <string name="search_library_no_results">ローカル音楽に「%1$s」に一致するものはありません。</string>
     <string name="save_queue_as_playlist">再生キューをプレイリストに保存</string>
     <string name="share_queue">再生キューを共有</string>
+    <string name="automix_next_track">次の曲</string>
+    <string name="return_to_current_lyrics">現在の歌詞に戻る</string>
+    <string name="home_filter_discovery">発見</string>
+    <string name="home_filter_energy">元気</string>
+    <string name="home_filter_chill">リラックス</string>
 </resources>

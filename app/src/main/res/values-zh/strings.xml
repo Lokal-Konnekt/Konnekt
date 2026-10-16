@@ -1312,4 +1312,19 @@
     <string name="saved_queue_playlist_name">播放队列 — %1$s</string>
     <string name="saved_queue_playlist_success">播放队列已保存到本地播放列表。</string>
     <string name="shared_queue_title">Konnekt 播放队列</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">扩展</string>
+    <string name="no_addons_configured">尚未配置扩展。请在“设置 → 来源”中添加。</string>
+    <string name="album_artwork_size">专辑封面大小</string>
+    <string name="album_artwork_size_subtitle">选择网格视图中的专辑封面大小</string>
+    <string name="album_artwork_size_small">小</string>
+    <string name="album_artwork_size_medium">中</string>
+    <string name="album_artwork_size_large">大</string>
+    <string name="update_release_page_body">Konnekt %1$s 已发布。打开 GitHub 发布页面阅读更新说明并下载适合的安装包。</string>
+    <string name="update_new_version">版本 %1$s</string>
+    <string name="update_current_version">已安装版本：%1$s</string>
+    <string name="lyrics_text_size">歌词字号</string>
+    <string name="lyrics_text_size_subtitle">调整完整歌词视图中的文字大小</string>
+    <string name="return_to_current_lyrics">返回当前歌词</string>
+    <string name="pipeline_pcm_data_rate">PCM 数据速率</string>
 </resources>

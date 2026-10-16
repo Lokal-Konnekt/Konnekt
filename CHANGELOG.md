@@ -1,12 +1,29 @@
 # 🎵 Konnekt Changelog
 
-## 1.5.0 — A more useful queue and smarter offline listening
+## 1.5.0 — Your music, ready to share and take offline
 
-- Save the current queue and upcoming tracks as a local playlist, or share the running order through Android's share sheet.
-- Added an opt-in smart offline selection drawn from recently and frequently played songs. On an unmetered connection, Konnekt refreshes it when the app opens, using the chosen download quality and a 250 MB, 500 MB or 1 GB storage target.
-- Added visible waiting, empty, updating, queued, ready and error states for smart offline downloads, with a manual refresh action.
-- Saved lyrics timing offsets per song on Android and desktop. Existing global offsets remain the starting value for songs without a saved correction.
-- Connected Listen Together's default address to the now-live Render service and added a direct deployment link for a single Frankfurt Free instance.
+### 🎶 Queue and playlists
+
+- Save the current track and upcoming queue as a local playlist with one tap.
+- Share the queue's track list through the Android share sheet.
+
+### 📥 Smart offline
+
+- Opt in to automatic downloads based on recent and frequent listening. Konnekt refreshes the selection when the app opens on an unmetered connection.
+- Choose a 250 MB, 500 MB or 1 GB storage target; downloads use your selected audio quality.
+- See clear waiting, empty, updating, queued, ready and error states, and refresh the selection manually.
+
+### 🎤 Lyrics and listening together
+
+- Save synchronized lyrics timing adjustments separately for each song on Android and desktop.
+- Listen Together now uses the live Render server by default.
+
+### 🌍 Languages and reliability
+
+- Filled every missing Android and shared interface resource key across all 15 supported non-English languages.
+- Revised 124 French interface strings, including Android Auto, Cast, equalizer controls and audio details.
+- Checked translated format arguments to keep version labels and other dynamic text intact.
+- Includes the Discord and Android update dialog improvements from 1.4.3, the previous unreleased version.
 
 **Android version:** `1.5.0` · **versionCode:** `15000` · **Package:** `com.music.konnekt`
 

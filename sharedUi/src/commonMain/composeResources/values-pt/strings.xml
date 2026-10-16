@@ -202,4 +202,9 @@
     <string name="search_library_no_results">Nada na Música local corresponde a “%1$s”.</string>
     <string name="save_queue_as_playlist">Salvar fila como playlist</string>
     <string name="share_queue">Compartilhar fila</string>
+    <string name="automix_next_track">Próxima faixa</string>
+    <string name="return_to_current_lyrics">Voltar à letra atual</string>
+    <string name="home_filter_discovery">Descobertas</string>
+    <string name="home_filter_energy">Energia</string>
+    <string name="home_filter_chill">Relaxar</string>
 </resources>

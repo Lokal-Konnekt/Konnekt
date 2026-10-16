@@ -387,7 +387,7 @@
     <string name="less">Moins</string>
     <string name="song_count_with_minutes">%1$s, %2$d minutes</string>
     <string name="song_count_with_duration">%1$s, %2$s</string>
-    <string name="song_count_with_hours_minutes">%1$s, %2$s %3$d minutes</string>
+    <string name="song_count_with_hours_minutes">%1$s, %2$s et %3$d minutes</string>
     <plurals name="hour_count">
         <item quantity="one">%1$d heure</item>
         <item quantity="other">%1$d heures</item>
@@ -630,7 +630,7 @@
     <string name="smb_not_configured">Connecte un partage dans Sources</string>
     <string name="smb_empty">Aucun fichier audio trouvé sur le partage SMB. Vérifie le serveur dans Sources.</string>
     <string name="smb_description">Relie Konnekt à un dossier de musique partagé : un NAS ou un partage Windows via SMB.</string>
-    <string name="smb_server_hint">nas.local or 192.168.1.10:4445</string>
+    <string name="smb_server_hint">nas.local ou 192.168.1.10:4445</string>
     <string name="smb_share_hint">Nom du partage, ex. Music</string>
     <string name="smb_folder_hint">Dossier (facultatif)</string>
     <string name="smb_disconnect">Déconnecter</string>
@@ -1040,120 +1040,120 @@
     <string name="use_this_profile">Utiliser ce profil</string>
 
 
-    <string name="lyrics_offset">Lyrics offset</string>
+    <string name="lyrics_offset">Décalage des paroles</string>
 
 
 
 
 
-    <string name="auto_quick_picks">Quick picks</string>
+    <string name="auto_quick_picks">Suggestions</string>
 
-    <string name="auto_recents">Recent</string>
+    <string name="auto_recents">Écoutés récemment</string>
 
-    <string name="auto_liked">Liked songs</string>
+    <string name="auto_liked">Titres favoris</string>
 
-    <string name="auto_login_title">Sign in to YouTube on your phone</string>
+    <string name="auto_login_title">Connectez-vous à YouTube sur votre téléphone</string>
 
-    <string name="auto_login_subtitle">Open Konnekt on your phone to sign in</string>
+    <string name="auto_login_subtitle">Ouvrez Konnekt sur votre téléphone pour vous connecter</string>
 
-    <string name="auto_empty_recents_title">No recent songs</string>
+    <string name="auto_empty_recents_title">Aucun titre récent</string>
 
-    <string name="auto_empty_recents_subtitle">Songs you play will appear here</string>
+    <string name="auto_empty_recents_subtitle">Vos titres écoutés apparaîtront ici</string>
 
-    <string name="auto_empty_quick_picks_title">No suggestions</string>
+    <string name="auto_empty_quick_picks_title">Aucune suggestion</string>
 
-    <string name="auto_empty_quick_picks_subtitle">Check your connection and try again</string>
+    <string name="auto_empty_quick_picks_subtitle">Vérifiez votre connexion et réessayez</string>
 
-    <string name="auto_empty_playlists_title">No playlists available</string>
+    <string name="auto_empty_playlists_title">Aucune playlist disponible</string>
 
-    <string name="auto_empty_playlists_subtitle">Check your connection and try again</string>
+    <string name="auto_empty_playlists_subtitle">Vérifiez votre connexion et réessayez</string>
 
-    <string name="auto_empty_liked_title">No liked songs</string>
+    <string name="auto_empty_liked_title">Aucun titre favori</string>
 
-    <string name="auto_empty_liked_subtitle">Tap the heart on a song to save it here</string>
+    <string name="auto_empty_liked_subtitle">Touchez le cœur sur un titre pour le retrouver ici</string>
 
-    <string name="auto_empty_offline_title">No offline songs</string>
+    <string name="auto_empty_offline_title">Aucun titre hors ligne</string>
 
-    <string name="auto_empty_offline_subtitle">Download songs on your phone to listen here</string>
+    <string name="auto_empty_offline_subtitle">Téléchargez des titres sur votre téléphone pour les écouter ici</string>
 
-    <string name="auto_unavailable_title">Content unavailable</string>
+    <string name="auto_unavailable_title">Contenu indisponible</string>
 
-    <string name="auto_unavailable_subtitle">Reopen the folder and try again</string>
+    <string name="auto_unavailable_subtitle">Rouvrez le dossier et réessayez</string>
 
-    <string name="settings_search_hint">Search settings</string>
+    <string name="settings_search_hint">Rechercher dans les paramètres</string>
 
-    <string name="settings_search_empty">No settings match “%1$s”</string>
+    <string name="settings_search_empty">Aucun paramètre ne correspond à « %1$s »</string>
 
-    <string name="prefer_music_only">Prefer music-only version</string>
+    <string name="prefer_music_only">Privilégier la version audio</string>
 
-    <string name="prefer_music_only_subtitle">For music videos, show the video details while finding and loading the catalogue audio version</string>
+    <string name="prefer_music_only_subtitle">Pour les clips, affiche les détails de la vidéo tout en recherchant et en chargeant la version audio du catalogue</string>
     <string name="smart_version_alignment">Alignement audio intelligent</string>
     <string name="smart_version_alignment_subtitle">Analyse les formes d\'onde pour retrouver le moment de lecture exactement correspondant</string>
 
-    <string name="equalizer_footer">Shapes the sound inside Konnekt, before it reaches the system.</string>
+    <string name="equalizer_footer">Modifie le son dans Konnekt avant sa sortie vers le système.</string>
 
-    <string name="equalizer_dynamic">Dynamic</string>
+    <string name="equalizer_dynamic">Dynamique</string>
 
-    <string name="equalizer_manual">Manual</string>
+    <string name="equalizer_manual">Manuel</string>
 
-    <string name="equalizer_tone">Tone</string>
+    <string name="equalizer_tone">Tonalité</string>
 
-    <string name="equalizer_tilt">Tilt</string>
+    <string name="equalizer_tilt">Inclinaison</string>
 
     <string name="equalizer_contour">Contour</string>
 
-    <string name="equalizer_broad">Broad</string>
+    <string name="equalizer_broad">Large</string>
 
-    <string name="equalizer_focused">Focused</string>
+    <string name="equalizer_focused">Précis</string>
 
-    <string name="equalizer_broad_footer">Drag left for a warmer sound and right for a brighter one; down scoops the middle, up brings it forward. Broad moves wide stretches of the spectrum at once.</string>
+    <string name="equalizer_broad_footer">Glissez vers la gauche pour un son plus chaud, vers la droite pour un son plus clair, vers le bas pour atténuer les médiums ou vers le haut pour les renforcer. Le mode Large agit sur de grandes plages de fréquences.</string>
 
-    <string name="equalizer_focused_footer">Drag left for a warmer sound and right for a brighter one; down scoops the middle, up brings it forward. Focused works on narrower stretches, so it changes less around what it moves.</string>
+    <string name="equalizer_focused_footer">Glissez vers la gauche pour un son plus chaud, vers la droite pour un son plus clair, vers le bas pour atténuer les médiums ou vers le haut pour les renforcer. Le mode Précis agit sur des plages plus étroites.</string>
 
-    <string name="equalizer_preset">Preset</string>
+    <string name="equalizer_preset">Préréglage</string>
 
-    <string name="equalizer_bands">Bands</string>
+    <string name="equalizer_bands">Bandes</string>
 
-    <string name="equalizer_bands_footer">Moving a band leaves the preset behind and the curve becomes your own.</string>
+    <string name="equalizer_bands_footer">Modifier une bande désactive le préréglage et crée votre propre courbe.</string>
 
-    <string name="equalizer_reset">Reset all bands</string>
+    <string name="equalizer_reset">Réinitialiser toutes les bandes</string>
 
     <string name="equalizer_balance">Balance</string>
 
-    <string name="equalizer_balance_left">L</string>
+    <string name="equalizer_balance_left">G</string>
 
-    <string name="equalizer_balance_right">R</string>
+    <string name="equalizer_balance_right">D</string>
 
-    <string name="equalizer_balance_footer">Shifts the sound towards one ear by quietening the other.</string>
+    <string name="equalizer_balance_footer">Déplace le son vers une oreille en réduisant le volume de l’autre.</string>
     <string name="equalizer_bitstream_title">Inactif pour le moment</string>
     <string name="equalizer_bitstream_subtitle">Ce titre est envoyé à la sortie sans être décodé</string>
     <string name="equalizer_bitstream_footer">L\'égaliseur travaille sur de l\'audio décodé. Ce titre est transmis en bitstream pour que ton appareil le décode, il n\'y a donc aucun échantillon à filtrer ici.</string>
 
-    <string name="system_equalizer">System equalizer</string>
+    <string name="system_equalizer">Égaliseur système</string>
 
-    <string name="system_equalizer_subtitle">Your device\'s own panel</string>
+    <string name="system_equalizer_subtitle">Panneau audio de votre appareil</string>
 
-    <string name="system_equalizer_footer">Runs after Konnekt\'s, on the whole audio session. Using both applies both.</string>
+    <string name="system_equalizer_footer">S’applique après l’égaliseur de Konnekt à toute la session audio. Activer les deux cumule leurs effets.</string>
 
-    <string name="eq_preset_flat">Flat</string>
+    <string name="eq_preset_flat">Neutre</string>
 
-    <string name="eq_preset_acoustic">Acoustic</string>
+    <string name="eq_preset_acoustic">Acoustique</string>
 
-    <string name="eq_preset_bass_boost">Bass boost</string>
+    <string name="eq_preset_bass_boost">Renforcer les basses</string>
 
-    <string name="eq_preset_bass_cut">Bass cut</string>
+    <string name="eq_preset_bass_cut">Atténuer les basses</string>
 
-    <string name="eq_preset_vocal">Vocal</string>
+    <string name="eq_preset_vocal">Voix</string>
 
-    <string name="eq_preset_treble_boost">Treble boost</string>
+    <string name="eq_preset_treble_boost">Renforcer les aigus</string>
 
-    <string name="eq_preset_treble_cut">Treble cut</string>
+    <string name="eq_preset_treble_cut">Atténuer les aigus</string>
 
-    <string name="eq_preset_loudness">Loudness</string>
+    <string name="eq_preset_loudness">Correction physiologique</string>
 
-    <string name="eq_preset_spoken_word">Spoken word</string>
+    <string name="eq_preset_spoken_word">Voix parlée</string>
 
-    <string name="eq_preset_electronic">Electronic</string>
+    <string name="eq_preset_electronic">Électronique</string>
 
     <string name="eq_preset_rock">Rock</string>
 
@@ -1161,91 +1161,91 @@
 
     <string name="eq_preset_jazz">Jazz</string>
 
-    <string name="eq_preset_classical">Classical</string>
+    <string name="eq_preset_classical">Classique</string>
 
-    <string name="eq_preset_small_speakers">Small speakers</string>
+    <string name="eq_preset_small_speakers">Petits haut-parleurs</string>
 
-    <string name="eq_preset_late_night">Late night</string>
+    <string name="eq_preset_late_night">Écoute nocturne</string>
 
-    <string name="eq_preset_custom">Custom</string>
+    <string name="eq_preset_custom">Personnalisé</string>
 
-    <string name="translation_language">Translation language</string>
+    <string name="translation_language">Langue de traduction</string>
 
-    <string name="translation_language_description">The language the translate button turns lyrics into.</string>
+    <string name="translation_language_description">Langue utilisée par le bouton de traduction des paroles.</string>
 
-    <string name="translation_language_app_default">App language</string>
+    <string name="translation_language_app_default">Langue de l’application</string>
 
-    <string name="translation_language_subtitle">Follows the app language</string>
+    <string name="translation_language_subtitle">Suit la langue de l’application</string>
 
-    <string name="search_languages">Search languages</string>
+    <string name="search_languages">Rechercher une langue</string>
 
-    <string name="no_languages_match">No languages match</string>
+    <string name="no_languages_match">Aucune langue correspondante</string>
 
 
 
-    <string name="audio_pipeline">Audio Pipeline</string>
-    <string name="cast_dialog_title">Cast</string>
-    <string name="cast_dialog_subtitle">Play on a Chromecast or Google Cast speaker</string>
-    <string name="cast_searching">Looking for devices…</string>
-    <string name="cast_searching_hint">Your phone and the receiver need to be on the same Wi-Fi network.</string>
-    <string name="cast_device_connecting">Connecting…</string>
-    <string name="cast_device_connected">Casting</string>
-    <string name="cast_stop">Stop casting</string>
-    <string name="cast_track_unsupported">This track can\'t be cast</string>
-    <string name="cast_connect_failed">Couldn\'t connect to the receiver</string>
+    <string name="audio_pipeline">Chaîne audio</string>
+    <string name="cast_dialog_title">Diffuser</string>
+    <string name="cast_dialog_subtitle">Lire sur un Chromecast ou une enceinte Google Cast</string>
+    <string name="cast_searching">Recherche d’appareils…</string>
+    <string name="cast_searching_hint">Votre téléphone et le récepteur doivent être sur le même réseau Wi-Fi.</string>
+    <string name="cast_device_connecting">Connexion…</string>
+    <string name="cast_device_connected">Diffusion en cours</string>
+    <string name="cast_stop">Arrêter la diffusion</string>
+    <string name="cast_track_unsupported">Ce titre ne peut pas être diffusé</string>
+    <string name="cast_connect_failed">Connexion au récepteur impossible</string>
     <string name="audio_pipeline_subtitle">Chemin du signal en direct, du décodeur à la sortie</string>
 
-    <string name="pipeline_track_info">Track Info</string>
+    <string name="pipeline_track_info">Informations sur le titre</string>
 
-    <string name="pipeline_decoder">Decoder</string>
+    <string name="pipeline_decoder">Décodeur</string>
 
-    <string name="pipeline_resampler">Resampler</string>
+    <string name="pipeline_resampler">Rééchantillonneur</string>
 
     <string name="pipeline_dsp">DSP</string>
 
-    <string name="pipeline_output_device">Output Device</string>
+    <string name="pipeline_output_device">Périphérique de sortie</string>
 
     <string name="pipeline_source">Source</string>
 
     <string name="pipeline_format">Format</string>
 
-    <string name="pipeline_bit_depth">Bit Depth</string>
+    <string name="pipeline_bit_depth">Profondeur de bits</string>
 
-    <string name="pipeline_sample_rate">Sample Rate</string>
+    <string name="pipeline_sample_rate">Fréquence d’échantillonnage</string>
 
-    <string name="pipeline_bitrate">Bitrate</string>
+    <string name="pipeline_bitrate">Débit binaire</string>
 
-    <string name="pipeline_channels">Channels</string>
+    <string name="pipeline_channels">Canaux</string>
 
-    <string name="pipeline_decoder_name">Decoder Name</string>
+    <string name="pipeline_decoder_name">Nom du décodeur</string>
 
-    <string name="pipeline_io_rate">I/O Rate</string>
+    <string name="pipeline_io_rate">Débit E/S</string>
 
     <string name="pipeline_type">Type</string>
 
-    <string name="pipeline_cutoff">Cutoff</string>
+    <string name="pipeline_cutoff">Fréquence de coupure</string>
 
-    <string name="pipeline_quality">Quality</string>
+    <string name="pipeline_quality">Qualité</string>
 
-    <string name="pipeline_pcm_format">PCM Format</string>
+    <string name="pipeline_pcm_format">Format PCM</string>
 
-    <string name="pipeline_eq_preset">EQ Preset</string>
+    <string name="pipeline_eq_preset">Préréglage de l’égaliseur</string>
 
-    <string name="pipeline_stereo_expand">Stereo Expand</string>
+    <string name="pipeline_stereo_expand">Élargissement stéréo</string>
 
-    <string name="pipeline_buffers">Buffers</string>
+    <string name="pipeline_buffers">Tampons</string>
 
-    <string name="pipeline_output_api">Output API</string>
+    <string name="pipeline_output_api">API de sortie</string>
 
-    <string name="pipeline_device_name">Device Name</string>
+    <string name="pipeline_device_name">Nom de l’appareil</string>
 
 
 
-    <string name="shared_link">Shared link</string>
+    <string name="shared_link">Lien partagé</string>
 
-    <string name="song_will_play_next">Song will play next</string>
+    <string name="song_will_play_next">Le titre sera lu ensuite</string>
 
-    <string name="song_added_to_queue">Song added to queue</string>
+    <string name="song_added_to_queue">Titre ajouté à la file</string>
     <string name="song_added_to_playlist">Ajouté à la playlist</string>
     <string name="song_already_in_playlist">Déjà dans la playlist</string>
     <plurals name="add_to_playlists_count">
@@ -1258,11 +1258,11 @@
     </plurals>
     <string name="party_queue_full">La file est pleine (%d titres maximum dans la session)</string>
 
-    <string name="paxsenix_api_key">PaxSenix API key</string>
+    <string name="paxsenix_api_key">Clé API PaxSenix</string>
 
-    <string name="paxsenix_api_key_configured">PaxSenix API key — configured</string>
+    <string name="paxsenix_api_key_configured">Clé API PaxSenix — configurée</string>
 
-    <string name="paxsenix_api_key_missing">PaxSenix API key — optional, not configured</string>
+    <string name="paxsenix_api_key_missing">Clé API PaxSenix — facultative, non configurée</string>
 
 
 
@@ -1340,4 +1340,16 @@
     <string name="saved_queue_playlist_name">File de lecture — %1$s</string>
     <string name="saved_queue_playlist_success">File enregistrée dans les playlists locales.</string>
     <string name="shared_queue_title">File de lecture Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Addons</string>
+    <string name="no_addons_configured">Aucun addon n’est configuré. Ajoutez-en un dans Paramètres → Sources.</string>
+    <string name="album_artwork_size">Taille des pochettes</string>
+    <string name="album_artwork_size_subtitle">Choisissez la taille des pochettes dans les vues en grille</string>
+    <string name="album_artwork_size_small">Petite</string>
+    <string name="album_artwork_size_medium">Moyenne</string>
+    <string name="album_artwork_size_large">Grande</string>
+    <string name="update_release_page_body">Konnekt %1$s est disponible. Ouvrez la page de la version sur GitHub pour lire les notes et télécharger la version adaptée.</string>
+    <string name="update_new_version">Version %1$s</string>
+    <string name="update_current_version">Version installée : %1$s</string>
+    <string name="pipeline_pcm_data_rate">Débit des données PCM</string>
 </resources>

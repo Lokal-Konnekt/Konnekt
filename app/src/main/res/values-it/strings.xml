@@ -1274,4 +1274,19 @@
     <string name="saved_queue_playlist_name">Coda — %1$s</string>
     <string name="saved_queue_playlist_success">Coda salvata nelle playlist locali.</string>
     <string name="shared_queue_title">Coda Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Addon</string>
+    <string name="no_addons_configured">Nessun addon configurato. Aggiungine uno in Impostazioni → Sorgenti.</string>
+    <string name="album_artwork_size">Dimensione delle copertine</string>
+    <string name="album_artwork_size_subtitle">Scegli la dimensione delle copertine nelle viste a griglia</string>
+    <string name="album_artwork_size_small">Piccola</string>
+    <string name="album_artwork_size_medium">Media</string>
+    <string name="album_artwork_size_large">Grande</string>
+    <string name="update_release_page_body">Konnekt %1$s è disponibile. Apri la pagina della release su GitHub per leggere le note e scaricare la versione adatta.</string>
+    <string name="update_new_version">Versione %1$s</string>
+    <string name="update_current_version">Versione installata: %1$s</string>
+    <string name="lyrics_text_size">Dimensione del testo dei brani</string>
+    <string name="lyrics_text_size_subtitle">Regola la dimensione del testo nella vista completa dei brani</string>
+    <string name="return_to_current_lyrics">Torna al testo corrente</string>
+    <string name="pipeline_pcm_data_rate">Velocità dati PCM</string>
 </resources>

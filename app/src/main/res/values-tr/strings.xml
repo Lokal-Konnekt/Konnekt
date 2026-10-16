@@ -1292,4 +1292,19 @@
     <string name="saved_queue_playlist_name">Sıra — %1$s</string>
     <string name="saved_queue_playlist_success">Sıra yerel çalma listelerine kaydedildi.</string>
     <string name="shared_queue_title">Konnekt sırası</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Eklentiler</string>
+    <string name="no_addons_configured">Yapılandırılmış eklenti yok. Ayarlar → Kaynaklar bölümünden bir tane ekleyin.</string>
+    <string name="album_artwork_size">Albüm kapağı boyutu</string>
+    <string name="album_artwork_size_subtitle">Izgara görünümünde albüm kapaklarının boyutunu seçin</string>
+    <string name="album_artwork_size_small">Küçük</string>
+    <string name="album_artwork_size_medium">Orta</string>
+    <string name="album_artwork_size_large">Büyük</string>
+    <string name="update_release_page_body">Konnekt %1$s kullanılabilir. Notları okumak ve uygun sürümü indirmek için GitHub sürüm sayfasını açın.</string>
+    <string name="update_new_version">Sürüm %1$s</string>
+    <string name="update_current_version">Yüklü sürüm: %1$s</string>
+    <string name="lyrics_text_size">Şarkı sözü yazı boyutu</string>
+    <string name="lyrics_text_size_subtitle">Tam şarkı sözü görünümünde yazı boyutunu ayarlayın</string>
+    <string name="return_to_current_lyrics">Geçerli sözlere dön</string>
+    <string name="pipeline_pcm_data_rate">PCM veri hızı</string>
 </resources>

@@ -1375,4 +1375,19 @@
     <string name="saved_queue_playlist_name">Kolejka — %1$s</string>
     <string name="saved_queue_playlist_success">Kolejkę zapisano w lokalnych playlistach.</string>
     <string name="shared_queue_title">Kolejka Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Dodatki</string>
+    <string name="no_addons_configured">Nie skonfigurowano dodatków. Dodaj jeden w Ustawienia → Źródła.</string>
+    <string name="album_artwork_size">Rozmiar okładek albumów</string>
+    <string name="album_artwork_size_subtitle">Wybierz rozmiar okładek w widoku siatki</string>
+    <string name="album_artwork_size_small">Mały</string>
+    <string name="album_artwork_size_medium">Średni</string>
+    <string name="album_artwork_size_large">Duży</string>
+    <string name="update_release_page_body">Konnekt %1$s jest dostępny. Otwórz stronę wydania w GitHub, aby przeczytać opis zmian i pobrać odpowiednią wersję.</string>
+    <string name="update_new_version">Wersja %1$s</string>
+    <string name="update_current_version">Zainstalowana wersja: %1$s</string>
+    <string name="lyrics_text_size">Rozmiar tekstu utworów</string>
+    <string name="lyrics_text_size_subtitle">Dostosuj rozmiar tekstu w pełnym widoku słów</string>
+    <string name="return_to_current_lyrics">Wróć do bieżących słów</string>
+    <string name="pipeline_pcm_data_rate">Szybkość danych PCM</string>
 </resources>

@@ -1340,4 +1340,19 @@
     <string name="saved_queue_playlist_name">תור — %1$s</string>
     <string name="saved_queue_playlist_success">התור נשמר בפלייליסטים המקומיים.</string>
     <string name="shared_queue_title">התור של Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">תוספים</string>
+    <string name="no_addons_configured">לא הוגדרו תוספים. אפשר להוסיף תוסף בהגדרות ← מקורות.</string>
+    <string name="album_artwork_size">גודל עטיפות האלבומים</string>
+    <string name="album_artwork_size_subtitle">בחירת גודל העטיפות בתצוגת רשת</string>
+    <string name="album_artwork_size_small">קטן</string>
+    <string name="album_artwork_size_medium">בינוני</string>
+    <string name="album_artwork_size_large">גדול</string>
+    <string name="update_release_page_body">Konnekt %1$s זמין. יש לפתוח את דף הגרסה ב-GitHub כדי לקרוא את ההערות ולהוריד את הגרסה המתאימה.</string>
+    <string name="update_new_version">גרסה %1$s</string>
+    <string name="update_current_version">גרסה מותקנת: %1$s</string>
+    <string name="lyrics_text_size">גודל טקסט המילים</string>
+    <string name="lyrics_text_size_subtitle">התאמת גודל הטקסט בתצוגת המילים המלאה</string>
+    <string name="return_to_current_lyrics">חזרה למילים הנוכחיות</string>
+    <string name="pipeline_pcm_data_rate">קצב נתוני PCM</string>
 </resources>

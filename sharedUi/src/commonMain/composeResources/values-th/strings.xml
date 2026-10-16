@@ -202,4 +202,9 @@
     <string name="search_library_no_results">ไม่มีอะไรในเพลงในเครื่องตรงกับ “%1$s”</string>
     <string name="save_queue_as_playlist">บันทึกคิวเป็นเพลย์ลิสต์</string>
     <string name="share_queue">แชร์คิว</string>
+    <string name="automix_next_track">เพลงถัดไป</string>
+    <string name="return_to_current_lyrics">กลับไปยังเนื้อเพลงปัจจุบัน</string>
+    <string name="home_filter_discovery">ค้นพบ</string>
+    <string name="home_filter_energy">พลังงาน</string>
+    <string name="home_filter_chill">ผ่อนคลาย</string>
 </resources>

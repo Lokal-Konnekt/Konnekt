@@ -1312,4 +1312,19 @@
     <string name="saved_queue_playlist_name">Antrean — %1$s</string>
     <string name="saved_queue_playlist_success">Antrean disimpan ke playlist lokal.</string>
     <string name="shared_queue_title">Antrean Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Addon</string>
+    <string name="no_addons_configured">Belum ada addon yang disiapkan. Tambahkan di Pengaturan → Sumber.</string>
+    <string name="album_artwork_size">Ukuran sampul album</string>
+    <string name="album_artwork_size_subtitle">Pilih ukuran sampul album dalam tampilan kisi</string>
+    <string name="album_artwork_size_small">Kecil</string>
+    <string name="album_artwork_size_medium">Sedang</string>
+    <string name="album_artwork_size_large">Besar</string>
+    <string name="update_release_page_body">Konnekt %1$s tersedia. Buka halaman rilis GitHub untuk membaca catatan dan mengunduh versi yang sesuai.</string>
+    <string name="update_new_version">Versi %1$s</string>
+    <string name="update_current_version">Versi terpasang: %1$s</string>
+    <string name="lyrics_text_size">Ukuran teks lirik</string>
+    <string name="lyrics_text_size_subtitle">Sesuaikan ukuran teks pada tampilan lirik lengkap</string>
+    <string name="return_to_current_lyrics">Kembali ke lirik saat ini</string>
+    <string name="pipeline_pcm_data_rate">Laju data PCM</string>
 </resources>

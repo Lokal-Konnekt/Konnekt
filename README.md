@@ -148,6 +148,8 @@ The container runs the desktop client. Android builds still need the Android SDK
 
 Verify APK package, version, signature and alignment with [verify-release.ps1](tools/verify-release.ps1). Follow the [update publishing guide](docs/IN_APP_UPDATES.md).
 
+Before each release, run `pwsh ./tools/audit-localizations.ps1` to check every Android and shared language file for missing keys and broken format arguments. The Windows release job runs the same audit.
+
 ## 🤝 Contributing
 
 Report the app version, Android version, device model and reproduction steps with each bug. Remove private tokens from shared logs. Read [CONTRIBUTING.md](CONTRIBUTING.md), the [Code of Conduct](CODE_OF_CONDUCT.md) and [MAINTAINERS.md](MAINTAINERS.md).

@@ -202,4 +202,9 @@
     <string name="search_library_no_results">Nulla in Musica locale corrisponde a «%1$s».</string>
     <string name="save_queue_as_playlist">Salva la coda come playlist</string>
     <string name="share_queue">Condividi la coda</string>
+    <string name="automix_next_track">Prossimo brano</string>
+    <string name="return_to_current_lyrics">Torna al testo corrente</string>
+    <string name="home_filter_discovery">Scoperte</string>
+    <string name="home_filter_energy">Energia</string>
+    <string name="home_filter_chill">Relax</string>
 </resources>

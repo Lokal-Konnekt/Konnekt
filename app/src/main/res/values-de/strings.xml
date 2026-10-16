@@ -1335,4 +1335,19 @@
     <string name="saved_queue_playlist_name">Warteschlange — %1$s</string>
     <string name="saved_queue_playlist_success">Warteschlange als lokale Playlist gespeichert.</string>
     <string name="shared_queue_title">Konnekt-Warteschlange</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Addons</string>
+    <string name="no_addons_configured">Keine Addons eingerichtet. Füge eines unter Einstellungen → Quellen hinzu.</string>
+    <string name="album_artwork_size">Größe der Albumcover</string>
+    <string name="album_artwork_size_subtitle">Lege fest, wie groß Albumcover in der Rasteransicht erscheinen</string>
+    <string name="album_artwork_size_small">Klein</string>
+    <string name="album_artwork_size_medium">Mittel</string>
+    <string name="album_artwork_size_large">Groß</string>
+    <string name="update_release_page_body">Konnekt %1$s ist verfügbar. Öffne die GitHub-Release-Seite, um die Hinweise zu lesen und die passende Version herunterzuladen.</string>
+    <string name="update_new_version">Version %1$s</string>
+    <string name="update_current_version">Installierte Version: %1$s</string>
+    <string name="lyrics_text_size">Schriftgröße der Songtexte</string>
+    <string name="lyrics_text_size_subtitle">Passe die Schriftgröße in der vollständigen Songtextansicht an</string>
+    <string name="return_to_current_lyrics">Zum aktuellen Songtext zurückkehren</string>
+    <string name="pipeline_pcm_data_rate">PCM-Datenrate</string>
 </resources>

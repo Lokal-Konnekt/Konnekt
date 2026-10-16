@@ -202,4 +202,9 @@
     <string name="search_library_no_results">Yerel Müzik’te “%1$s” ile eşleşen bir şey yok.</string>
     <string name="save_queue_as_playlist">Sırayı çalma listesi olarak kaydet</string>
     <string name="share_queue">Sırayı paylaş</string>
+    <string name="automix_next_track">Sıradaki</string>
+    <string name="return_to_current_lyrics">Geçerli sözlere dön</string>
+    <string name="home_filter_discovery">Keşif</string>
+    <string name="home_filter_energy">Enerji</string>
+    <string name="home_filter_chill">Rahatlama</string>
 </resources>

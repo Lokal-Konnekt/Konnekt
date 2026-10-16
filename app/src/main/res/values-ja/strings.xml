@@ -1313,4 +1313,19 @@
     <string name="saved_queue_playlist_name">再生キュー — %1$s</string>
     <string name="saved_queue_playlist_success">再生キューをローカルのプレイリストに保存しました。</string>
     <string name="shared_queue_title">Konnekt の再生キュー</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">アドオン</string>
+    <string name="no_addons_configured">アドオンが設定されていません。設定 → ソースから追加してください。</string>
+    <string name="album_artwork_size">アルバム画像のサイズ</string>
+    <string name="album_artwork_size_subtitle">グリッド表示でのアルバム画像の大きさを選択</string>
+    <string name="album_artwork_size_small">小</string>
+    <string name="album_artwork_size_medium">中</string>
+    <string name="album_artwork_size_large">大</string>
+    <string name="update_release_page_body">Konnekt %1$s を利用できます。GitHub のリリースページで更新内容を確認し、適切なビルドをダウンロードしてください。</string>
+    <string name="update_new_version">バージョン %1$s</string>
+    <string name="update_current_version">インストール済み: %1$s</string>
+    <string name="lyrics_text_size">歌詞の文字サイズ</string>
+    <string name="lyrics_text_size_subtitle">歌詞の全画面表示で文字サイズを調整</string>
+    <string name="return_to_current_lyrics">現在の歌詞に戻る</string>
+    <string name="pipeline_pcm_data_rate">PCM データレート</string>
 </resources>

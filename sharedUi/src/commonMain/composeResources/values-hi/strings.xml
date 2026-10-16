@@ -202,4 +202,9 @@
     <string name="search_library_no_results">लोकल म्यूज़िक में “%1$s” से मेल खाता कुछ नहीं.</string>
     <string name="save_queue_as_playlist">कतार को प्लेलिस्ट के रूप में सहेजें</string>
     <string name="share_queue">कतार साझा करें</string>
+    <string name="automix_next_track">अगला गाना</string>
+    <string name="return_to_current_lyrics">मौजूदा बोलों पर लौटें</string>
+    <string name="home_filter_discovery">खोज</string>
+    <string name="home_filter_energy">ऊर्जा</string>
+    <string name="home_filter_chill">सुकून</string>
 </resources>

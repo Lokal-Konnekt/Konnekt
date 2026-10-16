@@ -1340,4 +1340,19 @@
     <string name="saved_queue_playlist_name">Fila — %1$s</string>
     <string name="saved_queue_playlist_success">Fila salva nas playlists locais.</string>
     <string name="shared_queue_title">Fila do Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Addons</string>
+    <string name="no_addons_configured">Nenhum addon configurado. Adicione um em Configurações → Fontes.</string>
+    <string name="album_artwork_size">Tamanho das capas</string>
+    <string name="album_artwork_size_subtitle">Escolha o tamanho das capas nas visualizações em grade</string>
+    <string name="album_artwork_size_small">Pequeno</string>
+    <string name="album_artwork_size_medium">Médio</string>
+    <string name="album_artwork_size_large">Grande</string>
+    <string name="update_release_page_body">O Konnekt %1$s está disponível. Abra a página da versão no GitHub para ler as notas e baixar a versão adequada.</string>
+    <string name="update_new_version">Versão %1$s</string>
+    <string name="update_current_version">Versão instalada: %1$s</string>
+    <string name="lyrics_text_size">Tamanho do texto das letras</string>
+    <string name="lyrics_text_size_subtitle">Ajuste o tamanho do texto na visualização completa das letras</string>
+    <string name="return_to_current_lyrics">Voltar à letra atual</string>
+    <string name="pipeline_pcm_data_rate">Taxa de dados PCM</string>
 </resources>

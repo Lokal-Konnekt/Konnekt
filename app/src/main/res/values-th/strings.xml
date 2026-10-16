@@ -1318,4 +1318,19 @@
     <string name="saved_queue_playlist_name">คิว — %1$s</string>
     <string name="saved_queue_playlist_success">บันทึกคิวลงในเพลย์ลิสต์ภายในเครื่องแล้ว</string>
     <string name="shared_queue_title">คิว Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">ส่วนเสริม</string>
+    <string name="no_addons_configured">ยังไม่ได้ตั้งค่าส่วนเสริม เพิ่มได้ใน การตั้งค่า → แหล่งที่มา</string>
+    <string name="album_artwork_size">ขนาดปกอัลบั้ม</string>
+    <string name="album_artwork_size_subtitle">เลือกขนาดปกอัลบั้มในมุมมองตาราง</string>
+    <string name="album_artwork_size_small">เล็ก</string>
+    <string name="album_artwork_size_medium">กลาง</string>
+    <string name="album_artwork_size_large">ใหญ่</string>
+    <string name="update_release_page_body">Konnekt %1$s พร้อมใช้งาน เปิดหน้ารุ่นบน GitHub เพื่ออ่านบันทึกและดาวน์โหลดรุ่นที่เหมาะสม</string>
+    <string name="update_new_version">เวอร์ชัน %1$s</string>
+    <string name="update_current_version">เวอร์ชันที่ติดตั้ง: %1$s</string>
+    <string name="lyrics_text_size">ขนาดตัวอักษรเนื้อเพลง</string>
+    <string name="lyrics_text_size_subtitle">ปรับขนาดตัวอักษรในมุมมองเนื้อเพลงแบบเต็ม</string>
+    <string name="return_to_current_lyrics">กลับไปยังเนื้อเพลงปัจจุบัน</string>
+    <string name="pipeline_pcm_data_rate">อัตราข้อมูล PCM</string>
 </resources>

@@ -202,4 +202,9 @@
     <string name="search_library_no_results">Nichts in der lokalen Musik passt zu „%1$s“.</string>
     <string name="save_queue_as_playlist">Warteschlange als Playlist speichern</string>
     <string name="share_queue">Warteschlange teilen</string>
+    <string name="automix_next_track">Als Nächstes</string>
+    <string name="return_to_current_lyrics">Zum aktuellen Songtext zurückkehren</string>
+    <string name="home_filter_discovery">Entdecken</string>
+    <string name="home_filter_energy">Energie</string>
+    <string name="home_filter_chill">Entspannen</string>
 </resources>

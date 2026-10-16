@@ -1252,4 +1252,19 @@
     <string name="saved_queue_playlist_name">Hàng chờ — %1$s</string>
     <string name="saved_queue_playlist_success">Đã lưu hàng chờ vào danh sách phát trên thiết bị.</string>
     <string name="shared_queue_title">Hàng chờ Konnekt</string>
+    <string name="search_source_youtube">YouTube Music</string>
+    <string name="search_source_addons">Tiện ích bổ sung</string>
+    <string name="no_addons_configured">Chưa thiết lập tiện ích bổ sung. Thêm tại Cài đặt → Nguồn.</string>
+    <string name="album_artwork_size">Kích thước ảnh bìa album</string>
+    <string name="album_artwork_size_subtitle">Chọn kích thước ảnh bìa trong chế độ xem dạng lưới</string>
+    <string name="album_artwork_size_small">Nhỏ</string>
+    <string name="album_artwork_size_medium">Vừa</string>
+    <string name="album_artwork_size_large">Lớn</string>
+    <string name="update_release_page_body">Konnekt %1$s đã có sẵn. Mở trang phát hành trên GitHub để đọc ghi chú và tải bản phù hợp.</string>
+    <string name="update_new_version">Phiên bản %1$s</string>
+    <string name="update_current_version">Phiên bản đã cài: %1$s</string>
+    <string name="lyrics_text_size">Cỡ chữ lời bài hát</string>
+    <string name="lyrics_text_size_subtitle">Điều chỉnh cỡ chữ trong chế độ xem lời bài hát đầy đủ</string>
+    <string name="return_to_current_lyrics">Quay lại lời bài hát hiện tại</string>
+    <string name="pipeline_pcm_data_rate">Tốc độ dữ liệu PCM</string>
 </resources>

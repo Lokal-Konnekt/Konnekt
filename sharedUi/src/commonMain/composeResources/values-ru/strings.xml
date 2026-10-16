@@ -202,4 +202,9 @@
     <string name="search_library_no_results">В локальной музыке нет ничего, совпадающего с «%1$s».</string>
     <string name="save_queue_as_playlist">Сохранить очередь как плейлист</string>
     <string name="share_queue">Поделиться очередью</string>
+    <string name="automix_next_track">Следующий трек</string>
+    <string name="return_to_current_lyrics">Вернуться к текущей строке</string>
+    <string name="home_filter_discovery">Открытия</string>
+    <string name="home_filter_energy">Энергия</string>
+    <string name="home_filter_chill">Расслабление</string>
 </resources>

@@ -202,4 +202,9 @@
     <string name="search_library_no_results">NIC w muzyce lokalnej nie pasuje do „%1$s”.</string>
     <string name="save_queue_as_playlist">Zapisz kolejkę jako playlistę</string>
     <string name="share_queue">Udostępnij kolejkę</string>
+    <string name="automix_next_track">Następny utwór</string>
+    <string name="return_to_current_lyrics">Wróć do bieżących słów</string>
+    <string name="home_filter_discovery">Odkrywanie</string>
+    <string name="home_filter_energy">Energia</string>
+    <string name="home_filter_chill">Relaks</string>
 </resources>

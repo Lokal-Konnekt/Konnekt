@@ -202,4 +202,9 @@
     <string name="search_library_no_results">Không có gì trong Nhạc cục bộ khớp với “%1$s”.</string>
     <string name="save_queue_as_playlist">Lưu hàng chờ thành danh sách phát</string>
     <string name="share_queue">Chia sẻ hàng chờ</string>
+    <string name="automix_next_track">Tiếp theo</string>
+    <string name="return_to_current_lyrics">Quay lại lời bài hát hiện tại</string>
+    <string name="home_filter_discovery">Khám phá</string>
+    <string name="home_filter_energy">Năng lượng</string>
+    <string name="home_filter_chill">Thư giãn</string>
 </resources>
