@@ -1327,4 +1327,14 @@
     <string name="new_design">Novo visual</string>
     <string name="new_design_subtitle">Experimente a nova interface Liquid Glass com mais movimento e um visual renovado</string>
     <string name="new_design_enabled_subtitle">Novo visual ativado · vidro animado, transições suaves e reprodutor melhorado</string>
+    <string name="smart_offline">Offline inteligente</string>
+    <string name="smart_offline_subtitle">Salva músicas ouvidas com frequência ao abrir o Konnekt em uma rede sem cobrança de dados. Usa a qualidade escolhida e o limite de armazenamento abaixo.</string>
+    <string name="smart_offline_refresh">Atualizar downloads inteligentes</string>
+    <string name="smart_offline_idle">Ative o offline inteligente para começar.</string>
+    <string name="smart_offline_waiting">Aguardando uma rede sem cobrança de dados.</string>
+    <string name="smart_offline_no_history">Ouça algumas músicas para criar sua seleção.</string>
+    <string name="smart_offline_updating">Verificando seu histórico de reprodução…</string>
+    <string name="smart_offline_queued">Novos downloads adicionados à fila.</string>
+    <string name="smart_offline_ready">Sua seleção offline está atualizada.</string>
+    <string name="smart_offline_error">Não foi possível atualizar. Toque para tentar novamente.</string>
 </resources>

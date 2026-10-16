@@ -28,8 +28,8 @@ The repository includes the Android app, shared Kotlin modules, a Windows/Linux 
 |---|---|
 | **Discover** | Search tracks, albums and artists; browse a personalized feed and discover related music based on your listening. |
 | **Listen** | Background and lock-screen playback, queue management, shuffle, repeat, sleep timer, gapless playback, crossfade and Automix. |
-| **Follow the lyrics** | Syllable, word and line sync, multiple providers, source selection, timing adjustment, translation, romanization and lyric sharing. |
-| **Go offline** | Download music, browse local audio and keep downloads across compatible app updates. |
+| **Follow the lyrics** | Syllable, word and line sync, multiple providers, source selection, per-song timing adjustment, translation, romanization and lyric sharing. |
+| **Go offline** | Download music, browse local audio, keep downloads across compatible app updates and opt in to smart downloads of frequently played tracks. |
 | **Make it yours** | Light/dark appearance, Midnight and Ember themes, artwork colors, Canvas artwork, reduced animation/blur options and an opt-in New Design with liquid-glass motion. |
 | **Explore Replay** | Listening time, favorite tracks and artists, Replay stories and shareable summaries. |
 | **Connect** | Google/YouTube Music accounts, Spotify playlists, Discord Rich Presence, Last.fm, ListenBrainz and Listen Together. |

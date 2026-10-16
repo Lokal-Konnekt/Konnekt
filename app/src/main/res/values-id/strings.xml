@@ -1299,4 +1299,14 @@
     <string name="new_design">Desain baru</string>
     <string name="new_design_subtitle">Coba antarmuka Liquid Glass baru dengan gerakan yang lebih kaya dan tampilan segar</string>
     <string name="new_design_enabled_subtitle">Desain baru aktif · kaca animasi, transisi mulus, dan pemutar yang ditingkatkan</string>
+    <string name="smart_offline">Offline pintar</string>
+    <string name="smart_offline_subtitle">Menyimpan lagu yang sering diputar saat Konnekt dibuka di jaringan tanpa biaya data. Menggunakan kualitas unduhan dan batas penyimpanan yang dipilih.</string>
+    <string name="smart_offline_refresh">Perbarui unduhan pintar</string>
+    <string name="smart_offline_idle">Aktifkan offline pintar untuk memulai.</string>
+    <string name="smart_offline_waiting">Menunggu jaringan tanpa biaya data.</string>
+    <string name="smart_offline_no_history">Dengarkan beberapa lagu dahulu untuk membuat pilihan.</string>
+    <string name="smart_offline_updating">Memeriksa riwayat mendengarkan…</string>
+    <string name="smart_offline_queued">Unduhan baru ditambahkan ke antrean.</string>
+    <string name="smart_offline_ready">Pilihan offline Anda sudah terbaru.</string>
+    <string name="smart_offline_error">Gagal memperbarui. Ketuk untuk mencoba lagi.</string>
 </resources>

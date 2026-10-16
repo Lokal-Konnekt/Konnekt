@@ -870,6 +870,7 @@ fun NowPlayingScreen(
     // competing with the song change. Opening a panel early bypasses its wait.
     var playerPrewarmStage by remember(song.videoId) { mutableIntStateOf(0) }
     LaunchedEffect(song.videoId) {
+        PlayerSettings.selectLyricsTrack(song.videoId)
         delay(600)
         playerPrewarmStage = 1 // 128px backdrop decode + CPU blur
         delay(650)

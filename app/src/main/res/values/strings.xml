@@ -1171,4 +1171,14 @@
     <string name="update_retry_hint">Check your connection and try downloading again.</string>
     <string name="update_invalid_apk">This update could not be verified. Download it again before installing.</string>
     <string name="update_install_permission">Android will ask you to allow updates from Konnekt. Installation continues when you return.</string>
+    <string name="smart_offline">Smart offline</string>
+    <string name="smart_offline_subtitle">Save frequently played songs when Konnekt opens on an unmetered network. Uses the selected download quality and the storage target below.</string>
+    <string name="smart_offline_refresh">Refresh smart downloads</string>
+    <string name="smart_offline_idle">Turn on smart offline to start.</string>
+    <string name="smart_offline_waiting">Waiting for an unmetered connection.</string>
+    <string name="smart_offline_no_history">Listen to some songs first to build your selection.</string>
+    <string name="smart_offline_updating">Checking your listening history…</string>
+    <string name="smart_offline_queued">New downloads added to the queue.</string>
+    <string name="smart_offline_ready">Your offline selection is up to date.</string>
+    <string name="smart_offline_error">Couldn’t refresh. Tap to try again.</string>
 </resources>

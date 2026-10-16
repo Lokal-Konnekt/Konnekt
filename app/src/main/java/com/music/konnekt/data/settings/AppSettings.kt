@@ -14,6 +14,7 @@ import com.music.konnekt.data.lyrics.LyricsSource
 import com.music.konnekt.data.sources.SourceKind
 import com.music.konnekt.playback.EqLayout
 import com.music.konnekt.playback.EqualizerPreset
+import com.music.konnekt.ui.player.lyricsOffsetPreferenceKey
 import kotlinx.coroutines.flow.MutableStateFlow
 
 
@@ -200,6 +201,10 @@ object AppSettings {
      * second is recoverable by the person it happens to.
      */
     val wifiOnlyDownloads = MutableStateFlow(true)
+    /** Opt-in refresh of frequently played tracks when the app opens on an unmetered network. */
+    val smartOfflineEnabled = MutableStateFlow(false)
+    val smartOfflineBudgetMb = MutableStateFlow(500)
+    val SMART_OFFLINE_BUDGETS_MB = listOf(250, 500, 1000)
 
     /**
      * Keep ordinary downloads in Music/Konnekt where other music apps can see
@@ -414,6 +419,7 @@ object AppSettings {
 
     /** Positive values delay synced lyrics; negative values bring them forward. */
     val lyricsOffsetMs = MutableStateFlow(0)
+    private var selectedLyricsTrack: String = ""
 
     /**
      * Which language the lyrics translate button translates *into*.
@@ -789,6 +795,9 @@ object AppSettings {
         migrateDownloadQuality()
         downloadQuality.value = readDownloadQuality()
         wifiOnlyDownloads.value = prefs.getBoolean(KEY_WIFI_ONLY_DOWNLOADS, true)
+        smartOfflineEnabled.value = prefs.getBoolean(KEY_SMART_OFFLINE_ENABLED, false)
+        smartOfflineBudgetMb.value = prefs.getInt(KEY_SMART_OFFLINE_BUDGET_MB, 500)
+            .takeIf { it in SMART_OFFLINE_BUDGETS_MB } ?: 500
         exportDownloads.value = prefs.getBoolean(KEY_EXPORT_DOWNLOADS, true)
         crossfadeSeconds.value = prefs.getInt(KEY_CROSSFADE, 0)
         smartFadeEnabled.value = prefs.getBoolean(KEY_SMART_FADE, false)
@@ -845,8 +854,11 @@ object AppSettings {
         lyricsBlur.value = prefs.getBoolean(KEY_LYRICS_BLUR, true)
         lyricsTextScale.value = prefs.getFloat(KEY_LYRICS_TEXT_SCALE, 1.0f)
             .coerceIn(MIN_LYRICS_TEXT_SCALE, MAX_LYRICS_TEXT_SCALE)
-        lyricsOffsetMs.value = prefs.getInt(KEY_LYRICS_OFFSET_MS, 0)
-            .coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
+        lyricsOffsetMs.value = prefs.getInt(
+            selectedLyricsTrack.takeIf { it.isNotBlank() }?.let(::lyricsOffsetPreferenceKey)
+                ?: KEY_LYRICS_OFFSET_MS,
+            prefs.getInt(KEY_LYRICS_OFFSET_MS, 0),
+        ).coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
         translationLanguage.value = prefs.getString(KEY_TRANSLATION_LANGUAGE, "").orEmpty()
         if (highPerformanceMode.value) {
             reduceAnimation.value = false
@@ -1081,6 +1093,17 @@ object AppSettings {
         prefs.edit().putBoolean(KEY_WIFI_ONLY_DOWNLOADS, value).apply()
     }
 
+    fun setSmartOfflineEnabled(value: Boolean) {
+        smartOfflineEnabled.value = value
+        prefs.edit().putBoolean(KEY_SMART_OFFLINE_ENABLED, value).apply()
+    }
+
+    fun setSmartOfflineBudgetMb(value: Int) {
+        if (value !in SMART_OFFLINE_BUDGETS_MB) return
+        smartOfflineBudgetMb.value = value
+        prefs.edit().putInt(KEY_SMART_OFFLINE_BUDGET_MB, value).apply()
+    }
+
     fun setCrossfadeSeconds(value: Int) {
         crossfadeSeconds.value = value
         prefs.edit().putInt(KEY_CROSSFADE, value).apply()
@@ -1282,11 +1305,24 @@ object AppSettings {
         prefs.edit().putFloat(KEY_LYRICS_TEXT_SCALE, normalized).apply()
     }
 
+    fun selectLyricsTrack(trackId: String) {
+        if (selectedLyricsTrack == trackId) return
+        selectedLyricsTrack = trackId
+        lyricsOffsetMs.value = prefs.getInt(
+            lyricsOffsetPreferenceKey(trackId),
+            prefs.getInt(KEY_LYRICS_OFFSET_MS, 0),
+        ).coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
+    }
+
     fun setLyricsOffsetMs(value: Int) {
         val normalized = value.coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
         if (lyricsOffsetMs.value == normalized) return
         lyricsOffsetMs.value = normalized
-        prefs.edit().putInt(KEY_LYRICS_OFFSET_MS, normalized).apply()
+        prefs.edit().putInt(
+            selectedLyricsTrack.takeIf { it.isNotBlank() }?.let(::lyricsOffsetPreferenceKey)
+                ?: KEY_LYRICS_OFFSET_MS,
+            normalized,
+        ).apply()
     }
 
     /** Blank restores "follow the app language"; see [translationLanguage]. */
@@ -1956,6 +1992,8 @@ object AppSettings {
     private const val KEY_UPGRADE_LENGTH_SLACK_SECONDS = "upgrade_length_slack_seconds"
     private const val KEY_QUALITY_DOWNLOAD = "audio_quality_download"
     private const val KEY_WIFI_ONLY_DOWNLOADS = "wifi_only_downloads"
+    private const val KEY_SMART_OFFLINE_ENABLED = "smart_offline_enabled"
+    private const val KEY_SMART_OFFLINE_BUDGET_MB = "smart_offline_budget_mb"
     private const val KEY_EXPORT_DOWNLOADS = "export_downloads"
     private const val KEY_LOSSLESS = "lossless_audio"
     private const val KEY_CROSSFADE = "crossfade_seconds"

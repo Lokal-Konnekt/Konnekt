@@ -17,6 +17,7 @@ import com.music.konnekt.data.settings.TransitionWindow
 import dev.chrisbanes.haze.HazeState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import java.security.MessageDigest
 
 /**
  * Everything the player takes from the application it is drawn in.
@@ -170,6 +171,7 @@ interface PlayerSettingsSource {
     val versionAlignmentInProgress: StateFlow<Boolean>
 
     fun setLastPlayerScreen(value: LastPlayerScreen)
+    fun selectLyricsTrack(trackId: String)
     fun setLyricsOffsetMs(value: Int)
 }
 
@@ -180,6 +182,13 @@ internal val PlayerSettings: PlayerSettingsSource
 /** The lyric offset sheet's range, in milliseconds either way. */
 const val MIN_LYRICS_OFFSET_MS = -5_000
 const val MAX_LYRICS_OFFSET_MS = 5_000
+
+/** A bounded preference key even when a local track uses a long content URI. */
+fun lyricsOffsetPreferenceKey(trackId: String): String =
+    "lyrics_offset_track_" + MessageDigest.getInstance("SHA-256")
+        .digest(trackId.toByteArray(Charsets.UTF_8))
+        .take(16)
+        .joinToString("") { "%02x".format(it) }
 
 /** A system output level, 0..1, and the means to set it. */
 interface SystemVolume {

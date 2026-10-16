@@ -22,6 +22,7 @@ import com.music.konnekt.ui.player.LyricsRomanizationResult
 import com.music.konnekt.ui.player.LyricsTranslationResult
 import com.music.konnekt.ui.player.MAX_LYRICS_OFFSET_MS
 import com.music.konnekt.ui.player.MIN_LYRICS_OFFSET_MS
+import com.music.konnekt.ui.player.lyricsOffsetPreferenceKey
 import com.music.konnekt.ui.player.OutputFormatUi
 import com.music.konnekt.ui.player.PartyUi
 import com.music.konnekt.ui.player.PlayerHost
@@ -178,6 +179,7 @@ internal object DesktopPlayerHost : PlayerHost {
  */
 internal object DesktopPlayerSettings : PlayerSettingsSource {
     private val persistence by lazy { DesktopPersistence() }
+    private var selectedLyricsTrack: String = ""
 
     override val animatedCanvas = MutableStateFlow(true)
     override val audioQualityCellular = MutableStateFlow(AudioQuality.LOSSLESS)
@@ -221,10 +223,23 @@ internal object DesktopPlayerSettings : PlayerSettingsSource {
         persistence.saveString(KEY_LAST_SCREEN, value.name)
     }
 
+    override fun selectLyricsTrack(trackId: String) {
+        if (selectedLyricsTrack == trackId) return
+        selectedLyricsTrack = trackId
+        lyricsOffsetMs.value = persistence.int(
+            lyricsOffsetPreferenceKey(trackId),
+            persistence.int(KEY_LYRICS_OFFSET, 0),
+        ).coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
+    }
+
     override fun setLyricsOffsetMs(value: Int) {
         val clamped = value.coerceIn(MIN_LYRICS_OFFSET_MS, MAX_LYRICS_OFFSET_MS)
         lyricsOffsetMs.value = clamped
-        persistence.saveInt(KEY_LYRICS_OFFSET, clamped)
+        persistence.saveInt(
+            selectedLyricsTrack.takeIf { it.isNotBlank() }?.let(::lyricsOffsetPreferenceKey)
+                ?: KEY_LYRICS_OFFSET,
+            clamped,
+        )
     }
 
     private const val KEY_LAST_SCREEN = "last_player_screen"

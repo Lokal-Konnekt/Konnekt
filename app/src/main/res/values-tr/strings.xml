@@ -1279,4 +1279,14 @@
     <string name="new_design">Yeni tasarım</string>
     <string name="new_design_subtitle">Daha canlı hareketlere ve yenilenmiş görünüme sahip Liquid Glass arayüzünü dene</string>
     <string name="new_design_enabled_subtitle">Yeni tasarım açık · hareketli cam, akıcı geçişler ve geliştirilmiş oynatıcı</string>
+    <string name="smart_offline">Akıllı çevrimdışı</string>
+    <string name="smart_offline_subtitle">Konnekt veri ücreti olmayan bir ağda açıldığında sık dinlenen şarkıları kaydeder. Seçilen indirme kalitesini ve aşağıdaki depolama hedefini kullanır.</string>
+    <string name="smart_offline_refresh">Akıllı indirmeleri yenile</string>
+    <string name="smart_offline_idle">Başlamak için akıllı çevrimdışını açın.</string>
+    <string name="smart_offline_waiting">Veri ücreti olmayan ağ bekleniyor.</string>
+    <string name="smart_offline_no_history">Seçiminizi oluşturmak için önce birkaç şarkı dinleyin.</string>
+    <string name="smart_offline_updating">Dinleme geçmişi kontrol ediliyor…</string>
+    <string name="smart_offline_queued">Yeni indirmeler kuyruğa eklendi.</string>
+    <string name="smart_offline_ready">Çevrimdışı seçiminiz güncel.</string>
+    <string name="smart_offline_error">Yenilenemedi. Tekrar denemek için dokunun.</string>
 </resources>

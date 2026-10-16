@@ -139,6 +139,7 @@ import com.music.konnekt.data.NerdStats
 import com.music.konnekt.data.scrobbling.LastFM
 import com.music.konnekt.data.listentogether.ListenTogether
 import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.download.SmartOffline
 import com.music.konnekt.data.settings.LibraryArtworkSize
 import com.music.konnekt.data.settings.OutputPcmMode
 import com.music.konnekt.playback.AudioOutputStatus
@@ -227,6 +228,9 @@ fun SettingsScreen(
     val showCacheFolder by AppSettings.showCacheFolder.collectAsStateWithLifecycle()
     val downloadQuality by AppSettings.downloadQuality.collectAsStateWithLifecycle()
     val wifiOnlyDownloads by AppSettings.wifiOnlyDownloads.collectAsStateWithLifecycle()
+    val smartOfflineEnabled by AppSettings.smartOfflineEnabled.collectAsStateWithLifecycle()
+    val smartOfflineBudgetMb by AppSettings.smartOfflineBudgetMb.collectAsStateWithLifecycle()
+    val smartOfflineStatus by SmartOffline.status.collectAsStateWithLifecycle()
     val exportDownloads by AppSettings.exportDownloads.collectAsStateWithLifecycle()
     val stopOnTaskRemoved by AppSettings.stopOnTaskRemoved.collectAsStateWithLifecycle()
     val hideVolumeBar by AppSettings.hideVolumeBar.collectAsStateWithLifecycle()
@@ -291,6 +295,7 @@ fun SettingsScreen(
     var showPerformanceWarning by remember { mutableStateOf(false) }
     var showPerformanceConfirmation by remember { mutableStateOf(false) }
     val backupScope = rememberCoroutineScope()
+    val smartOfflineScope = rememberCoroutineScope()
 
     val batterySettingsLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.StartActivityForResult(),
@@ -510,6 +515,55 @@ fun SettingsScreen(
         // it be fetched" — and those two questions only make sense read
         // together, which is what puts them side by side here.
         SearchableSettingsGroup(search, header = stringResource(R.string.downloads)) {
+            val smartOfflineTitle = stringResource(R.string.smart_offline)
+            row(smartOfflineTitle, "automatic", "favorites", "offline") {
+                SettingsRow(
+                    icon = Icons.Rounded.Download,
+                    title = smartOfflineTitle,
+                    subtitle = stringResource(R.string.smart_offline_subtitle),
+                    trailing = {
+                        Switch(
+                            checked = smartOfflineEnabled,
+                            onCheckedChange = { enabled ->
+                                AppSettings.setSmartOfflineEnabled(enabled)
+                                if (enabled) smartOfflineScope.launch { SmartOffline.refresh(context, force = true) }
+                            },
+                        )
+                    },
+                    onClick = {
+                        val enabled = !smartOfflineEnabled
+                        AppSettings.setSmartOfflineEnabled(enabled)
+                        if (enabled) smartOfflineScope.launch { SmartOffline.refresh(context, force = true) }
+                    },
+                )
+                if (smartOfflineEnabled) {
+                    SegmentedControl(
+                        options = AppSettings.SMART_OFFLINE_BUDGETS_MB.map { "$it MB" },
+                        selectedIndex = AppSettings.SMART_OFFLINE_BUDGETS_MB.indexOf(smartOfflineBudgetMb),
+                        onSelect = { index ->
+                            AppSettings.setSmartOfflineBudgetMb(AppSettings.SMART_OFFLINE_BUDGETS_MB[index])
+                            smartOfflineScope.launch { SmartOffline.refresh(context, force = true) }
+                        },
+                        modifier = Modifier.padding(start = TEXT_INSET, end = ROW_INSET, bottom = 8.dp),
+                    )
+                    SettingsRow(
+                        icon = Icons.Rounded.Wifi,
+                        title = stringResource(R.string.smart_offline_refresh),
+                        subtitle = stringResource(
+                            when (smartOfflineStatus) {
+                                SmartOffline.Status.IDLE -> R.string.smart_offline_idle
+                                SmartOffline.Status.WAITING_FOR_NETWORK -> R.string.smart_offline_waiting
+                                SmartOffline.Status.NO_HISTORY -> R.string.smart_offline_no_history
+                                SmartOffline.Status.UPDATING -> R.string.smart_offline_updating
+                                SmartOffline.Status.QUEUED -> R.string.smart_offline_queued
+                                SmartOffline.Status.READY -> R.string.smart_offline_ready
+                                SmartOffline.Status.ERROR -> R.string.smart_offline_error
+                            },
+                        ),
+                        onClick = { smartOfflineScope.launch { SmartOffline.refresh(context, force = true) } },
+                    )
+                }
+            }
             val downloadQualityTitle = stringResource(R.string.download_quality)
             row(downloadQualityTitle, "offline", "lossless") {
                 SettingsRow(

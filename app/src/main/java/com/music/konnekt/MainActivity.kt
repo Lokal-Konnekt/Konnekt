@@ -148,6 +148,7 @@ import kotlinx.coroutines.withContext
 import com.music.konnekt.data.model.durationMillis
 import com.music.konnekt.data.scrobbling.LastFM
 import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.download.SmartOffline
 import com.music.konnekt.data.settings.LibrarySort
 import com.music.konnekt.data.settings.ThemeMode
 import com.music.konnekt.ui.components.AccountProfileSelector
@@ -344,6 +345,7 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         AppUpdateChecker.resumePendingInstall(this)
+        lifecycleScope.launch { SmartOffline.refresh(this@MainActivity) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -1981,6 +1983,7 @@ private fun KonnektApp(
     // track, which is not a release however many of them are asked for one at a
     // time.
     val startDownload: (List<Song>, DownloadTarget?) -> Unit = { requested, from ->
+        scope.launch { SmartOffline.keepManually(context, requested.map { it.videoId }) }
         val saved = Downloads.saved.value
         // Already on disk, and already queued or running: neither needs asking
         // again. What's left is what a tap on "Download" actually means.

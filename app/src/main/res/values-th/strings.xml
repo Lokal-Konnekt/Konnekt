@@ -1305,4 +1305,14 @@
     <string name="new_design">ดีไซน์ใหม่</string>
     <string name="new_design_subtitle">ลองอินเทอร์เฟซ Liquid Glass ใหม่ที่มีการเคลื่อนไหวและรูปลักษณ์สดใหม่</string>
     <string name="new_design_enabled_subtitle">เปิดดีไซน์ใหม่แล้ว · กระจกเคลื่อนไหว การเปลี่ยนหน้าลื่นไหล และเครื่องเล่นที่ดีขึ้น</string>
+    <string name="smart_offline">ออฟไลน์อัจฉริยะ</string>
+    <string name="smart_offline_subtitle">บันทึกเพลงที่ฟังบ่อยเมื่อเปิด Konnekt ผ่านเครือข่ายที่ไม่คิดค่าข้อมูล โดยใช้คุณภาพดาวน์โหลดและขีดจำกัดพื้นที่ที่เลือกด้านล่าง</string>
+    <string name="smart_offline_refresh">รีเฟรชการดาวน์โหลดอัจฉริยะ</string>
+    <string name="smart_offline_idle">เปิดออฟไลน์อัจฉริยะเพื่อเริ่มใช้งาน</string>
+    <string name="smart_offline_waiting">กำลังรอเครือข่ายที่ไม่คิดค่าข้อมูล</string>
+    <string name="smart_offline_no_history">ฟังเพลงสักเล็กน้อยเพื่อสร้างรายการของคุณ</string>
+    <string name="smart_offline_updating">กำลังตรวจสอบประวัติการฟัง…</string>
+    <string name="smart_offline_queued">เพิ่มการดาวน์โหลดใหม่ลงในคิวแล้ว</string>
+    <string name="smart_offline_ready">รายการออฟไลน์ของคุณเป็นปัจจุบัน</string>
+    <string name="smart_offline_error">รีเฟรชไม่สำเร็จ แตะเพื่อลองอีกครั้ง</string>
 </resources>

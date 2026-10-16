@@ -1327,4 +1327,14 @@
     <string name="update_retry_hint">Vérifiez votre connexion et réessayez le téléchargement.</string>
     <string name="update_invalid_apk">Cette mise à jour n’a pas pu être vérifiée. Téléchargez-la à nouveau avant de l’installer.</string>
     <string name="update_install_permission">Android vous demandera d’autoriser les mises à jour depuis Konnekt. L’installation reprendra à votre retour.</string>
+    <string name="smart_offline">Hors ligne intelligent</string>
+    <string name="smart_offline_subtitle">Enregistre vos titres les plus écoutés à l’ouverture de Konnekt sur une connexion non limitée. Utilise la qualité choisie et le budget de stockage ci-dessous.</string>
+    <string name="smart_offline_refresh">Actualiser les téléchargements intelligents</string>
+    <string name="smart_offline_idle">Activez le hors ligne intelligent pour commencer.</string>
+    <string name="smart_offline_waiting">En attente d’une connexion non limitée.</string>
+    <string name="smart_offline_no_history">Écoutez quelques titres pour créer votre sélection.</string>
+    <string name="smart_offline_updating">Analyse de votre historique d’écoute…</string>
+    <string name="smart_offline_queued">Nouveaux téléchargements ajoutés à la file.</string>
+    <string name="smart_offline_ready">Votre sélection hors ligne est à jour.</string>
+    <string name="smart_offline_error">Actualisation impossible. Touchez pour réessayer.</string>
 </resources>

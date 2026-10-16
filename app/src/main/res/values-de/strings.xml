@@ -1322,4 +1322,14 @@
     <string name="new_design">Neues Design</string>
     <string name="new_design_subtitle">Probiere die neue Liquid-Glass-Oberfläche mit mehr Bewegung und frischem Design aus</string>
     <string name="new_design_enabled_subtitle">Neues Design aktiv · animiertes Glas, flüssige Übergänge und verbesserter Player</string>
+    <string name="smart_offline">Intelligenter Offline-Modus</string>
+    <string name="smart_offline_subtitle">Speichert häufig gehörte Titel beim Öffnen von Konnekt über ein kostenloses Netzwerk. Verwendet die gewählte Downloadqualität und das Speicherziel unten.</string>
+    <string name="smart_offline_refresh">Intelligente Downloads aktualisieren</string>
+    <string name="smart_offline_idle">Aktiviere den intelligenten Offline-Modus.</string>
+    <string name="smart_offline_waiting">Warten auf ein Netzwerk ohne Datenkosten.</string>
+    <string name="smart_offline_no_history">Höre zuerst einige Titel, um eine Auswahl zu erstellen.</string>
+    <string name="smart_offline_updating">Hörverlauf wird geprüft…</string>
+    <string name="smart_offline_queued">Neue Downloads wurden zur Warteschlange hinzugefügt.</string>
+    <string name="smart_offline_ready">Deine Offline-Auswahl ist aktuell.</string>
+    <string name="smart_offline_error">Aktualisierung fehlgeschlagen. Zum Wiederholen tippen.</string>
 </resources>

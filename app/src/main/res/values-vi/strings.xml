@@ -1239,4 +1239,14 @@
     <string name="new_design">Thiết kế mới</string>
     <string name="new_design_subtitle">Thử giao diện Liquid Glass mới với chuyển động sinh động và diện mạo mới</string>
     <string name="new_design_enabled_subtitle">Đã bật thiết kế mới · kính động, chuyển cảnh mượt mà và trình phát cải tiến</string>
+    <string name="smart_offline">Ngoại tuyến thông minh</string>
+    <string name="smart_offline_subtitle">Lưu các bài hát nghe nhiều khi mở Konnekt trên mạng không tính phí dữ liệu. Dùng chất lượng tải xuống và giới hạn lưu trữ đã chọn bên dưới.</string>
+    <string name="smart_offline_refresh">Làm mới tải xuống thông minh</string>
+    <string name="smart_offline_idle">Bật ngoại tuyến thông minh để bắt đầu.</string>
+    <string name="smart_offline_waiting">Đang chờ mạng không tính phí dữ liệu.</string>
+    <string name="smart_offline_no_history">Hãy nghe vài bài hát để tạo danh sách của bạn.</string>
+    <string name="smart_offline_updating">Đang kiểm tra lịch sử nghe…</string>
+    <string name="smart_offline_queued">Đã thêm bản tải xuống mới vào hàng đợi.</string>
+    <string name="smart_offline_ready">Danh sách ngoại tuyến đã được cập nhật.</string>
+    <string name="smart_offline_error">Không thể làm mới. Chạm để thử lại.</string>
 </resources>

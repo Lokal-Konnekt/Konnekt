@@ -1362,4 +1362,14 @@
     <string name="new_design">Nowy wygląd</string>
     <string name="new_design_subtitle">Wypróbuj nowy interfejs Liquid Glass z bogatszym ruchem i świeżą stylistyką</string>
     <string name="new_design_enabled_subtitle">Nowy wygląd włączony · animowane szkło, płynne przejścia i ulepszony odtwarzacz</string>
+    <string name="smart_offline">Inteligentny tryb offline</string>
+    <string name="smart_offline_subtitle">Zapisuje często słuchane utwory po otwarciu Konnekt w sieci bez opłat za dane. Używa wybranej jakości i poniższego limitu miejsca.</string>
+    <string name="smart_offline_refresh">Odśwież inteligentne pobieranie</string>
+    <string name="smart_offline_idle">Włącz inteligentny tryb offline, aby rozpocząć.</string>
+    <string name="smart_offline_waiting">Oczekiwanie na sieć bez opłat za dane.</string>
+    <string name="smart_offline_no_history">Posłuchaj kilku utworów, aby utworzyć wybór.</string>
+    <string name="smart_offline_updating">Sprawdzanie historii słuchania…</string>
+    <string name="smart_offline_queued">Dodano nowe pobrania do kolejki.</string>
+    <string name="smart_offline_ready">Wybór offline jest aktualny.</string>
+    <string name="smart_offline_error">Nie udało się odświeżyć. Dotknij, aby spróbować ponownie.</string>
 </resources>

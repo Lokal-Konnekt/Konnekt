@@ -1322,4 +1322,14 @@
     <string name="new_design">नया डिज़ाइन</string>
     <string name="new_design_subtitle">ज़्यादा गतिशीलता और नए रूप वाला Liquid Glass इंटरफ़ेस आज़माएँ</string>
     <string name="new_design_enabled_subtitle">नया डिज़ाइन चालू है · गतिशील ग्लास, सहज बदलाव और बेहतर प्लेयर</string>
+    <string name="smart_offline">स्मार्ट ऑफ़लाइन</string>
+    <string name="smart_offline_subtitle">Konnekt बिना डेटा शुल्क वाले नेटवर्क पर खुलने पर अक्सर सुने गए गाने सहेजता है। चुनी गई डाउनलोड गुणवत्ता और नीचे दी गई स्टोरेज सीमा का उपयोग होता है।</string>
+    <string name="smart_offline_refresh">स्मार्ट डाउनलोड रीफ़्रेश करें</string>
+    <string name="smart_offline_idle">शुरू करने के लिए स्मार्ट ऑफ़लाइन चालू करें।</string>
+    <string name="smart_offline_waiting">बिना डेटा शुल्क वाले नेटवर्क की प्रतीक्षा है।</string>
+    <string name="smart_offline_no_history">अपना चयन बनाने के लिए पहले कुछ गाने सुनें।</string>
+    <string name="smart_offline_updating">सुनने का इतिहास जाँचा जा रहा है…</string>
+    <string name="smart_offline_queued">नए डाउनलोड कतार में जोड़े गए।</string>
+    <string name="smart_offline_ready">आपका ऑफ़लाइन चयन अद्यतित है।</string>
+    <string name="smart_offline_error">रीफ़्रेश नहीं हो सका। फिर कोशिश करने के लिए टैप करें।</string>
 </resources>

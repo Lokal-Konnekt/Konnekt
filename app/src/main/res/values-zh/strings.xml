@@ -1299,4 +1299,14 @@
     <string name="new_design">全新设计</string>
     <string name="new_design_subtitle">试试焕然一新的 Liquid Glass 界面和更丰富的动态效果</string>
     <string name="new_design_enabled_subtitle">已启用全新设计 · 动态玻璃、流畅转场和升级的播放器</string>
+    <string name="smart_offline">智能离线</string>
+    <string name="smart_offline_subtitle">在不计流量费用的网络上打开 Konnekt 时保存常听歌曲。使用所选下载音质和下方的存储额度。</string>
+    <string name="smart_offline_refresh">刷新智能下载</string>
+    <string name="smart_offline_idle">开启智能离线以开始使用。</string>
+    <string name="smart_offline_waiting">正在等待不计流量费用的网络。</string>
+    <string name="smart_offline_no_history">先听几首歌以建立你的精选列表。</string>
+    <string name="smart_offline_updating">正在检查收听记录…</string>
+    <string name="smart_offline_queued">新下载已加入队列。</string>
+    <string name="smart_offline_ready">离线精选已是最新状态。</string>
+    <string name="smart_offline_error">刷新失败。点按以重试。</string>
 </resources>

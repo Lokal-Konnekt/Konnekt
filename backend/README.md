@@ -282,6 +282,7 @@ service by hand — which is one screen:
 - **Start Command** `./server`
 - **Health check path** `/healthz`
 - **Instances** 1
+- **Plan** Free, with **Frankfurt** for users in Europe (choose the closest region)
 
 Then point the app at `https://<service>.onrender.com`, by adding this to
 `local.properties` at the repository root:
@@ -293,9 +294,11 @@ LISTEN_TOGETHER_SERVER=https://<service>.onrender.com
 That becomes `BuildConfig.LISTEN_TOGETHER_SERVER` and seeds the address box on
 the Listen Together screen. It is only a default — anything typed into that box
 wins and persists, so running your own copy of this server never means editing
-the build. `local.properties` is gitignored, so a fresh checkout builds with an
-empty default and simply asks for an address the first time the screen is
-opened.
+the build. `local.properties` is gitignored. The fallback URL currently compiled
+into a fresh Android checkout is `https://konnekt-listen-together.onrender.com`;
+check `/healthz` before relying on it. On 16 October 2026 it returned Render's
+`x-render-routing: no-server` response, so deploy your own service and enter its
+URL in the app or set `LISTEN_TOGETHER_SERVER` for a new build.
 
 Two things about Render specifically:
 
@@ -303,11 +306,11 @@ Two things about Render specifically:
   holding its WebSockets, so a second instance is a second, disjoint set of
   parties, and a join lands in whichever one the load balancer picked. Outgrowing
   that is a Redis pub/sub swap behind `PartyStore` — nothing above it moves.
-- **The free plan spins down after ~15 minutes idle**, which closes every
-  WebSocket and drops every party, and the next request then waits ~30 s for a
-  cold start. Fine for development; for real use this wants the paid instance
-  type, where the process stays up (or a free uptime monitor pinging `/healthz`
-  every 12 minutes).
+- **The free plan spins down after 15 minutes with no incoming HTTP request or
+  WebSocket message.** Active parties send messages, so they keep it awake.
+  A later new party may still wait around a minute for a cold start. Parties
+  are held only in memory and disappear after a restart or deploy. Render grants
+  750 free instance-hours per workspace each month and applies bandwidth limits.
 
 ### Environment
 

@@ -1300,4 +1300,14 @@
     <string name="new_design">新しいデザイン</string>
     <string name="new_design_subtitle">動きが豊かで新鮮な Liquid Glass インターフェースを試す</string>
     <string name="new_design_enabled_subtitle">新しいデザインが有効 · 動くガラス、滑らかな画面切り替え、進化したプレーヤー</string>
+    <string name="smart_offline">スマートオフライン</string>
+    <string name="smart_offline_subtitle">通信料のかからないネットワークでKonnektを開くと、よく聴く曲を保存します。選択したダウンロード音質と下の保存容量を使用します。</string>
+    <string name="smart_offline_refresh">スマートダウンロードを更新</string>
+    <string name="smart_offline_idle">開始するにはスマートオフラインを有効にしてください。</string>
+    <string name="smart_offline_waiting">通信料のかからないネットワークを待機中です。</string>
+    <string name="smart_offline_no_history">まず曲を聴いて、保存する曲を選べるようにしてください。</string>
+    <string name="smart_offline_updating">再生履歴を確認しています…</string>
+    <string name="smart_offline_queued">新しいダウンロードをキューに追加しました。</string>
+    <string name="smart_offline_ready">オフラインの曲は最新です。</string>
+    <string name="smart_offline_error">更新できませんでした。タップして再試行してください。</string>
 </resources>

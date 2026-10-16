@@ -1354,4 +1354,14 @@
     <string name="new_design">Новый дизайн</string>
     <string name="new_design_subtitle">Попробуйте новый интерфейс Liquid Glass с более выразительной анимацией и свежим оформлением</string>
     <string name="new_design_enabled_subtitle">Новый дизайн включён · анимированное стекло, плавные переходы и улучшенный плеер</string>
+    <string name="smart_offline">Умный офлайн</string>
+    <string name="smart_offline_subtitle">Сохраняет часто прослушиваемые треки при открытии Konnekt в сети без тарификации. Использует выбранное качество и лимит хранилища ниже.</string>
+    <string name="smart_offline_refresh">Обновить умные загрузки</string>
+    <string name="smart_offline_idle">Включите умный офлайн, чтобы начать.</string>
+    <string name="smart_offline_waiting">Ожидание сети без тарификации.</string>
+    <string name="smart_offline_no_history">Послушайте несколько треков, чтобы создать подборку.</string>
+    <string name="smart_offline_updating">Проверка истории прослушивания…</string>
+    <string name="smart_offline_queued">Новые загрузки добавлены в очередь.</string>
+    <string name="smart_offline_ready">Офлайн-подборка обновлена.</string>
+    <string name="smart_offline_error">Не удалось обновить. Нажмите для повтора.</string>
 </resources>
