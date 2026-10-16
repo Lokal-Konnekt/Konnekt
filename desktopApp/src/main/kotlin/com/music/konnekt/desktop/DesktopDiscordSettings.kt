@@ -17,7 +17,9 @@ internal object DesktopDiscordSettings {
     private val _status = MutableStateFlow(persistence.string(KEY_STATUS, "").ifBlank { "online" })
     private val _activityType = MutableStateFlow(persistence.string(KEY_ACTIVITY_TYPE, "").ifBlank { "listening" })
     private val _activityName = MutableStateFlow(persistence.string(KEY_ACTIVITY_NAME, ""))
-    private val _button1Text = MutableStateFlow(persistence.string(KEY_BUTTON_1_TEXT, ""))
+    private val _button1Text = MutableStateFlow(
+        persistence.string(KEY_BUTTON_1_TEXT, "").takeUnless { it == "Listen on YouTube Music" }.orEmpty(),
+    )
     private val _button1Visible = MutableStateFlow(persistence.boolean(KEY_BUTTON_1_VISIBLE, true))
     private val _button2Text = MutableStateFlow(persistence.string(KEY_BUTTON_2_TEXT, ""))
     private val _button2Visible = MutableStateFlow(persistence.boolean(KEY_BUTTON_2_VISIBLE, true))
@@ -88,7 +90,8 @@ internal object DesktopDiscordSettings {
     fun activityLabel(id: String) = activities.firstOrNull { it.id == id }?.label ?: id
     fun activityVerb(id: String) = activities.firstOrNull { it.id == id }?.detail ?: "Listening to"
 
-    const val DEFAULT_BUTTON_1 = "Listen on YouTube Music"
+    const val DISCORD_INVITE_URL = "https://discord.gg/x7ysPnHs"
+    const val DEFAULT_BUTTON_1 = "Join The Discord (discord.gg/x7ysPnHs)"
     const val DEFAULT_BUTTON_2 = "Visit Konnekt"
     const val APP_NAME = "Konnekt"
 

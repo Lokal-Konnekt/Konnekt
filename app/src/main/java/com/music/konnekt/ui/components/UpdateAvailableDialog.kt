@@ -11,11 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.material3.Button
-import androidx.compose.material3.TextButton
 import androidx.compose.material3.LinearProgressIndicator
-import androidx.compose.material3.Surface
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalConfiguration
@@ -23,8 +19,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.semantics
-import androidx.compose.ui.window.Dialog
-import androidx.compose.ui.window.DialogProperties
 import java.text.NumberFormat
 
 import androidx.compose.foundation.background
@@ -38,7 +32,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -63,9 +56,11 @@ import com.halilibo.richtext.markdown.Markdown
 import com.halilibo.richtext.ui.RichTextStyle
 import com.halilibo.richtext.ui.material3.RichText
 import com.music.konnekt.R
+import com.music.konnekt.BuildConfig
 import com.music.konnekt.data.AppUpdateChecker
 import com.music.konnekt.data.settings.AppSettings
 import dev.chrisbanes.haze.HazeState
+import dev.chrisbanes.haze.ExperimentalHazeApi
 import dev.chrisbanes.haze.materials.ExperimentalHazeMaterialsApi
 import dev.chrisbanes.haze.materials.HazeMaterials
 
@@ -81,11 +76,13 @@ internal val ACTION_HEIGHT = 44.dp
  */
 internal val SCRIM_COLOR = Color.Black.copy(alpha = 0.28f)
 
-/** Native dialog with a short entrance and a persistent, cancellable download. */
+/** Frosted update sheet with a persistent, cancellable download. */
+@OptIn(ExperimentalHazeApi::class, ExperimentalHazeMaterialsApi::class)
 @Composable
 fun UpdateAvailableDialog(
     version: String,
     notes: String?,
+    hasApk: Boolean,
     hazeState: HazeState,
     onDismiss: () -> Unit,
     onDownload: () -> Unit,
@@ -102,106 +99,178 @@ fun UpdateAvailableDialog(
         else entrance.animateTo(1f, tween(240, easing = FastOutSlowInEasing))
     }
     val context = LocalContext.current
-    val maxHeight = LocalConfiguration.current.screenHeightDp.dp * 0.85f
+    val maxHeight = LocalConfiguration.current.screenHeightDp.dp * 0.88f
     val downloading = state as? AppUpdateChecker.DownloadState.Downloading
     val progress by animateFloatAsState(
         downloading?.fraction?.coerceIn(0f, 1f) ?: 1f,
         animationSpec = tween(if (reduceAnimation) 0 else 180), label = "updateProgress",
     )
-    val body = stringResource(when (state) {
-        is AppUpdateChecker.DownloadState.Downloading -> R.string.update_downloading_body
-        is AppUpdateChecker.DownloadState.Ready -> R.string.update_ready_body
-        is AppUpdateChecker.DownloadState.Failed -> R.string.update_failed_body
-        AppUpdateChecker.DownloadState.Verifying -> R.string.update_verifying_body
+    val body = stringResource(when {
+        !hasApk && state !is AppUpdateChecker.DownloadState.Downloading &&
+            state !is AppUpdateChecker.DownloadState.Verifying &&
+            state !is AppUpdateChecker.DownloadState.Ready -> R.string.update_release_page_body
+        state is AppUpdateChecker.DownloadState.Downloading -> R.string.update_downloading_body
+        state is AppUpdateChecker.DownloadState.Ready -> R.string.update_ready_body
+        state is AppUpdateChecker.DownloadState.Failed -> R.string.update_failed_body
+        state == AppUpdateChecker.DownloadState.Verifying -> R.string.update_verifying_body
         else -> R.string.update_available_body
     }, version)
 
-    Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
-        Surface(
-            modifier = modifier.padding(24.dp).widthIn(max = 420.dp).fillMaxWidth()
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(SCRIM_COLOR)
+            .clickable(
+                indication = null,
+                interactionSource = remember { MutableInteractionSource() },
+                onClick = onDismiss,
+            ),
+        contentAlignment = Alignment.Center,
+    ) {
+        Column(
+            modifier = Modifier
+                .widthIn(min = 280.dp, max = 440.dp)
+                .fillMaxWidth(0.9f)
                 .heightIn(max = maxHeight)
+                .clip(RoundedCornerShape(24.dp))
+                .then(
+                    if (AppSettings.reduceDynamicBlur.collectAsStateWithLifecycle().value) {
+                        Modifier.background(MaterialTheme.colorScheme.surface)
+                    } else {
+                        Modifier.optimizedHazeEffect(
+                            state = hazeState,
+                            style = HazeMaterials.regular(MaterialTheme.colorScheme.surface),
+                        )
+                    },
+                )
+                .clickable(
+                    indication = null,
+                    interactionSource = remember { MutableInteractionSource() },
+                    onClick = {},
+                )
                 .graphicsLayer {
                     alpha = 0.3f + entrance.value * 0.7f
                     scaleX = 0.96f + entrance.value * 0.04f
                     scaleY = scaleX
                 },
-            shape = RoundedCornerShape(28.dp),
-            color = MaterialTheme.colorScheme.surfaceContainerHigh,
         ) {
-            Column(Modifier.verticalScroll(rememberScrollState()).padding(24.dp)) {
-                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(16.dp)) {
-                    Image(painterResource(R.drawable.launcher_logo_image), contentDescription = null,
-                        modifier = Modifier.size(64.dp).clip(RoundedCornerShape(16.dp)))
+            Column(
+                modifier = Modifier
+                    .weight(1f, fill = false)
+                    .verticalScroll(rememberScrollState())
+                    .padding(horizontal = 22.dp, vertical = 22.dp),
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(14.dp)) {
+                    Image(
+                        painterResource(R.drawable.launcher_logo_image),
+                        contentDescription = null,
+                        modifier = Modifier.size(58.dp).clip(RoundedCornerShape(16.dp)),
+                    )
                     Column(Modifier.weight(1f)) {
-                        Text("Konnekt", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
-                        Text("v$version", style = MaterialTheme.typography.labelLarge,
-                            color = MaterialTheme.colorScheme.primary)
+                        Text(
+                            text = stringResource(R.string.software_update),
+                            style = MaterialTheme.typography.titleLarge,
+                            fontWeight = FontWeight.Bold,
+                            modifier = Modifier.semantics { heading() },
+                        )
+                        Text(
+                            text = stringResource(R.string.update_new_version, version),
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                        )
                     }
                 }
-                Spacer(Modifier.height(24.dp))
-                Text(stringResource(R.string.software_update), style = MaterialTheme.typography.headlineSmall,
-                    fontWeight = FontWeight.Bold, modifier = Modifier.semantics { heading() })
+                Spacer(Modifier.height(16.dp))
+                Text(
+                    text = body,
+                    style = MaterialTheme.typography.bodyLarge,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant,
+                )
                 Spacer(Modifier.height(8.dp))
-                Text(body, style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Text(
+                    text = stringResource(R.string.update_current_version, BuildConfig.VERSION_NAME),
+                    style = MaterialTheme.typography.labelMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.75f),
+                )
                 if (downloading != null || state == AppUpdateChecker.DownloadState.Verifying) {
-                    Spacer(Modifier.height(20.dp))
+                    Spacer(Modifier.height(18.dp))
                     if (state == AppUpdateChecker.DownloadState.Verifying || (downloading?.fraction ?: 0f) < 0f) {
                         LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
                     } else {
                         LinearProgressIndicator(progress = { progress }, modifier = Modifier.fillMaxWidth())
                     }
                     if (downloading != null) {
-                        Row(Modifier.fillMaxWidth().padding(top = 10.dp), horizontalArrangement = Arrangement.SpaceBetween) {
+                        Row(Modifier.fillMaxWidth().padding(top = 8.dp), horizontalArrangement = Arrangement.SpaceBetween) {
                             Text(Formatter.formatShortFileSize(context, downloading.bytes), style = MaterialTheme.typography.labelMedium)
                             if (downloading.total > 0) Text(
                                 NumberFormat.getPercentInstance().format(downloading.fraction.coerceIn(0f, 1f)),
-                                style = MaterialTheme.typography.labelMedium)
+                                style = MaterialTheme.typography.labelMedium,
+                            )
                         }
                     }
                 }
                 if (state is AppUpdateChecker.DownloadState.Failed) {
                     Spacer(Modifier.height(12.dp))
-                    Text(stringResource(if ((state as AppUpdateChecker.DownloadState.Failed).invalidApk)
-                        R.string.update_invalid_apk else R.string.update_retry_hint),
-                        style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error)
+                    Text(
+                        text = stringResource(
+                            if ((state as AppUpdateChecker.DownloadState.Failed).invalidApk) {
+                                R.string.update_invalid_apk
+                            } else {
+                                R.string.update_retry_hint
+                            },
+                        ),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.error,
+                    )
                 }
                 if (state is AppUpdateChecker.DownloadState.Ready && !context.packageManager.canRequestPackageInstalls()) {
                     Spacer(Modifier.height(12.dp))
-                    Text(stringResource(R.string.update_install_permission), style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.update_install_permission), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
                 if (!notes.isNullOrBlank()) {
-                    HorizontalDivider(Modifier.padding(vertical = 20.dp))
-                    Text(stringResource(R.string.whats_new), style = MaterialTheme.typography.titleMedium,
-                        fontWeight = FontWeight.SemiBold)
-                    Box(Modifier.padding(top = 8.dp).heightIn(max = 220.dp).verticalScroll(rememberScrollState())) {
-                        CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
-                            RichText(style = RichTextStyle.Default) { Markdown(notes) }
-                        }
+                    AlertRule(Modifier.padding(top = 18.dp))
+                    Text(
+                        text = stringResource(R.string.whats_new),
+                        style = MaterialTheme.typography.titleMedium,
+                        fontWeight = FontWeight.SemiBold,
+                        modifier = Modifier.padding(top = 16.dp),
+                    )
+                    CompositionLocalProvider(LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant) {
+                        RichText(
+                            style = RichTextStyle.Default,
+                            modifier = Modifier.padding(top = 8.dp),
+                        ) { Markdown(notes) }
                     }
                 }
-                Spacer(Modifier.height(24.dp))
-                when (state) {
-                    is AppUpdateChecker.DownloadState.Downloading -> {
-                        TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.later)) }
-                        TextButton(onClick = onCancelDownload, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.cancel)) }
-                    }
-                    AppUpdateChecker.DownloadState.Verifying -> {
-                        Button(onClick = {}, enabled = false, modifier = Modifier.fillMaxWidth()) {
-                            Text(stringResource(R.string.update_verifying))
-                        }
-                    }
-                    else -> {
-                        val ready = state is AppUpdateChecker.DownloadState.Ready
-                        Button(onClick = if (ready) onInstall else onDownload, modifier = Modifier.fillMaxWidth().heightIn(min = 52.dp)) {
-                            Text(stringResource(if (ready) R.string.install_now
-                                else if (state is AppUpdateChecker.DownloadState.Failed) R.string.try_again else R.string.download_now))
-                        }
-                        TextButton(onClick = onDismiss, modifier = Modifier.fillMaxWidth().heightIn(min = 48.dp)) {
-                            Text(stringResource(R.string.remind_me_later))
-                        }
-                    }
+            }
+            AlertRule()
+            when (state) {
+                is AppUpdateChecker.DownloadState.Downloading -> {
+                    AlertAction(label = stringResource(R.string.later), emphasised = false, onClick = onDismiss)
+                    AlertRule()
+                    AlertAction(label = stringResource(R.string.cancel), emphasised = false, onClick = onCancelDownload)
+                }
+                AppUpdateChecker.DownloadState.Verifying -> {
+                    AlertAction(label = stringResource(R.string.update_verifying), emphasised = true, onClick = {}, enabled = false)
+                }
+                is AppUpdateChecker.DownloadState.Ready -> {
+                    AlertAction(label = stringResource(R.string.install_now), emphasised = true, onClick = onInstall)
+                    AlertRule()
+                    AlertAction(label = stringResource(R.string.remind_me_later), emphasised = false, onClick = onDismiss)
+                }
+                is AppUpdateChecker.DownloadState.Failed -> {
+                    AlertAction(label = stringResource(R.string.try_again), emphasised = true, onClick = onDownload)
+                    AlertRule()
+                    AlertAction(label = stringResource(R.string.open_releases_page), emphasised = false, onClick = onOpenReleasePage)
+                }
+                else -> {
+                    AlertAction(
+                        label = stringResource(if (hasApk) R.string.download_now else R.string.open_releases_page),
+                        emphasised = true,
+                        onClick = if (hasApk) onDownload else onOpenReleasePage,
+                    )
+                    AlertRule()
+                    AlertAction(label = stringResource(R.string.remind_me_later), emphasised = false, onClick = onDismiss)
                 }
             }
         }

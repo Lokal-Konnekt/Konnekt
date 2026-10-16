@@ -242,7 +242,7 @@ internal object DesktopDiscordRpc {
         val settings = DesktopDiscordSettings
         if (settings.button1Visible.value) {
             val text = settings.button1Text.value.ifEmpty { DesktopDiscordSettings.DEFAULT_BUTTON_1 }
-            add(settings.resolveVariables(text, song.title, song.artist, song.albumName) to watchUrl(song))
+            add(settings.resolveVariables(text, song.title, song.artist, song.albumName) to DesktopDiscordSettings.DISCORD_INVITE_URL)
         }
         if (settings.button2Visible.value) {
             val text = settings.button2Text.value.ifEmpty { DesktopDiscordSettings.DEFAULT_BUTTON_2 }

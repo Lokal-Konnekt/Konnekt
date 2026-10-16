@@ -83,7 +83,7 @@ open class DiscordWebSocket(
     private val device: String = "Generic Android Device",
 ) : CoroutineScope {
     private val logger = Logger.getLogger(DiscordWebSocket::class.java.name)
-    private val gatewayUrl = "wss://gateway.discord.gg/?v=9&encoding=json"
+    private val gatewayUrl = "wss://gateway.discord.gg/?v=10&encoding=json"
     private var websocket: DefaultClientWebSocketSession? = null
     private var sequence = 0
     private var sessionId: String? = null

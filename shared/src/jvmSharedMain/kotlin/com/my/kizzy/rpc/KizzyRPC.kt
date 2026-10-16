@@ -166,7 +166,7 @@ open class KizzyRPC(
             superPropertiesBase64: String? = null,
         ): Result<UserInfo> = runCatching {
             val client = HttpClient()
-            val response = client.get("https://discord.com/api/v9/users/@me") {
+            val response = client.get("https://discord.com/api/v10/users/@me") {
                 header("Authorization", token)
                 header("User-Agent", userAgent)
                 if (superPropertiesBase64 != null) {

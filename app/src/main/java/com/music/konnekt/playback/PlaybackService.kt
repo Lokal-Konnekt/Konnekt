@@ -6401,7 +6401,7 @@ class PlaybackService : MediaLibraryService() {
             .takeIf { AppSettings.discordShowAudioQuality.value }
 
         discordUpdateJob?.cancel()
-        discordPresenceUp = true
+        discordPresenceUp = false
         discordUpdateJob = scope.launch(Dispatchers.IO) {
             rpc.updateSong(
                 song = song,
@@ -6417,7 +6417,10 @@ class PlaybackService : MediaLibraryService() {
                 activityType = AppSettings.discordActivityType.value,
                 activityName = AppSettings.discordActivityName.value,
                 audioQuality = audioQuality,
-            ).onFailure {
+            ).onSuccess {
+                discordPresenceUp = true
+            }.onFailure {
+                discordPresenceUp = false
                 TrackLog.d("Konnekt", "Discord presence failed: ${it.message}", about = song.videoId)
             }
         }

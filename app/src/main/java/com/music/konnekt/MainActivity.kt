@@ -4825,6 +4825,7 @@ private fun KonnektApp(
                 UpdateAvailableDialog(
                     version = update.version,
                     notes = update.notes,
+                    hasApk = update.apkUrl != null,
                     hazeState = hazeState,
                     // A download in progress keeps running behind the closed
                     // sheet — only the sheet itself goes away. The top bar's

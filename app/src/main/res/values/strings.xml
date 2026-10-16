@@ -171,6 +171,9 @@
     <string name="update_available">Update available: v%1$s</string>
     <string name="software_update">Software Update</string>
     <string name="update_available_body">Konnekt %1$s is available to download.</string>
+    <string name="update_release_page_body">Konnekt %1$s is available. Open the GitHub release page to read the notes and download the right build.</string>
+    <string name="update_new_version">Version %1$s</string>
+    <string name="update_current_version">Installed version: %1$s</string>
     <string name="update_downloading_body">Downloading Konnekt %1$s…</string>
     <string name="update_ready_body">Konnekt %1$s is ready to install.</string>
     <string name="update_failed_body">Couldn’t download Konnekt %1$s.</string>
@@ -436,7 +439,7 @@
     <string name="discord">Discord</string>
     <string name="discord_account">Discord account</string>
     <string name="discord_button_variables">{song_name}, {artist_name} and {album_name} are replaced with the current track.</string>
-    <string name="discord_buttons_footer">{song_name}, {artist_name} and {album_name} are replaced with the track. The first button opens the song on YouTube Music and the second opens this project.</string>
+    <string name="discord_buttons_footer">The first button invites people to the Konnekt Discord. The second opens the project page. Track variables are available for custom labels.</string>
     <string name="discord_presence_footer">The card updates when the track, position or playback state changes. It clears when playback stops.</string>
     <string name="discord_show_audio_quality">Show audio quality</string>
     <string name="discord_show_audio_quality_subtitle">Hi-Res, lossless and Dolby specs on the presence card</string>

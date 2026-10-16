@@ -655,13 +655,11 @@ private fun RichPresencePreview(
             Spacer(Modifier.height(12.dp))
             PresenceButton(
                 label = resolved(button1Text, DiscordRPC.DEFAULT_BUTTON_1),
-                enabled = song != null,
+                enabled = true,
                 onClick = {
-                    song?.let {
-                        context.startActivity(
-                            Intent(Intent.ACTION_VIEW, DiscordRPC.watchUrl(it).toUri()),
-                        )
-                    }
+                    context.startActivity(
+                        Intent(Intent.ACTION_VIEW, DiscordRPC.DISCORD_INVITE_URL.toUri()),
+                    )
                 },
             )
         }
