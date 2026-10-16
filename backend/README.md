@@ -302,10 +302,10 @@ That becomes `BuildConfig.LISTEN_TOGETHER_SERVER` and seeds the address box on
 the Listen Together screen. It is only a default — anything typed into that box
 wins and persists, so running your own copy of this server never means editing
 the build. `local.properties` is gitignored. The fallback URL currently compiled
-into a fresh Android checkout is `https://konnekt-listen-together.onrender.com`;
-check `/healthz` before relying on it. On 16 October 2026 it returned Render's
-`x-render-routing: no-server` response, so deploy your own service and enter its
-URL in the app or set `LISTEN_TOGETHER_SERVER` for a new build.
+into a fresh Android checkout is `https://konnekt-listen-together.onrender.com`.
+Its `/healthz` endpoint returned HTTP 200 after the Render deployment on
+16 October 2026. If you deploy another copy, enter its URL in the app or set
+`LISTEN_TOGETHER_SERVER` for a new build.
 
 Two things about Render specifically:
 
