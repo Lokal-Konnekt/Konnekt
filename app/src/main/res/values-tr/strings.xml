@@ -1289,4 +1289,7 @@
     <string name="smart_offline_queued">Yeni indirmeler kuyruğa eklendi.</string>
     <string name="smart_offline_ready">Çevrimdışı seçiminiz güncel.</string>
     <string name="smart_offline_error">Yenilenemedi. Tekrar denemek için dokunun.</string>
+    <string name="saved_queue_playlist_name">Sıra — %1$s</string>
+    <string name="saved_queue_playlist_success">Sıra yerel çalma listelerine kaydedildi.</string>
+    <string name="shared_queue_title">Konnekt sırası</string>
 </resources>

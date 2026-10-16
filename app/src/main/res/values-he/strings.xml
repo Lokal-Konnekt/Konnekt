@@ -1337,4 +1337,7 @@
     <string name="smart_offline_queued">הורדות חדשות נוספו לתור.</string>
     <string name="smart_offline_ready">האוסף הלא מקוון שלך מעודכן.</string>
     <string name="smart_offline_error">הרענון נכשל. יש להקיש כדי לנסות שוב.</string>
+    <string name="saved_queue_playlist_name">תור — %1$s</string>
+    <string name="saved_queue_playlist_success">התור נשמר בפלייליסטים המקומיים.</string>
+    <string name="shared_queue_title">התור של Konnekt</string>
 </resources>

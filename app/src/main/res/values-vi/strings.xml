@@ -1249,4 +1249,7 @@
     <string name="smart_offline_queued">Đã thêm bản tải xuống mới vào hàng đợi.</string>
     <string name="smart_offline_ready">Danh sách ngoại tuyến đã được cập nhật.</string>
     <string name="smart_offline_error">Không thể làm mới. Chạm để thử lại.</string>
+    <string name="saved_queue_playlist_name">Hàng chờ — %1$s</string>
+    <string name="saved_queue_playlist_success">Đã lưu hàng chờ vào danh sách phát trên thiết bị.</string>
+    <string name="shared_queue_title">Hàng chờ Konnekt</string>
 </resources>

@@ -1372,4 +1372,7 @@
     <string name="smart_offline_queued">Dodano nowe pobrania do kolejki.</string>
     <string name="smart_offline_ready">Wybór offline jest aktualny.</string>
     <string name="smart_offline_error">Nie udało się odświeżyć. Dotknij, aby spróbować ponownie.</string>
+    <string name="saved_queue_playlist_name">Kolejka — %1$s</string>
+    <string name="saved_queue_playlist_success">Kolejkę zapisano w lokalnych playlistach.</string>
+    <string name="shared_queue_title">Kolejka Konnekt</string>
 </resources>

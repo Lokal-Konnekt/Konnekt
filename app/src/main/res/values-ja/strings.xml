@@ -1310,4 +1310,7 @@
     <string name="smart_offline_queued">新しいダウンロードをキューに追加しました。</string>
     <string name="smart_offline_ready">オフラインの曲は最新です。</string>
     <string name="smart_offline_error">更新できませんでした。タップして再試行してください。</string>
+    <string name="saved_queue_playlist_name">再生キュー — %1$s</string>
+    <string name="saved_queue_playlist_success">再生キューをローカルのプレイリストに保存しました。</string>
+    <string name="shared_queue_title">Konnekt の再生キュー</string>
 </resources>

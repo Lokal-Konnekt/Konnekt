@@ -2454,6 +2454,37 @@ private fun KonnektApp(
                     QueueCoordinator.clearUserQueue(c)
                 }
             },
+            onSaveQueue = { songs ->
+                val title = context.getString(
+                    R.string.saved_queue_playlist_name,
+                    java.text.DateFormat.getDateTimeInstance(
+                        java.text.DateFormat.SHORT,
+                        java.text.DateFormat.SHORT,
+                    ).format(java.util.Date()),
+                )
+                scope.launch {
+                    val saved = withContext(Dispatchers.IO) {
+                        runCatching {
+                            com.music.konnekt.data.spotify.LocalPlaylistStore.savePlaylist(title, songs)
+                        }.isSuccess
+                    }
+                    showQueueNotice(context.getString(
+                        if (saved) R.string.saved_queue_playlist_success else R.string.failed,
+                    ))
+                }
+            },
+            onShareQueue = { songs ->
+                val title = context.getString(R.string.shared_queue_title)
+                val list = songs.mapIndexed { index, song ->
+                    "${index + 1}. ${song.title} — ${song.artist}"
+                }.joinToString("\n")
+                runCatching {
+                    context.startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).apply {
+                        type = "text/plain"
+                        putExtra(Intent.EXTRA_TEXT, "$title\n\n$list")
+                    }, title))
+                }.onFailure { showQueueNotice(context.getString(R.string.failed)) }
+            },
         )
     }
 

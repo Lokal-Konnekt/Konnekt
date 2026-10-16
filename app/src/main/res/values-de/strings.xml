@@ -1332,4 +1332,7 @@
     <string name="smart_offline_queued">Neue Downloads wurden zur Warteschlange hinzugefügt.</string>
     <string name="smart_offline_ready">Deine Offline-Auswahl ist aktuell.</string>
     <string name="smart_offline_error">Aktualisierung fehlgeschlagen. Zum Wiederholen tippen.</string>
+    <string name="saved_queue_playlist_name">Warteschlange — %1$s</string>
+    <string name="saved_queue_playlist_success">Warteschlange als lokale Playlist gespeichert.</string>
+    <string name="shared_queue_title">Konnekt-Warteschlange</string>
 </resources>

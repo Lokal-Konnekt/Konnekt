@@ -1181,4 +1181,7 @@
     <string name="smart_offline_queued">New downloads added to the queue.</string>
     <string name="smart_offline_ready">Your offline selection is up to date.</string>
     <string name="smart_offline_error">Couldn’t refresh. Tap to try again.</string>
+    <string name="saved_queue_playlist_name">Queue — %1$s</string>
+    <string name="saved_queue_playlist_success">Queue saved to local playlists.</string>
+    <string name="shared_queue_title">Konnekt queue</string>
 </resources>

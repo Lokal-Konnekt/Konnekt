@@ -1315,4 +1315,7 @@
     <string name="smart_offline_queued">เพิ่มการดาวน์โหลดใหม่ลงในคิวแล้ว</string>
     <string name="smart_offline_ready">รายการออฟไลน์ของคุณเป็นปัจจุบัน</string>
     <string name="smart_offline_error">รีเฟรชไม่สำเร็จ แตะเพื่อลองอีกครั้ง</string>
+    <string name="saved_queue_playlist_name">คิว — %1$s</string>
+    <string name="saved_queue_playlist_success">บันทึกคิวลงในเพลย์ลิสต์ภายในเครื่องแล้ว</string>
+    <string name="shared_queue_title">คิว Konnekt</string>
 </resources>

@@ -1364,4 +1364,7 @@
     <string name="smart_offline_queued">Новые загрузки добавлены в очередь.</string>
     <string name="smart_offline_ready">Офлайн-подборка обновлена.</string>
     <string name="smart_offline_error">Не удалось обновить. Нажмите для повтора.</string>
+    <string name="saved_queue_playlist_name">Очередь — %1$s</string>
+    <string name="saved_queue_playlist_success">Очередь сохранена в локальных плейлистах.</string>
+    <string name="shared_queue_title">Очередь Konnekt</string>
 </resources>

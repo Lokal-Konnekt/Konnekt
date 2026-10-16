@@ -1332,4 +1332,7 @@
     <string name="smart_offline_queued">नए डाउनलोड कतार में जोड़े गए।</string>
     <string name="smart_offline_ready">आपका ऑफ़लाइन चयन अद्यतित है।</string>
     <string name="smart_offline_error">रीफ़्रेश नहीं हो सका। फिर कोशिश करने के लिए टैप करें।</string>
+    <string name="saved_queue_playlist_name">कतार — %1$s</string>
+    <string name="saved_queue_playlist_success">कतार स्थानीय प्लेलिस्ट में सहेजी गई।</string>
+    <string name="shared_queue_title">Konnekt कतार</string>
 </resources>

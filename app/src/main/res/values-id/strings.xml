@@ -1309,4 +1309,7 @@
     <string name="smart_offline_queued">Unduhan baru ditambahkan ke antrean.</string>
     <string name="smart_offline_ready">Pilihan offline Anda sudah terbaru.</string>
     <string name="smart_offline_error">Gagal memperbarui. Ketuk untuk mencoba lagi.</string>
+    <string name="saved_queue_playlist_name">Antrean — %1$s</string>
+    <string name="saved_queue_playlist_success">Antrean disimpan ke playlist lokal.</string>
+    <string name="shared_queue_title">Antrean Konnekt</string>
 </resources>

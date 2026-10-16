@@ -1337,4 +1337,7 @@
     <string name="smart_offline_queued">Nouveaux téléchargements ajoutés à la file.</string>
     <string name="smart_offline_ready">Votre sélection hors ligne est à jour.</string>
     <string name="smart_offline_error">Actualisation impossible. Touchez pour réessayer.</string>
+    <string name="saved_queue_playlist_name">File de lecture — %1$s</string>
+    <string name="saved_queue_playlist_success">File enregistrée dans les playlists locales.</string>
+    <string name="shared_queue_title">File de lecture Konnekt</string>
 </resources>

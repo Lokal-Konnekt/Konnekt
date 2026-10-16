@@ -1304,4 +1304,7 @@
     <string name="smart_offline_queued">Nuevas descargas añadidas a la cola.</string>
     <string name="smart_offline_ready">Tu selección sin conexión está actualizada.</string>
     <string name="smart_offline_error">No se pudo actualizar. Toca para reintentar.</string>
+    <string name="saved_queue_playlist_name">Cola — %1$s</string>
+    <string name="saved_queue_playlist_success">Cola guardada en las listas locales.</string>
+    <string name="shared_queue_title">Cola de Konnekt</string>
 </resources>

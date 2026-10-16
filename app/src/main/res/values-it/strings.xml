@@ -1271,4 +1271,7 @@
     <string name="smart_offline_queued">Nuovi download aggiunti alla coda.</string>
     <string name="smart_offline_ready">La selezione offline è aggiornata.</string>
     <string name="smart_offline_error">Aggiornamento non riuscito. Tocca per riprovare.</string>
+    <string name="saved_queue_playlist_name">Coda — %1$s</string>
+    <string name="saved_queue_playlist_success">Coda salvata nelle playlist locali.</string>
+    <string name="shared_queue_title">Coda Konnekt</string>
 </resources>

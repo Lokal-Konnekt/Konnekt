@@ -1337,4 +1337,7 @@
     <string name="smart_offline_queued">Novos downloads adicionados à fila.</string>
     <string name="smart_offline_ready">Sua seleção offline está atualizada.</string>
     <string name="smart_offline_error">Não foi possível atualizar. Toque para tentar novamente.</string>
+    <string name="saved_queue_playlist_name">Fila — %1$s</string>
+    <string name="saved_queue_playlist_success">Fila salva nas playlists locais.</string>
+    <string name="shared_queue_title">Fila do Konnekt</string>
 </resources>

@@ -1309,4 +1309,7 @@
     <string name="smart_offline_queued">新下载已加入队列。</string>
     <string name="smart_offline_ready">离线精选已是最新状态。</string>
     <string name="smart_offline_error">刷新失败。点按以重试。</string>
+    <string name="saved_queue_playlist_name">播放队列 — %1$s</string>
+    <string name="saved_queue_playlist_success">播放队列已保存到本地播放列表。</string>
+    <string name="shared_queue_title">Konnekt 播放队列</string>
 </resources>

@@ -1,12 +1,14 @@
 # 🎵 Konnekt Changelog
 
-## Unreleased — Smarter offline listening and per-song lyrics timing
+## 1.5.0 — A more useful queue and smarter offline listening
 
+- Save the current queue and upcoming tracks as a local playlist, or share the running order through Android's share sheet.
 - Added an opt-in smart offline selection drawn from recently and frequently played songs. On an unmetered connection, Konnekt refreshes it when the app opens, using the chosen download quality and a 250 MB, 500 MB or 1 GB storage target.
 - Added visible waiting, empty, updating, queued, ready and error states for smart offline downloads, with a manual refresh action.
 - Saved lyrics timing offsets per song on Android and desktop. Existing global offsets remain the starting value for songs without a saved correction.
-- Updated the Listen Together hosting guide with the current Render Free behavior and the status of the old default server URL.
-- Moved the Render Blueprint to the repository root and added a direct deployment link for a single Frankfurt Free instance.
+- Connected Listen Together's default address to the now-live Render service and added a direct deployment link for a single Frankfurt Free instance.
+
+**Android version:** `1.5.0` · **versionCode:** `15000` · **Package:** `com.music.konnekt`
 
 ---
 

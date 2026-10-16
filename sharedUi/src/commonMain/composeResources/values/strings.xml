@@ -205,4 +205,6 @@
     <string name="member_since">Member since</string>
     <string name="import_spotify">Import Spotify</string>
     <string name="import_spotify_subtitle">From a playlist link</string>
+    <string name="save_queue_as_playlist">Save queue as playlist</string>
+    <string name="share_queue">Share queue</string>
 </resources>

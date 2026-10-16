@@ -33,7 +33,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.DragHandle
 import androidx.compose.material.icons.rounded.GraphicEq
+import androidx.compose.material.icons.rounded.PlaylistAdd
+import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -216,6 +219,8 @@ internal fun InlineQueue(
     onRemove: (Int) -> Unit,
     onMove: (Int, Int) -> Unit,
     onClear: () -> Unit,
+    onSaveQueue: ((List<Song>) -> Unit)? = null,
+    onShareQueue: ((List<Song>) -> Unit)? = null,
     onScrollingChange: (Boolean) -> Unit = {},
     onDragActiveChange: (Boolean) -> Unit = {},
     /** Phone only: let queue scrolling dismiss/restore the lower half player. */
@@ -237,6 +242,9 @@ internal fun InlineQueue(
     val tracks = remember(queue, currentIndex) { splitQueue(queue, currentIndex) }
     val drag = rememberQueueDrag(listState, tracks, onMove, onDragActiveChange)
     val nowPlaying = tracks.nowPlaying
+    val remaining = remember(queue, currentIndex) {
+        queue.drop(currentIndex.coerceAtLeast(0)).filter { it.videoId.isNotBlank() }
+    }
     val contextSong = tracks.context.firstOrNull()?.song
     val contextTitle = contextSong?.playbackSource?.takeIf { it.isNotBlank() }
         ?: contextSong?.albumName?.takeIf { it.isNotBlank() }
@@ -269,6 +277,26 @@ internal fun InlineQueue(
                 color = Color.White,
                 modifier = Modifier.weight(1f),
             )
+            if (remaining.isNotEmpty()) {
+                onSaveQueue?.let { save ->
+                    IconButton(onClick = { save(remaining) }) {
+                        Icon(
+                            Icons.Rounded.PlaylistAdd,
+                            contentDescription = stringResource(Res.string.save_queue_as_playlist),
+                            tint = Color.White,
+                        )
+                    }
+                }
+                onShareQueue?.let { share ->
+                    IconButton(onClick = { share(remaining) }) {
+                        Icon(
+                            Icons.Rounded.Share,
+                            contentDescription = stringResource(Res.string.share_queue),
+                            tint = Color.White,
+                        )
+                    }
+                }
+            }
             if (tracks.user.isNotEmpty()) {
                 QueueClearButton(MaterialTheme.typography.titleMedium, controlsLocked, onClear)
             }

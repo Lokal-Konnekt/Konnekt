@@ -702,6 +702,8 @@ fun NowPlayingScreen(
      */
     onQueueDragActiveChange: (Boolean) -> Unit = {},
     onClearQueue: () -> Unit,
+    onSaveQueue: ((List<Song>) -> Unit)? = null,
+    onShareQueue: ((List<Song>) -> Unit)? = null,
     onOpenMenu: () -> Unit,
     onOpenAlbum: (String) -> Unit,
     /**
@@ -2022,6 +2024,8 @@ fun NowPlayingScreen(
                         onRemove = onRemoveFromQueue,
                         onMove = onMoveInQueue,
                         onClear = onClearQueue,
+                        onSaveQueue = onSaveQueue,
+                        onShareQueue = onShareQueue,
                         onDragActiveChange = onQueueDragActiveChange,
                         modifier = Modifier.fillMaxSize(),
                     )
@@ -3433,6 +3437,8 @@ fun NowPlayingScreen(
                             onRemove = onRemoveFromQueue,
                             onMove = onMoveInQueue,
                             onClear = onClearQueue,
+                            onSaveQueue = onSaveQueue,
+                            onShareQueue = onShareQueue,
                             onScrollingChange = { queueScrolling = it },
                             onDragActiveChange = onQueueDragActiveChange,
                             collapsePlayerOnScroll = true,
