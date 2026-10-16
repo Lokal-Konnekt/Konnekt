@@ -43,6 +43,7 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.music.konnekt.data.model.SearchHistoryEntity
 import com.music.konnekt.data.settings.LibrarySort
+import com.music.konnekt.data.settings.LibraryArtworkSize
 import com.music.konnekt.data.settings.LibraryViewType
 import com.music.konnekt.ui.AppUiHost
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -81,6 +82,7 @@ internal object DesktopAppUiHost : AppUiHost {
             .getOrDefault(LibrarySort.DEFAULT),
     )
     override val librarySort: StateFlow<LibrarySort> = _librarySort
+    override val libraryArtworkSize: StateFlow<LibraryArtworkSize> = MutableStateFlow(LibraryArtworkSize.MEDIUM)
 
     fun setLibrarySort(value: LibrarySort) {
         persistence.saveString(KEY_LIBRARY_SORT, value.name)

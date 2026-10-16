@@ -3,6 +3,7 @@ package com.music.konnekt.ui.components
 import com.music.konnekt.ui.LocalPullToRefreshEnabled
 import com.music.konnekt.ui.AppUiHost
 import com.music.konnekt.ui.AppUi
+import com.music.konnekt.data.settings.LibraryArtworkSize
 import com.music.konnekt.sharedui.resources.*
 import org.jetbrains.compose.resources.stringResource
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -223,6 +224,12 @@ data class LibraryGridSpec(val columns: Int, val cardWidth: Dp)
  */
 private val LIBRARY_GRID_MIN_CARD_WIDTH = 140.dp
 
+fun LibraryArtworkSize.minCardWidth(): Dp = when (this) {
+    LibraryArtworkSize.SMALL -> 116.dp
+    LibraryArtworkSize.MEDIUM -> 140.dp
+    LibraryArtworkSize.LARGE -> 176.dp
+}
+
 /** Gap between cards in a library grid, in both directions. */
 val LIBRARY_GRID_SPACING = 12.dp
 
@@ -251,8 +258,8 @@ private const val LIBRARY_GRID_MAX_COLUMNS = 5
  * five-card cap rather than a width-derived one, so a card is the same size
  * whether the row it's in scrolls or not. See `LibraryGridShelf`.
  */
-fun libraryGrid(available: Dp): LibraryGridSpec {
-    val raw = ((available + LIBRARY_GRID_SPACING) / (LIBRARY_GRID_MIN_CARD_WIDTH + LIBRARY_GRID_SPACING))
+fun libraryGrid(available: Dp, minCardWidth: Dp = LIBRARY_GRID_MIN_CARD_WIDTH): LibraryGridSpec {
+    val raw = ((available + LIBRARY_GRID_SPACING) / (minCardWidth + LIBRARY_GRID_SPACING))
         .toInt()
     val columns = raw.coerceIn(LIBRARY_GRID_MIN_COLUMNS, LIBRARY_GRID_MAX_COLUMNS)
     val cardWidth = (available - LIBRARY_GRID_SPACING * (columns - 1)) / columns

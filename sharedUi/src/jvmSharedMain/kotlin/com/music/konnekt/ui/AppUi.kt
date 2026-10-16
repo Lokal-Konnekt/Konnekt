@@ -3,6 +3,7 @@ package com.music.konnekt.ui
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.music.konnekt.data.settings.LibrarySort
+import com.music.konnekt.data.settings.LibraryArtworkSize
 import com.music.konnekt.data.settings.LibraryViewType
 import kotlinx.coroutines.flow.StateFlow
 
@@ -27,6 +28,9 @@ interface AppUiHost {
 
     /** How a Library "Show all" grid is ordered. */
     val librarySort: StateFlow<LibrarySort>
+
+    /** Preferred album-card size for grid pages. */
+    val libraryArtworkSize: StateFlow<LibraryArtworkSize>
 
     /** Video ids of the tracks already downloaded, for the mark on their rows. */
     @Composable

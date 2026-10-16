@@ -563,6 +563,7 @@ object AppSettings {
     val downloadedMusicSort = MutableStateFlow(LocalMusicSort.TITLE_ASC)
     val localMusicViewType = MutableStateFlow(LibraryViewType.LIST)
     val downloadedMusicViewType = MutableStateFlow(LibraryViewType.LIST)
+    val libraryArtworkSize = MutableStateFlow(LibraryArtworkSize.MEDIUM)
     /** Layout used by the Recents shelf on Play; compact tracks are the default. */
     val homeRecentsViewType = MutableStateFlow(LibraryViewType.LIST)
     val librarySort = MutableStateFlow(LibrarySort.DEFAULT)
@@ -892,6 +893,7 @@ object AppSettings {
         downloadedMusicSort.value = readLocalMusicSort(KEY_DOWNLOADED_MUSIC_SORT)
         localMusicViewType.value = readLibraryViewType(KEY_LOCAL_MUSIC_VIEW_TYPE)
         downloadedMusicViewType.value = readLibraryViewType(KEY_DOWNLOADED_MUSIC_VIEW_TYPE)
+        libraryArtworkSize.value = readLibraryArtworkSize()
         homeRecentsViewType.value = readLibraryViewType(KEY_HOME_RECENTS_VIEW_TYPE)
         librarySort.value = prefs.getString(KEY_LIBRARY_SORT, null)
             ?.let { saved -> LibrarySort.entries.firstOrNull { it.name == saved } }
@@ -1680,6 +1682,11 @@ object AppSettings {
         prefs.edit().putString(KEY_DOWNLOADED_MUSIC_VIEW_TYPE, value.name).apply()
     }
 
+    fun setLibraryArtworkSize(value: LibraryArtworkSize) {
+        libraryArtworkSize.value = value
+        prefs.edit().putString(KEY_LIBRARY_ARTWORK_SIZE, value.name).apply()
+    }
+
     fun setHomeRecentsViewType(value: LibraryViewType) {
         homeRecentsViewType.value = value
         prefs.edit().putString(KEY_HOME_RECENTS_VIEW_TYPE, value.name).apply()
@@ -1789,6 +1796,11 @@ object AppSettings {
         prefs.getString(key, null)
             ?.let { saved -> LibraryViewType.entries.firstOrNull { it.name == saved } }
             ?: LibraryViewType.LIST
+
+    private fun readLibraryArtworkSize(): LibraryArtworkSize =
+        prefs.getString(KEY_LIBRARY_ARTWORK_SIZE, null)
+            ?.let { saved -> LibraryArtworkSize.entries.firstOrNull { it.name == saved } }
+            ?: LibraryArtworkSize.MEDIUM
 
     /**
      * Pins or unpins [browseId], returning whether it is pinned afterwards.
@@ -2007,6 +2019,7 @@ object AppSettings {
     private const val KEY_DETAIL_SONG_SORTS = "detail_song_sorts"
     private const val KEY_LOCAL_MUSIC_VIEW_TYPE = "local_music_view_type"
     private const val KEY_DOWNLOADED_MUSIC_VIEW_TYPE = "downloaded_music_view_type"
+    private const val KEY_LIBRARY_ARTWORK_SIZE = "library_artwork_size"
     private const val KEY_HOME_RECENTS_VIEW_TYPE = "home_recents_view_type"
     private const val KEY_LOCAL_MUSIC_FOLDER_URI = "local_music_folder_uri"
     private const val KEY_WEBDAV_URL = "webdav_url"

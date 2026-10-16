@@ -111,6 +111,7 @@ import com.music.konnekt.ui.components.SongRow
 import com.music.konnekt.ui.components.SearchPlayingBars
 import com.music.konnekt.ui.components.rememberRemoteArtworkUrl
 import com.music.konnekt.ui.components.thumbnailBorder
+import com.music.konnekt.ui.components.minCardWidth
 import com.music.konnekt.ui.components.TopBarContentGap
 import com.music.konnekt.ui.components.topBarHeight
 import com.music.konnekt.ui.haptics.Haptic
@@ -515,10 +516,11 @@ private fun SongsTab(
     onSongSwipe: (Song) -> Unit,
     contentPadding: PaddingValues,
 ) {
+    val albumCardMinWidth = AppSettings.libraryArtworkSize.collectAsStateWithLifecycle().value.minCardWidth()
     if (viewType == LibraryViewType.GRID) {
         val gridState = rememberLazyGridState()
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 140.dp),
+            columns = GridCells.Adaptive(minSize = albumCardMinWidth),
             state = gridState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
@@ -667,10 +669,11 @@ private fun ArtistsTab(
     onArtistLongPress: ((String, List<Song>) -> Unit)?,
     contentPadding: PaddingValues,
 ) {
+    val albumCardMinWidth = AppSettings.libraryArtworkSize.collectAsStateWithLifecycle().value.minCardWidth()
     if (viewType == LibraryViewType.GRID) {
         val gridState = rememberLazyGridState()
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 130.dp),
+            columns = GridCells.Adaptive(minSize = albumCardMinWidth),
             state = gridState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
@@ -953,10 +956,11 @@ private fun AlbumsTab(
     onAlbumLongPress: ((AlbumEntry) -> Unit)?,
     contentPadding: PaddingValues,
 ) {
+    val albumCardMinWidth = AppSettings.libraryArtworkSize.collectAsStateWithLifecycle().value.minCardWidth()
     if (viewType == LibraryViewType.GRID) {
         val gridState = rememberLazyGridState()
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 140.dp),
+            columns = GridCells.Adaptive(minSize = albumCardMinWidth),
             state = gridState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(
@@ -1371,10 +1375,11 @@ private fun DrillDownSongList(
     onBack: () -> Unit,
     contentPadding: PaddingValues,
 ) {
+    val albumCardMinWidth = AppSettings.libraryArtworkSize.collectAsStateWithLifecycle().value.minCardWidth()
     if (viewType == LibraryViewType.GRID) {
         val gridState = rememberLazyGridState()
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(minSize = 140.dp),
+            columns = GridCells.Adaptive(minSize = albumCardMinWidth),
             state = gridState,
             modifier = Modifier.fillMaxSize(),
             contentPadding = PaddingValues(

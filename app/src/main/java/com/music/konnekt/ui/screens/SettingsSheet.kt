@@ -139,6 +139,7 @@ import com.music.konnekt.data.NerdStats
 import com.music.konnekt.data.scrobbling.LastFM
 import com.music.konnekt.data.listentogether.ListenTogether
 import com.music.konnekt.data.settings.AppSettings
+import com.music.konnekt.data.settings.LibraryArtworkSize
 import com.music.konnekt.data.settings.OutputPcmMode
 import com.music.konnekt.playback.AudioOutputStatus
 import com.music.konnekt.data.settings.AutomixPerformanceMode
@@ -236,6 +237,7 @@ fun SettingsScreen(
     val smartVersionAlignment by AppSettings.smartVersionAlignment.collectAsStateWithLifecycle()
     val filterNonMusicAudio by AppSettings.filterNonMusicAudio.collectAsStateWithLifecycle()
     val localMusicFolderUri by AppSettings.localMusicFolderUri.collectAsStateWithLifecycle()
+    val libraryArtworkSize by AppSettings.libraryArtworkSize.collectAsStateWithLifecycle()
     val highPerformanceMode by AppSettings.highPerformanceMode.collectAsStateWithLifecycle()
     val performanceRefreshRate by AppSettings.performanceRefreshRate.collectAsStateWithLifecycle()
     val currentDisplay = LocalView.current.display
@@ -1099,6 +1101,28 @@ fun SettingsScreen(
         }
 
         SearchableSettingsGroup(search, header = stringResource(R.string.local_music)) {
+            val albumArtworkSizeTitle = stringResource(R.string.album_artwork_size)
+            row(albumArtworkSizeTitle, "album", "artwork", "grid", "size") {
+                SettingsRow(
+                    icon = Icons.Rounded.Fullscreen,
+                    title = albumArtworkSizeTitle,
+                    subtitle = stringResource(R.string.album_artwork_size_subtitle),
+                )
+                SegmentedControl(
+                    options = LibraryArtworkSize.entries.map { size ->
+                        stringResource(
+                            when (size) {
+                                LibraryArtworkSize.SMALL -> R.string.album_artwork_size_small
+                                LibraryArtworkSize.MEDIUM -> R.string.album_artwork_size_medium
+                                LibraryArtworkSize.LARGE -> R.string.album_artwork_size_large
+                            },
+                        )
+                    },
+                    selectedIndex = libraryArtworkSize.ordinal,
+                    onSelect = { index -> AppSettings.setLibraryArtworkSize(LibraryArtworkSize.entries[index]) },
+                    modifier = Modifier.padding(start = TEXT_INSET, end = ROW_INSET, bottom = 14.dp),
+                )
+            }
             val localMusicFolderTitle = stringResource(R.string.local_music_folder)
             row(localMusicFolderTitle, "folder", "offline", "files") {
                 SettingsRow(

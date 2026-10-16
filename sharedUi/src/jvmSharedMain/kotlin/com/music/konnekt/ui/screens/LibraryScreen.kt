@@ -58,6 +58,7 @@ import com.music.konnekt.ui.components.PAGE_GUTTER
 import com.music.konnekt.ui.components.PullToRefresh
 import com.music.konnekt.ui.components.SHELF_CARD_WIDTH
 import com.music.konnekt.ui.components.libraryGrid
+import com.music.konnekt.ui.components.minCardWidth
 import com.music.konnekt.ui.components.librarySkeleton
 
 /**
@@ -407,12 +408,16 @@ fun LibraryGridPage(
     // immediately rather than waiting for the row underneath to be revisited.
     val pinnedPlaylists by AppUi.host.pinnedPlaylists.collectAsStateWithLifecycle()
     val librarySort by AppUi.host.librarySort.collectAsStateWithLifecycle()
+    val artworkSize by AppUi.host.libraryArtworkSize.collectAsStateWithLifecycle()
     // Pinning wins over the default order, but an explicit sort is a stronger,
     // more deliberate signal than a pin and is left to reorder the whole grid,
     // pinned cards included.
     val sortedShelf = shelf.pinnedFirst(pinnedPlaylists).sortedForLibrary(librarySort)
     BoxWithConstraints(modifier.fillMaxSize()) {
-        val grid = libraryGrid(maxWidth - PAGE_GUTTER * 2)
+        val grid = libraryGrid(
+            maxWidth - PAGE_GUTTER * 2,
+            minCardWidth = artworkSize.minCardWidth(),
+        )
         LazyVerticalGrid(
             columns = GridCells.Fixed(grid.columns),
             state = gridState,

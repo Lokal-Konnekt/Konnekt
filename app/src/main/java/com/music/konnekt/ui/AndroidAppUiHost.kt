@@ -14,6 +14,7 @@ object AndroidAppUiHost : AppUiHost {
     override fun setHomeRecentsViewType(value: LibraryViewType) = AppSettings.setHomeRecentsViewType(value)
     override val pinnedPlaylists = AppSettings.pinnedPlaylists
     override val librarySort = AppSettings.librarySort
+    override val libraryArtworkSize = AppSettings.libraryArtworkSize
 
     @Composable
     override fun downloadedIds(): Set<String> {

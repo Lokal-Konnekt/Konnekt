@@ -17,3 +17,10 @@ enum class LibraryViewType {
     LIST,
     GRID,
 }
+
+/** Preferred minimum width of album artwork cards in grid views. */
+enum class LibraryArtworkSize {
+    SMALL,
+    MEDIUM,
+    LARGE,
+}
