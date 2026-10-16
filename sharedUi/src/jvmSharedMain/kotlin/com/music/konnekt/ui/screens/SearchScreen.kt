@@ -142,6 +142,8 @@ fun SearchScreen(
      * YouTube. The phone's top bar flips this; the desktop never does.
      */
     searchingLibrary: Boolean = false,
+    /** True when the configured addon catalogues answer the query. */
+    searchingAddons: Boolean = false,
     /** The Library source's tracks for [query]; null while nothing is typed. */
     libraryResults: UiState<List<Song>>? = null,
     /** Files on the device are a running order to play through, not a station seed. */
@@ -175,14 +177,14 @@ fun SearchScreen(
     // MainViewModel.suggestions. Nothing below it is worth showing while it is
     // up: the results are for whatever was searched before this edit began,
     // and so are the filter tabs above them.
-    val suggesting = suggestions.isNotEmpty() && !searchingLibrary
+    val suggesting = suggestions.isNotEmpty() && !searchingLibrary && !searchingAddons
     // Live media results arrive from the parallel typeahead pipeline; show
     // them only while the user is still typing (suggestions visible), so they
     // appear as a dropdown beneath the text completions rather than floating
     // after the search has committed.
     val showTypeahead = typeaheadResults.isNotEmpty() && suggesting
-    LaunchedEffect(listState, results, loadingMore, searchingLibrary) {
-        if (results !is UiState.Success || searchingLibrary) return@LaunchedEffect
+    LaunchedEffect(listState, results, loadingMore, searchingLibrary, searchingAddons) {
+        if (results !is UiState.Success || searchingLibrary || searchingAddons) return@LaunchedEffect
         snapshotFlow {
             val layout = listState.layoutInfo
             (layout.visibleItemsInfo.lastOrNull()?.index ?: -1) to layout.totalItemsCount
@@ -211,6 +213,15 @@ fun SearchScreen(
                     },
                     modifier = Modifier.padding(start = PAGE_GUTTER, end = PAGE_GUTTER, bottom = 4.dp),
                 )
+            }
+            sourceSwitcher?.let { switcher ->
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = PAGE_GUTTER, vertical = 4.dp),
+                ) {
+                    switcher()
+                }
             }
         }
 

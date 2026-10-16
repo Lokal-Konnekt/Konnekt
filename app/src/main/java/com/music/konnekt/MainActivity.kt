@@ -3235,6 +3235,7 @@ private fun KonnektApp(
                                 SegmentedControl(
                                     options = listOf(
                                         stringResource(R.string.search_source_youtube),
+                                        stringResource(R.string.search_source_addons),
                                         stringResource(R.string.library),
                                     ),
                                     selectedIndex = searchSource.ordinal,
@@ -3242,6 +3243,7 @@ private fun KonnektApp(
                                 )
                             },
                             searchingLibrary = searchSource == SearchSource.LIBRARY,
+                            searchingAddons = searchSource == SearchSource.ADDONS,
                             libraryResults = libraryResults,
                             // The same queue opening the Local Music folder and
                             // tapping the row there would give.

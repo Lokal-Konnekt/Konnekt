@@ -59,6 +59,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.withTimeout
@@ -83,6 +84,9 @@ import com.music.konnekt.data.sources.SourceKind
 import com.music.konnekt.data.sources.SourceRegistry
 import com.music.konnekt.data.sources.SourceResolver
 import com.music.konnekt.data.sources.TrackMatcher
+import com.music.konnekt.data.sources.AddonSearchCandidate
+import com.music.konnekt.data.sources.MusicSource
+import com.music.konnekt.data.sources.mergeAddonSearchResults
 import com.music.konnekt.playback.AudioCache
 import com.music.konnekt.playback.StreamChoice
 import com.music.konnekt.ui.screens.CACHE_FOLDER_BROWSE_ID
@@ -91,8 +95,8 @@ import java.util.Locale
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicLong
 
-/** What the Search tab searches: YouTube Music, or the Local Music folder on this device. */
-enum class SearchSource { YOUTUBE, LIBRARY }
+/** What the Search tab searches: YouTube Music, configured addons, or local music. */
+enum class SearchSource { YOUTUBE, ADDONS, LIBRARY }
 
 class MainViewModel(app: Application) : AndroidViewModel(app) {
 
@@ -1964,7 +1968,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         searchSubmitted = false
         // The Library source answers from the device on every keystroke (see
         // [libraryResults]); YouTube's completions have nothing to add to it.
-        if (_searchSource.value == SearchSource.LIBRARY) return
+        if (_searchSource.value != SearchSource.YOUTUBE) return
         // While typing, surface text completions — the pipeline already feeds
         // them through [suggestRequests] and publishes results via typeahead.
         suggestRequests.tryEmit(newValue)
@@ -1998,7 +2002,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         _searchScrollReset.value += 1
         when (source) {
             SearchSource.LIBRARY -> loadLibrarySongs()
-            SearchSource.YOUTUBE -> submitSearch()
+            SearchSource.YOUTUBE, SearchSource.ADDONS -> submitSearch()
         }
     }
 
@@ -2099,6 +2103,19 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
     private fun startSearchPipeline() = viewModelScope.launch {
         searchRequests
             .collectLatest { request ->
+                if (_searchSource.value == SearchSource.ADDONS) {
+                    _results.value = UiState.Loading
+                    val addons = SourceRegistry.activeForPlayback()
+                        .filter { it.kind == SourceKind.ADDON }
+                    val songs = addonSearchResults(request.query, addons)
+                    if (request.requestId != newestRequestId.get()) return@collectLatest
+                    _results.value = when {
+                        addons.isEmpty() -> UiState.Error(text(R.string.no_addons_configured))
+                        songs.isEmpty() -> UiState.Error(text(R.string.no_results))
+                        else -> UiState.Success(songs.map { SearchResult.Track(it) })
+                    }
+                    return@collectLatest
+                }
                 val key = cacheKey(request.query, request.filter)
                 // Something to look at immediately: the exact answer if this
                 // query has been run before, otherwise the closest earlier
@@ -2137,6 +2154,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
      * continuation was the reason a search sat on a spinner for seconds.
      */
     fun loadMoreSearchResults() {
+        if (_searchSource.value != SearchSource.YOUTUBE) return
         val session = searchSession ?: return
         val token = session.continuation ?: return
         if (_searchLoadingMore.value) return
@@ -2297,6 +2315,23 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
             if (rank in 0 until youtubeRank) above += rows else below += rows
         }
         above to below
+    }
+
+    private suspend fun addonSearchResults(
+        query: String,
+        addons: List<MusicSource>,
+    ): List<Song> = coroutineScope {
+        val answers = addons.mapIndexed { rank, source ->
+            async {
+                val songs = runCatching {
+                    withTimeout(SOURCE_SEARCH_TIMEOUT_MS) {
+                        source.search(query, SOURCE_SEARCH_LIMIT, waitForAll = true)
+                    }
+                }.getOrDefault(emptyList())
+                songs.map { AddonSearchCandidate(it, rank) }
+            }
+        }
+        mergeAddonSearchResults(answers.awaitAll().flatten())
     }
 
     /**
