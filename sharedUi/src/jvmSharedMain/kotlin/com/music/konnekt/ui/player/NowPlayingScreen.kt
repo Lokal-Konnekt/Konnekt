@@ -37,6 +37,7 @@ import androidx.compose.foundation.gestures.verticalDrag
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.PaddingValues
@@ -792,6 +793,7 @@ fun NowPlayingScreen(
     // track" check lives.
     val spotifyCanvasAutoHide by PlayerSettings.spotifyCanvasAutoHide.collectAsStateWithLifecycle()
     val mixing by PlayerSettings.smartMixInProgress.collectAsStateWithLifecycle()
+    val nextSong = queue.getOrNull(queueIndex + 1)
     val canvas = rememberCanvasArtwork(song)
     var canvasAspect by remember(canvas) { mutableFloatStateOf(0f) }
     // Whether the clip actually has a frame on screen right now, and one of
@@ -1888,23 +1890,29 @@ fun NowPlayingScreen(
                             null
                         },
                         scrubber = {
-                            PlayerScrubber(
-                                shown = shown,
-                                durationMs = durationMs,
-                                loading = versionAligning || audioVersionSwitching,
-                                mixing = mixing && !scrub.scrubbing,
-                                transitionWindow = transitionWindow
-                                    ?.takeIf { !scrub.scrubbing && it.end > it.start }
-                                    ?.let { it.start..it.end },
-                                onScrub = onScrub,
-                                onScrubFinished = onScrubFinished,
-                            ) {
-                                PlaybackQualityLabel(
-                                    song = song,
-                                    isLoading = isLoading,
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
-                                        .padding(horizontal = 8.dp),
+                            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                                PlayerScrubber(
+                                    shown = shown,
+                                    durationMs = durationMs,
+                                    loading = versionAligning || audioVersionSwitching,
+                                    mixing = mixing && !scrub.scrubbing,
+                                    transitionWindow = transitionWindow
+                                        ?.takeIf { !scrub.scrubbing && it.end > it.start }
+                                        ?.let { it.start..it.end },
+                                    onScrub = onScrub,
+                                    onScrubFinished = onScrubFinished,
+                                ) {
+                                    PlaybackQualityLabel(
+                                        song = song,
+                                        isLoading = isLoading,
+                                        modifier = Modifier
+                                            .align(Alignment.Center)
+                                            .padding(horizontal = 8.dp),
+                                    )
+                                }
+                                AutomixNextNotice(
+                                    nextSong = nextSong,
+                                    visible = mixing && !scrub.scrubbing,
                                 )
                             }
                         },
@@ -3524,6 +3532,7 @@ fun NowPlayingScreen(
                 )
             }
             val transitionWindow by PlayerSettings.smartTransitionWindow.collectAsStateWithLifecycle()
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
             PlayerScrubber(
                 shown = shown,
                 durationMs = durationMs,
@@ -3546,6 +3555,11 @@ fun NowPlayingScreen(
                         .align(Alignment.Center)
                         .padding(horizontal = 8.dp),
                 )
+            }
+            AutomixNextNotice(
+                nextSong = nextSong,
+                visible = mixing && !scrub.scrubbing,
+            )
             }
 
             // The transport rides midway between the two blocks it separates:
